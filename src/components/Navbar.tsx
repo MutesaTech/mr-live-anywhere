@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Tv, Radio, Star, Download } from 'lucide-react';
+import { Radio, Star, Download } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from '@/hooks/use-toast';
 
@@ -48,9 +48,11 @@ const Navbar = ({ activeSection, onSectionChange }: NavbarProps) => {
     <nav className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-sm">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
         <div className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg gradient-primary">
-            <Tv className="h-6 w-6 text-primary-foreground" />
-          </div>
+          <img 
+            src="/logo.png" 
+            alt="MR LIVE Logo" 
+            className="h-12 w-12 object-contain"
+          />
           <h1 className="text-2xl font-bold gradient-primary bg-clip-text text-transparent">
             MR LIVE
           </h1>
@@ -74,7 +76,7 @@ const Navbar = ({ activeSection, onSectionChange }: NavbarProps) => {
             onClick={() => onSectionChange('tv')}
             className="gap-2"
           >
-            <Tv className="h-4 w-4" />
+            <img src="/logo.png" alt="TV" className="h-4 w-4 object-contain" />
             <span className="hidden sm:inline">TV</span>
           </Button>
           <Button
