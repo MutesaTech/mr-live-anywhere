@@ -1,5 +1,7 @@
-import { Tv, Radio, Star } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Tv, Radio, Star, Download } from 'lucide-react';
 import { Button } from './ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 interface NavbarProps {
   activeSection: 'tv' | 'radio' | 'favorites';
@@ -7,6 +9,41 @@ interface NavbarProps {
 }
 
 const Navbar = ({ activeSection, onSectionChange }: NavbarProps) => {
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isInstallable, setIsInstallable] = useState(false);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setIsInstallable(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+
+    if (outcome === 'accepted') {
+      toast({
+        title: "App installed!",
+        description: "MR LIVE has been installed on your device.",
+      });
+    }
+
+    setDeferredPrompt(null);
+    setIsInstallable(false);
+  };
+
   return (
     <nav className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-sm">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
@@ -20,6 +57,17 @@ const Navbar = ({ activeSection, onSectionChange }: NavbarProps) => {
         </div>
         
         <div className="flex gap-2">
+          {isInstallable && (
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={handleInstallClick}
+              className="gap-2"
+            >
+              <Download className="h-4 w-4" />
+              <span className="hidden sm:inline">Get App</span>
+            </Button>
+          )}
           <Button
             variant={activeSection === 'tv' ? 'default' : 'ghost'}
             size="sm"

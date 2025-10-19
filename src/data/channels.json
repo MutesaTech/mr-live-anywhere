@@ -1,49 +1,249 @@
 [
   {
     "id": "1",
-    "name": "Rwanda TV",
-    "logo": "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=200&h=200&fit=crop",
-    "stream": "https://5d7e98750cc08.streamlock.net/rwandatv/smil:rwandatv.smil/playlist.m3u8",
+    "name": "TV1 Rwanda",
+    "logo": "https://i.postimg.cc/JnCRm8Pg/images.png",
+    "stream": "https://live.tv1.rw/live/tv1rwanda_480/index.m3u8",
     "category": "news",
     "language": "kinyarwanda"
   },
   {
     "id": "2",
-    "name": "BBC News",
-    "logo": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=200&h=200&fit=crop",
-    "stream": "https://d2vnbkvjbims7j.cloudfront.net/containerA/LTN/playlist.m3u8",
+    "name": "RTV Rwanda",
+    "logo": "https://i.postimg.cc/DyCygpBV/RTV-LOGO-2014.png",
+    "stream": "https://5c46fa289c89f.streamlock.net:443/rtv25/rtv/playlist.m3u8",
     "category": "news",
-    "language": "english"
+    "language": "kinyarwanda"
   },
   {
     "id": "3",
+    "name": "KC2",
+    "logo": "https://i.postimg.cc/NjgCgpwd/icr-kc2.png",
+    "stream": "https://5c46fa289c89f.streamlock.net:443/kc2/kc2/playlist.m3u8",
+    "category": "entertainment",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "4",
+    "name": "ISIBO TV",
+    "logo": "https://i.postimg.cc/Qt5JgT3W/images.png",
+    "stream": "https://5c46fa289c89f.streamlock.net/pub2live/myStream/chunklist_w261730867.m3u8",
+    "category": "entertainment",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "5",
+    "name": "TV10",
+    "logo": "https://i.postimg.cc/JnJGY3tB/82154cd5c508e0f8f0ab0a1e268189ed-400x400.jpg",
+    "stream": "https://5c46fa289c89f.streamlock.net/pub1live/mystream/chunklist_w428308438.m3u8",
+    "category": "entertainment",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "6",
+    "name": "B+",
+    "logo": "https://i.postimg.cc/j2pv0446/channels4-profile.jpg",
+    "stream": "https://tv.btnrwanda.com:3432/live/bpluslive.m3u8",
+    "category": "entertainment",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "7",
+    "name": "BTN",
+    "logo": "https://i.postimg.cc/wj7Jcm5X/images-1.png",
+    "stream": "https://tv.btnrwanda.com:3086/live/btnlive.m3u8",
+    "category": "news",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "8",
+    "name": "HD TV",
+    "logo": "https://i.postimg.cc/DfrtnWXf/hq720.jpg",
+    "stream": "https://live-evg6.tv360.metfone.com.kh/CTV9HD@1.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "9",
+    "name": "AHUPA TV",
+    "logo": "https://i.postimg.cc/yN7Dp3cG/images.png",
+    "stream": "https://tv.btnrwanda.com:3349/live/ahupalive.m3u8",
+    "category": "entertainment",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "10",
+    "name": "TV W",
+    "logo": "https://i.postimg.cc/nV1pTSTW/images-1.png",
+    "stream": "https://live-linear-adaptive.global.ssl.fastly.net/9375922947_TVWAIR_247/9375922947_TVWAIR_247_source/chunklist.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "11",
+    "name": "AFROBEATS TV",
+    "logo": "https://i.postimg.cc/52Qg5RTP/afrobeats-tv.jpg",
+    "stream": "https://stream.ecable.tv/afrobeats/tracks-v5a1/mono.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "12",
     "name": "Al Jazeera",
-    "logo": "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=200&h=200&fit=crop",
-    "stream": "https://live-hls-web-aje.getaj.net/AJE/index.m3u8",
+    "logo": "https://i.postimg.cc/gcRG5zhH/images-2.png",
+    "stream": "https://live-hls-web-aje-fa.thehlive.com/AJE/06.m3u8",
     "category": "news",
     "language": "english"
   },
   {
-    "id": "4",
-    "name": "France 24",
-    "logo": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200&h=200&fit=crop",
-    "stream": "https://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8",
+    "id": "13",
+    "name": "RAKUTEN",
+    "logo": "https://i.postimg.cc/Bn5svMpv/images-3.png",
+    "stream": "https://73e5474be2ae422487b18295a9782482.mediatailor.eu-west-1.amazonaws.com/v1/manifest/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-4548/5233bbcd-9570-4264-b3af-382cfeed9fa8/0.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "14",
+    "name": "XTREMA ANIMAL",
+    "logo": "https://i.postimg.cc/RZcBsXnw/HQxKLlK.png",
+    "stream": "https://stmv6.voxtvhd.com.br/xtremaanimal/xtremaanimal/playlist.m3u8?hls_ctx=53474w92",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "15",
+    "name": "MAGIC KIDS",
+    "logo": "https://i.postimg.cc/pTj4rdYQ/2006-Magic-Kids-logo.png",
+    "stream": "https://magicstream.ddns.net/magicstream/stream.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "16",
+    "name": "EXPO CHANNEL",
+    "logo": "https://i.postimg.cc/hj8sNQ1r/Expo-2015-logo.png",
+    "stream": "https://tvsnhlslivetest.akamaized.net/hls/live/2034711/EXPO-MSL4/master_EXPO.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "17",
+    "name": "YOUNG HOLLYWOOD",
+    "logo": "https://i.postimg.cc/25DBMccg/png-transparent-young-hollywood-television-show-ultra-music-festival-logo-television-blue-text.png",
+    "stream": "https://younghollywood-rakuten-samsung.amagi.tv/240p-cc/index.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "18",
+    "name": "WHIO TV",
+    "logo": "https://i.postimg.cc/vZznL5M9/71dq21-W-9p-L.png",
+    "stream": "https://livetv-fa.tubi.video/whio2/playlistR216lp.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "19",
+    "name": "TVS Drive-In Movie",
+    "logo": "https://i.postimg.cc/KY1s6G0f/images.jpg",
+    "stream": "https://rpn.bozztv.com/gusa/gusa-tvsdriveinmovie/tracks-v1a1/mono.m3u8?nimblesessionid=1264052675",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "20",
+    "name": "CGTN Documentary",
+    "logo": "https://i.postimg.cc/nzbKzp1Z/channels4-profile.jpg",
+    "stream": "https://amg00405-rakutentv-cgtndocumentary-rakuten-0ql8j.amagi.tv/master480p.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "21",
+    "name": "CGTN Français",
+    "logo": "https://i.postimg.cc/YqbJmyVy/cgtn-french.jpg",
+    "stream": "https://amg01314-cgtn-amg01314c2-rakuten-us-1319.playouts.now.amagi.tv/cgtn-fr-rakuten/playlist480p.m3u8",
     "category": "news",
     "language": "french"
   },
   {
-    "id": "5",
-    "name": "Sports TV",
-    "logo": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=200&h=200&fit=crop",
-    "stream": "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8",
-    "category": "sports",
+    "id": "22",
+    "name": "CapeTown TV",
+    "logo": "https://i.postimg.cc/3JqC0X8D/channels4-profile-1.jpg",
+    "stream": "https://cdn.freevisiontv.co.za/sttv/smil:ctv.stream.smil/chunklist_b480000.m3u8",
+    "category": "news",
     "language": "english"
   },
   {
-    "id": "6",
-    "name": "Entertainment Plus",
-    "logo": "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=200&h=200&fit=crop",
-    "stream": "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8",
+    "id": "23",
+    "name": "Faith TV",
+    "logo": "https://i.postimg.cc/xTfZnDgq/PP-WEB.png",
+    "stream": "https://cdn.freevisiontv.co.za/sttv/smil:faith.stream.smil/chunklist_b480000.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "24",
+    "name": "RTM",
+    "logo": "https://i.postimg.cc/FzyYhCb1/images-1.jpg",
+    "stream": "https://live.nixsat.com/play/rtm/index.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "25",
+    "name": "SABC",
+    "logo": "https://i.postimg.cc/9FxL2LL6/channels4-profile-2.jpg",
+    "stream": "https://sabctretalh.cdn.mangomolo.com/lehae/smil:lehae.stream.smil/chunklist_b250000_t64MjQwcA==.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "26",
+    "name": "SABC NEWS",
+    "logo": "https://i.postimg.cc/yNCQpkQs/Radio-TV-1.png",
+    "stream": "https://sabconetanw.cdn.mangomolo.com/news/smil:news.stream.smil/chunklist_b250000_t64MjQwcA==.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "27",
+    "name": "Soweto TV",
+    "logo": "https://i.postimg.cc/pTXgkmr2/channels4-profile-3.jpg",
+    "stream": "https://cdn.freevisiontv.co.za/sttv/smil:soweto.stream.smil/chunklist_b480000.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "28",
+    "name": "TSHWANE",
+    "logo": "https://i.postimg.cc/qRqpqb8Q/images-2.jpg",
+    "stream": "https://cdn.freevisiontv.co.za/sttv/smil:tshwane.stream.smil/chunklist_b480000.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "29",
+    "name": "Brit Asia",
+    "logo": "https://i.postimg.cc/XqFXLjsV/unnamed.png",
+    "stream": "https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/britasiatv/b430a05d-7d70-4a63-91ea-8b7bbbc4caf0/0.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "30",
+    "name": "Yu-Gi-Oh!",
+    "logo": "https://i.postimg.cc/Hkhw62mq/298912.png",
+    "stream": "https://amg01796-amg01796c19-rakuten-gb-7486.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg01796-fastmediafast-yugioh2en-rakutengb/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac7253db80148b61299bce8c37683f03409a5e5afba358b1ebe90c118a6ea0b31d55c47c44e39f43c8821ca6d18652995e8374f9129bc4a6898244d7d0f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad78e406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8fa69eae2032fb9794b034a35412b1c05dea09f9fa7e2bed97de58/130/426x240_511680/index.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "31",
+    "name": "World War TV",
+    "logo": "https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=200&h=200&fit=crop",
+    "stream": "https://amg00793-amg00793c6-xumo-us-2669.playouts.now.amagi.tv/BBCStudios-BBCEarthA-hls/playlist240p.m3u8",
     "category": "entertainment",
     "language": "english"
   }
