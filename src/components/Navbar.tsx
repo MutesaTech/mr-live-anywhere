@@ -45,7 +45,7 @@ const Navbar = ({ activeSection, onSectionChange }: NavbarProps) => {
     <nav className="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur-sm">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
 
-        {/* Logo */}
+        {/* Logo on the left */}
         <div className="flex items-center gap-2">
           <Link to="/">
             <img
@@ -56,7 +56,7 @@ const Navbar = ({ activeSection, onSectionChange }: NavbarProps) => {
           </Link>
         </div>
 
-        {/* Hamburger for small screens */}
+        {/* Hamburger for mobile */}
         <div className="sm:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -66,10 +66,10 @@ const Navbar = ({ activeSection, onSectionChange }: NavbarProps) => {
           </button>
         </div>
 
-        {/* Navbar buttons */}
+        {/* Right-aligned buttons */}
         <div
-          className={`absolute top-full left-0 w-full bg-card/95 backdrop-blur-md p-4 sm:static sm:flex sm:items-center sm:p-0 gap-2 ${
-            isMobileMenuOpen ? "flex flex-col" : "hidden sm:flex"
+          className={`absolute top-full right-0 w-full bg-card/95 backdrop-blur-md p-4 sm:static sm:flex sm:items-center sm:justify-end sm:w-auto sm:p-0 gap-2 ${
+            isMobileMenuOpen ? "flex flex-col items-end" : "hidden sm:flex"
           }`}
         >
           {isInstallable && (
