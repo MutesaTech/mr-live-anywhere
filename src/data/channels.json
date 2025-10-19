@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "name": "Rwanda TV",
+    "logo": "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=200&h=200&fit=crop",
+    "stream": "https://5d7e98750cc08.streamlock.net/rwandatv/smil:rwandatv.smil/playlist.m3u8",
+    "category": "news",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "2",
+    "name": "BBC News",
+    "logo": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=200&h=200&fit=crop",
+    "stream": "https://d2vnbkvjbims7j.cloudfront.net/containerA/LTN/playlist.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "3",
+    "name": "Al Jazeera",
+    "logo": "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=200&h=200&fit=crop",
+    "stream": "https://live-hls-web-aje.getaj.net/AJE/index.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "4",
+    "name": "France 24",
+    "logo": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200&h=200&fit=crop",
+    "stream": "https://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8",
+    "category": "news",
+    "language": "french"
+  },
+  {
+    "id": "5",
+    "name": "Sports TV",
+    "logo": "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=200&h=200&fit=crop",
+    "stream": "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "6",
+    "name": "Entertainment Plus",
+    "logo": "https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=200&h=200&fit=crop",
+    "stream": "https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8",
+    "category": "entertainment",
+    "language": "english"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "id": "r1",
+    "name": "Radio Rwanda",
+    "logo": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=200&h=200&fit=crop",
+    "stream": "https://listen.radioking.com/radio/8639/stream/11815",
+    "category": "news",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "r2",
+    "name": "BBC World Service",
+    "logo": "https://images.unsplash.com/photo-1487537023671-8dce1a785863?w=200&h=200&fit=crop",
+    "stream": "http://stream.live.vc.bbcmedia.co.uk/bbc_world_service",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "r3",
+    "name": "Kiss FM Rwanda",
+    "logo": "https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=200&h=200&fit=crop",
+    "stream": "https://listen.radioking.com/radio/12345/stream/67890",
+    "category": "music",
+    "language": "english"
+  },
+  {
+    "id": "r4",
+    "name": "Radio 10",
+    "logo": "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=200&h=200&fit=crop",
+    "stream": "https://listen.radioking.com/radio/54321/stream/98765",
+    "category": "music",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "r5",
+    "name": "City Radio",
+    "logo": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=200&h=200&fit=crop",
+    "stream": "https://listen.radioking.com/radio/11111/stream/22222",
+    "category": "entertainment",
+    "language": "english"
+  }
+]
