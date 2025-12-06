@@ -4,6 +4,7 @@ import { Maximize2, Star, Eye, Play } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { cn } from '@/lib/utils';
+import LazyImage from './LazyImage';
 
 interface Channel {
   id: string;
@@ -175,10 +176,10 @@ const TvPlayer = ({ channels, favorites, onToggleFavorite, lastWatched, onPlay }
             onClick={() => handlePlayChannel(channel.id)}
           >
             <div className="relative aspect-video overflow-hidden">
-              <img
+              <LazyImage
                 src={channel.logo}
                 alt={channel.name}
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
+                className="h-full w-full"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <Button
