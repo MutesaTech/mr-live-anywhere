@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import { Play, Pause, Star, Volume2 } from 'lucide-react';
 import { Button } from './ui/button';
-import { Card } from './ui/card';
 import { Slider } from './ui/slider';
 import { cn } from '@/lib/utils';
-import LazyImage from './LazyImage';
+import RadioCard from './RadioCard';
+import CategoryTabs from './CategoryTabs';
+import SearchBar from './SearchBar';
 
 interface Radio {
   id: string;
@@ -27,11 +28,29 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
   const [activeRadio, setActiveRadio] = useState<string | null>(lastPlayed);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(80);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
   const audioRef = useRef<HTMLAudioElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const animationRef = useRef<number>();
+
+  // Get unique categories
+  const categories = useMemo(() => {
+    const cats = ['all', ...new Set(radios.map(r => r.category))];
+    return cats;
+  }, [radios]);
+
+  // Filter radios
+  const filteredRadios = useMemo(() => {
+    return radios.filter(radio => {
+      const matchesSearch = radio.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        radio.category.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory = activeCategory === 'all' || radio.category === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [radios, searchQuery, activeCategory]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -82,7 +101,11 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
 
       analyserRef.current!.getByteFrequencyData(dataArray);
 
-      ctx.fillStyle = 'hsl(var(--card))';
+      // Create gradient background
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, 'hsl(213 90% 58% / 0.1)');
+      gradient.addColorStop(1, 'hsl(213 90% 58% / 0.05)');
+      ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const barWidth = (canvas.width / bufferLength) * 2.5;
@@ -92,8 +115,9 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
       for (let i = 0; i < bufferLength; i++) {
         barHeight = (dataArray[i] / 255) * canvas.height * 0.8;
 
-        const hue = (i / bufferLength) * 60 + 250;
-        ctx.fillStyle = `hsl(${hue}, 100%, 65%)`;
+        // Use primary color with varying opacity
+        const opacity = 0.4 + (dataArray[i] / 255) * 0.6;
+        ctx.fillStyle = `hsl(213 90% 58% / ${opacity})`;
         ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
 
         x += barWidth + 1;
@@ -133,16 +157,18 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
   const activeRadioData = radios.find(r => r.id === activeRadio);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 animate-page-enter">
       <audio ref={audioRef} crossOrigin="anonymous" />
 
+      {/* Full Player */}
       {activeRadio && activeRadioData && (
-        <Card className="overflow-hidden shadow-card">
-          <div className="relative h-64 bg-gradient-to-br from-primary/20 to-accent/20">
+        <div className="rounded-2xl overflow-hidden bg-card border border-border/50 shadow-strong animate-scale-in">
+          {/* Visualizer */}
+          <div className="relative h-48 bg-gradient-to-br from-primary/20 to-accent/10 overflow-hidden">
             <canvas
               ref={canvasRef}
               width={800}
-              height={256}
+              height={192}
               className="h-full w-full"
             />
             <div className="absolute inset-0 flex items-center justify-center">
@@ -150,32 +176,34 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
                 <img
                   src={activeRadioData.logo}
                   alt={activeRadioData.name}
-                  className="mx-auto mb-4 h-24 w-24 rounded-full object-cover shadow-lg"
+                  className="mx-auto mb-3 h-20 w-20 rounded-2xl object-cover shadow-strong border-2 border-background/50"
                 />
-                <h3 className="mb-2 text-2xl font-bold">{activeRadioData.name}</h3>
-                <p className="text-sm text-muted-foreground capitalize">
+                <h3 className="text-h2 font-bold">{activeRadioData.name}</h3>
+                <p className="text-caption text-muted-foreground capitalize mt-1">
                   {activeRadioData.category} • {activeRadioData.language}
                 </p>
               </div>
             </div>
           </div>
           
-          <div className="space-y-4 p-6">
+          {/* Controls */}
+          <div className="p-6 space-y-6">
             <div className="flex items-center justify-center gap-4">
               <Button
                 size="lg"
-                className="h-16 w-16 rounded-full"
+                className="h-16 w-16 rounded-full shadow-glow"
                 onClick={() => handlePlayRadio(activeRadio)}
               >
                 {isPlaying ? (
                   <Pause className="h-6 w-6" />
                 ) : (
-                  <Play className="h-6 w-6" />
+                  <Play className="h-6 w-6 ml-0.5" />
                 )}
               </Button>
               <Button
                 variant="ghost"
                 size="icon"
+                className="h-12 w-12 rounded-full"
                 onClick={() => onToggleFavorite(activeRadio)}
               >
                 <Star
@@ -187,8 +215,9 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
               </Button>
             </div>
             
-            <div className="flex items-center gap-3">
-              <Volume2 className="h-5 w-5 text-muted-foreground" />
+            {/* Volume */}
+            <div className="flex items-center gap-3 max-w-xs mx-auto">
+              <Volume2 className="h-5 w-5 text-muted-foreground shrink-0" />
               <Slider
                 value={[volume]}
                 onValueChange={(value) => setVolume(value[0])}
@@ -196,66 +225,53 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
                 step={1}
                 className="flex-1"
               />
-              <span className="w-12 text-sm text-muted-foreground">{volume}%</span>
+              <span className="w-10 text-caption text-muted-foreground text-right">{volume}%</span>
             </div>
           </div>
-        </Card>
+        </div>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {radios.map((radio) => (
-          <Card
+      {/* Search & Categories */}
+      <div className="space-y-4">
+        <SearchBar
+          value={searchQuery}
+          onChange={setSearchQuery}
+          placeholder="Search radio stations..."
+        />
+        <CategoryTabs
+          categories={categories}
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+        />
+      </div>
+
+      {/* Radio Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 stagger-children">
+        {filteredRadios.map((radio) => (
+          <RadioCard
             key={radio.id}
-            className={cn(
-              "group cursor-pointer shadow-card hover-lift",
-              activeRadio === radio.id && "ring-2 ring-primary"
-            )}
+            id={radio.id}
+            name={radio.name}
+            logo={radio.logo}
+            category={radio.category}
+            isActive={activeRadio === radio.id}
+            isPlaying={activeRadio === radio.id && isPlaying}
+            isFavorite={favorites.includes(radio.id)}
             onClick={() => handlePlayRadio(radio.id)}
-          >
-            <div className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="relative">
-                  <LazyImage
-                    src={radio.logo}
-                    alt={radio.name}
-                    className="h-16 w-16 rounded-lg"
-                  />
-                  {activeRadio === radio.id && isPlaying && (
-                    <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary">
-                      <div className="h-2 w-2 animate-pulse rounded-full bg-white" />
-                    </div>
-                  )}
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold line-clamp-1">{radio.name}</h3>
-                  <p className="text-sm text-muted-foreground capitalize">
-                    {radio.category}
-                  </p>
-                  {activeRadio === radio.id && isPlaying && (
-                    <p className="mt-1 text-xs font-medium text-primary">Now Playing</p>
-                  )}
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onToggleFavorite(radio.id);
-                  }}
-                >
-                  <Star
-                    className={cn(
-                      "h-4 w-4",
-                      favorites.includes(radio.id) && "fill-primary text-primary"
-                    )}
-                  />
-                </Button>
-              </div>
-            </div>
-          </Card>
+            onToggleFavorite={(e) => {
+              e.stopPropagation();
+              onToggleFavorite(radio.id);
+            }}
+          />
         ))}
       </div>
+
+      {/* Empty state */}
+      {filteredRadios.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-16 text-center">
+          <p className="text-muted-foreground">No radio stations found</p>
+        </div>
+      )}
     </div>
   );
 };
