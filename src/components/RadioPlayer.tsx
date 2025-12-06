@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Slider } from './ui/slider';
 import { cn } from '@/lib/utils';
+import LazyImage from './LazyImage';
 
 interface Radio {
   id: string;
@@ -214,10 +215,10 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
             <div className="p-6">
               <div className="flex items-start gap-4">
                 <div className="relative">
-                  <img
+                  <LazyImage
                     src={radio.logo}
                     alt={radio.name}
-                    className="h-16 w-16 rounded-lg object-cover"
+                    className="h-16 w-16 rounded-lg"
                   />
                   {activeRadio === radio.id && isPlaying && (
                     <div className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary">

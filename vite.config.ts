@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'robots.txt'],
+      includeAssets: ['favicon.ico', 'robots.txt', 'logo.png'],
       manifest: {
         name: 'MR LIVE - TV & Radio Streaming',
         short_name: 'MR LIVE',
@@ -24,6 +24,8 @@ export default defineConfig(({ mode }) => ({
         background_color: '#0a0e17',
         display: 'standalone',
         orientation: 'portrait',
+        start_url: '/',
+        scope: '/',
         icons: [
           {
             src: '/logo.png',
@@ -39,20 +41,61 @@ export default defineConfig(({ mode }) => ({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
+        // Pre-cache the app shell
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,woff,woff2}'],
+        // Runtime caching strategies
         runtimeCaching: [
+          // Cache channel/radio data JSON
           {
-            urlPattern: /^https:\/\/images\.unsplash\.com\/.*/i,
-            handler: 'CacheFirst',
+            urlPattern: /\/.*\.json$/i,
+            handler: 'StaleWhileRevalidate',
             options: {
-              cacheName: 'unsplash-images',
+              cacheName: 'data-cache',
               expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 60 * 60 * 24 * 7 // 1 week
+                maxEntries: 20,
+                maxAgeSeconds: 60 * 60 * 24 // 1 day
               }
             }
+          },
+          // Cache images with CacheFirst strategy
+          {
+            urlPattern: /^https:\/\/.*\.(png|jpg|jpeg|svg|gif|webp)$/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'image-cache',
+              expiration: {
+                maxEntries: 100,
+                maxAgeSeconds: 60 * 60 * 24 * 7 // 1 week
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          // Cache external logos (postimg, etc.)
+          {
+            urlPattern: /^https:\/\/i\.postimg\.cc\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'logo-cache',
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          },
+          // Network first for API/streams (fallback to cache)
+          {
+            urlPattern: /^https:\/\/.*\.(m3u8|ts)$/i,
+            handler: 'NetworkOnly'
           }
-        ]
+        ],
+        // Skip waiting and claim clients immediately
+        skipWaiting: true,
+        clientsClaim: true
       }
     })
   ].filter(Boolean),

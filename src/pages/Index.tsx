@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TvPlayer from '@/components/TvPlayer';
 import RadioPlayer from '@/components/RadioPlayer';
 import Favorites from '@/components/Favorites';
 import SearchBar from '@/components/SearchBar';
+import InstallPrompt from '@/components/InstallPrompt';
+import OfflineIndicator from '@/components/OfflineIndicator';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import channelsData from '@/data/channels.json';
 import radiosData from '@/data/radios.json';
@@ -54,8 +56,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <OfflineIndicator />
+      <InstallPrompt />
       <Navbar activeSection={activeSection} onSectionChange={setActiveSection} />
-      
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8 space-y-4">
           <div className="space-y-2 animate-fade-in">
