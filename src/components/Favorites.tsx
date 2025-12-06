@@ -1,5 +1,6 @@
-import { Star } from 'lucide-react';
-import { Card } from './ui/card';
+import { Star, Tv, Radio } from 'lucide-react';
+import ChannelCard from './ChannelCard';
+import RadioCard from './RadioCard';
 
 interface Channel {
   id: string;
@@ -8,7 +9,7 @@ interface Channel {
   category: string;
 }
 
-interface Radio {
+interface RadioStation {
   id: string;
   name: string;
   logo: string;
@@ -17,7 +18,7 @@ interface Radio {
 
 interface FavoritesProps {
   favoriteChannels: Channel[];
-  favoriteRadios: Radio[];
+  favoriteRadios: RadioStation[];
   onSelectChannel: (id: string) => void;
   onSelectRadio: (id: string) => void;
 }
@@ -32,78 +33,68 @@ const Favorites = ({
 
   if (!hasFavorites) {
     return (
-      <div className="flex min-h-[400px] items-center justify-center">
-        <div className="text-center">
-          <Star className="mx-auto mb-4 h-16 w-16 text-muted-foreground" />
-          <h2 className="mb-2 text-2xl font-semibold">No Favorites Yet</h2>
-          <p className="text-muted-foreground">
-            Start adding your favorite channels and radio stations!
-          </p>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center animate-fade-in">
+        <div className="h-20 w-20 rounded-full bg-muted/50 flex items-center justify-center mb-6">
+          <Star className="h-10 w-10 text-muted-foreground" />
         </div>
+        <h2 className="text-h2 mb-2">No Favorites Yet</h2>
+        <p className="text-body text-muted-foreground max-w-xs">
+          Start adding your favorite channels and radio stations by tapping the star icon!
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-page-enter">
+      {/* Favorite TV Channels */}
       {favoriteChannels.length > 0 && (
-        <div>
-          <h2 className="mb-4 text-2xl font-semibold">Favorite TV Channels</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <section>
+          <div className="flex items-center gap-2 mb-4">
+            <Tv className="h-5 w-5 text-primary" />
+            <h2 className="text-h2">TV Channels</h2>
+            <span className="badge-category">{favoriteChannels.length}</span>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 stagger-children">
             {favoriteChannels.map((channel) => (
-              <Card
+              <ChannelCard
                 key={channel.id}
-                className="group cursor-pointer shadow-card hover-lift"
+                id={channel.id}
+                name={channel.name}
+                logo={channel.logo}
+                category={channel.category}
+                isFavorite={true}
                 onClick={() => onSelectChannel(channel.id)}
-              >
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={channel.logo}
-                    alt={channel.name}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold line-clamp-1">{channel.name}</h3>
-                  <p className="text-sm text-muted-foreground capitalize">
-                    {channel.category}
-                  </p>
-                </div>
-              </Card>
+                onToggleFavorite={(e) => e.stopPropagation()}
+              />
             ))}
           </div>
-        </div>
+        </section>
       )}
 
+      {/* Favorite Radio Stations */}
       {favoriteRadios.length > 0 && (
-        <div>
-          <h2 className="mb-4 text-2xl font-semibold">Favorite Radio Stations</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <section>
+          <div className="flex items-center gap-2 mb-4">
+            <Radio className="h-5 w-5 text-primary" />
+            <h2 className="text-h2">Radio Stations</h2>
+            <span className="badge-category">{favoriteRadios.length}</span>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 stagger-children">
             {favoriteRadios.map((radio) => (
-              <Card
+              <RadioCard
                 key={radio.id}
-                className="group cursor-pointer shadow-card hover-lift"
+                id={radio.id}
+                name={radio.name}
+                logo={radio.logo}
+                category={radio.category}
+                isFavorite={true}
                 onClick={() => onSelectRadio(radio.id)}
-              >
-                <div className="p-6">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src={radio.logo}
-                      alt={radio.name}
-                      className="h-16 w-16 rounded-lg object-cover"
-                    />
-                    <div>
-                      <h3 className="font-semibold line-clamp-1">{radio.name}</h3>
-                      <p className="text-sm text-muted-foreground capitalize">
-                        {radio.category}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card>
+                onToggleFavorite={(e) => e.stopPropagation()}
+              />
             ))}
           </div>
-        </div>
+        </section>
       )}
     </div>
   );

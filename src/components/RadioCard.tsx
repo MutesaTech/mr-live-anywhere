@@ -1,0 +1,94 @@
+import { Star, Play, Pause } from 'lucide-react';
+import { Button } from './ui/button';
+import { cn } from '@/lib/utils';
+import LazyImage from './LazyImage';
+
+interface RadioCardProps {
+  id: string;
+  name: string;
+  logo: string;
+  category: string;
+  isActive?: boolean;
+  isPlaying?: boolean;
+  isFavorite?: boolean;
+  onClick: () => void;
+  onToggleFavorite: (e: React.MouseEvent) => void;
+}
+
+const RadioCard = ({
+  id,
+  name,
+  logo,
+  category,
+  isActive,
+  isPlaying,
+  isFavorite,
+  onClick,
+  onToggleFavorite,
+}: RadioCardProps) => {
+  return (
+    <div
+      onClick={onClick}
+      className={cn(
+        "group relative rounded-xl overflow-hidden cursor-pointer card-interactive",
+        "bg-card border border-border/50 p-4",
+        isActive && "ring-2 ring-primary"
+      )}
+    >
+      <div className="flex items-center gap-4">
+        {/* Logo with play overlay */}
+        <div className="relative shrink-0">
+          <LazyImage
+            src={logo}
+            alt={name}
+            className="h-14 w-14 rounded-xl"
+          />
+          
+          {/* Play/Pause overlay */}
+          {isActive && (
+            <div className="absolute inset-0 flex items-center justify-center bg-black/40 rounded-xl">
+              {isPlaying ? (
+                <Pause className="h-5 w-5 text-white" />
+              ) : (
+                <Play className="h-5 w-5 text-white ml-0.5" />
+              )}
+            </div>
+          )}
+          
+          {/* Playing indicator */}
+          {isActive && isPlaying && (
+            <div className="absolute -bottom-1 -right-1 h-5 w-5 rounded-full bg-primary flex items-center justify-center">
+              <span className="h-2 w-2 rounded-full bg-primary-foreground animate-pulse-dot" />
+            </div>
+          )}
+        </div>
+        
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          <h3 className="font-semibold text-body line-clamp-1">{name}</h3>
+          <p className="text-caption text-muted-foreground capitalize">{category}</p>
+          {isActive && isPlaying && (
+            <p className="text-caption text-primary font-medium mt-0.5">Now Playing</p>
+          )}
+        </div>
+        
+        {/* Favorite button */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="h-8 w-8 shrink-0"
+          onClick={onToggleFavorite}
+        >
+          <Star
+            className={cn(
+              "h-4 w-4 transition-colors",
+              isFavorite && "fill-primary text-primary"
+            )}
+          />
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default RadioCard;
