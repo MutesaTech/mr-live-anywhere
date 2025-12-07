@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState, useMemo } from 'react';
-import { Play, Pause, Star, Volume2 } from 'lucide-react';
+import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
+import { Play, Pause, Star, Volume2, SkipBack, SkipForward } from 'lucide-react';
 import { Button } from './ui/button';
 import { Slider } from './ui/slider';
 import { cn } from '@/lib/utils';
 import RadioCard from './RadioCard';
 import CategoryTabs from './CategoryTabs';
 import SearchBar from './SearchBar';
+import { useSwipeGesture } from '@/hooks/useSwipeGesture';
 
 interface Radio {
   id: string;
@@ -30,11 +31,25 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
   const [volume, setVolume] = useState(80);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
+  const [isPlayerExpanded, setIsPlayerExpanded] = useState(true);
+  
   const audioRef = useRef<HTMLAudioElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const playerRef = useRef<HTMLDivElement>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const animationRef = useRef<number>();
+
+  // Get current radio index
+  const currentRadioIndex = useMemo(() => {
+    return radios.findIndex(r => r.id === activeRadio);
+  }, [radios, activeRadio]);
+
+  // Swipe gestures
+  useSwipeGesture(playerRef, {
+    onSwipeLeft: () => handleNextRadio(),
+    onSwipeRight: () => handlePreviousRadio(),
+  });
 
   // Get unique categories
   const categories = useMemo(() => {
@@ -131,6 +146,11 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
     const radio = radios.find(r => r.id === radioId);
     if (!radio || !audioRef.current) return;
 
+    // Auto-scroll to player
+    if (playerRef.current) {
+      playerRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     if (activeRadio === radioId && isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
@@ -139,6 +159,7 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
         audioRef.current.src = radio.stream;
         setActiveRadio(radioId);
         onPlay(radioId);
+        setIsPlayerExpanded(true);
       }
 
       try {
@@ -154,6 +175,22 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
     }
   };
 
+  const handleNextRadio = useCallback(() => {
+    if (currentRadioIndex < radios.length - 1) {
+      handlePlayRadio(radios[currentRadioIndex + 1].id);
+    } else {
+      handlePlayRadio(radios[0].id);
+    }
+  }, [currentRadioIndex, radios]);
+
+  const handlePreviousRadio = useCallback(() => {
+    if (currentRadioIndex > 0) {
+      handlePlayRadio(radios[currentRadioIndex - 1].id);
+    } else {
+      handlePlayRadio(radios[radios.length - 1].id);
+    }
+  }, [currentRadioIndex, radios]);
+
   const activeRadioData = radios.find(r => r.id === activeRadio);
 
   return (
@@ -162,7 +199,14 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
 
       {/* Full Player */}
       {activeRadio && activeRadioData && (
-        <div className="rounded-2xl overflow-hidden bg-card border border-border/50 shadow-strong animate-scale-in">
+        <div 
+          ref={playerRef}
+          className={cn(
+            "rounded-2xl overflow-hidden bg-card border border-border/50 shadow-strong",
+            "transition-all duration-300 ease-out touch-pan-x",
+            isPlayerExpanded ? "animate-scale-in" : "h-0 opacity-0"
+          )}
+        >
           {/* Visualizer */}
           <div className="relative h-48 bg-gradient-to-br from-primary/20 to-accent/10 overflow-hidden">
             <canvas
@@ -184,11 +228,25 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
                 </p>
               </div>
             </div>
+
+            {/* Swipe hint */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-caption text-foreground/50 flex items-center gap-1">
+              <span>← Swipe to change station →</span>
+            </div>
           </div>
           
           {/* Controls */}
           <div className="p-6 space-y-6">
             <div className="flex items-center justify-center gap-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-12 w-12 rounded-full"
+                onClick={handlePreviousRadio}
+              >
+                <SkipBack className="h-5 w-5" />
+              </Button>
+              
               <Button
                 size="lg"
                 className="h-16 w-16 rounded-full shadow-glow"
@@ -200,6 +258,16 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
                   <Play className="h-6 w-6 ml-0.5" />
                 )}
               </Button>
+              
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-12 w-12 rounded-full"
+                onClick={handleNextRadio}
+              >
+                <SkipForward className="h-5 w-5" />
+              </Button>
+              
               <Button
                 variant="ghost"
                 size="icon"
