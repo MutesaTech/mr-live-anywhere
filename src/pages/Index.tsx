@@ -6,8 +6,9 @@ import TvPlayer from '@/components/TvPlayer';
 import RadioPlayer from '@/components/RadioPlayer';
 import Favorites from '@/components/Favorites';
 import SettingsPage from '@/components/SettingsPage';
-import InstallPrompt from '@/components/InstallPrompt';
+import SmartInstallPrompt from '@/components/SmartInstallPrompt';
 import OfflineIndicator from '@/components/OfflineIndicator';
+import LowBandwidthToast from '@/components/LowBandwidthToast';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import channelsData from '@/data/channels.json';
 import radiosData from '@/data/radios.json';
@@ -28,6 +29,7 @@ const Index = () => {
   const [favoriteRadioIds, setFavoriteRadioIds] = useLocalStorage<string[]>('favoriteRadio', []);
   const [lastWatchedTv, setLastWatchedTv] = useLocalStorage<string | null>('lastWatchedTv', null);
   const [lastPlayedRadio, setLastPlayedRadio] = useLocalStorage<string | null>('lastPlayedRadio', null);
+  const [externalChannelId, setExternalChannelId] = useState<string | null>(null);
 
   // Apply theme on mount
   useEffect(() => {
@@ -59,6 +61,7 @@ const Index = () => {
   const favoriteRadios = radiosData.filter(radio => favoriteRadioIds.includes(radio.id));
 
   const handleSelectChannel = (id: string) => {
+    setExternalChannelId(id);
     setActiveSection('tv');
     setLastWatchedTv(id);
   };
@@ -68,10 +71,18 @@ const Index = () => {
     setLastPlayedRadio(id);
   };
 
+  // Clear external channel after navigation
+  useEffect(() => {
+    if (activeSection !== 'tv') {
+      setExternalChannelId(null);
+    }
+  }, [activeSection]);
+
   return (
     <div className="min-h-screen bg-background">
       <OfflineIndicator />
-      <InstallPrompt />
+      <SmartInstallPrompt />
+      <LowBandwidthToast />
       
       {/* Header */}
       <Header title={sectionTitles[activeSection]} />
@@ -99,6 +110,7 @@ const Index = () => {
             onToggleFavorite={toggleFavoriteTv}
             lastWatched={lastWatchedTv}
             onPlay={setLastWatchedTv}
+            externalChannel={externalChannelId}
           />
         )}
         
