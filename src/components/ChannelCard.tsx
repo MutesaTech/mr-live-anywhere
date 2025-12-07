@@ -2,6 +2,7 @@ import { Star, Play, Eye } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import LazyImage from './LazyImage';
+import ShareButton from './ShareButton';
 
 interface ChannelCardProps {
   id: string;
@@ -12,6 +13,7 @@ interface ChannelCardProps {
   isPlaying?: boolean;
   isFavorite?: boolean;
   viewerCount?: number;
+  shareVariant?: 'icon' | 'menu';
   onClick: () => void;
   onToggleFavorite: (e: React.MouseEvent) => void;
 }
@@ -25,6 +27,7 @@ const ChannelCard = ({
   isPlaying,
   isFavorite,
   viewerCount,
+  shareVariant = 'icon',
   onClick,
   onToggleFavorite,
 }: ChannelCardProps) => {
@@ -47,6 +50,17 @@ const ChannelCard = ({
         
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+        
+        {/* Share button - pinned top-right */}
+        <div className="absolute top-2 right-2 z-10">
+          <ShareButton
+            channelId={id}
+            channelName={name}
+            variant={shareVariant}
+            isFavorite={isFavorite}
+            onToggleFavorite={() => onToggleFavorite({} as React.MouseEvent)}
+          />
+        </div>
         
         {/* Play button - centered */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">

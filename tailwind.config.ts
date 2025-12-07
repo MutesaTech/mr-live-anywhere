@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -159,6 +160,9 @@ export default {
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
+      scale: {
+        '92': '0.92',
       },
     },
   },
