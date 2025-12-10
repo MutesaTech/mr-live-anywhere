@@ -10,6 +10,7 @@ import SmartInstallPrompt from '@/components/SmartInstallPrompt';
 import OfflineIndicator from '@/components/OfflineIndicator';
 import LowBandwidthToast from '@/components/LowBandwidthToast';
 import OfflineFallback from '@/components/OfflineFallback';
+import SocialProofPopup from '@/components/SocialProofPopup';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { useLowBandwidthMode } from '@/hooks/useLowBandwidthMode';
@@ -161,8 +162,10 @@ const Index = () => {
         )}
       </main>
 
-      {/* Bottom Navigation */}
       <BottomNav activeSection={activeSection} onSectionChange={setActiveSection} />
+      <OfflineIndicator />
+      <LowBandwidthToast />
+      <SocialProofPopup />
     </div>
   );
 };
