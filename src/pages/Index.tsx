@@ -93,10 +93,6 @@ const Index = () => {
     saveResumeState(id, 'radio');
   };
 
-  const handleSelectRadio = (id: string) => {
-    setActiveSection('radio');
-    setLastPlayedRadio(id);
-  };
 
   // Clear external channel after navigation
   useEffect(() => {
