@@ -9,7 +9,11 @@ import SettingsPage from '@/components/SettingsPage';
 import SmartInstallPrompt from '@/components/SmartInstallPrompt';
 import OfflineIndicator from '@/components/OfflineIndicator';
 import LowBandwidthToast from '@/components/LowBandwidthToast';
+import OfflineFallback from '@/components/OfflineFallback';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useNetworkStatus } from '@/hooks/useNetworkStatus';
+import { useLowBandwidthMode } from '@/hooks/useLowBandwidthMode';
+import { useAutoResume } from '@/hooks/useAutoResume';
 import channelsData from '@/data/channels.json';
 import radiosData from '@/data/radios.json';
 
@@ -30,6 +34,22 @@ const Index = () => {
   const [lastWatchedTv, setLastWatchedTv] = useLocalStorage<string | null>('lastWatchedTv', null);
   const [lastPlayedRadio, setLastPlayedRadio] = useLocalStorage<string | null>('lastPlayedRadio', null);
   const [externalChannelId, setExternalChannelId] = useState<string | null>(null);
+  const { isOnline } = useNetworkStatus();
+  const { shouldReduceAnimations } = useLowBandwidthMode();
+  const { saveResumeState, getResumeState } = useAutoResume();
+
+  // Auto-resume on app load
+  useEffect(() => {
+    const resume = getResumeState();
+    if (resume && resume.channelId) {
+      if (resume.type === 'tv') {
+        setExternalChannelId(resume.channelId);
+        setActiveSection('tv');
+      } else {
+        setActiveSection('radio');
+      }
+    }
+  }, []);
 
   // Apply theme on mount
   useEffect(() => {
@@ -64,6 +84,13 @@ const Index = () => {
     setExternalChannelId(id);
     setActiveSection('tv');
     setLastWatchedTv(id);
+    saveResumeState(id, 'tv');
+  };
+
+  const handleSelectRadio = (id: string) => {
+    setActiveSection('radio');
+    setLastPlayedRadio(id);
+    saveResumeState(id, 'radio');
   };
 
   const handleSelectRadio = (id: string) => {
