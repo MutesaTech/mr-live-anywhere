@@ -86,20 +86,7 @@ const SmartInstallPrompt = () => {
     );
   }
 
-  // Floating pill button for Android
-  if ((isAndroid || showPrompt) && deferredPrompt && !isStandalone) {
-    return (
-      <div className="fixed bottom-20 right-4 z-50 animate-slide-up">
-        <Button
-          onClick={handleInstall}
-          className="gap-2 rounded-full shadow-glow px-5 py-3"
-        >
-          <Download className="h-4 w-4" />
-          Install App
-        </Button>
-      </div>
-    );
-  }
+  // Removed floating install button on mobile - only show on desktop now
 
   // iOS "Add to Home Screen" popup
   if (showIOSPrompt && isIOS && !isStandalone) {
