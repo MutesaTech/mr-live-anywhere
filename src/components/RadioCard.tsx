@@ -67,9 +67,22 @@ const RadioCard = ({
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-body line-clamp-1">{name}</h3>
           <p className="text-caption text-muted-foreground capitalize">{category}</p>
-          {isActive && isPlaying && (
-            <p className="text-caption text-primary font-medium mt-0.5">Now Playing</p>
-          )}
+          {/* Waveform visualization */}
+          <div className="flex items-end gap-[3px] h-5 mt-1.5" aria-hidden>
+            {Array.from({ length: 18 }).map((_, i) => (
+              <span
+                key={i}
+                className={cn(
+                  "w-[2px] rounded-full bg-gradient-to-t from-primary to-accent",
+                  isActive && isPlaying ? "animate-pulse-dot" : "opacity-40"
+                )}
+                style={{
+                  height: `${20 + Math.abs(Math.sin(i * 0.9)) * 80}%`,
+                  animationDelay: `${i * 70}ms`,
+                }}
+              />
+            ))}
+          </div>
         </div>
         
         {/* Favorite button */}
