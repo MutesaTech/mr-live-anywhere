@@ -18,7 +18,7 @@ const navItems = [
 
 const BottomNav = ({ activeSection, onSectionChange }: BottomNavProps) => {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 glass shadow-soft rounded-t-2xl pb-safe">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 glass-strong shadow-strong rounded-t-3xl pb-safe border-t border-white/10">
       <div className="flex items-center justify-around h-16">
         {navItems.map((item) => {
           const isActive = activeSection === item.id;
@@ -33,15 +33,17 @@ const BottomNav = ({ activeSection, onSectionChange }: BottomNavProps) => {
                 "transition-colors duration-200"
               )}
             >
-              {/* Active indicator */}
+              {/* Active glow indicator */}
               {isActive && (
-                <span className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 rounded-full bg-primary animate-scale-in" />
+                <span className="absolute -top-px left-1/2 -translate-x-1/2 w-10 h-1 rounded-full gradient-primary shadow-glow animate-scale-in" />
               )}
-              
+
               <Icon
                 className={cn(
                   "h-5 w-5 transition-all duration-200",
-                  isActive ? "text-primary scale-110" : "text-muted-foreground"
+                  isActive
+                    ? "text-accent scale-110 drop-shadow-[0_0_8px_hsl(var(--accent)/0.6)]"
+                    : "text-muted-foreground"
                 )}
               />
               <span
