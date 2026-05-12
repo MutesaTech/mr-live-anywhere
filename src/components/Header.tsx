@@ -41,19 +41,25 @@ const Header = ({ title, onSearchClick }: HeaderProps) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-14 glass shadow-soft">
+    <header className="fixed top-0 left-0 right-0 z-50 h-16 glass shadow-soft border-b border-white/5">
       <div className="container h-full flex items-center justify-between px-4">
-        {/* Left: Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <img
-            src="/logo.png"
-            alt="MR LIVE"
-            className="h-10 w-10 rounded-lg object-contain"
-          />
+        {/* Left: Logo + Brand */}
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="relative">
+            <div className="absolute inset-0 rounded-xl gradient-primary blur-md opacity-60" />
+            <img
+              src="/logo.png"
+              alt="MR LIVE"
+              className="relative h-9 w-9 rounded-xl object-contain bg-card p-1"
+            />
+          </div>
+          <span className="font-bold text-lg tracking-tight text-gradient-primary hidden sm:inline">
+            MR LIVE
+          </span>
         </Link>
 
         {/* Center: Title */}
-        <h1 className="absolute left-1/2 -translate-x-1/2 text-h3 font-semibold truncate max-w-[50%]">
+        <h1 className="absolute left-1/2 -translate-x-1/2 text-base font-semibold truncate max-w-[50%] text-foreground/90">
           {title}
         </h1>
 
