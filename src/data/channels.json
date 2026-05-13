@@ -3,7 +3,7 @@
     "id": "1",
     "name": "5-Minute Crafts ",
     "logo": "https://i.postimg.cc/V6ccV7dW/images.jpg",
-    "stream": "https://media-tyo.hls.nhkworld.jp/hls/w/live/1/sig/b95e9aa9a33513b4d3416b7a201ec82c0d5e59c711f7fb0191d49f299d05b62e/a1.m3u8",
+    "stream": "",
     "category": "Life Hacks",
     "language": "english"
   },
@@ -425,10 +425,10 @@
   },
   {
     "id": "54",
-    "name": "HD Travel",
+    "name": "Motorvision",
     "logo": "https://i.postimg.cc/RFh8z1JR/travel-channel-hd-logo-png-seeklogo-270293-removebg-preview.png",
-    "stream": "https://streams2.sofast.tv/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/e58c3999-b5e1-4322-8d73-db8ebd8acb32/7d3c29e3-d170-48d8-81e7-81ca23f259dc/0.m3u8",
-    "category": "entertainment",
+    "stream": "https://stream.ads.ottera.tv/cl/260513d82acvd2o2cc73a1j0c0/640x360_1126400_3_f.m3u8?i=475_758",
+    "category": "sport",
     "language": "english"
   },
   {
