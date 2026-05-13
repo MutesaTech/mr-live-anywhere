@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "name": "TV1 Rwanda",
+    "name": "",
     "logo": "https://i.postimg.cc/JnCRm8Pg/images.png",
     "stream": "",
     "category": "news",
@@ -249,10 +249,10 @@
   },
   {
     "id": "32",
-    "name": "Sport 4",
-    "logo": "https://i.postimg.cc/k5Kp40qB/images.png",
-    "stream": "https://pepsi.abntv.live/hls/4spstream.m3u8",
-    "category": "sports",
+    "name": "Baby Shark",
+    "logo": "https://i.postimg.cc/mgMd22PY/854081161001-6045307371001-6045305932001-vs.jpg",
+    "stream": "https://newidco-babysharktv-1-eu.rakuten.wurl.tv/2000.m3u8",
+    "category": "kids",
     "language": "english"
   },
   {
