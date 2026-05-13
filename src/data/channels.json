@@ -97,9 +97,9 @@
   },
   {
     "id": "13",
-    "name": "RAKUTEN",
-    "logo": "https://i.postimg.cc/PJBz8T7s/images-2-removebg-preview.png",
-    "stream": "https://73e5474be2ae422487b18295a9782482.mediatailor.eu-west-1.amazonaws.com/v1/manifest/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-4548/5233bbcd-9570-4264-b3af-382cfeed9fa8/0.m3u8",
+    "name": "Bxx tv",
+    "logo": "https://i.postimg.cc/QCLF4HVr/images.jpg",
+    "stream": "https://fl1004.bozztv.com/ushba-mafia/tracks-v1a1/mono.m3u8",
     "category": "entertainment",
     "language": "english"
   },
