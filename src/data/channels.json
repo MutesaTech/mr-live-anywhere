@@ -227,7 +227,7 @@
     "id": "29",
     "name": "Brit Asia",
     "logo": "https://i.postimg.cc/fLmPbqyk/22b3a6cc2cdce33be33fe4f1b1151d3b-removebg-preview.png",
-    "stream": "https://d35j504z0x2vu2.cloudfront.net/v1/manifest/0bc8e8376bd8417a1b6761138aa41c26c7309312/britasiatv/b430a05d-7d70-4a63-91ea-8b7bbbc4caf0/0.m3u8",
+    "stream": "https://hls.autopo.st/hls/britasiatv/index.m3u8",
     "category": "entertainment",
     "language": "english"
   },
