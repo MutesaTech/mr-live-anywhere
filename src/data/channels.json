@@ -3,7 +3,7 @@
     "id": "1",
     "name": "TV1 Rwanda",
     "logo": "https://i.postimg.cc/JnCRm8Pg/images.png",
-    "stream": "https://rpn3.bozztv.com/dvrfl07/ushba-t2/tracks-v1a1/mono.m3u8",
+    "stream": "",
     "category": "news",
     "language": "kinyarwanda"
   },
@@ -57,9 +57,9 @@
   },
   {
     "id": "8",
-    "name": "HD TV",
-    "logo": "https://i.postimg.cc/DfrtnWXf/hq720.jpg",
-    "stream": "https://live-evg6.tv360.metfone.com.kh/CTV9HD@1.m3u8",
+    "name": "a3bikini",
+    "logo": "https://i.postimg.cc/wTGttfcn/65151.png",
+    "stream": "https://rpn3.bozztv.com/dvrfl07/ushba-t2/tracks-v1a1/mono.m3u8",
     "category": "entertainment",
     "language": "english"
   },
