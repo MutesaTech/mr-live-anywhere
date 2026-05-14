@@ -454,6 +454,14 @@
     "stream": "https://tv03.zas.media:1936/tvdocarro/tvdocarro/chunklist_w1900094563.m3u8",
     "category": "cars",
     "language": "Portuguese"
+  },
+   {
+    "id": "58",
+    "name": "Canal Motor",
+    "logo": "https://i.postimg.cc/rFYT8xVk/images.jpg",
+    "stream": "https://digicom.hls.iptvdc.com/canalmotor/tracks-v2a1/mono.m3u8",
+    "category": "cars",
+    "language": ""
   }
 
  
