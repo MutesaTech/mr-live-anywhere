@@ -485,16 +485,25 @@
     "logo": "https://i.postimg.cc/htmcGvZp/imgi-57-images.jpg",
     "stream": "https://stmv1.srvif.com/tvserie/tvserie/playlist.m3u8",
     "category": "Movies",
-    "language": "english"
+    "language": "Portuguese"
   },
     {
     "id": "62",
     "name": "RetroCrush",
-    "logo": "",
+    "logo": "https://i.postimg.cc/SxG2KgvD/images-(1).jpg",
     "stream": "https://cineverse.g-mana.live/media/ac7cff3c-5bc3-4745-ac4d-56aadb586d00/profile/4/profileManifest.m3u8?_uid=9ba9a470-00f3-48fd-8d89-dd97e14ed9bb&rK=c1&_did=093df016-1b27-92b9-1ca2-5378d58f4f5d",
-    "category": "",
+    "category": "kids",
+    "language": "english"
+  },
+   {
+    "id": "63",
+    "name": "Boomerang UK ",
+    "logo": "",
+    "stream": "https://www.youtube.com/youtubei/v1/player/heartbeat?alt=json",
+    "category": "kids",
     "language": "english"
   }
+  
 
 
  
