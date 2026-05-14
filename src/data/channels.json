@@ -526,6 +526,14 @@
     "stream": "https://stmv1.srvif.com/gospelcartoon/gospelcartoon/playlist.m3u8",
     "category": "kids",
     "language": "Portuguese"
+  },
+   {
+    "id": "67",
+    "name": "Bons Tempos ",
+    "logo": "https://i.postimg.cc/W43Lx7qh/images.jpg",
+    "stream": "https://stmv1.srvif.com/canal29/canal29/playlist.m3u8",
+    "category": "Movies",
+    "language": "Portuguese"
   }
 
 
