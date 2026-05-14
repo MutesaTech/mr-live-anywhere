@@ -425,9 +425,9 @@
   },
   {
     "id": "54",
-    "name": " Weather Channel",
-    "logo": "https://i.postimg.cc/R0VY67rG/images-(1).png",
-    "stream": "https://db691j6te7mt4.cloudfront.net/out/v1/f65bdb9d5ac1498ba700027b5ca8a383/index_7_0.m3u8",
+    "name": "SPEEDVISION",
+    "logo": "https://i.postimg.cc/BZLxw69Y/images-(1).jpg",
+    "stream": "https://eb9a3a62.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/T05PX1NwZWVkdmlzaW9uX0hMUw/50eb06fa-9ecf-4eaf-a697-f908eb7a1949/6.m3u8",
     "category": "weather",
     "language": "english"
   },
