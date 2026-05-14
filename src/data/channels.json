@@ -542,7 +542,24 @@
     "stream": "https://video04.logicahost.com.br/tvaracati/tvaracati/chunklist_w1102925845.m3u8",
     "category": "kids",
     "language": "Portuguese"
-  }
+  },
+   {
+    "id": "69",
+    "name": "Otaku Sign ",
+    "logo": "https://i.postimg.cc/ZRb9G2FP/images-(1).jpg",
+    "stream": "https://stmv1.srvif.com/anime/anime/playlist.m3u8",
+    "category": "kids",
+    "language": "Portuguese"
+  },
+    {
+    "id": "70",
+    "name": "Sat 7 Kids Live",
+    "logo": "https://i.postimg.cc/ZKtLgKv8/images.png",
+    "stream": "https://svs.itworkscdn.net/sat7kidslive/sat7kids.smil/sat7kidspublish/sat7kids_240p/chunks_dvr.m3u8",
+    "category": "kids",
+    "language": "english"
+  },
+
 
 
  
