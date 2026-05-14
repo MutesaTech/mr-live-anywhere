@@ -289,11 +289,11 @@
   },
   {
     "id": "37",
-    "name": "Kickboxing",
+    "name": "Power Nation en Español Live",
     "logo": "https://i.postimg.cc/QMRZY2JF/0W7TWDHH-400x400.jpg",
     "stream": "https://amg01258-raycomsports-powernationspanish-canelatv-5h8dc.amagi.tv/ts-us-e2-n2/playlist/amg01258-raycomsports-powernationspanish-canelatv/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac725adb80148b61299bce8c37683f03409a5e5afba358b1ebe055118c3aa4b44e55917943ef9f43c8821da6d2d65d9b5e8e23f5409992f0dfd415d38ef31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad787406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8ea59f1ea1faa0f2897117961f049a420b363a2fb800da223160/22/426x240_511680/index.m3u8",
     "category": "sports",
-    "language": "english"
+    "language": "Español"
   },
   {
     "id": "38",
@@ -438,5 +438,367 @@
     "stream": "https://fast-channels.sinclairstoryline.com/CHARGE/index_1.m3u8",
     "category": "TV Shows",
     "language": "english"
+  },
+   {
+    "id": "56",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "57",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "58",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "59",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "60",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "61",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "62",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "63",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "64",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "65",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "66",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "67",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "68",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "69",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "70",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "71",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "72",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "73",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "74",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "75",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "76",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "77",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "78",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "79,
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "80",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "81",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "82",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "83",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+
+  {
+    "id": "84",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "85",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "86",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "87",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "88",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+  {
+    "id": "89",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "90",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "91",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "92",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "93",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "94",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "95",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "96",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "97",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "98",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "99",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
+  },
+   {
+    "id": "100",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": "english"
   }
+  
 ]
