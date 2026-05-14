@@ -511,7 +511,14 @@
     "category": "kids",
     "language": "Portuguese"
   },
-  
+   {
+    "id": "65",
+    "name": "Anime Tv",
+    "logo": "https://i.postimg.cc/W3SxbqRk/Love-Live-School-Idol-Project-anime-promotional-art.jpg",
+    "stream": "https://stmv1.srvif.com/loadingtv/loadingtv/playlist.m3u8",
+    "category": "Movies,Tv shows",
+    "language": "english"
+  }
 
 
  
