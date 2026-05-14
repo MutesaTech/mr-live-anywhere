@@ -241,10 +241,10 @@
   },
   {
     "id": "31",
-    "name": "World War TV",
-    "logo": "https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=200&h=200&fit=crop",
+    "name": "BBCEarth",
+    "logo": "https://i.postimg.cc/DzMpGwbN/images.jpg",
     "stream": "https://amg00793-amg00793c6-xumo-us-2669.playouts.now.amagi.tv/BBCStudios-BBCEarthA-hls/playlist240p.m3u8",
-    "category": "entertainment",
+    "category": "Documentary",
     "language": "english"
   },
   {
@@ -438,6 +438,15 @@
     "stream": "https://fast-channels.sinclairstoryline.com/CHARGE/index_1.m3u8",
     "category": "TV Shows",
     "language": "english"
+  },
+    {
+    "id": "56",
+    "name": "Garage TV",
+    "logo": "https://i.postimg.cc/7LsMRtHp/552-5525948-garage-tv-logo-png-transparent-png.png",
+    "stream": "https://stream1.sersat.com/hls/garagetv.m3u8",
+    "category": "cars",
+    "language": "english"
   }
+
  
 ]
