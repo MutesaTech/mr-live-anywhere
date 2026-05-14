@@ -425,10 +425,10 @@
   },
   {
     "id": "54",
-    "name": "Motorvision",
-    "logo": "https://i.postimg.cc/rw4NggWH/images.png",
-    "stream": "https://stream.ads.ottera.tv/cl/260513d82acvd2o2cc73a1j0c0/640x360_1126400_3_f.m3u8?i=475_758",
-    "category": "sport",
+    "name": " Weather Channel",
+    "logo": "https://i.postimg.cc/R0VY67rG/images-(1).png",
+    "stream": "https://db691j6te7mt4.cloudfront.net/out/v1/f65bdb9d5ac1498ba700027b5ca8a383/index_7_0.m3u8",
+    "category": "weather",
     "language": "english"
   },
   {
