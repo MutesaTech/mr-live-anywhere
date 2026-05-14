@@ -513,11 +513,19 @@
   },
    {
     "id": "65",
-    "name": "Anime Tv",
-    "logo": "https://i.postimg.cc/W3SxbqRk/Love-Live-School-Idol-Project-anime-promotional-art.jpg",
+    "name": "Tv Loading ",
+    "logo": "https://i.postimg.cc/Gpz195G4/images-(1).png",
     "stream": "https://stmv1.srvif.com/loadingtv/loadingtv/playlist.m3u8",
     "category": "Movies",
     "language": "english"
+  },
+   {
+    "id": "66",
+    "name": "Gospel Cartoon",
+    "logo": "https://i.postimg.cc/655wxwZw/imgi-1-f0a3c3c7b9a651e847d86dd71bbb5551.webp",
+    "stream": "https://stmv1.srvif.com/gospelcartoon/gospelcartoon/playlist.m3u8",
+    "category": "kids",
+    "language": "Portuguese"
   }
 
 
