@@ -534,6 +534,14 @@
     "stream": "https://stmv1.srvif.com/canal29/canal29/playlist.m3u8",
     "category": "Movies",
     "language": "Portuguese"
+  },
+  {
+    "id": "68",
+    "name": "Tv Aracati ",
+    "logo": "https://i.postimg.cc/dQRHmyLQ/images-(1).jpg",
+    "stream": "https://video04.logicahost.com.br/tvaracati/tvaracati/chunklist_w1102925845.m3u8",
+    "category": "kids",
+    "language": "Portuguese"
   }
 
 
