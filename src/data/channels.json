@@ -502,7 +502,15 @@
     "stream": "https://stmv1.video.brstream.com.br/retrotv/retrotv/chunklist_w1389733955.m3u8",
      "category": "kids",
     "language": "Portuguese"
-  }
+  },
+   {
+    "id": "64",
+    "name": "TV Cultura",
+    "logo": "https://i.postimg.cc/xj4TtWwL/images.png",
+    "stream": "https://player-tvcultura.stream.uol.com.br/live/tvcultura_lsd.m3u8?vhost=player-tvcultura.stream.uol.com.br",
+    "category": "kids",
+    "language": "Portuguese"
+  },
   
 
 
