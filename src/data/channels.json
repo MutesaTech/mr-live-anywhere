@@ -478,6 +478,14 @@
     "stream": "https://mmm-dk.otteravision.com/DexaYJdJXkLqFxTK_DuckTVHDSAMS/DuckTVHDSAMS.stream/DuckTVHDSAMS/DuckTVHDSAMS_360p_AAC.stream/chunks.m3u8",
     "category": "kids",
     "language": "english"
+  },
+  {
+    "id": "61",
+    "name": "Web Tv Cine",
+    "logo": "https://i.postimg.cc/htmcGvZp/imgi-57-images.jpg",
+    "stream": "https://stmv1.srvif.com/tvserie/tvserie/playlist.m3u8",
+    "category": "Movies",
+    "language": "english"
   }
 
  
