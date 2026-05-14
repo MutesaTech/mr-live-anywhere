@@ -470,6 +470,14 @@
     "stream": "https://d39yjeivnywvts.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ww9fq2xfgtfog/4a5e9a4d-d882-4868-9772-2e2258d2e85b/2.m3u8",
     "category": "cars",
     "language": "english"
+  },
+    {
+    "id": "60",
+    "name": "Duck TV",
+    "logo": "https://i.postimg.cc/XN9MRmhH/images-(1).png",
+    "stream": "https://mmm-dk.otteravision.com/DexaYJdJXkLqFxTK_DuckTVHDSAMS/DuckTVHDSAMS.stream/DuckTVHDSAMS/DuckTVHDSAMS_360p_AAC.stream/chunks.m3u8",
+    "category": "kids",
+    "language": "english"
   }
 
  
