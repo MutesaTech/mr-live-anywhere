@@ -445,8 +445,16 @@
     "logo": "https://i.postimg.cc/7LsMRtHp/552-5525948-garage-tv-logo-png-transparent-png.png",
     "stream": "https://stream1.sersat.com/hls/garagetv.m3u8",
     "category": "cars",
-    "language": "english"
-  }
+    "language": "Portuguese"
+  },
+   {
+    "id": "57",
+    "name": "WSN TV do Carro",
+    "logo": "https://i.postimg.cc/mgFynyc5/imgi-78-images.jpg",
+    "stream": "https://tv03.zas.media:1936/tvdocarro/tvdocarro/chunklist_w1900094563.m3u8",
+    "category": "cars",
+    "language": "Portuguese"
+  },
 
  
 ]
