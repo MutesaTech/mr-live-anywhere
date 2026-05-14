@@ -462,6 +462,14 @@
     "stream": "https://digicom.hls.iptvdc.com/canalmotor/tracks-v2a1/mono.m3u8",
     "category": "cars",
     "language": ""
+  },
+    {
+    "id": "59",
+    "name": "Red Bull TV Motorsport",
+    "logo": "https://i.postimg.cc/VkYKHVQd/images.png",
+    "stream": "https://d39yjeivnywvts.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-ww9fq2xfgtfog/19bcb254-e7d1-4386-93fb-33be1edbeb4f/4.m3u8",
+    "category": "cars",
+    "language": "english"
   }
 
  
