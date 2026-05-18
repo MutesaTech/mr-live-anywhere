@@ -46,5 +46,13 @@
     "stream": "https://as-hls-ww.live.cf.md.bbci.co.uk/pool_89021708/live/ww/bbc_radio_five_live/bbc_radio_five_live.isml/bbc_radio_five_live-audio%3d96000.norewind.m3u8",
     "category": "sport",
     "language": "english"
+  },
+   {
+    "id": "r7",
+    "name": "WIVK 107.7 FM",
+    "logo": "https://i.postimg.cc/RV8YVTCr/1769836428-1.jpg",
+    "stream": "https://worldradios.app/metadata.php?url=https%3A%2F%2Fplayerservices.streamtheworld.com%2Fapi%2Flivestream-redirect%2FWIVKFMAAC.aac",
+    "category": "country",
+    "language": "english"
   }
 ]
