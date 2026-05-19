@@ -54,5 +54,13 @@
     "stream": "https://worldradios.app/metadata.php?url=https%3A%2F%2Flisten.181fm.com%2F181-80scountry_128k.mp3",
     "category": "country",
     "language": "english"
+  },
+   {
+    "id": "r8",
+    "name": "dj sheski",
+    "logo": "https://i.postimg.cc/RV8YVTCr/1769836428-1.jpg",
+    "stream": "https://feeds.soundcloud.com/stream/2321542928-deejayshinski-afrobeats-vs-amapiano-mix-vol-3.mp3",
+    "category": "country",
+    "language": "english"
   }
 ]
