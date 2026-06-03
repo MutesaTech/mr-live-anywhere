@@ -8,6 +8,8 @@ import CategoryTabs from './CategoryTabs';
 import SearchBar from './SearchBar';
 import StreamLoader from './StreamLoader';
 import StreamErrorHandler from './StreamErrorHandler';
+import SponsoredBanner from './SponsoredBanner';
+import HorizontalRail from './HorizontalRail';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { useSwipeGesture } from '@/hooks/useSwipeGesture';
 interface Channel {
@@ -165,25 +167,13 @@ const TvPlayer = ({
     };
   }, [activeChannel, channels, loadStream]);
   const handlePlayChannel = (channelId: string, autoExpand = true) => {
-    // Auto-scroll to player
-    if (playerRef.current) {
-      playerRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-
-    // Fast loading animation
+    // Optimistic, instant switch — no scroll jumping.
     setIsLoading(true);
-
-    // Instant channel switch (200ms animation feel)
-    setTimeout(() => {
-      setActiveChannel(channelId);
-      onPlay(channelId);
-      if (autoExpand) {
-        setIsPlayerExpanded(true);
-      }
-    }, 50);
+    setActiveChannel(channelId);
+    onPlay(channelId);
+    if (autoExpand) {
+      setIsPlayerExpanded(true);
+    }
   };
   const handleClosePlayer = () => {
     setActiveChannel(null);
@@ -231,7 +221,12 @@ const TvPlayer = ({
             <video ref={videoRef} className="h-full w-full" controls playsInline />
             
             {/* Stream Loader */}
-            <StreamLoader isLoading={isLoading} />
+            <StreamLoader
+              isLoading={isLoading}
+              channelLogo={activeChannelData.logo}
+              channelName={activeChannelData.name}
+              channelCategory={activeChannelData.category}
+            />
             
             {/* Error Handler */}
             <StreamErrorHandler error={streamError} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
@@ -284,6 +279,38 @@ const TvPlayer = ({
             </div>
           </div>
         </div>}
+
+      {/* Sponsored banner — directly below the live player */}
+      {activeChannel && activeChannelData && (
+        <SponsoredBanner />
+      )}
+
+      {/* Quick-switch horizontal rail — instant channel switching without scroll-jump */}
+      {activeChannel && filteredChannels.length > 1 && (
+        <HorizontalRail
+          title="Up Next"
+          itemWidthClass="w-[160px] sm:w-[180px] md:w-[200px]"
+        >
+          {filteredChannels.map((channel) => (
+            <ChannelCard
+              key={`rail-${channel.id}`}
+              id={channel.id}
+              name={channel.name}
+              logo={channel.logo}
+              category={channel.category}
+              isActive={activeChannel === channel.id}
+              isPlaying={activeChannel === channel.id}
+              isFavorite={favorites.includes(channel.id)}
+              viewerCount={viewerCounts[channel.id]}
+              onClick={() => handlePlayChannel(channel.id)}
+              onToggleFavorite={(e) => {
+                e.stopPropagation();
+                onToggleFavorite(channel.id);
+              }}
+            />
+          ))}
+        </HorizontalRail>
+      )}
 
       {/* Search & Categories */}
       <div className="space-y-4">
