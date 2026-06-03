@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import Hls from 'hls.js';
-import { Maximize2, Star, Eye, X } from 'lucide-react';
+import { Maximize2, Minimize2, Star, Eye, X, GripHorizontal, PictureInPicture2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import ChannelCard from './ChannelCard';
@@ -46,6 +46,13 @@ const TvPlayer = ({
   const [streamError, setStreamError] = useState<string | null>(null);
   const [isPlayerExpanded, setIsPlayerExpanded] = useState(true);
   const [stickyPlayer, setStickyPlayer] = useState(false);
+  // Floating/draggable mini-player state
+  const [floating, setFloating] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [inlineHeight, setInlineHeight] = useState(0);
+  const dragRef = useRef<{ sx: number; sy: number; bx: number; by: number } | null>(null);
+  const inlineSlotRef = useRef<HTMLDivElement>(null);
+  const playerWrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<Hls | null>(null);
   const playerRef = useRef<HTMLDivElement>(null);
@@ -178,6 +185,8 @@ const TvPlayer = ({
   const handleClosePlayer = () => {
     setActiveChannel(null);
     setIsPlayerExpanded(false);
+    setFloating(false);
+    setDragOffset({ x: 0, y: 0 });
     if (hlsRef.current) {
       hlsRef.current.destroy();
       hlsRef.current = null;
@@ -189,6 +198,22 @@ const TvPlayer = ({
         videoRef.current.requestFullscreen();
       }
     }
+  };
+  const handlePip = async () => {
+    try {
+      if (!videoRef.current) return;
+      if (document.pictureInPictureElement) {
+        await document.exitPictureInPicture();
+      } else if ((videoRef.current as any).requestPictureInPicture) {
+        await (videoRef.current as any).requestPictureInPicture();
+      }
+    } catch (err) {
+      console.warn('PiP failed', err);
+    }
+  };
+  const scrollToInline = () => {
+    inlineSlotRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setDragOffset({ x: 0, y: 0 });
   };
   const handleNextChannel = useCallback(() => {
     if (currentChannelIndex < channels.length - 1) {
@@ -213,9 +238,80 @@ const TvPlayer = ({
     }
   };
   const activeChannelData = channels.find(c => c.id === activeChannel);
+
+  // Observe inline slot — when out of view while a channel is playing, switch player to floating mini-mode.
+  useEffect(() => {
+    if (!inlineSlotRef.current || !activeChannel) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        const visible = entry.isIntersecting;
+        setFloating((prev) => {
+          const next = !visible;
+          if (next === prev) return prev;
+          if (!next) setDragOffset({ x: 0, y: 0 });
+          // Notify parent that a mini-player is visible vs the inline expanded player
+          onMiniPlayerStateChange?.(next, !next);
+          return next;
+        });
+      },
+      { threshold: 0, rootMargin: '-72px 0px 0px 0px' }
+    );
+    obs.observe(inlineSlotRef.current);
+    return () => obs.disconnect();
+  }, [activeChannel, onMiniPlayerStateChange]);
+
+  // Capture inline player height so the slot reserves space when player goes floating
+  useEffect(() => {
+    if (!playerWrapRef.current || floating) return;
+    const h = playerWrapRef.current.offsetHeight;
+    if (h > 0) setInlineHeight(h);
+  }, [activeChannel, floating, isPlayerExpanded]);
+
+  // Drag handlers for floating mini-player
+  const onDragStart = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!floating) return;
+    const target = e.target as HTMLElement;
+    if (target.closest('video, button, input, [data-no-drag]')) return;
+    dragRef.current = { sx: e.clientX, sy: e.clientY, bx: dragOffset.x, by: dragOffset.y };
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+  const onDragMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!dragRef.current) return;
+    const { sx, sy, bx, by } = dragRef.current;
+    setDragOffset({ x: bx + (e.clientX - sx), y: by + (e.clientY - sy) });
+  };
+  const onDragEnd = (e: React.PointerEvent<HTMLDivElement>) => {
+    dragRef.current = null;
+    try { (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId); } catch {}
+  };
+
   return <div ref={containerRef} className="space-y-6 animate-page-enter">
-      {/* Full Player */}
-      {activeChannel && activeChannelData && <div ref={playerRef} className={cn("rounded-2xl overflow-hidden bg-card border border-border/50 shadow-strong", "transition-all duration-300 ease-out touch-pan-x", isPlayerExpanded ? "animate-scale-in" : "h-0 opacity-0", stickyPlayer && "sticky top-16 z-30")}>
+      {/* Inline slot — reserves layout space when the player is floating */}
+      {activeChannel && activeChannelData && (
+        <div
+          ref={inlineSlotRef}
+          aria-hidden={floating}
+          style={{ height: floating ? inlineHeight : undefined, minHeight: floating ? inlineHeight : undefined }}
+          className={cn(floating && 'rounded-2xl border border-dashed border-border/40 bg-card/30')}
+        />
+      )}
+
+      {/* Full / Floating Player — same DOM node so the video stream never reloads */}
+      {activeChannel && activeChannelData && <div
+        ref={(el) => { playerRef.current = el; (playerWrapRef as any).current = el; }}
+        onPointerDown={onDragStart}
+        onPointerMove={onDragMove}
+        onPointerUp={onDragEnd}
+        onPointerCancel={onDragEnd}
+        style={floating ? { transform: `translate3d(${dragOffset.x}px, ${dragOffset.y}px, 0)` } : undefined}
+        className={cn(
+          "rounded-2xl overflow-hidden border shadow-strong touch-pan-x",
+          "transition-[width,box-shadow,border-color,background-color] duration-300 ease-out",
+          isPlayerExpanded ? "animate-scale-in" : "h-0 opacity-0",
+          floating
+            ? "fixed z-40 bottom-4 right-4 w-[280px] sm:w-[340px] md:w-[400px] glass-strong border-white/10 shadow-2xl cursor-grab active:cursor-grabbing"
+            : "relative bg-card border-border/50",
+        )}>
           {/* Video Container */}
           <div className="relative aspect-video bg-black">
             <video ref={videoRef} className="h-full w-full" controls playsInline />
@@ -239,23 +335,33 @@ const TvPlayer = ({
               </div>
               
               <div className="flex gap-2 pointer-events-auto">
+                {floating && (
+                  <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={scrollToInline} title="Expand">
+                    <Maximize2 className="h-4 w-4" />
+                  </Button>
+                )}
+                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handlePip} title="Picture in picture">
+                  <PictureInPicture2 className="h-4 w-4" />
+                </Button>
                 <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handleFullscreen}>
                   <Maximize2 className="h-5 w-5" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handleClosePlayer}>
+                <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handleClosePlayer}>
                   <X className="h-5 w-5" />
                 </Button>
               </div>
             </div>
 
-            {/* Swipe hint */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-caption text-white/50 flex items-center gap-1">
-              
-            </div>
+            {/* Drag handle when floating */}
+            {floating && (
+              <div className="absolute top-1 left-1/2 -translate-x-1/2 text-white/60">
+                <GripHorizontal className="h-4 w-4" />
+              </div>
+            )}
           </div>
           
-          {/* Channel Info */}
-          <div className="p-4">
+          {/* Channel Info — hidden in floating compact mode */}
+          {!floating && <div className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <img src={activeChannelData.logo} alt={activeChannelData.name} className="h-12 w-12 rounded-xl object-cover" />
@@ -277,7 +383,21 @@ const TvPlayer = ({
                 </Button>
               </div>
             </div>
-          </div>
+          </div>}
+
+          {/* Compact info bar — only when floating */}
+          {floating && (
+            <div className="flex items-center gap-2 p-2.5 border-t border-white/10">
+              <img src={activeChannelData.logo} alt={activeChannelData.name} className="h-8 w-8 rounded-lg object-cover" />
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-semibold text-white line-clamp-1">{activeChannelData.name}</p>
+                <p className="text-[10px] text-white/60 capitalize line-clamp-1">{activeChannelData.category}</p>
+              </div>
+              <Button data-no-drag variant="ghost" size="icon" className="h-8 w-8 rounded-full text-white/80 hover:text-white" onClick={() => onToggleFavorite(activeChannel)}>
+                <Star className={cn('h-4 w-4', favorites.includes(activeChannel) && 'fill-primary text-primary')} />
+              </Button>
+            </div>
+          )}
         </div>}
 
       {/* Sponsored banner — directly below the live player */}
