@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { getCategoryTheme } from '@/lib/categoryThemes';
 
 interface CategoryTabsProps {
   categories: string[];
@@ -44,20 +45,33 @@ const CategoryTabs = ({ categories, activeCategory, onCategoryChange }: Category
       >
         {categories.map((category) => {
           const isActive = activeCategory === category;
-          
+          const theme = getCategoryTheme(category);
+          const Icon = theme.icon;
+
           return (
             <button
               key={category}
               onClick={() => onCategoryChange(category)}
               className={cn(
-                "shrink-0 px-4 py-2 rounded-pill text-body font-medium transition-all duration-200",
-                "border border-transparent",
+                "group relative shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-semibold",
+                "transition-all duration-300 ease-out border",
+                theme.motion,
                 isActive
-                  ? "bg-primary text-primary-foreground shadow-glow"
-                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  ? cn(
+                      'text-white border-white/15 bg-gradient-to-r',
+                      theme.gradient,
+                      theme.glow
+                    )
+                  : 'bg-secondary/70 text-secondary-foreground border-white/5 hover:bg-secondary'
               )}
             >
-              <span className="capitalize">{category}</span>
+              <Icon className={cn(
+                'h-4 w-4 transition-transform duration-300',
+                isActive ? 'opacity-100' : 'opacity-70 group-hover:opacity-100',
+                isActive && category.toLowerCase() === 'music' && 'animate-pulse-dot',
+                isActive && category.toLowerCase() === 'sports' && 'group-hover:rotate-12'
+              )} />
+              <span className="capitalize tracking-tight">{theme.label}</span>
             </button>
           );
         })}

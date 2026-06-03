@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
 import BottomNav from '@/components/BottomNav';
 import HomePage from '@/components/HomePage';
@@ -29,6 +30,8 @@ const sectionTitles: Record<Section, string> = {
 };
 
 const Index = () => {
+  const params = useParams();
+  const location = useLocation();
   const [activeSection, setActiveSection] = useState<Section>('home');
   const [favoriteTvIds, setFavoriteTvIds] = useLocalStorage<string[]>('favoriteTv', []);
   const [favoriteRadioIds, setFavoriteRadioIds] = useLocalStorage<string[]>('favoriteRadio', []);
@@ -51,6 +54,37 @@ const Index = () => {
       }
     }
   }, []);
+
+  // Deep linking: /channel/:id, /radio/:id, /live/:id, /category/:slug
+  useEffect(() => {
+    const path = location.pathname;
+    if (path.startsWith('/channel/') || path.startsWith('/live/')) {
+      const id = params.id;
+      if (id) {
+        const exists = channelsData.find((c) => c.id === id);
+        if (exists) {
+          setExternalChannelId(id);
+          setActiveSection('tv');
+          setLastWatchedTv(id);
+          saveResumeState(id, 'tv');
+        }
+      }
+    } else if (path.startsWith('/radio/')) {
+      const id = params.id;
+      if (id) {
+        const exists = radiosData.find((r) => r.id === id);
+        if (exists) {
+          setActiveSection('radio');
+          setLastPlayedRadio(id);
+          saveResumeState(id, 'radio');
+        }
+      }
+    } else if (path.startsWith('/category/')) {
+      // Default to TV section; CategoryTabs will filter via search param fallback.
+      setActiveSection('tv');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname, params.id, params.slug]);
 
   // Apply theme on mount
   useEffect(() => {
