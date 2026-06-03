@@ -4,6 +4,7 @@ import ChannelCard from './ChannelCard';
 import RadioCard from './RadioCard';
 import SkeletonCard, { SkeletonGrid } from './SkeletonCard';
 import SearchBar from './SearchBar';
+import HorizontalRail from './HorizontalRail';
 import { cn } from '@/lib/utils';
 
 interface Channel {
@@ -137,52 +138,50 @@ const HomePage = ({
 
           {/* Channels */}
           {filteredChannels.length > 0 && (
-            <section>
-              <h2 className="text-h2 mb-4">
-                {searchQuery ? 'Search Results' : 'Continue Watching'}
-              </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {filteredChannels.map((channel) => (
-                  <ChannelCard
-                    key={channel.id}
-                    id={channel.id}
-                    name={channel.name}
-                    logo={channel.logo}
-                    category={channel.category}
-                    isFavorite={favoriteTvIds.includes(channel.id)}
-                    onClick={() => onSelectChannel(channel.id)}
-                    onToggleFavorite={(e) => {
-                      e.stopPropagation();
-                      onToggleFavoriteTv(channel.id);
-                    }}
-                  />
-                ))}
-              </div>
-            </section>
+            <HorizontalRail
+              title={searchQuery ? 'Search Results' : 'Continue Watching'}
+              itemWidthClass="w-[180px] sm:w-[220px] md:w-[260px]"
+            >
+              {filteredChannels.map((channel) => (
+                <ChannelCard
+                  key={channel.id}
+                  id={channel.id}
+                  name={channel.name}
+                  logo={channel.logo}
+                  category={channel.category}
+                  isFavorite={favoriteTvIds.includes(channel.id)}
+                  onClick={() => onSelectChannel(channel.id)}
+                  onToggleFavorite={(e) => {
+                    e.stopPropagation();
+                    onToggleFavoriteTv(channel.id);
+                  }}
+                />
+              ))}
+            </HorizontalRail>
           )}
 
           {/* Radio Stations */}
           {filteredRadios.length > 0 && (
-            <section>
-              <h2 className="text-h2 mb-4">Radio Stations</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {filteredRadios.map((radio) => (
-                  <RadioCard
-                    key={radio.id}
-                    id={radio.id}
-                    name={radio.name}
-                    logo={radio.logo}
-                    category={radio.category}
-                    isFavorite={favoriteRadioIds.includes(radio.id)}
-                    onClick={() => onSelectRadio(radio.id)}
-                    onToggleFavorite={(e) => {
-                      e.stopPropagation();
-                      onToggleFavoriteRadio(radio.id);
-                    }}
-                  />
-                ))}
-              </div>
-            </section>
+            <HorizontalRail
+              title="Radio Stations"
+              itemWidthClass="w-[280px] sm:w-[320px]"
+            >
+              {filteredRadios.map((radio) => (
+                <RadioCard
+                  key={radio.id}
+                  id={radio.id}
+                  name={radio.name}
+                  logo={radio.logo}
+                  category={radio.category}
+                  isFavorite={favoriteRadioIds.includes(radio.id)}
+                  onClick={() => onSelectRadio(radio.id)}
+                  onToggleFavorite={(e) => {
+                    e.stopPropagation();
+                    onToggleFavoriteRadio(radio.id);
+                  }}
+                />
+              ))}
+            </HorizontalRail>
           )}
         </>
       )}
