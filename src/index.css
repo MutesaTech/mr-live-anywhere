@@ -335,6 +335,43 @@
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
+/* === Premium Radio Player additions === */
+@keyframes neon-pulse {
+  0%, 100% { box-shadow: 0 0 28px hsl(187 100% 50% / 0.55), 0 0 60px hsl(187 100% 50% / 0.35), inset 0 0 24px hsl(187 100% 50% / 0.25); }
+  50%      { box-shadow: 0 0 44px hsl(187 100% 50% / 0.85), 0 0 90px hsl(187 100% 50% / 0.55), inset 0 0 32px hsl(187 100% 50% / 0.4); }
+}
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@keyframes eq-bar {
+  0%, 100% { transform: scaleY(0.35); }
+  50%      { transform: scaleY(1); }
+}
+.animate-neon-pulse { animation: neon-pulse 2.8s ease-in-out infinite; }
+.animate-float-soft { animation: float-soft 4s ease-in-out infinite; }
+
+.radio-bg {
+  background:
+    radial-gradient(60% 40% at 50% 0%, hsl(195 100% 50% / 0.18), transparent 70%),
+    radial-gradient(50% 40% at 100% 100%, hsl(217 91% 60% / 0.18), transparent 70%),
+    linear-gradient(180deg, #021B79 0%, #03103f 60%, #010820 100%);
+}
+
+.eq-bar {
+  display: inline-block;
+  width: 4px;
+  border-radius: 2px;
+  transform-origin: bottom center;
+  background: linear-gradient(180deg, hsl(195 100% 60%), hsl(217 91% 60%));
+  box-shadow: 0 0 8px hsl(195 100% 60% / 0.7);
+  animation: eq-bar 0.9s ease-in-out infinite;
+}
+.eq-bar.eq-bar--red {
+  background: linear-gradient(180deg, hsl(351 100% 65%), hsl(351 100% 55%));
+  box-shadow: 0 0 12px hsl(351 100% 60% / 0.8);
+}
+
 /* Stagger children animations */
 .stagger-children > * {
   animation: pageEnter 0.4s ease-out backwards;
