@@ -2,8 +2,8 @@
   {
     "id": "r1",
     "name": "Radio Rwanda",
-    "logo": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=200&h=200&fit=crop",
-    "stream": "https://listen.radioking.com/radio/8639/stream/11815",
+    "logo": "https://i.postimg.cc/XN858HrW/images-(1).png",
+    "stream": "https://listen.rba.co.rw:8008/rwanda",
     "category": "news",
     "language": "kinyarwanda"
   },
