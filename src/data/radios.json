@@ -27,7 +27,7 @@
     "id": "r4",
     "name": "Radio 10",
     "logo": "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=200&h=200&fit=crop",
-    "stream": "https://listen.radioking.com/radio/54321/stream/98765",
+    "stream": "http://197.243.1.130:8006/k2dlivemp3",
     "category": "music",
     "language": "kinyarwanda"
   },
