@@ -329,35 +329,35 @@
   },
   {
     "id": "42",
-    "name": "Super Tennis",
-    "logo": "https://i.postimg.cc/nhTC0tSD/Super-tennis.png",
-    "stream": "https://corsply07c.cfpass2.workers.dev/?url=https%3A%2F%2Famg01935-amg01935c1-amgplt0165.playout.now3.amagi.tv%2F360p-cc%2Findex.m3u8",
+    "name": "Fubo Sports",
+    "logo": "https://i.postimg.cc/FRd8hd86/download.jpg",
+    "stream": "https://aegis-cloudfront-1.tubi.video/c2ac89da-5c69-439e-b85d-d87de0548b54/3.m3u8",
     "category": "sports",
     "language": "english"
   },
   {
     "id": "43",
-    "name": "DAZN Combat",
-    "logo": "https://i.postimg.cc/Y0GtN5Gj/logo-DAZN-Combat.png",
-    "stream": "https://oldkors109.cfpass1.workers.dev/?url=https%3A%2F%2Frakutenaa-dazn-combat-rakuten-kcybm.amagi.tv%2Fts-eu-w1-n2%2Fplaylist%2FrakutenAA-dazn-combat-rakuten%2Fcb493e4f7b746f8792993f6cd3f740a0d10c638154128b4830e00dcb2990005c9bbce1db8a12b13c03d85cce1f6e7d505d79cb12ce1b5899d87ea3417c7a136d8ae9f23b85cc755ce0a3566e35b679194ffd0805c85e2b46f4c556488934be7c4534ed0a65597bcd9e01ef290f909f0b8f7e378bb3dd7f396d390ec90c1fbcbf5ba0f8ff5e43ca78f2b54d1d9c2b41b19f10c98749a681d50d9e5e8f73f0148097a18dd7158485c460a101e40636325a15182be4f1b33f83e9d8040c92783c431a15d5b792ea4b2ff43f293ed6debb72e16271b4e40b8e7223b340b94281228368ab73c7ab2ef2e8d3db33c2fc5f601be105809c38b978f0c8a95e5be886fc7e798bff177908ea65d1212a3f9fc70675eecc3899ac2a89b868526d8ec105d3aabb8debbf9a59dc0bfe87a5c873121523330b880bf6c12dc37f8931e8ef0331504873a8987ecd92960b633501d5d61e9c38338df6a7cf9f0232c1655b7ded63d2544c2cef3c7e73e828b6cb683dc77644d57b6dbb6b348643eeb163a0f48cab556dc7abad28c866e1b105c5e542f83d4e3e2c87b27d0f0b1c079384002a3f76c449e1a9bac27f1b0fe1f28db3806431093d18451fc985c3758885d4260d1ca301758015ffba1ba3b08af4880b69deb25335c80775a910cb3a%2F23%2F640x360_792000%2Findex.m3u8",
+    "name": "RS News Sports",
+    "logo": "https://i.postimg.cc/FHGHL8z0/imgi-63-702517cc49df69d1f090c7d5227c53ba.webp",
+    "stream": "https://video03.logicahost.com.br/rssports5/rssports5/chunklist_w515075502.m3u8",
     "category": "sports",
     "language": "english"
   },
   {
     "id": "44",
-    "name": "FIFA Plus",
-    "logo": "https://i.postimg.cc/W1Q4163m/bdab6851e7bb4bee055f6d6f55900de2.jpg",
-    "stream": "https://a62dad94.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0ZJRkFQbHVzRW5nbGlzaF9ITFM/3481db19-1f3c-4cdf-8510-68752571e9a5/0.m3u8",
+    "name": "NBC Sports ",
+    "logo": "https://i.postimg.cc/P5b8FSxt/images.png",
+    "stream": "https://xumo-xumoent-vc-122-sjv70.fast.nbcuni.com/live/master_1.m3u8",
     "category": "sports",
     "language": "english"
   },
   {
     "id": "45",
-    "name": "Canal+ Sports4",
-    "logo": "https://i.postimg.cc/c43kMpmK/Canal-Sport-4-PL.png",
-    "stream": "https://pepsi.abntv.live/hls/4spstream.m3u8",
+    "name": "Azteca Deportes",
+    "logo": "https://i.postimg.cc/5tMDf2bg/images.jpg",
+    "stream": "https://azt-mun.otteravision.com/azt/mun/mun_480p.m3u8",
     "category": "sports",
-    "language": "french"
+    "language": "Spanish"
   },
   {
     "id": "46",
