@@ -1,11 +1,11 @@
 [
   {
     "id": "1",
-    "name": "5-Minute Crafts ",
-    "logo": "https://i.postimg.cc/V6ccV7dW/images.jpg",
-    "stream": "",
-    "category": "Life Hacks",
-    "language": "english"
+    "name": "New World TV ",
+    "logo": "https://postimg.cc/xkS5PC5N",
+    "stream": "https://hls.newworldtv.com/nw-info/video/live_3.m3u8",
+    "category": "sports",
+    "language": "French "
   },
   {
     "id": "2",
