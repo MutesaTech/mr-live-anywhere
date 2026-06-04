@@ -86,18 +86,10 @@ const Index = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname, params.id, params.slug]);
 
-  // Apply theme on mount
+  // Always use the premium default dark theme
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else if (savedTheme === 'light') {
-      document.documentElement.classList.remove('dark');
-    } else {
-      // System preference
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      document.documentElement.classList.toggle('dark', systemDark);
-    }
+    document.documentElement.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
   }, []);
 
   const toggleFavoriteTv = (id: string) => {

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import Hls from 'hls.js';
-import { Maximize2, Minimize2, Star, Eye, X, GripHorizontal, PictureInPicture2 } from 'lucide-react';
+import { Maximize2, Minimize2, Star, Eye, X, GripHorizontal, PictureInPicture2, Play, Pause, Volume2, VolumeX, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from './ui/button';
+import { Slider } from './ui/slider';
 import { cn } from '@/lib/utils';
 import ChannelCard from './ChannelCard';
 import CategoryTabs from './CategoryTabs';
@@ -46,6 +47,11 @@ const TvPlayer = ({
   const [streamError, setStreamError] = useState<string | null>(null);
   const [isPlayerExpanded, setIsPlayerExpanded] = useState(true);
   const [stickyPlayer, setStickyPlayer] = useState(false);
+  // Custom playback controls state
+  const [isPaused, setIsPaused] = useState(false);
+  const [volume, setVolume] = useState(80);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showVolume, setShowVolume] = useState(false);
   // Floating/draggable mini-player state
   const [floating, setFloating] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -199,6 +205,40 @@ const TvPlayer = ({
       }
     }
   };
+  const togglePlayPause = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      videoRef.current.play().catch(() => {});
+    } else {
+      videoRef.current.pause();
+    }
+  };
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    const next = !isMuted;
+    videoRef.current.muted = next;
+    setIsMuted(next);
+  };
+  // Sync video element with volume/mute state
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = volume / 100;
+      videoRef.current.muted = isMuted || volume === 0;
+    }
+  }, [volume, isMuted]);
+  // Track play/pause from video element
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    const onPlay = () => setIsPaused(false);
+    const onPause = () => setIsPaused(true);
+    v.addEventListener('play', onPlay);
+    v.addEventListener('pause', onPause);
+    return () => {
+      v.removeEventListener('play', onPlay);
+      v.removeEventListener('pause', onPause);
+    };
+  }, [activeChannel]);
   const handlePip = async () => {
     try {
       if (!videoRef.current) return;
@@ -303,18 +343,27 @@ const TvPlayer = ({
         onPointerMove={onDragMove}
         onPointerUp={onDragEnd}
         onPointerCancel={onDragEnd}
-        style={floating ? { transform: `translate3d(${dragOffset.x}px, ${dragOffset.y}px, 0)` } : undefined}
+        style={{
+          transform: floating ? `translate3d(${dragOffset.x}px, ${dragOffset.y}px, 0)` : 'translate3d(0,0,0)',
+          willChange: 'transform',
+          contain: 'layout style paint',
+        }}
         className={cn(
           "rounded-2xl overflow-hidden border shadow-strong touch-pan-x",
-          "transition-[width,box-shadow,border-color,background-color] duration-300 ease-out",
-          isPlayerExpanded ? "animate-scale-in" : "h-0 opacity-0",
+          isPlayerExpanded ? "" : "h-0 opacity-0",
           floating
-            ? "fixed z-40 bottom-4 right-4 w-[280px] sm:w-[340px] md:w-[400px] glass-strong border-white/10 shadow-2xl cursor-grab active:cursor-grabbing"
+            ? "fixed z-40 bottom-20 right-4 w-[280px] sm:w-[340px] md:w-[400px] glass-strong border-white/10 shadow-2xl cursor-grab active:cursor-grabbing"
             : "relative bg-card border-border/50",
         )}>
           {/* Video Container */}
           <div className="relative aspect-video bg-black">
-            <video ref={videoRef} className="h-full w-full" controls playsInline />
+            <video
+              ref={videoRef}
+              className="h-full w-full"
+              playsInline
+              autoPlay
+              onClick={togglePlayPause}
+            />
             
             {/* Stream Loader */}
             <StreamLoader
@@ -335,21 +384,55 @@ const TvPlayer = ({
               </div>
               
               <div className="flex gap-2 pointer-events-auto">
-                {floating && (
-                  <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={scrollToInline} title="Expand">
-                    <Maximize2 className="h-4 w-4" />
-                  </Button>
-                )}
                 <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handlePip} title="Picture in picture">
                   <PictureInPicture2 className="h-4 w-4" />
                 </Button>
-                <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handleFullscreen}>
-                  <Maximize2 className="h-5 w-5" />
-                </Button>
-                <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handleClosePlayer}>
-                  <X className="h-5 w-5" />
+                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handleClosePlayer} title="Close">
+                  <X className="h-4 w-4" />
                 </Button>
               </div>
+            </div>
+
+            {/* Bottom custom controls — Play/Pause, Volume (collapsible), Fullscreen, Expand/Collapse */}
+            <div className="absolute bottom-0 left-0 right-0 px-3 py-2 flex items-center gap-2 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none">
+              <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto" onClick={togglePlayPause} title={isPaused ? 'Play' : 'Pause'}>
+                {isPaused ? <Play className="h-5 w-5 ml-0.5" /> : <Pause className="h-5 w-5" />}
+              </Button>
+
+              {/* Collapsible volume */}
+              <div className="flex items-center pointer-events-auto">
+                <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={() => setShowVolume(v => !v)} title="Volume">
+                  {isMuted || volume === 0 ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                </Button>
+                <div
+                  data-no-drag
+                  className={cn(
+                    "overflow-hidden transition-[width,opacity,margin] duration-300 ease-out",
+                    showVolume ? "w-24 sm:w-32 opacity-100 ml-2" : "w-0 opacity-0 ml-0"
+                  )}
+                >
+                  <Slider
+                    value={[isMuted ? 0 : volume]}
+                    onValueChange={(v) => { setVolume(v[0]); setIsMuted(v[0] === 0); }}
+                    max={100}
+                    step={1}
+                    className="cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              <div className="flex-1" />
+
+              <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto" onClick={handleFullscreen} title="Fullscreen">
+                <Maximize2 className="h-5 w-5" />
+              </Button>
+
+              {/* SINGLE expand/collapse control — only when floating, brings player back inline */}
+              {floating && (
+                <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto" onClick={scrollToInline} title="Expand player">
+                  <ChevronUp className="h-5 w-5" />
+                </Button>
+              )}
             </div>
 
             {/* Drag handle when floating */}
