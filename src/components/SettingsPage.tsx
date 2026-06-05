@@ -1,9 +1,12 @@
-import { Sparkles, Trash2, Info, MessageCircle, ChevronRight, Camera, Mail, User as UserIcon } from 'lucide-react';
+import { Trash2, ChevronRight, Camera, Mail, User as UserIcon, Star, Phone, MessageSquare } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import SleepTimerDialog from './SleepTimerDialog';
+import ReminderManager from './ReminderManager';
+import { AboutDialog, PrivacyDialog, TermsDialog } from './LegalDialogs';
 
 interface UserProfile {
   username: string;
@@ -51,6 +54,17 @@ const SettingsPage = () => {
     } catch {
       toast({ title: 'Error', description: 'Failed to clear cache.', variant: 'destructive' });
     }
+  };
+
+  const APP_VERSION = '1.1.0';
+  const BUILD = '2026.06.05';
+
+  const handleRate = () => {
+    const ua = navigator.userAgent.toLowerCase();
+    let url = 'https://mrlive.app';
+    if (/android/.test(ua)) url = 'https://play.google.com/store/apps/details?id=app.lovable.mrlive';
+    else if (/iphone|ipad|ipod|mac/.test(ua)) url = 'https://apps.apple.com/app/mr-live/id000000000';
+    window.open(url, '_blank', 'noopener');
   };
 
   return (
@@ -106,24 +120,14 @@ const SettingsPage = () => {
         </div>
       </section>
 
-      {/* Appearance — Default only */}
-      <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden">
-        <div className="p-4 border-b border-border/50">
-          <h2 className="text-h3 font-semibold">Appearance</h2>
-          <p className="text-caption text-muted-foreground mt-1">Premium dark theme is always on</p>
-        </div>
+      {/* Playback */}
+      <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden divide-y divide-border/50">
         <div className="p-4">
-          <div className="flex items-center gap-3 p-4 rounded-xl border-2 border-primary bg-primary/10">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-glow">
-              <Sparkles className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <div className="flex-1">
-              <p className="text-body font-semibold">Default</p>
-              <p className="text-caption text-muted-foreground">Cinematic dark experience</p>
-            </div>
-            <span className="h-2 w-2 rounded-full bg-primary animate-pulse-dot" />
-          </div>
+          <h2 className="text-h3 font-semibold">Playback</h2>
+          <p className="text-caption text-muted-foreground mt-1">Sleep timer & reminders</p>
         </div>
+        <SleepTimerDialog />
+        <ReminderManager />
       </section>
 
       {/* Storage */}
@@ -146,37 +150,67 @@ const SettingsPage = () => {
         </button>
       </section>
 
-      {/* About */}
+      {/* Support */}
       <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden">
         <div className="p-4 border-b border-border/50">
-          <h2 className="text-h3 font-semibold">About</h2>
+          <h2 className="text-h3 font-semibold">Contact Support</h2>
+          <p className="text-caption text-muted-foreground mt-1">We respond fast</p>
         </div>
         <div className="divide-y divide-border/50">
-          <div className="flex items-center justify-between p-4">
+          <a href="https://wa.me/250791319992" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                <Info className="h-5 w-5 text-primary" />
+              <div className="h-10 w-10 rounded-full bg-emerald-500/15 grid place-items-center">
+                <Phone className="h-5 w-5 text-emerald-400" />
               </div>
               <div>
-                <p className="text-body font-medium">MR LIVE</p>
-                <p className="text-caption text-muted-foreground">Version 1.0.0</p>
+                <p className="text-body font-medium">WhatsApp</p>
+                <p className="text-caption text-muted-foreground">+250 791 319 992</p>
               </div>
             </div>
-          </div>
-          <a href="mailto:feedback@mrlive.app" className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
+            <ChevronRight className="h-5 w-5 text-muted-foreground" />
+          </a>
+          <a href="mailto:mutesamoments@gmail.com" className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center">
-                <MessageCircle className="h-5 w-5 text-accent" />
+              <div className="h-10 w-10 rounded-full bg-accent/10 grid place-items-center">
+                <Mail className="h-5 w-5 text-accent" />
               </div>
               <div>
-                <p className="text-body font-medium">Send Feedback</p>
-                <p className="text-caption text-muted-foreground">Help us improve</p>
+                <p className="text-body font-medium">Email</p>
+                <p className="text-caption text-muted-foreground">mutesamoments@gmail.com</p>
               </div>
             </div>
             <ChevronRight className="h-5 w-5 text-muted-foreground" />
           </a>
         </div>
       </section>
+
+      {/* Legal */}
+      <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden divide-y divide-border/50">
+        <div className="p-4">
+          <h2 className="text-h3 font-semibold">About & Legal</h2>
+        </div>
+        <AboutDialog />
+        <PrivacyDialog />
+        <TermsDialog />
+        <button onClick={handleRate} className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-full bg-yellow-500/15 grid place-items-center">
+              <Star className="h-5 w-5 text-yellow-400" />
+            </div>
+            <div className="text-left">
+              <p className="text-body font-medium">Rate the App</p>
+              <p className="text-caption text-muted-foreground">Open store rating page</p>
+            </div>
+          </div>
+          <ChevronRight className="h-5 w-5 text-muted-foreground" />
+        </button>
+      </section>
+
+      {/* Version footer */}
+      <div className="text-center text-caption text-muted-foreground py-4">
+        <p className="font-semibold text-foreground/70">MR LIVE v{APP_VERSION}</p>
+        <p>Build {BUILD} • Updated {new Date().toISOString().slice(0, 10)}</p>
+      </div>
     </div>
   );
 };
