@@ -1,4 +1,4 @@
-import { Trash2, ChevronRight, Camera, Mail, User as UserIcon, Star, Phone, MessageSquare } from 'lucide-react';
+import { Trash2, ChevronRight, Camera, Mail, User as UserIcon, Star, Phone } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
