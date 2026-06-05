@@ -350,13 +350,13 @@ const TvPlayer = ({
       {activeChannel && activeChannelData && (
         <div ref={sentinelRef} aria-hidden className="h-px w-full -mb-px" />
       )}
-      {/* Inline slot — ALWAYS reserves the player's natural height once known, eliminating layout shift. */}
-      {activeChannel && activeChannelData && (
+      {/* Placeholder — only rendered when player is floating, reserves the player's natural height. */}
+      {activeChannel && activeChannelData && floating && (
         <div
           ref={inlineSlotRef}
-          aria-hidden={floating}
-          style={inlineHeight ? { minHeight: inlineHeight } : undefined}
-          className={cn('relative', floating && 'rounded-2xl border border-dashed border-border/40 bg-card/30')}
+          aria-hidden
+          style={{ height: inlineHeight, minHeight: inlineHeight }}
+          className="rounded-2xl border border-dashed border-border/40 bg-card/30"
         />
       )}
 
@@ -377,7 +377,7 @@ const TvPlayer = ({
           isPlayerExpanded ? "" : "h-0 opacity-0",
           floating
             ? "fixed z-40 bottom-20 right-4 w-[280px] sm:w-[340px] md:w-[400px] glass-strong border-white/10 shadow-2xl cursor-grab active:cursor-grabbing"
-            : "absolute left-0 right-0 top-0 bg-card border-border/50",
+            : "relative bg-card border-border/50",
         )}>
           {/* Video Container */}
           <div className="relative aspect-video bg-black">
