@@ -5,6 +5,7 @@ import RadioCard from './RadioCard';
 import SkeletonCard, { SkeletonGrid } from './SkeletonCard';
 import SearchBar from './SearchBar';
 import HorizontalRail from './HorizontalRail';
+import QuickCategories from './QuickCategories';
 import { cn } from '@/lib/utils';
 
 interface Channel {
@@ -36,6 +37,7 @@ interface HomePageProps {
   onToggleFavoriteTv: (id: string) => void;
   onToggleFavoriteRadio: (id: string) => void;
   reducedAnimations?: boolean;
+  onQuickSelect?: (target: { type: 'section' | 'category'; value: string }) => void;
 }
 
 const HomePage = ({
@@ -49,6 +51,7 @@ const HomePage = ({
   onToggleFavoriteTv,
   onToggleFavoriteRadio,
   reducedAnimations = false,
+  onQuickSelect,
 }: HomePageProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -108,6 +111,10 @@ const HomePage = ({
         placeholder="Search channels & radios..."
         className="mb-4"
       />
+
+      {!searchQuery && onQuickSelect && (
+        <QuickCategories onSelect={onQuickSelect} />
+      )}
 
       {/* Loading skeletons */}
       {isLoading ? (
