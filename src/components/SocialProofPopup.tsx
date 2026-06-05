@@ -15,8 +15,8 @@ const SocialProofPopup = () => {
 
     // Show popup after 5 seconds
     const timer = setTimeout(() => {
-      // Random viewer count between 800-2500
-      setViewerCount(Math.floor(Math.random() * 1700) + 800);
+      // Always ≥ 50k viewers per requirements
+      setViewerCount(50_000 + Math.floor(Math.random() * 35_000));
       setIsVisible(true);
       localStorage.setItem('socialProofLastShown', today);
     }, 5000);

@@ -38,6 +38,7 @@ const Index = () => {
   const [lastWatchedTv, setLastWatchedTv] = useLocalStorage<string | null>('lastWatchedTv', null);
   const [lastPlayedRadio, setLastPlayedRadio] = useLocalStorage<string | null>('lastPlayedRadio', null);
   const [externalChannelId, setExternalChannelId] = useState<string | null>(null);
+  const [tvCategoryFilter, setTvCategoryFilter] = useState<string | null>(null);
   const { isOnline } = useNetworkStatus();
   const { shouldReduceAnimations } = useLowBandwidthMode();
   const { saveResumeState, getResumeState } = useAutoResume();
@@ -80,7 +81,8 @@ const Index = () => {
         }
       }
     } else if (path.startsWith('/category/')) {
-      // Default to TV section; CategoryTabs will filter via search param fallback.
+      const slug = (params.slug || '').toLowerCase();
+      if (slug) setTvCategoryFilter(slug);
       setActiveSection('tv');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,6 +122,16 @@ const Index = () => {
     saveResumeState(id, 'radio');
   };
 
+  const handleQuickSelect = (target: { type: 'section' | 'category'; value: string }) => {
+    if (target.type === 'section') {
+      setActiveSection(target.value as Section);
+      setTvCategoryFilter(null);
+    } else {
+      setTvCategoryFilter(target.value);
+      setActiveSection('tv');
+    }
+  };
+
 
   // Clear external channel after navigation
   useEffect(() => {
@@ -150,6 +162,7 @@ const Index = () => {
             onSelectRadio={handleSelectRadio}
             onToggleFavoriteTv={toggleFavoriteTv}
             onToggleFavoriteRadio={toggleFavoriteRadio}
+            onQuickSelect={handleQuickSelect}
           />
         )}
 
@@ -161,6 +174,7 @@ const Index = () => {
             lastWatched={lastWatchedTv}
             onPlay={setLastWatchedTv}
             externalChannel={externalChannelId}
+            initialCategory={tvCategoryFilter}
           />
         )}
         

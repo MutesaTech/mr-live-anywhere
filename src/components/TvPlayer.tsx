@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import Hls from 'hls.js';
-import { Maximize2, Minimize2, Star, Eye, X, GripHorizontal, PictureInPicture2, Play, Pause, Volume2, VolumeX, ChevronDown, ChevronUp } from 'lucide-react';
+import { Star, Eye, X, GripHorizontal, PictureInPicture2, Play, Pause, Volume2, VolumeX, ChevronUp, ChevronDown } from 'lucide-react';
 import { Button } from './ui/button';
 import { Slider } from './ui/slider';
 import { cn } from '@/lib/utils';
@@ -29,6 +29,7 @@ interface TvPlayerProps {
   onPlay: (id: string) => void;
   externalChannel?: string | null;
   onMiniPlayerStateChange?: (isVisible: boolean, isExpanded: boolean) => void;
+  initialCategory?: string | null;
 }
 const TvPlayer = ({
   channels,
@@ -37,11 +38,12 @@ const TvPlayer = ({
   lastWatched,
   onPlay,
   externalChannel,
-  onMiniPlayerStateChange
+  onMiniPlayerStateChange,
+  initialCategory
 }: TvPlayerProps) => {
   const [activeChannel, setActiveChannel] = useState<string | null>(lastWatched);
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState(initialCategory || 'all');
   const [viewerCounts, setViewerCounts] = useState<Record<string, number>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [streamError, setStreamError] = useState<string | null>(null);
@@ -58,11 +60,13 @@ const TvPlayer = ({
   const [inlineHeight, setInlineHeight] = useState(0);
   const dragRef = useRef<{ sx: number; sy: number; bx: number; by: number } | null>(null);
   const inlineSlotRef = useRef<HTMLDivElement>(null);
+  const sentinelRef = useRef<HTMLDivElement>(null);
   const playerWrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<Hls | null>(null);
   const playerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const volumeTimerRef = useRef<number | null>(null);
   const {
     isSlowConnection
   } = useNetworkStatus();
@@ -99,10 +103,16 @@ const TvPlayer = ({
       handlePlayChannel(externalChannel, true);
     }
   }, [externalChannel]);
+  // Sync initialCategory prop changes
+  useEffect(() => {
+    if (initialCategory) setActiveCategory(initialCategory);
+  }, [initialCategory]);
+
   useEffect(() => {
     const counts: Record<string, number> = {};
     channels.forEach(channel => {
-      counts[channel.id] = Math.floor(Math.random() * 5000) + 100;
+      // Floor of 50,000; can fluctuate upward
+      counts[channel.id] = 50_000 + Math.floor(Math.random() * 25_000);
     });
     setViewerCounts(counts);
     const interval = setInterval(() => {
@@ -111,7 +121,9 @@ const TvPlayer = ({
           ...prev
         };
         channels.forEach(channel => {
-          updated[channel.id] = Math.max(100, prev[channel.id] + Math.floor(Math.random() * 20) - 10);
+          // Drift up/down but never below 50k
+          const drift = Math.floor(Math.random() * 200) - 80;
+          updated[channel.id] = Math.max(50_000, (prev[channel.id] ?? 50_000) + drift);
         });
         return updated;
       });
@@ -279,9 +291,18 @@ const TvPlayer = ({
   };
   const activeChannelData = channels.find(c => c.id === activeChannel);
 
-  // Observe inline slot — when out of view while a channel is playing, switch player to floating mini-mode.
+  // Auto-collapse volume after 3s inactivity
   useEffect(() => {
-    if (!inlineSlotRef.current || !activeChannel) return;
+    if (!showVolume) return;
+    if (volumeTimerRef.current) window.clearTimeout(volumeTimerRef.current);
+    volumeTimerRef.current = window.setTimeout(() => setShowVolume(false), 3000);
+    return () => { if (volumeTimerRef.current) window.clearTimeout(volumeTimerRef.current); };
+  }, [showVolume, volume, isMuted]);
+
+  // Observe sentinel — when sentinel is scrolled off-screen, go floating.
+  // Sentinel is a 1px element above the inline slot whose visibility never changes its own size, so no flip-flop.
+  useEffect(() => {
+    if (!sentinelRef.current || !activeChannel) return;
     const obs = new IntersectionObserver(
       ([entry]) => {
         const visible = entry.isIntersecting;
@@ -289,14 +310,13 @@ const TvPlayer = ({
           const next = !visible;
           if (next === prev) return prev;
           if (!next) setDragOffset({ x: 0, y: 0 });
-          // Notify parent that a mini-player is visible vs the inline expanded player
           onMiniPlayerStateChange?.(next, !next);
           return next;
         });
       },
-      { threshold: 0, rootMargin: '-72px 0px 0px 0px' }
+      { threshold: 0, rootMargin: '-80px 0px 0px 0px' }
     );
-    obs.observe(inlineSlotRef.current);
+    obs.observe(sentinelRef.current);
     return () => obs.disconnect();
   }, [activeChannel, onMiniPlayerStateChange]);
 
@@ -326,13 +346,17 @@ const TvPlayer = ({
   };
 
   return <div ref={containerRef} className="space-y-6 animate-page-enter">
-      {/* Inline slot — reserves layout space when the player is floating */}
+      {/* Stable 1px sentinel — observer target. Never resizes, so no scroll jitter. */}
       {activeChannel && activeChannelData && (
+        <div ref={sentinelRef} aria-hidden className="h-px w-full -mb-px" />
+      )}
+      {/* Placeholder — only rendered when player is floating, reserves the player's natural height. */}
+      {activeChannel && activeChannelData && floating && (
         <div
           ref={inlineSlotRef}
-          aria-hidden={floating}
-          style={{ height: floating ? inlineHeight : undefined, minHeight: floating ? inlineHeight : undefined }}
-          className={cn(floating && 'rounded-2xl border border-dashed border-border/40 bg-card/30')}
+          aria-hidden
+          style={{ height: inlineHeight, minHeight: inlineHeight }}
+          className="rounded-2xl border border-dashed border-border/40 bg-card/30"
         />
       )}
 
@@ -423,16 +447,17 @@ const TvPlayer = ({
 
               <div className="flex-1" />
 
-              <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto" onClick={handleFullscreen} title="Fullscreen">
-                <Maximize2 className="h-5 w-5" />
+              {/* SINGLE expand/collapse button */}
+              <Button
+                data-no-drag
+                variant="ghost"
+                size="icon"
+                className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto"
+                onClick={floating ? scrollToInline : handleFullscreen}
+                title={floating ? 'Expand player' : 'Fullscreen'}
+              >
+                {floating ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5 rotate-180" />}
               </Button>
-
-              {/* SINGLE expand/collapse control — only when floating, brings player back inline */}
-              {floating && (
-                <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto" onClick={scrollToInline} title="Expand player">
-                  <ChevronUp className="h-5 w-5" />
-                </Button>
-              )}
             </div>
 
             {/* Drag handle when floating */}
