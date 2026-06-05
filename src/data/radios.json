@@ -25,9 +25,9 @@
   },
   {
     "id": "r4",
-    "name": "Radio 10",
-    "logo": "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=200&h=200&fit=crop",
-    "stream": "http://197.243.1.130:8006/k2dlivemp3",
+    "name": "104.1 Power Fm",
+    "logo": "https://i.postimg.cc/gj2dndQ9/152265-v1.jpg",
+    "stream": "https://stream.casthost.net/listen/vision_radio_ltd1/radio.mp3",
     "category": "music",
     "language": "kinyarwanda"
   },
@@ -49,11 +49,11 @@
   },
    {
     "id": "r7",
-    "name": "WIVK 107.7 FM",
-    "logo": "https://i.postimg.cc/RV8YVTCr/1769836428-1.jpg",
+    "name": "103.5 Capital Fm ",
+    "logo": "https://i.postimg.cc/DwVrQDzd/121244-v8.png",
     "stream": "https://stream.zeno.fm/wmf5p1176juvv",
-    "category": "country",
-    "language": "english"
+    "category": "music",
+    "language": "kinyarwanda"
   }
 
 ]
