@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import Hls from 'hls.js';
-import { Star, Eye, X, GripHorizontal, PictureInPicture2, Play, Pause, Volume2, VolumeX, ChevronUp, ChevronDown } from 'lucide-react';
+import { Star, Eye, X, GripHorizontal, PictureInPicture2, Play, Pause, Volume2, VolumeX, Maximize2 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Slider } from './ui/slider';
 import { cn } from '@/lib/utils';
@@ -299,26 +299,61 @@ const TvPlayer = ({
     return () => { if (volumeTimerRef.current) window.clearTimeout(volumeTimerRef.current); };
   }, [showVolume, volume, isMuted]);
 
-  // Observe sentinel — when sentinel is scrolled off-screen, go floating.
-  // Sentinel is a 1px element above the inline slot whose visibility never changes its own size, so no flip-flop.
+  // Floating mini-player driven by scroll position (works reliably on mobile + desktop).
+  // We measure the natural anchor — sentinel when inline, placeholder when floating —
+  // which stays at the player's original position and never flickers.
   useEffect(() => {
-    if (!sentinelRef.current || !activeChannel) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        const visible = entry.isIntersecting;
-        setFloating((prev) => {
-          const next = !visible;
-          if (next === prev) return prev;
-          if (!next) setDragOffset({ x: 0, y: 0 });
-          onMiniPlayerStateChange?.(next, !next);
-          return next;
-        });
-      },
-      { threshold: 0, rootMargin: '-80px 0px 0px 0px' }
-    );
-    obs.observe(sentinelRef.current);
-    return () => obs.disconnect();
-  }, [activeChannel, onMiniPlayerStateChange]);
+    if (!activeChannel) return;
+    const headerH = 80;
+    let raf = 0;
+    const tick = () => {
+      raf = 0;
+      const anchor = floating ? inlineSlotRef.current : playerWrapRef.current;
+      if (!anchor) return;
+      const r = anchor.getBoundingClientRect();
+      if (!floating && r.bottom < headerH) {
+        setFloating(true);
+        onMiniPlayerStateChange?.(true, false);
+      } else if (floating && r.bottom > headerH + 20) {
+        setFloating(false);
+        setDragOffset({ x: 0, y: 0 });
+        onMiniPlayerStateChange?.(false, true);
+      }
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    // initial check
+    onScroll();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [activeChannel, floating, onMiniPlayerStateChange]);
+
+  // Reset floating when channel changes — main player should always open full size.
+  useEffect(() => {
+    setFloating(false);
+    setDragOffset({ x: 0, y: 0 });
+  }, [activeChannel]);
+
+  // MediaSession metadata for lockscreen / notification controls
+  useEffect(() => {
+    if (!('mediaSession' in navigator) || !activeChannelData) return;
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: activeChannelData.name,
+        artist: activeChannelData.category,
+        album: 'MR LIVE',
+        artwork: [{ src: activeChannelData.logo, sizes: '512x512', type: 'image/png' }],
+      });
+      navigator.mediaSession.setActionHandler('play', () => videoRef.current?.play().catch(() => {}));
+      navigator.mediaSession.setActionHandler('pause', () => videoRef.current?.pause());
+      navigator.mediaSession.setActionHandler('nexttrack', () => handleNextChannel());
+      navigator.mediaSession.setActionHandler('previoustrack', () => handlePreviousChannel());
+    } catch {}
+  }, [activeChannelData, handleNextChannel, handlePreviousChannel]);
 
   // Capture inline player height so the slot reserves space when player goes floating
   useEffect(() => {
@@ -373,7 +408,7 @@ const TvPlayer = ({
           contain: 'layout style paint',
         }}
         className={cn(
-          "rounded-2xl overflow-hidden border shadow-strong touch-pan-x",
+          "rounded-2xl overflow-hidden border shadow-strong",
           isPlayerExpanded ? "" : "h-0 opacity-0",
           floating
             ? "fixed z-40 bottom-20 right-4 w-[280px] sm:w-[340px] md:w-[400px] glass-strong border-white/10 shadow-2xl cursor-grab active:cursor-grabbing"
@@ -447,16 +482,16 @@ const TvPlayer = ({
 
               <div className="flex-1" />
 
-              {/* SINGLE expand/collapse button */}
+              {/* Fullscreen button — always available */}
               <Button
                 data-no-drag
                 variant="ghost"
                 size="icon"
                 className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto"
-                onClick={floating ? scrollToInline : handleFullscreen}
-                title={floating ? 'Expand player' : 'Fullscreen'}
+                onClick={handleFullscreen}
+                title="Fullscreen"
               >
-                {floating ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5 rotate-180" />}
+                <Maximize2 className="h-5 w-5" />
               </Button>
             </div>
 

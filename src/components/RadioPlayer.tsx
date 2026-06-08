@@ -78,6 +78,21 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
     }
   }, [radios, activeRadio, isPlaying, onPlay]);
 
+  // MediaSession metadata for lockscreen / notification controls
+  useEffect(() => {
+    if (!('mediaSession' in navigator) || !activeRadioData) return;
+    try {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: activeRadioData.name,
+        artist: activeRadioData.category,
+        album: 'MR LIVE Radio',
+        artwork: [{ src: activeRadioData.logo, sizes: '512x512', type: 'image/png' }],
+      });
+      navigator.mediaSession.setActionHandler('play', () => audioRef.current?.play().catch(() => {}));
+      navigator.mediaSession.setActionHandler('pause', () => audioRef.current?.pause());
+    } catch {}
+  }, [activeRadioData]);
+
   const handleNext = useCallback(() => {
     if (!radios.length) return;
     const next = currentIndex < radios.length - 1 ? currentIndex + 1 : 0;

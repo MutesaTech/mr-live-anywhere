@@ -3,6 +3,16 @@ import { useEffect, useState, useCallback } from 'react';
 export type ReminderRepeat = 'once' | 'daily' | 'weekly' | 'monthly';
 export type ReminderKind = 'tv' | 'radio';
 
+export const REMINDER_SOUNDS = [
+  { id: 'jazz', name: 'Jazz', url: 'https://ia601009.us.archive.org/5/items/velvet-lobby/Velvet%20Lobby.mp3' },
+  { id: 'velvet', name: 'Velvet Reminder', url: 'https://ia601801.us.archive.org/11/items/velvet-reminder/Velvet%20Reminder.mp3' },
+  { id: 'glass', name: 'Calendar Glass', url: 'https://ia600102.us.archive.org/30/items/glass-calendar/Glass%20Calendar.mp3' },
+] as const;
+
+export type ReminderSoundId = typeof REMINDER_SOUNDS[number]['id'];
+/** Duration in seconds, or 'manual' to play until dismissed. */
+export type ReminderDuration = 5 | 10 | 15 | 30 | 60 | 'manual';
+
 export interface Reminder {
   id: string;
   channelId: string;
@@ -12,6 +22,8 @@ export interface Reminder {
   time: string; // HH:mm
   repeat: ReminderRepeat;
   notifyBeforeMin: number;
+  soundId?: ReminderSoundId;
+  duration?: ReminderDuration;
   lastFiredAt?: number;
 }
 
@@ -48,17 +60,59 @@ async function ensurePermission(): Promise<boolean> {
   return res === 'granted';
 }
 
+let currentAudio: HTMLAudioElement | null = null;
+let currentStopTimer: number | null = null;
+
+export function stopReminderSound() {
+  if (currentStopTimer) { window.clearTimeout(currentStopTimer); currentStopTimer = null; }
+  if (currentAudio) {
+    try { currentAudio.pause(); currentAudio.currentTime = 0; } catch {}
+    currentAudio = null;
+  }
+  window.dispatchEvent(new CustomEvent('reminder:dismiss'));
+}
+
+function playReminderSound(r: Reminder) {
+  const sound = REMINDER_SOUNDS.find(s => s.id === (r.soundId ?? 'velvet')) ?? REMINDER_SOUNDS[1];
+  const duration = r.duration ?? 15;
+  try {
+    stopReminderSound();
+    const audio = new Audio(sound.url);
+    audio.loop = true;
+    audio.volume = 0.9;
+    currentAudio = audio;
+    audio.play().catch(() => {});
+    if (duration !== 'manual') {
+      currentStopTimer = window.setTimeout(() => stopReminderSound(), duration * 1000);
+    }
+    // vibrate where supported
+    if ('vibrate' in navigator) {
+      try { (navigator as any).vibrate([300, 150, 300, 150, 300]); } catch {}
+    }
+  } catch {}
+}
+
 function fire(r: Reminder) {
   const title = `${r.channelName} is starting soon`;
   const url = `${window.location.origin}/${r.kind === 'tv' ? 'channel' : 'radio'}/${r.channelId}`;
+  playReminderSound(r);
   try {
     if ('Notification' in window && Notification.permission === 'granted') {
-      const n = new Notification(title, { body: 'Tap to open and start playing.', tag: r.id });
-      n.onclick = () => { window.focus(); window.location.href = url; };
+      const n = new Notification(title, {
+        body: 'Tap to open and start playing.',
+        tag: r.id,
+        requireInteraction: r.duration === 'manual',
+        silent: false,
+      } as any);
+      n.onclick = () => {
+        window.focus();
+        stopReminderSound();
+        window.location.href = url;
+      };
     } else {
-      // fallback in-app toast via custom event
       window.dispatchEvent(new CustomEvent('reminder:fire', { detail: { reminder: r, url } }));
     }
+    window.dispatchEvent(new CustomEvent('reminder:fire', { detail: { reminder: r, url } }));
   } catch {}
 }
 

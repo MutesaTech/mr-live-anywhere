@@ -1,15 +1,31 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { Bell, Calendar as CalendarIcon, Pencil, Trash2, Plus } from 'lucide-react';
-import { useReminders, type Reminder, type ReminderRepeat } from '@/hooks/useReminders';
+import { Bell, Calendar as CalendarIcon, Pencil, Trash2, Plus, Play, Square } from 'lucide-react';
+import {
+  useReminders,
+  REMINDER_SOUNDS,
+  stopReminderSound,
+  type Reminder,
+  type ReminderRepeat,
+  type ReminderSoundId,
+  type ReminderDuration,
+} from '@/hooks/useReminders';
 import channels from '@/data/channels.json';
 import radios from '@/data/radios.json';
 import { cn } from '@/lib/utils';
 
 const REPEAT: ReminderRepeat[] = ['once', 'daily', 'weekly', 'monthly'];
 const NOTIFY = [5, 15, 30, 60];
+const DURATIONS: { v: ReminderDuration; label: string }[] = [
+  { v: 5, label: '5s' },
+  { v: 10, label: '10s' },
+  { v: 15, label: '15s' },
+  { v: 30, label: '30s' },
+  { v: 60, label: '1m' },
+  { v: 'manual', label: 'Manual' },
+];
 
 function ReminderForm({ initial, onSave, onCancel }: {
   initial?: Reminder;
@@ -23,6 +39,21 @@ function ReminderForm({ initial, onSave, onCancel }: {
   const [time, setTime] = useState(initial?.time ?? '20:00');
   const [repeat, setRepeat] = useState<ReminderRepeat>(initial?.repeat ?? 'once');
   const [notify, setNotify] = useState(initial?.notifyBeforeMin ?? 15);
+  const [soundId, setSoundId] = useState<ReminderSoundId>(initial?.soundId ?? 'velvet');
+  const [duration, setDuration] = useState<ReminderDuration>(initial?.duration ?? 15);
+  const [previewing, setPreviewing] = useState<HTMLAudioElement | null>(null);
+
+  const previewSound = () => {
+    if (previewing) { previewing.pause(); setPreviewing(null); return; }
+    const s = REMINDER_SOUNDS.find(x => x.id === soundId);
+    if (!s) return;
+    const a = new Audio(s.url);
+    a.volume = 0.8;
+    a.play().catch(() => {});
+    setPreviewing(a);
+    setTimeout(() => { a.pause(); setPreviewing((p) => p === a ? null : p); }, 4000);
+  };
+  useEffect(() => () => { if (previewing) previewing.pause(); }, [previewing]);
 
   const list = kind === 'tv' ? channels : radios;
   const sel = list.find((c) => c.id === channelId);
@@ -37,6 +68,8 @@ function ReminderForm({ initial, onSave, onCancel }: {
       time,
       repeat,
       notifyBeforeMin: notify,
+      soundId,
+      duration,
     });
   };
 
@@ -108,6 +141,47 @@ function ReminderForm({ initial, onSave, onCancel }: {
                 notify === n ? 'bg-primary text-primary-foreground border-primary' : 'border-border/50'
               )}
             >{n < 60 ? `${n} min` : '1 hour'}</button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <div className="flex items-center justify-between">
+          <label className="text-caption text-muted-foreground">Reminder sound</label>
+          <button
+            type="button"
+            onClick={previewSound}
+            className="text-xs text-primary inline-flex items-center gap-1"
+          >
+            {previewing ? <><Square className="h-3 w-3" /> Stop</> : <><Play className="h-3 w-3" /> Preview</>}
+          </button>
+        </div>
+        <div className="mt-1 grid grid-cols-3 gap-1.5">
+          {REMINDER_SOUNDS.map((s) => (
+            <button
+              key={s.id}
+              onClick={() => setSoundId(s.id)}
+              className={cn(
+                'py-1.5 text-xs rounded-md border',
+                soundId === s.id ? 'bg-primary text-primary-foreground border-primary' : 'border-border/50'
+              )}
+            >{s.name}</button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <label className="text-caption text-muted-foreground">Sound duration</label>
+        <div className="mt-1 grid grid-cols-6 gap-1.5">
+          {DURATIONS.map((d) => (
+            <button
+              key={String(d.v)}
+              onClick={() => setDuration(d.v)}
+              className={cn(
+                'py-1.5 text-xs rounded-md border',
+                duration === d.v ? 'bg-primary text-primary-foreground border-primary' : 'border-border/50'
+              )}
+            >{d.label}</button>
           ))}
         </div>
       </div>
