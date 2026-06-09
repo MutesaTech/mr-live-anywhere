@@ -3,7 +3,7 @@
     "id": "r1",
     "name": "Radio Rwanda",
     "logo": "https://i.postimg.cc/XN858HrW/images-(1).png",
-    "stream": "https://listen.rba.co.rw:8008/rwanda",
+    "stream": "https://listen.rba.co.rw:8008/rwanda2.",
     "category": "news",
     "language": "kinyarwanda"
   },
