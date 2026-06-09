@@ -78,6 +78,14 @@
     "stream": "blob:https://tunein.com/370a8827-0069-48a0-8bf6-375c101b00c5",
     "category": "music",
     "language": "Roman"
+  },
+   {
+    "id": "r10",
+    "name": "Al Jazeera English",
+    "logo": "https://i.postimg.cc/FRxKbRhn/imgi-2-s108977d.png",
+    "stream": "blob:https://tunein.com/8b1c6948-52bd-48f8-bb13-a5908832a9b0",
+    "category": "news",
+    "language": "english"
   }
 
 ]
