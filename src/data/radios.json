@@ -62,6 +62,14 @@
     "stream": "http://radio10rwanda-atunwadigital.streamguys1.com/Radio10Rwanda",
     "category": "music",
     "language": "kinyarwanda"
+  },
+   {
+    "id": "r9",
+    "name": "Kiss FM Romania",
+    "logo": "https://i.postimg.cc/YCNh3b28/imgi-4-logod.png",
+    "stream": "https://live.kissfm.ro/kissfm.aacp",
+    "category": "music",
+    "language": "Roman"
   }
 
 ]
