@@ -70,6 +70,14 @@
     "stream": "https://live.kissfm.ro/kissfm.aacp",
     "category": "music",
     "language": "Roman"
+  },
+   {
+    "id": "r10",
+    "name": "Radio ZU",
+    "logo": "https://i.postimg.cc/sxFJWTDm/imgi-2-logod.jpg",
+    "stream": "blob:https://tunein.com/370a8827-0069-48a0-8bf6-375c101b00c5",
+    "category": "music",
+    "language": "Roman"
   }
 
 ]
