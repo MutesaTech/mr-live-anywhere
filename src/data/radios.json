@@ -33,9 +33,9 @@
   },
   {
     "id": "r5",
-    "name": "City Radio",
-    "logo": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=200&h=200&fit=crop",
-    "stream": "https://listen.radioking.com/radio/11111/stream/22222",
+    "name": "KT Radio",
+    "logo": "https://i.postimg.cc/D0GNGWQT/imgi-2-logod.png",
+    "stream": "https://stream.zeno.fm/q84wt2xdf18uv",
     "category": "entertainment",
     "language": "english"
   },
