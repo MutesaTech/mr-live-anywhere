@@ -11,7 +11,7 @@
     "id": "r2",
     "name": "BBC World Service",
     "logo": "https://i.postimg.cc/FsNMB5Nm/images-(1).png",
-    "stream": "http://dreamsiteradiocp2.com:8098/stream/",
+    "stream": "https://listen.rba.co.rw:8085/mgcfmwe",
     "category": "news",
     "language": "kinyarwanda"
   },
