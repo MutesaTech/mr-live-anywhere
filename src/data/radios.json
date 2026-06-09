@@ -9,8 +9,8 @@
   },
   {
     "id": "r2",
-    "name": "BBC World Service",
-    "logo": "https://i.postimg.cc/FsNMB5Nm/images-(1).png",
+    "name": "Magic FM 90.7",
+    "logo": "https://i.postimg.cc/02NDXgKQ/imgi-2-s231686d.png",
     "stream": "https://listen.rba.co.rw:8085/mgcfmwe",
     "category": "news",
     "language": "kinyarwanda"
