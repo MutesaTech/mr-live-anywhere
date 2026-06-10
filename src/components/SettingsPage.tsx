@@ -1,4 +1,4 @@
-import { Trash2, ChevronRight, Camera, Mail, User as UserIcon, Star, Phone } from 'lucide-react';
+import { Trash2, ChevronRight, Camera, Mail, User as UserIcon, Star, Phone, Gauge } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -7,6 +7,7 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import SleepTimerDialog from './SleepTimerDialog';
 import ReminderManager from './ReminderManager';
 import { AboutDialog, PrivacyDialog, TermsDialog } from './LegalDialogs';
+import { cn } from '@/lib/utils';
 
 interface UserProfile {
   username: string;
@@ -22,6 +23,7 @@ const SettingsPage = () => {
     email: 'you@mrlive.app',
     avatar: null,
   });
+  const [dataSaver, setDataSaver] = useLocalStorage<'auto' | 'low' | 'standard' | 'high'>('dataSaver', 'auto');
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState<UserProfile>(profile);
 
@@ -128,6 +130,39 @@ const SettingsPage = () => {
         </div>
         <SleepTimerDialog />
         <ReminderManager />
+      </section>
+
+      {/* Data Saver */}
+      <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden">
+        <div className="p-4 border-b border-border/50 flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-primary/10 grid place-items-center">
+            <Gauge className="h-5 w-5 text-primary" />
+          </div>
+          <div className="flex-1">
+            <h2 className="text-h3 font-semibold">Data Saver</h2>
+            <p className="text-caption text-muted-foreground mt-0.5">Optimize streaming for your network</p>
+          </div>
+        </div>
+        <div className="p-4 grid grid-cols-2 gap-2">
+          {([
+            { v: 'auto', label: 'Auto', desc: 'Match your connection' },
+            { v: 'low', label: 'Low Data', desc: 'Best on 2G / 3G' },
+            { v: 'standard', label: 'Standard', desc: 'Balanced quality' },
+            { v: 'high', label: 'High', desc: 'Best on Wi-Fi' },
+          ] as const).map((o) => (
+            <button
+              key={o.v}
+              onClick={() => { setDataSaver(o.v); toast({ title: `Data Saver: ${o.label}` }); }}
+              className={cn(
+                'text-left rounded-xl border p-3 transition-colors',
+                dataSaver === o.v ? 'border-primary bg-primary/5' : 'border-border/50 hover:border-border'
+              )}
+            >
+              <p className="text-sm font-semibold">{o.label}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{o.desc}</p>
+            </button>
+          ))}
+        </div>
       </section>
 
       {/* Storage */}
