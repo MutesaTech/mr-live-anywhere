@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 
 export type ReminderRepeat = 'once' | 'daily' | 'weekly' | 'monthly';
 export type ReminderKind = 'tv' | 'radio';
+export type ReminderStatus = 'upcoming' | 'completed' | 'missed';
 
 export const REMINDER_SOUNDS = [
   { id: 'jazz', name: 'Jazz', url: 'https://ia601009.us.archive.org/5/items/velvet-lobby/Velvet%20Lobby.mp3' },
@@ -25,6 +26,7 @@ export interface Reminder {
   soundId?: ReminderSoundId;
   duration?: ReminderDuration;
   lastFiredAt?: number;
+  status?: ReminderStatus;
 }
 
 const KEY = 'reminders';
@@ -58,6 +60,45 @@ async function ensurePermission(): Promise<boolean> {
   if (Notification.permission === 'denied') return false;
   const res = await Notification.requestPermission();
   return res === 'granted';
+}
+
+/**
+ * Try to schedule a true OS-level notification via Capacitor Local Notifications
+ * when running inside a native shell. Silently no-ops in pure web.
+ */
+async function scheduleNative(r: Reminder) {
+  try {
+    const cap = (window as any).Capacitor;
+    if (!cap?.isNativePlatform?.()) return;
+    const mod: any = await import(/* @vite-ignore */ '@capacitor/local-notifications').catch(() => null);
+    if (!mod?.LocalNotifications) return;
+    const { LocalNotifications } = mod;
+    await LocalNotifications.requestPermissions();
+    const at = new Date(nextDue(r) - r.notifyBeforeMin * 60_000);
+    const idNum = Math.abs([...r.id].reduce((a, c) => a + c.charCodeAt(0), 0)) % 2147483647;
+    await LocalNotifications.cancel({ notifications: [{ id: idNum }] }).catch(() => {});
+    await LocalNotifications.schedule({
+      notifications: [{
+        id: idNum,
+        title: `${r.channelName} is starting now`,
+        body: 'Tap to open and start playing.',
+        schedule: { at, allowWhileIdle: true, repeats: r.repeat !== 'once', every: r.repeat === 'daily' ? 'day' : r.repeat === 'weekly' ? 'week' : r.repeat === 'monthly' ? 'month' : undefined },
+        smallIcon: 'ic_stat_icon_config_sample',
+        extra: { url: `/${r.kind === 'tv' ? 'channel' : 'radio'}/${r.channelId}`, reminderId: r.id },
+      }],
+    });
+  } catch {}
+}
+
+async function cancelNative(r: Reminder) {
+  try {
+    const cap = (window as any).Capacitor;
+    if (!cap?.isNativePlatform?.()) return;
+    const mod: any = await import(/* @vite-ignore */ '@capacitor/local-notifications').catch(() => null);
+    if (!mod?.LocalNotifications) return;
+    const idNum = Math.abs([...r.id].reduce((a, c) => a + c.charCodeAt(0), 0)) % 2147483647;
+    await mod.LocalNotifications.cancel({ notifications: [{ id: idNum }] });
+  } catch {}
 }
 
 let currentAudio: HTMLAudioElement | null = null;
@@ -119,6 +160,23 @@ function fire(r: Reminder) {
 export function useReminders() {
   const [reminders, setReminders] = useState<Reminder[]>(() => load());
 
+  // On mount: detect missed reminders (scheduled before last open and never fired).
+  useEffect(() => {
+    const now = Date.now();
+    let changed = false;
+    const updated = reminders.map((r) => {
+      if (r.repeat !== 'once') return r;
+      const due = nextDue(r);
+      if (due < now - 60_000 && !r.lastFiredAt && r.status !== 'missed') {
+        changed = true;
+        return { ...r, status: 'missed' as ReminderStatus };
+      }
+      return r;
+    });
+    if (changed) { setReminders(updated); save(updated); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // schedule loop — checks every 30s
   useEffect(() => {
     const check = () => {
@@ -129,7 +187,7 @@ export function useReminders() {
         if (due <= now && (!r.lastFiredAt || now - r.lastFiredAt > 60_000)) {
           fire(r);
           changed = true;
-          return { ...r, lastFiredAt: now };
+          return { ...r, lastFiredAt: now, status: (r.repeat === 'once' ? 'completed' : 'upcoming') as ReminderStatus };
         }
         return r;
       });
@@ -145,7 +203,8 @@ export function useReminders() {
 
   const add = useCallback(async (r: Omit<Reminder, 'id'>) => {
     await ensurePermission();
-    const item: Reminder = { ...r, id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}` };
+    const item: Reminder = { ...r, id: `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`, status: 'upcoming' };
+    scheduleNative(item);
     setReminders((prev) => {
       const next = [...prev, item];
       save(next);
@@ -156,7 +215,12 @@ export function useReminders() {
 
   const update = useCallback((id: string, patch: Partial<Reminder>) => {
     setReminders((prev) => {
-      const next = prev.map((r) => (r.id === id ? { ...r, ...patch } : r));
+      const next = prev.map((r) => {
+        if (r.id !== id) return r;
+        const merged = { ...r, ...patch };
+        scheduleNative(merged);
+        return merged;
+      });
       save(next);
       return next;
     });
@@ -164,6 +228,8 @@ export function useReminders() {
 
   const remove = useCallback((id: string) => {
     setReminders((prev) => {
+      const target = prev.find((r) => r.id === id);
+      if (target) cancelNative(target);
       const next = prev.filter((r) => r.id !== id);
       save(next);
       return next;
