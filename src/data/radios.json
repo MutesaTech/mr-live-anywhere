@@ -88,7 +88,7 @@
     "language": "english"
   },
   {
-    "id": "r1",
+    "id": "r12",
     "name": "BBC World Service",
     "logo": "https://i.postimg.cc/L87ZrsYG/imgi-2-logod.png",
     "stream": "https://as-hls-ww-live.akamaized.net/pool_87948813/live/ww/bbc_world_service/bbc_world_service.isml/bbc_world_service-audio%3d48000.norewind.m3u8",
@@ -96,27 +96,27 @@
     "language": "english"
   },
    {
-    "id": "r1",
-    "name": "",
-    "logo": "",
-    "stream": "",
+    "id": "r13",
+    "name": "BBC Radio 1",
+    "logo": "https://i.postimg.cc/MTJtJ5fZ/imgi-2-logod.png",
+    "stream": "https://as-hls-ww-live.akamaized.net/pool_01505109/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8",
+    "category": "music",
+    "language": "english"
+  },
+   {
+    "id": "r14",
+    "name": "ABC NewsRadio",
+    "logo": "https://i.postimg.cc/QMFxZkGc/images.png",
+    "stream": "https://mediaserviceslive.akamaized.net/hls/live/2109425/newsradio/v0-221.m3u8",
     "category": "news",
     "language": "english"
   },
    {
-    "id": "r1",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "news",
-    "language": "english"
-  },
-   {
-    "id": "r1",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "news",
+    "id": "r15",
+    "name": "talkSPORT",
+    "logo": "https://i.postimg.cc/T3Cchb7N/imgi-2-logod.jpg",
+    "stream": "https://radio.talksport.com/stream?gdpr=0&partnerId=RadioTime",
+    "category": "sport",
     "language": "english"
   }
 
