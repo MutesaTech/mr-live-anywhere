@@ -74,16 +74,48 @@
    {
     "id": "r10",
     "name": "Apple Music Hits",
-    "logo": "https://i.postimg.cc/sxFJWTDm/imgi-2-logod.jpg",
+    "logo": "https://i.postimg.cc/CKF4x5LM/imgi-4-logod.jpg",
     "stream": "https://itsliveradio.apple.com/3p-tune-in/tune_in/1498155548/usw/256.m3u8?accessKey=1781123091_3bd851148d27cc7b4e558be627da93fa_YXgoFRpVZsRGy9%2FqgXM3%2FfrojsEJGfoRefrzyZk%2FmiNF%2BSXwLNol%2B5RwnN2rYiStm3MfeLcXi%2FNRs4y6BZuxbCQIcV3koGD9cFGXX4tv%2FkS%2FwV2%2BYYboZgeF3e6S1RhQ",
     "category": "music",
-    "language": "Roman"
+    "language": "english"
   },
    {
     "id": "r11",
     "name": "Al Jazeera English",
     "logo": "https://i.postimg.cc/FRxKbRhn/imgi-2-s108977d.png",
     "stream": "https://live-hls-audio-apps-aje.getaj.net/VOICE-AJE/index.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "r1",
+    "name": "BBC World Service",
+    "logo": "https://i.postimg.cc/L87ZrsYG/imgi-2-logod.png",
+    "stream": "https://as-hls-ww-live.akamaized.net/pool_87948813/live/ww/bbc_world_service/bbc_world_service.isml/bbc_world_service-audio%3d48000.norewind.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+   {
+    "id": "r1",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "news",
+    "language": "english"
+  },
+   {
+    "id": "r1",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "news",
+    "language": "english"
+  },
+   {
+    "id": "r1",
+    "name": "",
+    "logo": "",
+    "stream": "",
     "category": "news",
     "language": "english"
   }
