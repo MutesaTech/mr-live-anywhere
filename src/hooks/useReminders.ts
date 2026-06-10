@@ -70,7 +70,7 @@ async function scheduleNative(r: Reminder) {
   try {
     const cap = (window as any).Capacitor;
     if (!cap?.isNativePlatform?.()) return;
-    const mod: any = await import(/* @vite-ignore */ '@capacitor/local-notifications').catch(() => null);
+    const mod: any = await import(/* @vite-ignore */ ('@capacitor/local-notifications' as any)).catch(() => null);
     if (!mod?.LocalNotifications) return;
     const { LocalNotifications } = mod;
     await LocalNotifications.requestPermissions();
@@ -94,7 +94,7 @@ async function cancelNative(r: Reminder) {
   try {
     const cap = (window as any).Capacitor;
     if (!cap?.isNativePlatform?.()) return;
-    const mod: any = await import(/* @vite-ignore */ '@capacitor/local-notifications').catch(() => null);
+    const mod: any = await import(/* @vite-ignore */ ('@capacitor/local-notifications' as any)).catch(() => null);
     if (!mod?.LocalNotifications) return;
     const idNum = Math.abs([...r.id].reduce((a, c) => a + c.charCodeAt(0), 0)) % 2147483647;
     await mod.LocalNotifications.cancel({ notifications: [{ id: idNum }] });
