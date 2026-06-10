@@ -73,9 +73,9 @@
   },
    {
     "id": "r10",
-    "name": "Radio ZU",
+    "name": "Apple Music Hits",
     "logo": "https://i.postimg.cc/sxFJWTDm/imgi-2-logod.jpg",
-    "stream": "blob:https://tunein.com/370a8827-0069-48a0-8bf6-375c101b00c5",
+    "stream": "https://itsliveradio.apple.com/3p-tune-in/tune_in/1498155548/usw/256.m3u8?accessKey=1781123091_3bd851148d27cc7b4e558be627da93fa_YXgoFRpVZsRGy9%2FqgXM3%2FfrojsEJGfoRefrzyZk%2FmiNF%2BSXwLNol%2B5RwnN2rYiStm3MfeLcXi%2FNRs4y6BZuxbCQIcV3koGD9cFGXX4tv%2FkS%2FwV2%2BYYboZgeF3e6S1RhQ",
     "category": "music",
     "language": "Roman"
   },
