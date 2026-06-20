@@ -580,8 +580,8 @@
     "name": "The Weather",
     "logo": "https://i.postimg.cc/qqw77hcN/imgi-61-4feef1f6a0041b96534c9d33c1b99cf7.webp",
     "stream": "https://db691j6te7mt4.cloudfront.net/out/v1/f65bdb9d5ac1498ba700027b5ca8a383/index_1.m3u8",
-    "category": "English",
-    "language": "Weather"
+    "category": "Weather",
+    "language": "English"
   },
   {
     "id": "74",
@@ -628,7 +628,7 @@
     "name": "FilmRise ",
     "logo": "https://i.postimg.cc/g21dKqN4/imgi-58-4d8d5f0a464e1242b4fde108caaa6570.webp",
     "stream": "https://d1bl6tskrpq9ze.cloudfront.net/manifest/3fec3e5cac39a52b2132f9c66c83dae043dc17d4/prod_default_lgchannels-cdp-springserve/ea39e221-0137-4dc2-b6b5-0c447896fcb6/3.m3u8",
-    "category": "entertainment",
+    "category": "Movie",
     "language": "English"
   },
   {
@@ -644,7 +644,7 @@
     "name": "Moviesphere Live",
     "logo": "https://i.postimg.cc/pdfzwn2X/imgi-58-b5c373a817c81c049d68ca769d1847ef.webp",
     "stream": "https://samsunguk-moviesphereuk-samsung-uk-s7xaa.amagi.tv/ts-eu-w1-n2/playlist/samsunguk-moviesphereuk-samsung-uk/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac725bdb80148b61299bce8c37683f03409a5e5afba358b1ebe05846d038a8e54955937c17e09f43c8821da6d1dd5e9a5e8770a412ccc7a3de8711d785f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad786406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8ea39e1ea18688bd8871259fbd6c18748a904b4b93fcb49e09ba/43/640x360_1057680/index.m3u8",
-    "category": "movies",
+    "category": "Movies",
     "language": "English"
    },
    {
