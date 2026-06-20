@@ -566,6 +566,78 @@
     "stream": "https://stream.ads.ottera.tv/cl/260514d82qs6b8akdc739g4as0/854x480_550000_3_f.m3u8?i=475_50",
     "category": "kids",
     "language": "english"
+  },
+  {
+    "id": "72",
+    "name": "TVI Live",
+    "logo": "https://i.postimg.cc/g0zLmsHm/imgi-60-467691868df05a4035d5b6e8d361e79f.webp",
+    "stream": "https://video-auth6.iol.pt/edge_servers/tvi-720_passthrough/chunks.m3u8?nimblesessionid=2902839742&wmsAuthSign=c2VydmVyX3RpbWU9Ni8yMC8yMDI2IDEyOjUwOjMyIEFNJmhhc2hfdmFsdWU9Mnk2N29wZE1jQ0QrNzRSMC9xTHgrdz09JnZhbGlkbWludXRlcz0xNDQwJmlkPTI0YzAxZGQ2LTBhYzctNDgxYS04YWI0LWZmZTVmM2IyYjkwNg==",
+    "category": "",
+    "language": "Portuguese"
+  },
+  {
+    "id": "73",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "74",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "75",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "76",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "77",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "78",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "79",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "80",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
   }
   
 
