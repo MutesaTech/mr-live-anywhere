@@ -585,19 +585,19 @@
   },
   {
     "id": "74",
-    "name": "TNT Sports Brasil",
-    "logo": "",
-    "stream": "https://www.youtube.com/youtubei/v1/player/heartbeat?alt=json",
-    "category": "",
-    "language": ""
+    "name": "That's 80s Live",
+    "logo": "https://i.postimg.cc/7Z3qPTxM/imgi-57-cdcf0e0f226888e2e9e521b911842177.webp",
+    "stream": "https://lightning-now80s-rakuten.amagi.tv/playlist360p.m3u8",
+    "category": "music",
+    "language": "English"
   },
   {
     "id": "75",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "Bloomberg",
+    "logo": "https://i.postimg.cc/MGGZspSK/imgi-58-a024c9bc44f4adf14389bbfeab689cd2.webp",
+    "stream": "https://cdn4.skygo.mn/live/disk1/Bloomberg/HLSv3-FTA/Bloomberg-avc1_2089200=9-mp4a_256000_eng=10.m3u8",
+    "category": "news",
+    "language": "English"
   },
   {
     "id": "76",
