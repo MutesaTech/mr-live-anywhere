@@ -577,11 +577,11 @@
   },
   {
     "id": "73",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "The Weather",
+    "logo": "https://i.postimg.cc/qqw77hcN/imgi-61-4feef1f6a0041b96534c9d33c1b99cf7.webp",
+    "stream": "https://db691j6te7mt4.cloudfront.net/out/v1/f65bdb9d5ac1498ba700027b5ca8a383/index_1.m3u8",
+    "category": "English",
+    "language": "Weather"
   },
   {
     "id": "74",
