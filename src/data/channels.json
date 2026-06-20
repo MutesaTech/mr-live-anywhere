@@ -228,7 +228,7 @@
     "name": "Brit Asia",
     "logo": "https://i.postimg.cc/fLmPbqyk/22b3a6cc2cdce33be33fe4f1b1151d3b-removebg-preview.png",
     "stream": "https://hls.autopo.st/hls/britasiatv/index.m3u8",
-    "category": "Music",
+    "category": "music",
     "language": "english"
   },
   {
@@ -569,11 +569,11 @@
   },
   {
     "id": "72",
-    "name": "TVI Live",
-    "logo": "https://i.postimg.cc/g0zLmsHm/imgi-60-467691868df05a4035d5b6e8d361e79f.webp",
-    "stream": "https://video-auth6.iol.pt/edge_servers/tvi-720_passthrough/chunks.m3u8?nimblesessionid=2902839742&wmsAuthSign=c2VydmVyX3RpbWU9Ni8yMC8yMDI2IDEyOjUwOjMyIEFNJmhhc2hfdmFsdWU9Mnk2N29wZE1jQ0QrNzRSMC9xTHgrdz09JnZhbGlkbWludXRlcz0xNDQwJmlkPTI0YzAxZGQ2LTBhYzctNDgxYS04YWI0LWZmZTVmM2IyYjkwNg==",
-    "category": "",
-    "language": "Portuguese"
+    "name": "Channel 13 Israel",
+    "logo": "https://i.postimg.cc/ZnST1CKg/imgi-52-04f11e34700f1f415d2e631764d7bbae.webp",
+    "stream": "https://d2xg1g9o5vns8m.cloudfront.net/out/v1/66d4ac8748ce4a9298b4e40e48d1ae2f/index_3.m3u8",
+    "category": "news",
+    "language": ""
   },
   {
     "id": "73",
@@ -604,7 +604,7 @@
     "name": "Porto Canal ",
     "logo": "https://i.postimg.cc/283wf47n/imgi-60-15dfa81381e3e94f5a823ee970d0500e.webp",
     "stream": "https://pull-live-156-1.global.ssl.fastly.net/pc5865dc25400thmb-ea6bf03b14fa318f7133/smil:pc1-jhrgyuoqe5865db-68tkgb14fa318f7133f03.smil/chunklist_b1996000_slen.m3u8",
-    "category": "",
+    "category": "sport",
     "language": "Portuguese"
   },
   {
@@ -638,7 +638,248 @@
     "stream": "https://sdn-global-live-streaming-packager-cache.3qsdn.com/13456/6a35f5555c4a2_13018905_2606200205_5.m3u8",
     "category": "music",
     "language": "German"
+  },
+    {
+    "id": "81",
+    "name": "Moviesphere Live",
+    "logo": "https://i.postimg.cc/pdfzwn2X/imgi-58-b5c373a817c81c049d68ca769d1847ef.webp",
+    "stream": "https://samsunguk-moviesphereuk-samsung-uk-s7xaa.amagi.tv/ts-eu-w1-n2/playlist/samsunguk-moviesphereuk-samsung-uk/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac725bdb80148b61299bce8c37683f03409a5e5afba358b1ebe05846d038a8e54955937c17e09f43c8821da6d1dd5e9a5e8770a412ccc7a3de8711d785f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad786406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8ea39e1ea18688bd8871259fbd6c18748a904b4b93fcb49e09ba/43/640x360_1057680/index.m3u8",
+    "category": "movies",
+    "language": "English"
+   },
+   {
+    "id": "82",
+    "name": "Trace Urban ",
+    "logo": "https://i.postimg.cc/Rh4Bgyg0/imgi-59-74a76057b28ccd9c9d48045b64825ff9.webp",
+    "stream": "https://amg01076-lightningintern-traceurban-xiaomi-m78n3.amagi.tv/ts-us-e2-n1/playlist/amg01076-lightningintern-traceurban-xiaomi/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac725bdb80148b61299bce8c37683f03409a5e5afba358b1ebb35c17dc6cf2e31b55937c17ef9f43c8821da6d18008995e8223f51d98c3f982d741d7d3f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad786406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8fa699a92032b1b283a63427ced3fc58a631fa6d497d5075e10f84/147/640x360_1020800/index.m3u8",
+    "category": "music",
+    "language": "English"
+  },
+  {
+    "id": "83",
+    "name": "ABC News",
+    "logo": "https://i.postimg.cc/gjnDbkSS/imgi-55-ec432b3a9f86ac0b68d68ce11c20dd99.webp",
+    "stream": "https://aegis-cloudfront-1.tubi.video/d6cbb0de-68e4-4f3b-82f9-bf5d526e0bde/index_4.m3u8",
+    "category": "news",
+    "language": "English"
+  },
+  {
+    "id": "84",
+    "name": "Sky News",
+    "logo": "https://i.postimg.cc/g0z3P2r5/imgi-59-eb20b62966b86fab810313b033c39363.webp",
+    "stream": "https://linear901-oo-hls0-prd-gtm.delivery.skycdp.com/v1/master/6404a5d732e04991ed59ac7790b61cc065c9aabd/prod-gb-lin-skynews-hls-25-web/stream04/streamPlaylist.m3u8",
+    "category": "news",
+    "language": "English"
+  },
+   {
+    "id": "85",
+    "name": "CNA Live",
+    "logo": "https://i.postimg.cc/3J2SZ16x/imgi-49-22820071256fad3110f9b05a1fa086a9.webp",
+    "stream": "https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_1.m3u8",
+    "category": "news",
+    "language": "English"
+  },
+   {
+    "id": "86",
+    "name": "NHK WORLD ",
+    "logo": "https://i.postimg.cc/9fwqG8gC/imgi-53-87ab2cae62f1210235beccb4bb75e35b.webp",
+    "stream": "https://media-tyo.hls.nhkworld.jp/hls/w/live/1/sig/530224ae7fe14c4d840b06a0299d12f2255183a4d5ef16447a48ddc0b8f204d7/v3.m3u8",
+    "category": "entertainment",
+    "language": " English"
+  },
+   {
+    "id": "87",
+    "name": "CBC News",
+    "logo": "https://i.postimg.cc/V6RsMX8B/imgi-59-948a6a9c11a6b84c87504f5cc9b7a8c5.webp",
+    "stream": "https://aegis-cloudfront-1.tubi.video/c71ce9b6-cddb-4cec-b0db-2f09289f8782/master480P.m3u8",
+    "category": "news",
+    "language": "English"
+  },
+   {
+    "id": "88",
+    "name": "Retro Plus",
+    "logo": "https://i.postimg.cc/bNG8Y7ZJ/imgi-64-466deabbd42d619f75a9134701c3e39b.webp",
+    "stream": "https://scl.edge.grupoz.cl/retroplustvuno/live/chunklist_w1359251397.m3u8",
+    "category": "music",
+    "language": "Spanish"
+  },
+   {
+    "id": "89",
+    "name": "CARAC1",
+    "logo": "https://i.postimg.cc/prwSL16G/imgi-55-41e6c86bda3b8692d9ea3bc24309f105.webp",
+    "stream": "https://edge13.vedge.infomaniak.com/livecast/ik:event/chunklist_w1556098266.m3u8",
+    "category": "movie",
+    "language": "French"
+  },
+   {
+    "id": "90",
+    "name": "Hi-Yah! Live",
+    "logo": "https://i.postimg.cc/hty5Jj6d/imgi-57-ced90c34eb8f8eb33c0d08b174923282.webp",
+    "stream": "https://linear-59.frequency.stream/dist/xumo/59/hls/master/playlist_1024x576.m3u8",
+    "category": "movie",
+    "language": "English"
+  },
+   {
+    "id": "91",
+    "name": "WMUR News",
+    "logo": "https://i.postimg.cc/J0rNc3B0/imgi-57-5c5f589f85c581e959be20d73df16a16.webp",
+    "stream": "https://aegis-cloudfront-1.tubi.video/b77ffe96-c5d1-43a7-8687-306ff244d725/playlist_1024x576.m3u8",
+    "category": "news",
+    "language": "English"
+  },
+   {
+    "id": "92",
+    "name": "That's Rock",
+    "logo": "https://i.postimg.cc/tC1Z0my9/imgi-57-61f063c0a977629e10da5357c53d2336.webp",
+    "stream": "https://lightning-now90s-rakuten.amagi.tv/playlist480p.m3u8",
+    "category": "music",
+    "language": "English"
+  },
+   {
+    "id": "93",
+    "name": "Vevo 2K",
+    "logo": "https://i.postimg.cc/q7B6FBvw/imgi-58-f8ee7254150c78d90e38bb3393ad94b7.webp",
+    "stream": "https://amg00056-vevotv-vevo2kau-samsungau-xh1pk.amagi.tv/ts-us-w2-n2/playlist/amg00056-vevotv-vevo2kau-samsungau/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac725bdb80148b61299bce8c37683f03409a5e5afba358b1ebb40e418c3aa9b24a55937c17b39f43c8821da6d187589e5e8074a0139596f6dad41483d4f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad786406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8da22d9f0fd482b65f87ff35939c34417d09cc061e17ec841a/5/640x360_1057680/index.m3u8",
+    "category": "music",
+    "language": " English"
+  },
+   {
+    "id": "94",
+    "name": "Rádio Itália ",
+    "logo": "https://i.postimg.cc/W3PCVyQd/imgi-64-d9f9f503ba7bafd7ab3d5c4209f7eba2.webp",
+    "stream": "https://radioitaliatv.akamaized.net/hls/live/2093117/RadioitaliaTV/stream01/streamPlaylist.m3u8",
+    "category": "music",
+    "language": "Italian"
+  },
+   {
+    "id": "95",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+   {
+    "id": "96",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+   {
+    "id": "97",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+   {
+    "id": "98",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+   {
+    "id": "99",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+   {
+    "id": "100",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "01",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "02",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "03",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "04",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "05",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "06",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "07",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "08",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "09",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
+  },
+  {
+    "id": "010",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "",
+    "language": ""
   }
+  
   
 
 
