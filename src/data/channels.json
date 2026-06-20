@@ -604,7 +604,7 @@
     "name": "Porto Canal ",
     "logo": "https://i.postimg.cc/283wf47n/imgi-60-15dfa81381e3e94f5a823ee970d0500e.webp",
     "stream": "https://pull-live-156-1.global.ssl.fastly.net/pc5865dc25400thmb-ea6bf03b14fa318f7133/smil:pc1-jhrgyuoqe5865db-68tkgb14fa318f7133f03.smil/chunklist_b1996000_slen.m3u8",
-    "category": "sport",
+    "category": "sports",
     "language": "Portuguese"
   },
   {
@@ -753,59 +753,59 @@
   },
    {
     "id": "95",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "Trace Latina",
+    "logo": "https://i.postimg.cc/jdJH6jDJ/imgi-64-5536c18c8dc6b2ee955e65c59720b9c3.webp",
+    "stream": "https://amg01131-tracetv-tracelatina-xiaomi-395yt.amagi.tv/ts-us-e2-n1/playlist/amg01131-tracetv-tracelatina-xiaomi/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac725bdb80148b61299bce8c37683f03409a5e5afba358b1ebe80b16d869f2e51b55937c17b19f43c8821da6d2d55f985e8223a7409a93a3d9854283d0f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad786406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8fa69caa2032d18a83a634a35eaae9ba2e9b17ed44f59e97650d4b/114/848x480_1249600/index.m3u8",
+    "category": "music",
+    "language": "Spanish"
   },
    {
     "id": "96",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "Visual Radio ",
+    "logo": "https://i.postimg.cc/QMP5WGj6/imgi-63-logo-white.png",
+    "stream": "https://59d7d6f47d7fc.streamlock.net/visualradio/visualradio/chunklist_w1294564678.m3u8",
+    "category": "music",
+    "language": "Italian"
   },
    {
     "id": "97",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "FIFA Plus ",
+    "logo": "https://i.postimg.cc/7L7PXpgt/imgi-55-f5f1b3ee68f9bd23c87dab4a49e755b2.webp",
+    "stream": "https://c2657533.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UGxleC1icl9GSUZBUGx1c1BvcnR1Z3Vlc2VfSExT/5091ff6f-4fe8-45f9-91d3-c5f5c2451d11/1.m3u8",
+    "category": "sports",
+    "language": "Portuguese"
   },
    {
     "id": "98",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "N Sports",
+    "logo": "https://i.postimg.cc/3R8Mp691/imgi-63-8bbe6817af0af2e0e5a6df96f245b752.webp",
+    "stream": "https://ogc-nsprt-tcl-roku-syndication.otteravision.com/ogc/nsprt/nsprt_720p.m3u8",
+    "category": "sports",
+    "language": "Portuguese"
   },
    {
     "id": "99",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "FIFA Live",
+    "logo": "https://i.postimg.cc/7L7PXpgt/imgi-55-f5f1b3ee68f9bd23c87dab4a49e755b2.webp",
+    "stream": "https://a62dad94.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0ZJRkFQbHVzRW5nbGlzaF9ITFM/f4fa8b18-8738-49f0-9d88-271fb1a9b964/1.m3u8",
+    "category": "sports",
+    "language": "English"
   },
    {
     "id": "100",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "Barça TV",
+    "logo": "https://i.postimg.cc/d076f91x/imgi-63-73cde5990fa4d395e807a2780b68b333.webp",
+    "stream": "https://amg17560-fcb-amg17560c1-rakuten-uk-4891.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg17560-fcbarcelona-topbarcaenglish-rakutenuk/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac725bdb80148b61299bce8c37683f03409a5e5afba358b1ebe80b40dc6bf3e44855937c16e69f43c8821da6d1850dc85ed270f2149ec6f5dd801186d7f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad786406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8fa69aa82032bc9483a63430b49cf4a4eb917fd1cd02ed02e3c58e/176/854x480_1478083/index.m3u8",
+    "category": "sports",
+    "language": "Spanish"
   },
   {
     "id": "01",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "Inter 24/7",
+    "logo": "https://i.postimg.cc/SRZzqw18/imgi-63-91a2ad27e57828a20e02a0b1a293d2e2.webp",
+    "stream": "https://amg27604-amg27604c1-amgplt0165.playout.now3.amagi.tv/ts-eu-w1-n2/playlist/amg27604-amg27604c1-amgplt0165/9e99b3d4-6cc2-11f1-af31-2e2935bac782/31/426x240_350000/index.m3u8",
+    "category": "sports",
+    "language": "Italian"
   },
   {
     "id": "02",
