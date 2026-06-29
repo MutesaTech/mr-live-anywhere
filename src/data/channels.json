@@ -60,7 +60,7 @@
     "name": "a3bikini",
     "logo": "https://i.postimg.cc/wTGttfcn/65151.png",
     "stream": "https://rpn3.bozztv.com/dvrfl07/ushba-t2/tracks-v1a1/mono.m3u8",
-    "category": "entertainment",
+    "category": "music",
     "language": "english"
   },
   {
@@ -268,7 +268,7 @@
     "name": "Game +",
     "logo": "https://i.postimg.cc/5tJcWBF5/formlessai-logo.jpg",
     "stream": "https://a-cdn.klowdtv.com/live2/fntsy_720p/chunks.m3u8",
-    "category": "entertainment",
+    "category": "sports",
     "language": "english"
   },
   {
@@ -380,7 +380,7 @@
     "name": "Activa Tv",
     "logo": "https://i.postimg.cc/nLbFS563/7ec1b88db8493f5426d662878c90025f-removebg-preview.png",
     "stream": "https://streamtv.mediasector.es/hls/activatv/1_2/index.m3u8?tkn=86011797",
-    "category": "entertainment",
+    "category": "music",
     "language": "spanish"
   },
   {
