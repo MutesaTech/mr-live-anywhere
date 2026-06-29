@@ -865,19 +865,19 @@
   },
   {
     "id": "09",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "Adventure Earth",
+    "logo": "https://i.postimg.cc/mrVWgTk7/imgi-60-8964689ffab6b835bfc53e18f535f45d.webp",
+    "stream": "https://a57e9c69976649b582a8d7604c00e69a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AdventureEarth/02ba33f2-e5e6-4a37-8f3d-e802039093e1/1.m3u8",
+    "category": "documentary",
+    "language": "English"
   },
   {
     "id": "010",
     "name": "Daystar",
-    "logo": "",
+    "logo": "https://i.postimg.cc/DfS37kTq/imgi-61-4e504c06ab0bf74d7831b840a9a6a42f.webp",
     "stream": "https://hls-live-media-gc.cdn01.net/mpegts/232076_2222904/BBuYldqUDAi4aMAXJfiRCQ/1786579200/media_mpegts_2.m3u8?via=direct&source=smarttv",
     "category": "Evangelical",
-    "language": ""
+    "language": "English"
   }
   
   
