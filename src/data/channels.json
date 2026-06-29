@@ -708,7 +708,7 @@
     "name": "CARAC1",
     "logo": "https://i.postimg.cc/prwSL16G/imgi-55-41e6c86bda3b8692d9ea3bc24309f105.webp",
     "stream": "https://edge13.vedge.infomaniak.com/livecast/ik:event/chunklist_w1556098266.m3u8",
-    "category": "movie",
+    "category": "Movies",
     "language": "French"
   },
    {
@@ -716,7 +716,7 @@
     "name": "Hi-Yah! Live",
     "logo": "https://i.postimg.cc/hty5Jj6d/imgi-57-ced90c34eb8f8eb33c0d08b174923282.webp",
     "stream": "https://linear-59.frequency.stream/dist/xumo/59/hls/master/playlist_1024x576.m3u8",
-    "category": "movie",
+    "category": "Movies",
     "language": "English"
   },
    {
