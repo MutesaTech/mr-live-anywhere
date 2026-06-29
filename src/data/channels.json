@@ -771,9 +771,9 @@
     "id": "97",
     "name": "FIFA Plus ",
     "logo": "https://i.postimg.cc/7L7PXpgt/imgi-55-f5f1b3ee68f9bd23c87dab4a49e755b2.webp",
-    "stream": "https://c2657533.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UGxleC1icl9GSUZBUGx1c1BvcnR1Z3Vlc2VfSExT/5091ff6f-4fe8-45f9-91d3-c5f5c2451d11/1.m3u8",
+    "stream": "https://a62dad94.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0ZJRkFQbHVzRW5nbGlzaF9ITFM/df5a2f75-daca-497e-825e-3e4b618108a5/1.m3u8",
     "category": "sports",
-    "language": "Portuguese"
+    "language": "English"
   },
    {
     "id": "98",
@@ -787,7 +787,7 @@
     "id": "99",
     "name": "FIFA Live",
     "logo": "https://i.postimg.cc/7L7PXpgt/imgi-55-f5f1b3ee68f9bd23c87dab4a49e755b2.webp",
-    "stream": "https://a62dad94.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0ZJRkFQbHVzRW5nbGlzaF9ITFM/f4fa8b18-8738-49f0-9d88-271fb1a9b964/1.m3u8",
+    "stream": "",
     "category": "sports",
     "language": "English"
   },
