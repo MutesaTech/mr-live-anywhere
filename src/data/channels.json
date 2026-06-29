@@ -801,11 +801,11 @@
   },
   {
     "id": "01",
-    "name": "Inter 24/7",
-    "logo": "https://i.postimg.cc/SRZzqw18/imgi-63-91a2ad27e57828a20e02a0b1a293d2e2.webp",
-    "stream": "https://amg27604-amg27604c1-amgplt0165.playout.now3.amagi.tv/ts-eu-w1-n2/playlist/amg27604-amg27604c1-amgplt0165/9e99b3d4-6cc2-11f1-af31-2e2935bac782/31/426x240_350000/index.m3u8",
-    "category": "sports",
-    "language": "Italian"
+    "name": "Maverick Black",
+    "logo": "https://i.postimg.cc/65bWY5zd/imgi-57-1787e8edfca1fc688295e5466b90a1c1.webp",
+    "stream": "https://maverick-maverick-black-cinema-2-us.plex.wurl.tv/2000.m3u8",
+    "category": "Movies",
+    "language": "English"
   },
   {
     "id": "02",
