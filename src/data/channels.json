@@ -156,7 +156,7 @@
     "name": "CGTN Documentary",
     "logo": "https://i.postimg.cc/nzbKzp1Z/channels4-profile.jpg",
     "stream": "https://amg00405-rakutentv-cgtndocumentary-rakuten-0ql8j.amagi.tv/master480p.m3u8",
-    "category": "entertainment",
+    "category": "documentary",
     "language": "english"
   },
   {
@@ -508,7 +508,7 @@
     "name": "TV Cultura",
     "logo": "https://i.postimg.cc/xj4TtWwL/images.png",
     "stream": "https://player-tvcultura.stream.uol.com.br/live/tvcultura_lsd.m3u8?vhost=player-tvcultura.stream.uol.com.br",
-    "category": "kids",
+    "category": "culinary",
     "language": "Portuguese"
   },
    {
@@ -833,35 +833,35 @@
   },
   {
     "id": "05",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "ARD Alpha",
+    "logo": "https://i.postimg.cc/fbzNxV0b/imgi-63-eb26934b97d92fe06450d53ae9819437.webp",
+    "stream": "https://mcdn.br.de/br/fs/ard_alpha/hls/int/master270p700.m3u8",
+    "category": "education",
+    "language": "German"
   },
   {
     "id": "06",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "Tastemade",
+    "logo": "https://i.postimg.cc/YCXgHWk9/imgi-60-dfb596b8c6ac58475808d03f05721253.webp",
+    "stream": "https://tastemade-tastemadefreetv16-tcl-mmaw8.amagi.tv/ts-us-e2-n2/playlist/tastemade-tastemadefreetv16-tcl/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac725bdb80148b61299bce8c37683f03409a5e5afba358b1ebb75f13db6bf4e34d55922c14e69f43c8821da689815f965e8f70a0409ec1f48387198a80f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad786406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8ea09b1ea189deee8b71a86ddde8dadc4ba16a440a82bf8b8d6a/76/854x480_1706830/index.m3u8",
+    "category": "culinary",
+    "language": "English"
   },
   {
     "id": "07",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "Gusto",
+    "logo": "https://i.postimg.cc/44KWFX6G/imgi-61-34929b38fd8794231ed1bb4f0f59a40c.webp",
+    "stream": "https://e75fc053c0d2406fb74cdd71d77e1a7f.mediatailor.us-east-1.amazonaws.com/v1/manifest/f4e8c53a8367a5b58e20ce054ea3ce25a3e904d3/RakutenTV-eu_GustoTV/d60be12b-8c2b-4bb7-83dc-3afff85db36d/0.m3u8",
+    "category": "culinary",
+    "language": "English"
   },
   {
     "id": "08",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "Nature Time",
+    "logo": "https://i.postimg.cc/XJRgdyDy/imgi-63-76c1f7bf76617738201aa7ad7ca01972.webp",
+    "stream": "https://amg00090-blueantmedia-naturetime-samsungfr-yakbf.amagi.tv/ts-eu-w1-n2/playlist/amg00090-blueantmedia-naturetime-samsungfr/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac725bdb80148b61299bce8c37683f03409a5e5afba358b1ebe959478b3af4b71a55922c4cb29f43c8821da689d50f985e8070a546ccc6f28980458285f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad786406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8da22d9f58c9d0b55ff11d7c9f948dfad33e9776bf1cf693fa/5/848x480_1249600/index.m3u8",
+    "category": "documentary",
+    "language": "French"
   },
   {
     "id": "09",
