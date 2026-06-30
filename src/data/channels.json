@@ -244,7 +244,7 @@
     "name": "BBCEarth",
     "logo": "https://i.postimg.cc/DzMpGwbN/images.jpg",
     "stream": "https://amg00793-amg00793c6-xumo-us-2669.playouts.now.amagi.tv/BBCStudios-BBCEarthA-hls/playlist240p.m3u8",
-    "category": "Documentary",
+    "category": "documentary",
     "language": "english"
   },
   {
@@ -612,7 +612,7 @@
     "name": "Love Nature",
     "logo": "https://i.postimg.cc/D0Rbhb7Q/imgi-60-89902ad1c93745ba04306321089fd39d.webp",
     "stream": "https://aegis-cloudfront-1.tubi.video/6d6d0f24-8445-4b4c-bdf6-44f9e38beaa4/480p-cc/index.m3u8",
-    "category": "Documentary",
+    "category": "documentary",
     "language": "English"
   },
   {
@@ -787,9 +787,9 @@
     "id": "99",
     "name": "FIFA Live",
     "logo": "https://i.postimg.cc/7L7PXpgt/imgi-55-f5f1b3ee68f9bd23c87dab4a49e755b2.webp",
-    "stream": "",
+    "stream": "https://c2657533.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UGxleC1icl9GSUZBUGx1c1BvcnR1Z3Vlc2VfSExT/b86daf04-a90f-4888-8bbe-2cfb472618e3/1.m3u8",
     "category": "sports",
-    "language": "English"
+    "language": "Portuguese"
   },
    {
     "id": "100",
@@ -809,27 +809,27 @@
   },
   {
     "id": "02",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
+    "name": "Dodoma TV",
+    "logo": "https://i.postimg.cc/J01FwjDW/imgi-8-b-Lq9e-Fa.png",
+    "stream": "https://goliveafrica.media:9998/live/625965017ed69/index.m3u8",
+    "category": "music",
     "language": ""
   },
   {
     "id": "03",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "https://stream.berosat.live:19360/baraka-hd/baraka-hd.m3u8",
+    "logo": "https://i.postimg.cc/1Xn9FxBh/imgi-1-IKXdd-HN.png",
+    "stream": "https://stream.berosat.live:19360/baraka-hd/baraka-hd.m3u8",
+    "category": "music",
+    "language": "french "
   },
   {
     "id": "04",
-    "name": "",
-    "logo": "",
-    "stream": "",
-    "category": "",
-    "language": ""
+    "name": "TV1",
+    "logo": "https://i.postimg.cc/bJffsGMs/5d2bbd-939383bfc46543ed9853c1bb1b6a3726-mv2.png",
+    "stream": "https://live.tv1.rw/index-480p.m3u8",
+    "category": "news",
+    "language": "kinyarwanda"
   },
   {
     "id": "05",
