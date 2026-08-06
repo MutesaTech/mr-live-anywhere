@@ -99,6 +99,17 @@ const TvPlayer = ({
     return channels.findIndex(c => c.id === activeChannel);
   }, [channels, activeChannel]);
 
+  // Group filtered channels into explicit category rows
+  const channelsByCategory = useMemo(() => {
+    const groups: { category: string; items: Channel[] }[] = [];
+    filteredChannels.forEach(channel => {
+      const group = groups.find(g => g.category === channel.category);
+      if (group) group.items.push(channel);
+      else groups.push({ category: channel.category, items: [channel] });
+    });
+    return groups;
+  }, [filteredChannels]);
+
   // Handle external channel selection
   useEffect(() => {
     if (externalChannel && externalChannel !== activeChannel) {
