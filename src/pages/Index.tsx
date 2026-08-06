@@ -12,7 +12,6 @@ import OfflineIndicator from '@/components/OfflineIndicator';
 import LowBandwidthToast from '@/components/LowBandwidthToast';
 import OfflineFallback from '@/components/OfflineFallback';
 import SocialProofPopup from '@/components/SocialProofPopup';
-import ReminderToast from '@/components/ReminderToast';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { useLowBandwidthMode } from '@/hooks/useLowBandwidthMode';
@@ -207,7 +206,6 @@ const Index = () => {
       <OfflineIndicator />
       <LowBandwidthToast />
       <SocialProofPopup />
-      <ReminderToast />
     </div>
   );
 };
