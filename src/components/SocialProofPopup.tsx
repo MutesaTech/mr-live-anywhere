@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Users, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { formatViewers, randomViewers } from '@/lib/media';
 
 const SocialProofPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
