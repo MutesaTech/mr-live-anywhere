@@ -100,6 +100,17 @@ const HomePage = ({
     ).slice(0, 4);
   }, [radios, popularRadios, searchQuery]);
 
+  // Explicit per-category rows
+  const categoryRows = useMemo(() => {
+    const groups: { category: string; items: Channel[] }[] = [];
+    channels.forEach((c) => {
+      const g = groups.find((x) => x.category === c.category);
+      if (g) g.items.push(c);
+      else groups.push({ category: c.category, items: [c] });
+    });
+    return groups;
+  }, [channels]);
+
   const animationClass = reducedAnimations ? '' : 'animate-page-enter';
 
   return (
@@ -189,6 +200,39 @@ const HomePage = ({
                 />
               ))}
             </HorizontalRail>
+          )}
+
+          {/* Category rows — each category gets its own clearly separated horizontal row */}
+          {!searchQuery && (
+            <div className="space-y-10 pt-2">
+              {categoryRows.map((group) => (
+                <section
+                  key={group.category}
+                  className="border-t border-border/40 pt-6"
+                >
+                  <HorizontalRail
+                    title={group.category.charAt(0).toUpperCase() + group.category.slice(1)}
+                    itemWidthClass="w-[180px] sm:w-[220px] md:w-[240px]"
+                  >
+                    {group.items.map((channel) => (
+                      <ChannelCard
+                        key={`${group.category}-${channel.id}`}
+                        id={channel.id}
+                        name={channel.name}
+                        logo={channel.logo}
+                        category={channel.category}
+                        isFavorite={favoriteTvIds.includes(channel.id)}
+                        onClick={() => onSelectChannel(channel.id)}
+                        onToggleFavorite={(e) => {
+                          e.stopPropagation();
+                          onToggleFavoriteTv(channel.id);
+                        }}
+                      />
+                    ))}
+                  </HorizontalRail>
+                </section>
+              ))}
+            </div>
           )}
         </>
       )}
