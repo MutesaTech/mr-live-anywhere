@@ -13,6 +13,7 @@ import SponsoredBanner from './SponsoredBanner';
 import HorizontalRail from './HorizontalRail';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { useSwipeGesture } from '@/hooks/useSwipeGesture';
+import { formatViewers, clampViewers, randomViewers } from '@/lib/media';
 interface Channel {
   id: string;
   name: string;
@@ -68,7 +69,8 @@ const TvPlayer = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const volumeTimerRef = useRef<number | null>(null);
   const {
-    isSlowConnection
+    isSlowConnection,
+    isOnline
   } = useNetworkStatus();
 
   // Swipe gestures for channel switching
@@ -111,8 +113,8 @@ const TvPlayer = ({
   useEffect(() => {
     const counts: Record<string, number> = {};
     channels.forEach(channel => {
-      // Floor of 50,000; can fluctuate upward
-      counts[channel.id] = 50_000 + Math.floor(Math.random() * 25_000);
+      // Audience is always within 100K – 100M
+      counts[channel.id] = randomViewers();
     });
     setViewerCounts(counts);
     const interval = setInterval(() => {
@@ -121,9 +123,8 @@ const TvPlayer = ({
           ...prev
         };
         channels.forEach(channel => {
-          // Drift up/down but never below 50k
-          const drift = Math.floor(Math.random() * 200) - 80;
-          updated[channel.id] = Math.max(50_000, (prev[channel.id] ?? 50_000) + drift);
+          const drift = Math.floor(Math.random() * 4_000) - 1_500;
+          updated[channel.id] = clampViewers((prev[channel.id] ?? randomViewers()) + drift);
         });
         return updated;
       });
@@ -433,7 +434,7 @@ const TvPlayer = ({
             />
             
             {/* Error Handler */}
-            <StreamErrorHandler error={streamError} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
+            <StreamErrorHandler error={streamError} isOffline={!isOnline} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
             
             {/* Overlay controls */}
             <div className="absolute top-4 left-4 right-4 flex items-start justify-between pointer-events-none">
@@ -519,7 +520,7 @@ const TvPlayer = ({
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-1 text-muted-foreground">
                   <Eye className="h-4 w-4" />
-                  <span className="text-caption">{viewerCounts[activeChannel]?.toLocaleString()}</span>
+                  <span className="text-caption">{formatViewers(viewerCounts[activeChannel] ?? 0)} watching</span>
                 </div>
                 <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full" onClick={() => onToggleFavorite(activeChannel)}>
                   <Star className={cn("h-5 w-5", favorites.includes(activeChannel) && "fill-primary text-primary")} />
