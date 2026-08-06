@@ -5,7 +5,6 @@ import { Input } from './ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import SleepTimerDialog from './SleepTimerDialog';
-import ReminderManager from './ReminderManager';
 import { AboutDialog, PrivacyDialog, TermsDialog } from './LegalDialogs';
 import { cn } from '@/lib/utils';
 
@@ -126,10 +125,9 @@ const SettingsPage = () => {
       <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden divide-y divide-border/50">
         <div className="p-4">
           <h2 className="text-h3 font-semibold">Playback</h2>
-          <p className="text-caption text-muted-foreground mt-1">Sleep timer & reminders</p>
+          <p className="text-caption text-muted-foreground mt-1">Sleep timer</p>
         </div>
         <SleepTimerDialog />
-        <ReminderManager />
       </section>
 
       {/* Data Saver */}
@@ -199,7 +197,7 @@ const SettingsPage = () => {
               </div>
               <div>
                 <p className="text-body font-medium">WhatsApp</p>
-                <p className="text-caption text-muted-foreground">+250 791 319 992</p>
+                <p className="text-caption text-muted-foreground">Chat with support</p>
               </div>
             </div>
             <ChevronRight className="h-5 w-5 text-muted-foreground" />
@@ -211,7 +209,7 @@ const SettingsPage = () => {
               </div>
               <div>
                 <p className="text-body font-medium">Email</p>
-                <p className="text-caption text-muted-foreground">mutesamoments@gmail.com</p>
+                <p className="text-caption text-muted-foreground">Send us a message</p>
               </div>
             </div>
             <ChevronRight className="h-5 w-5 text-muted-foreground" />
