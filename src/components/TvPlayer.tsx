@@ -593,12 +593,35 @@ const TvPlayer = ({
         <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
       </div>
 
-      {/* Channels Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 stagger-children">
-        {filteredChannels.map(channel => <ChannelCard key={channel.id} id={channel.id} name={channel.name} logo={channel.logo} category={channel.category} isActive={activeChannel === channel.id} isPlaying={activeChannel === channel.id} isFavorite={favorites.includes(channel.id)} viewerCount={viewerCounts[channel.id]} onClick={() => handlePlayChannel(channel.id)} onToggleFavorite={e => {
-        e.stopPropagation();
-        onToggleFavorite(channel.id);
-      }} />)}
+      {/* Channels — one clearly separated horizontal row per category */}
+      <div className="space-y-10">
+        {channelsByCategory.map(group => (
+          <section key={group.category} className="border-t border-border/40 pt-6 first:border-t-0 first:pt-0">
+            <HorizontalRail
+              title={group.category.charAt(0).toUpperCase() + group.category.slice(1)}
+              itemWidthClass="w-[180px] sm:w-[220px] md:w-[240px]"
+            >
+              {group.items.map(channel => (
+                <ChannelCard
+                  key={channel.id}
+                  id={channel.id}
+                  name={channel.name}
+                  logo={channel.logo}
+                  category={channel.category}
+                  isActive={activeChannel === channel.id}
+                  isPlaying={activeChannel === channel.id}
+                  isFavorite={favorites.includes(channel.id)}
+                  viewerCount={viewerCounts[channel.id]}
+                  onClick={() => handlePlayChannel(channel.id)}
+                  onToggleFavorite={e => {
+                    e.stopPropagation();
+                    onToggleFavorite(channel.id);
+                  }}
+                />
+              ))}
+            </HorizontalRail>
+          </section>
+        ))}
       </div>
 
       {/* Empty state */}
