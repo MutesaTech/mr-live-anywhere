@@ -13,6 +13,7 @@ import SponsoredBanner from './SponsoredBanner';
 import HorizontalRail from './HorizontalRail';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { useSwipeGesture } from '@/hooks/useSwipeGesture';
+import { formatViewers, clampViewers, randomViewers } from '@/lib/media';
 interface Channel {
   id: string;
   name: string;
@@ -68,7 +69,8 @@ const TvPlayer = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const volumeTimerRef = useRef<number | null>(null);
   const {
-    isSlowConnection
+    isSlowConnection,
+    isOnline
   } = useNetworkStatus();
 
   // Swipe gestures for channel switching
@@ -97,6 +99,17 @@ const TvPlayer = ({
     return channels.findIndex(c => c.id === activeChannel);
   }, [channels, activeChannel]);
 
+  // Group filtered channels into explicit category rows
+  const channelsByCategory = useMemo(() => {
+    const groups: { category: string; items: Channel[] }[] = [];
+    filteredChannels.forEach(channel => {
+      const group = groups.find(g => g.category === channel.category);
+      if (group) group.items.push(channel);
+      else groups.push({ category: channel.category, items: [channel] });
+    });
+    return groups;
+  }, [filteredChannels]);
+
   // Handle external channel selection
   useEffect(() => {
     if (externalChannel && externalChannel !== activeChannel) {
@@ -111,8 +124,8 @@ const TvPlayer = ({
   useEffect(() => {
     const counts: Record<string, number> = {};
     channels.forEach(channel => {
-      // Floor of 50,000; can fluctuate upward
-      counts[channel.id] = 50_000 + Math.floor(Math.random() * 25_000);
+      // Audience is always within 100K – 100M
+      counts[channel.id] = randomViewers();
     });
     setViewerCounts(counts);
     const interval = setInterval(() => {
@@ -121,9 +134,8 @@ const TvPlayer = ({
           ...prev
         };
         channels.forEach(channel => {
-          // Drift up/down but never below 50k
-          const drift = Math.floor(Math.random() * 200) - 80;
-          updated[channel.id] = Math.max(50_000, (prev[channel.id] ?? 50_000) + drift);
+          const drift = Math.floor(Math.random() * 4_000) - 1_500;
+          updated[channel.id] = clampViewers((prev[channel.id] ?? randomViewers()) + drift);
         });
         return updated;
       });
@@ -433,7 +445,7 @@ const TvPlayer = ({
             />
             
             {/* Error Handler */}
-            <StreamErrorHandler error={streamError} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
+            <StreamErrorHandler error={streamError} isOffline={!isOnline} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
             
             {/* Overlay controls */}
             <div className="absolute top-4 left-4 right-4 flex items-start justify-between pointer-events-none">
@@ -519,7 +531,7 @@ const TvPlayer = ({
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-1 text-muted-foreground">
                   <Eye className="h-4 w-4" />
-                  <span className="text-caption">{viewerCounts[activeChannel]?.toLocaleString()}</span>
+                  <span className="text-caption">{formatViewers(viewerCounts[activeChannel] ?? 0)} watching</span>
                 </div>
                 <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full" onClick={() => onToggleFavorite(activeChannel)}>
                   <Star className={cn("h-5 w-5", favorites.includes(activeChannel) && "fill-primary text-primary")} />
@@ -581,12 +593,35 @@ const TvPlayer = ({
         <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
       </div>
 
-      {/* Channels Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 stagger-children">
-        {filteredChannels.map(channel => <ChannelCard key={channel.id} id={channel.id} name={channel.name} logo={channel.logo} category={channel.category} isActive={activeChannel === channel.id} isPlaying={activeChannel === channel.id} isFavorite={favorites.includes(channel.id)} viewerCount={viewerCounts[channel.id]} onClick={() => handlePlayChannel(channel.id)} onToggleFavorite={e => {
-        e.stopPropagation();
-        onToggleFavorite(channel.id);
-      }} />)}
+      {/* Channels — one clearly separated horizontal row per category */}
+      <div className="space-y-10">
+        {channelsByCategory.map(group => (
+          <section key={group.category} className="border-t border-border/40 pt-6 first:border-t-0 first:pt-0">
+            <HorizontalRail
+              title={group.category.charAt(0).toUpperCase() + group.category.slice(1)}
+              itemWidthClass="w-[180px] sm:w-[220px] md:w-[240px]"
+            >
+              {group.items.map(channel => (
+                <ChannelCard
+                  key={channel.id}
+                  id={channel.id}
+                  name={channel.name}
+                  logo={channel.logo}
+                  category={channel.category}
+                  isActive={activeChannel === channel.id}
+                  isPlaying={activeChannel === channel.id}
+                  isFavorite={favorites.includes(channel.id)}
+                  viewerCount={viewerCounts[channel.id]}
+                  onClick={() => handlePlayChannel(channel.id)}
+                  onToggleFavorite={e => {
+                    e.stopPropagation();
+                    onToggleFavorite(channel.id);
+                  }}
+                />
+              ))}
+            </HorizontalRail>
+          </section>
+        ))}
       </div>
 
       {/* Empty state */}

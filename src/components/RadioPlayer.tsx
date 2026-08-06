@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
-import { Play, Pause, Heart, Share2, Menu, Grid3x3, SkipBack, SkipForward } from 'lucide-react';
+import { Play, Pause, Heart, Menu, Grid3x3, SkipBack, SkipForward } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import RadioCard from './RadioCard';
@@ -105,18 +105,6 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
   }, [radios, currentIndex, handlePlayRadio]);
 
   useSwipeGesture(playerRef, { onSwipeLeft: handleNext, onSwipeRight: handlePrev });
-
-  const handleShare = async () => {
-    if (!activeRadioData) return;
-    const url = `${window.location.origin}/radio/${activeRadioData.id}`;
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: activeRadioData.name, url });
-      } else {
-        await navigator.clipboard.writeText(url);
-      }
-    } catch {}
-  };
 
   return (
     <div className="space-y-6 select-none -mx-4">
@@ -247,15 +235,6 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
             aria-label="Next"
           >
             <SkipForward className="h-5 w-5" />
-          </button>
-
-          <button
-            onClick={handleShare}
-            disabled={!activeRadioData}
-            className="h-12 w-12 grid place-items-center rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white hover:bg-white/10 transition-all hover:scale-105 disabled:opacity-40"
-            aria-label="Share"
-          >
-            <Share2 className="h-5 w-5 drop-shadow-[0_0_8px_rgba(0,245,255,0.5)]" />
           </button>
         </div>
       </div>

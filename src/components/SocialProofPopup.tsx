@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Users, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { formatViewers, randomViewers } from '@/lib/media';
 
 const SocialProofPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,8 +16,7 @@ const SocialProofPopup = () => {
 
     // Show popup after 5 seconds
     const timer = setTimeout(() => {
-      // Always ≥ 50k viewers per requirements
-      setViewerCount(50_000 + Math.floor(Math.random() * 35_000));
+      setViewerCount(randomViewers());
       setIsVisible(true);
       localStorage.setItem('socialProofLastShown', today);
     }, 5000);
@@ -60,7 +60,7 @@ const SocialProofPopup = () => {
         </div>
         <div>
           <p className="text-sm font-medium text-foreground">
-            Over <span className="text-primary font-bold">{viewerCount.toLocaleString()}</span> users watched Mr Live today!
+            Over <span className="text-primary font-bold">{formatViewers(viewerCount)}</span> users watched Mr Live today!
           </p>
           <p className="text-xs text-muted-foreground mt-0.5">
             Join the community

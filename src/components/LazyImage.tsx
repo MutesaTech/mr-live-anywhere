@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { DEFAULT_MEDIA_IMAGE } from '@/lib/media';
 
 interface LazyImageProps {
   src: string;
@@ -47,20 +48,10 @@ const LazyImage = ({ src, alt, className, placeholderClassName }: LazyImageProps
         />
       )}
       
-      {/* Error fallback */}
-      {hasError && (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted">
-          <div className="text-center text-muted-foreground">
-            <div className="text-2xl">📺</div>
-            <p className="text-xs mt-1">No image</p>
-          </div>
-        </div>
-      )}
-      
-      {/* Actual image - only load when in view */}
-      {isInView && !hasError && (
+      {/* Actual image - only load when in view. Falls back to the global default artwork. */}
+      {isInView && (
         <img
-          src={src}
+          src={hasError || !src ? DEFAULT_MEDIA_IMAGE : src}
           alt={alt}
           onLoad={handleLoad}
           onError={handleError}
