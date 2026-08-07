@@ -380,7 +380,7 @@ const TvPlayer = ({
       navigator.mediaSession.metadata = new MediaMetadata({
         title: activeChannelData.name,
         artist: activeChannelData.category,
-        album: 'MR LIVE',
+        album: 'Beemo',
         artwork: [{ src: activeChannelData.logo, sizes: '512x512', type: 'image/png' }],
       });
       navigator.mediaSession.setActionHandler('play', () => videoRef.current?.play().catch(() => {}));
