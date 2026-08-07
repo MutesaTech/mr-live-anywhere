@@ -17,8 +17,8 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt', 'logo.png'],
       manifest: {
-        name: 'MR LIVE - TV & Radio Streaming',
-        short_name: 'MR LIVE',
+        name: 'Beemo - Live TV, Radio & Books',
+        short_name: 'Beemo',
         description: 'Watch live TV and listen to radio stations from around the world',
         theme_color: '#7c3aed',
         background_color: '#0a0e17',
