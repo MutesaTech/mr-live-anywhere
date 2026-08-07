@@ -317,6 +317,23 @@ const TvPlayer = ({
     return () => { if (volumeTimerRef.current) window.clearTimeout(volumeTimerRef.current); };
   }, [showVolume, volume, isMuted]);
 
+  // Auto-hide overlay controls after 4s of inactivity during playback
+  const revealControls = useCallback(() => {
+    setControlsVisible(true);
+    if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
+    hideTimerRef.current = window.setTimeout(() => setControlsVisible(false), 4000);
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || isLoading || streamError) {
+      if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
+      setControlsVisible(true);
+      return;
+    }
+    revealControls();
+    return () => { if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current); };
+  }, [isPaused, isLoading, streamError, activeChannel, revealControls]);
+
   // Floating mini-player driven by scroll position (works reliably on mobile + desktop).
   // We measure the natural anchor — sentinel when inline, placeholder when floating —
   // which stays at the player's original position and never flickers.
