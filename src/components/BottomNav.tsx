@@ -1,7 +1,7 @@
-import { Home, Tv, Radio, Star, Settings } from 'lucide-react';
+import { Home, BookOpen, Compass, LifeBuoy } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-type Section = 'home' | 'tv' | 'radio' | 'favorites' | 'settings';
+type Section = 'home' | 'books' | 'explore' | 'support';
 
 interface BottomNavProps {
   activeSection: Section;
@@ -10,10 +10,9 @@ interface BottomNavProps {
 
 const navItems = [
   { id: 'home' as Section, icon: Home, label: 'Home' },
-  { id: 'tv' as Section, icon: Tv, label: 'TV' },
-  { id: 'radio' as Section, icon: Radio, label: 'Radio' },
-  { id: 'favorites' as Section, icon: Star, label: 'Favorites' },
-  { id: 'settings' as Section, icon: Settings, label: 'Settings' },
+  { id: 'books' as Section, icon: BookOpen, label: 'Books' },
+  { id: 'explore' as Section, icon: Compass, label: 'Explore' },
+  { id: 'support' as Section, icon: LifeBuoy, label: 'Support' },
 ];
 
 const BottomNav = ({ activeSection, onSectionChange }: BottomNavProps) => {
@@ -29,8 +28,9 @@ const BottomNav = ({ activeSection, onSectionChange }: BottomNavProps) => {
               key={item.id}
               onClick={() => onSectionChange(item.id)}
               className={cn(
-                "flex flex-col items-center justify-center gap-0.5 w-16 h-full relative ripple",
-                "transition-colors duration-200"
+                "flex flex-col items-center justify-center gap-0.5 w-20 h-full relative ripple rounded-2xl",
+                "transition-colors duration-200",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               )}
             >
               {/* Active glow indicator */}
