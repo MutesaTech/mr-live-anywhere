@@ -18,8 +18,8 @@ const SettingsPage = () => {
   const { toast } = useToast();
   const fileRef = useRef<HTMLInputElement>(null);
   const [profile, setProfile] = useLocalStorage<UserProfile>('userProfile', {
-    username: 'MR LIVE User',
-    email: 'you@mrlive.app',
+    username: 'Beemo User',
+    email: 'you@beemo.app',
     avatar: null,
   });
   const [dataSaver, setDataSaver] = useLocalStorage<'auto' | 'low' | 'standard' | 'high'>('dataSaver', 'auto');
@@ -62,9 +62,9 @@ const SettingsPage = () => {
 
   const handleRate = () => {
     const ua = navigator.userAgent.toLowerCase();
-    let url = 'https://mrlive.app';
-    if (/android/.test(ua)) url = 'https://play.google.com/store/apps/details?id=app.lovable.mrlive';
-    else if (/iphone|ipad|ipod|mac/.test(ua)) url = 'https://apps.apple.com/app/mr-live/id000000000';
+    let url = 'https://beemo.app';
+    if (/android/.test(ua)) url = 'https://play.google.com/store/apps/details?id=app.lovable.beemo';
+    else if (/iphone|ipad|ipod|mac/.test(ua)) url = 'https://apps.apple.com/app/beemo/id000000000';
     window.open(url, '_blank', 'noopener');
   };
 
@@ -241,7 +241,7 @@ const SettingsPage = () => {
 
       {/* Version footer */}
       <div className="text-center text-caption text-muted-foreground py-4">
-        <p className="font-semibold text-foreground/70">MR LIVE v{APP_VERSION}</p>
+        <p className="font-semibold text-foreground/70">Beemo v{APP_VERSION}</p>
         <p>Build {BUILD} • Updated {new Date().toISOString().slice(0, 10)}</p>
       </div>
     </div>

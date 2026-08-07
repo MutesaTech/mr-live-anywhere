@@ -33,7 +33,7 @@ const Header = ({ title, onSearchClick }: HeaderProps) => {
     if (outcome === 'accepted') {
       toast({
         title: "App installed!",
-        description: "MR LIVE has been installed on your device."
+        description: "Beemo has been installed on your device."
       });
     }
     setDeferredPrompt(null);
@@ -49,12 +49,12 @@ const Header = ({ title, onSearchClick }: HeaderProps) => {
             <div className="absolute inset-0 rounded-xl gradient-primary blur-md opacity-60" />
             <img
               src="/logo.png"
-              alt="MR LIVE"
+              alt="Beemo"
               className="relative h-9 w-9 rounded-xl object-contain bg-card p-1"
             />
           </div>
           <span className="font-bold text-lg tracking-tight text-gradient-primary hidden sm:inline">
-            MR LIVE
+            BEEMO
           </span>
         </Link>
 
