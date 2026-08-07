@@ -1,7 +1,7 @@
-import channelPlaceholder from '@/assets/channel-placeholder.jpg';
+import channelPlaceholder from '@/assets/channel-placeholder.jpg.asset.json';
 
 /** Global fallback artwork used whenever a channel/radio image is missing or fails to load. */
-export const DEFAULT_MEDIA_IMAGE = channelPlaceholder;
+export const DEFAULT_MEDIA_IMAGE = channelPlaceholder.url;
 
 const MIN_VIEWERS = 100_000;
 const MAX_VIEWERS = 100_000_000;
