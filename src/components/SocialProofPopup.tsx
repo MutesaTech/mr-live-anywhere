@@ -60,7 +60,7 @@ const SocialProofPopup = () => {
         </div>
         <div>
           <p className="text-sm font-medium text-foreground">
-            Over <span className="text-primary font-bold">{formatViewers(viewerCount)}</span> users watched Beemo today!
+            Over <span className="text-primary font-bold">{formatViewers(viewerCount)}</span> users watched Mr Live today!
           </p>
           <p className="text-xs text-muted-foreground mt-0.5">
             Join the community

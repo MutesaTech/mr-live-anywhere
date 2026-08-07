@@ -40,7 +40,7 @@ const SmartInstallPrompt = () => {
       setDeferredPrompt(null);
       toast({
         title: "App Installed!",
-        description: "Beemo is now on your home screen.",
+        description: "MR LIVE is now on your home screen.",
       });
     };
 
@@ -104,7 +104,7 @@ const SmartInstallPrompt = () => {
           
           <div className="flex items-start gap-3 pr-8">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
-              <img src="/logo.png" alt="Beemo" className="h-8 w-8" />
+              <img src="/logo.png" alt="MR LIVE" className="h-8 w-8" />
             </div>
             <div>
               <h4 className="font-semibold text-body">Add to Home Screen</h4>

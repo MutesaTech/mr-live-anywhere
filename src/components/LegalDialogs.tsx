@@ -24,7 +24,7 @@ const Row = ({ icon, title, subtitle, children }: { icon: ReactNode; title: stri
 
 export const AboutDialog = () => (
   <Row icon={<Info className="h-5 w-5 text-primary" />} title="About" subtitle="App info & release notes">
-    <h3>Beemo</h3>
+    <h3>MR LIVE</h3>
     <p>Premium Live TV & Radio streaming, built for mobile, tablet, desktop, and Smart TVs.</p>
     <p><strong>Developer:</strong> Mutesa Moments</p>
     <h4>Release Notes</h4>
@@ -39,7 +39,7 @@ export const AboutDialog = () => (
 
 export const PrivacyDialog = () => (
   <Row icon={<Shield className="h-5 w-5 text-primary" />} title="Privacy Policy" subtitle="How we handle your data">
-    <p><strong>Data Collection.</strong> Beemo stores your preferences, favorites, watch history, profile, reminders and sleep-timer state only on your device using local storage. No personal data is sent to any server by the app itself.</p>
+    <p><strong>Data Collection.</strong> MR LIVE stores your preferences, favorites, watch history, profile, reminders and sleep-timer state only on your device using local storage. No personal data is sent to any server by the app itself.</p>
     <p><strong>Cookies.</strong> The app uses browser local storage only. We do not place tracking cookies.</p>
     <p><strong>User Information.</strong> Usernames, emails and avatars you enter in Settings stay on your device. You may delete them at any time by clearing app cache.</p>
     <p><strong>Security.</strong> All stream playback uses HTTPS where available. Update your device & browser regularly for best protection.</p>
@@ -49,9 +49,9 @@ export const PrivacyDialog = () => (
 );
 
 export const TermsDialog = () => (
-  <Row icon={<FileText className="h-5 w-5 text-primary" />} title="Terms of Service" subtitle="Rules for using Beemo">
-    <p><strong>User Responsibilities.</strong> You agree to use Beemo for lawful, personal viewing only.</p>
-    <p><strong>Streaming Usage.</strong> All streams belong to their respective broadcasters. Beemo only links to publicly available streams and does not host any content.</p>
+  <Row icon={<FileText className="h-5 w-5 text-primary" />} title="Terms of Service" subtitle="Rules for using MR LIVE">
+    <p><strong>User Responsibilities.</strong> You agree to use MR LIVE for lawful, personal viewing only.</p>
+    <p><strong>Streaming Usage.</strong> All streams belong to their respective broadcasters. MR LIVE only links to publicly available streams and does not host any content.</p>
     <p><strong>Copyright.</strong> Do not record, redistribute, or rebroadcast any stream without permission from the rights holder.</p>
     <p><strong>Acceptable Use.</strong> No scraping, automation, or attempts to disrupt the service or other users.</p>
     <p><strong>Account Terms.</strong> Profile data is stored locally; you are responsible for keeping your device secure.</p>
