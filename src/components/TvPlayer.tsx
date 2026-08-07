@@ -31,8 +31,6 @@ interface TvPlayerProps {
   externalChannel?: string | null;
   onMiniPlayerStateChange?: (isVisible: boolean, isExpanded: boolean) => void;
   initialCategory?: string | null;
-  /** Render only the player (browsing rows live on the Home page). */
-  playerOnly?: boolean;
 }
 const TvPlayer = ({
   channels,
@@ -42,8 +40,7 @@ const TvPlayer = ({
   onPlay,
   externalChannel,
   onMiniPlayerStateChange,
-  initialCategory,
-  playerOnly = false
+  initialCategory
 }: TvPlayerProps) => {
   const [activeChannel, setActiveChannel] = useState<string | null>(lastWatched);
   const [searchQuery, setSearchQuery] = useState('');
@@ -58,9 +55,6 @@ const TvPlayer = ({
   const [volume, setVolume] = useState(80);
   const [isMuted, setIsMuted] = useState(false);
   const [showVolume, setShowVolume] = useState(false);
-  // Auto-hiding overlay controls (linear/live playback)
-  const [controlsVisible, setControlsVisible] = useState(true);
-  const hideTimerRef = useRef<number | null>(null);
   // Floating/draggable mini-player state
   const [floating, setFloating] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -317,23 +311,6 @@ const TvPlayer = ({
     return () => { if (volumeTimerRef.current) window.clearTimeout(volumeTimerRef.current); };
   }, [showVolume, volume, isMuted]);
 
-  // Auto-hide overlay controls after 4s of inactivity during playback
-  const revealControls = useCallback(() => {
-    setControlsVisible(true);
-    if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
-    hideTimerRef.current = window.setTimeout(() => setControlsVisible(false), 4000);
-  }, []);
-
-  useEffect(() => {
-    if (isPaused || isLoading || streamError) {
-      if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current);
-      setControlsVisible(true);
-      return;
-    }
-    revealControls();
-    return () => { if (hideTimerRef.current) window.clearTimeout(hideTimerRef.current); };
-  }, [isPaused, isLoading, streamError, activeChannel, revealControls]);
-
   // Floating mini-player driven by scroll position (works reliably on mobile + desktop).
   // We measure the natural anchor — sentinel when inline, placeholder when floating —
   // which stays at the player's original position and never flickers.
@@ -380,7 +357,7 @@ const TvPlayer = ({
       navigator.mediaSession.metadata = new MediaMetadata({
         title: activeChannelData.name,
         artist: activeChannelData.category,
-        album: 'Beemo',
+        album: 'MR LIVE',
         artwork: [{ src: activeChannelData.logo, sizes: '512x512', type: 'image/png' }],
       });
       navigator.mediaSession.setActionHandler('play', () => videoRef.current?.play().catch(() => {}));
@@ -450,18 +427,13 @@ const TvPlayer = ({
             : "relative bg-card border-border/50",
         )}>
           {/* Video Container */}
-          <div
-            className="relative aspect-video bg-black group/player"
-            onPointerMove={revealControls}
-            onPointerDown={revealControls}
-            onFocusCapture={revealControls}
-          >
+          <div className="relative aspect-video bg-black">
             <video
               ref={videoRef}
               className="h-full w-full"
               playsInline
               autoPlay
-              onClick={() => { revealControls(); togglePlayPause(); }}
+              onClick={togglePlayPause}
             />
             
             {/* Stream Loader */}
@@ -475,87 +447,64 @@ const TvPlayer = ({
             {/* Error Handler */}
             <StreamErrorHandler error={streamError} isOffline={!isOnline} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
             
-            {/* Top overlay — dark gradient backdrop keeps broadcast graphics readable */}
-            <div
-              className={cn(
-                "absolute top-0 left-0 right-0 px-3 pt-3 pb-8 flex items-start justify-end",
-                "bg-gradient-to-b from-black/70 via-black/25 to-transparent pointer-events-none",
-                "transition-opacity duration-300",
-                controlsVisible ? "opacity-100" : "opacity-0"
-              )}
-            >
+            {/* Overlay controls */}
+            <div className="absolute top-4 left-4 right-4 flex items-start justify-between pointer-events-none">
+              <div className="badge-live pointer-events-auto">
+                <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse-dot" />
+                LIVE
+              </div>
+              
               <div className="flex gap-2 pointer-events-auto">
-                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black" onClick={handlePip} title="Picture in picture">
+                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handlePip} title="Picture in picture">
                   <PictureInPicture2 className="h-4 w-4" />
                 </Button>
-                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black" onClick={handleClosePlayer} title="Close">
+                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handleClosePlayer} title="Close">
                   <X className="h-4 w-4" />
                 </Button>
               </div>
             </div>
 
-            {/* Bottom control bar — linear broadcast: no scrubber, no duration counter */}
-            <div
-              className={cn(
-                "absolute bottom-0 left-0 right-0 px-3 pt-10 pb-2 grid grid-cols-3 items-center",
-                "bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none",
-                "transition-opacity duration-300",
-                controlsVisible ? "opacity-100" : "opacity-0"
-              )}
-            >
-              {/* Left — Play / Pause */}
-              <div className="flex justify-start">
-                <Button
-                  data-no-drag
-                  variant="ghost"
-                  size="icon"
-                  className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                  onClick={togglePlayPause}
-                  title={isPaused ? 'Play' : 'Pause'}
-                >
-                  {isPaused ? <Play className="h-5 w-5 ml-0.5" /> : <Pause className="h-5 w-5" />}
+            {/* Bottom custom controls — Play/Pause, Volume (collapsible), Fullscreen, Expand/Collapse */}
+            <div className="absolute bottom-0 left-0 right-0 px-3 py-2 flex items-center gap-2 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none">
+              <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto" onClick={togglePlayPause} title={isPaused ? 'Play' : 'Pause'}>
+                {isPaused ? <Play className="h-5 w-5 ml-0.5" /> : <Pause className="h-5 w-5" />}
+              </Button>
+
+              {/* Collapsible volume */}
+              <div className="flex items-center pointer-events-auto">
+                <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={() => setShowVolume(v => !v)} title="Volume">
+                  {isMuted || volume === 0 ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
                 </Button>
-              </div>
-
-              {/* Center — LIVE status indicator */}
-              <div className="flex justify-center">
-                <div className="badge-live pointer-events-auto bg-black/50 backdrop-blur-sm">
-                  <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse-dot" />
-                  LIVE
-                </div>
-              </div>
-
-              {/* Right — Volume / Mute + Fullscreen */}
-              <div className="flex items-center justify-end pointer-events-auto">
                 <div
                   data-no-drag
                   className={cn(
                     "overflow-hidden transition-[width,opacity,margin] duration-300 ease-out",
-                    showVolume ? "w-20 sm:w-28 opacity-100 mr-2" : "w-0 opacity-0 mr-0"
+                    showVolume ? "w-24 sm:w-32 opacity-100 ml-2" : "w-0 opacity-0 ml-0"
                   )}
                 >
                   <Slider
                     value={[isMuted ? 0 : volume]}
-                    onValueChange={(v) => { setVolume(v[0]); setIsMuted(v[0] === 0); revealControls(); }}
+                    onValueChange={(v) => { setVolume(v[0]); setIsMuted(v[0] === 0); }}
                     max={100}
                     step={1}
                     className="cursor-pointer"
                   />
                 </div>
-                <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black" onClick={() => setShowVolume(v => !v)} title="Volume">
-                  {isMuted || volume === 0 ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
-                </Button>
-                <Button
-                  data-no-drag
-                  variant="ghost"
-                  size="icon"
-                  className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white ml-1 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                  onClick={handleFullscreen}
-                  title="Fullscreen"
-                >
-                  <Maximize2 className="h-5 w-5" />
-                </Button>
               </div>
+
+              <div className="flex-1" />
+
+              {/* Fullscreen button — always available */}
+              <Button
+                data-no-drag
+                variant="ghost"
+                size="icon"
+                className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto"
+                onClick={handleFullscreen}
+                title="Fullscreen"
+              >
+                <Maximize2 className="h-5 w-5" />
+              </Button>
             </div>
 
             {/* Drag handle when floating */}
@@ -612,7 +561,7 @@ const TvPlayer = ({
       )}
 
       {/* Quick-switch horizontal rail — instant channel switching without scroll-jump */}
-      {!playerOnly && activeChannel && filteredChannels.length > 1 && (
+      {activeChannel && filteredChannels.length > 1 && (
         <HorizontalRail
           title="Up Next"
           itemWidthClass="w-[160px] sm:w-[180px] md:w-[200px]"
@@ -639,15 +588,13 @@ const TvPlayer = ({
       )}
 
       {/* Search & Categories */}
-      {!playerOnly && (
-        <div className="space-y-4">
-          <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="Search channels..." />
-          <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
-        </div>
-      )}
+      <div className="space-y-4">
+        <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="Search channels..." />
+        <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+      </div>
 
       {/* Channels — one clearly separated horizontal row per category */}
-      <div className={cn("space-y-10", playerOnly && "hidden")}>
+      <div className="space-y-10">
         {channelsByCategory.map(group => (
           <section key={group.category} className="border-t border-border/40 pt-6 first:border-t-0 first:pt-0">
             <HorizontalRail
@@ -678,7 +625,7 @@ const TvPlayer = ({
       </div>
 
       {/* Empty state */}
-      {!playerOnly && filteredChannels.length === 0 && <div className="flex flex-col items-center justify-center py-16 text-center">
+      {filteredChannels.length === 0 && <div className="flex flex-col items-center justify-center py-16 text-center">
           <p className="text-muted-foreground">No channels found</p>
         </div>}
     </div>;
