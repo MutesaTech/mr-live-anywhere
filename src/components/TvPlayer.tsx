@@ -31,6 +31,8 @@ interface TvPlayerProps {
   externalChannel?: string | null;
   onMiniPlayerStateChange?: (isVisible: boolean, isExpanded: boolean) => void;
   initialCategory?: string | null;
+  /** Render only the player (browsing rows live on the Home page). */
+  playerOnly?: boolean;
 }
 const TvPlayer = ({
   channels,
@@ -40,7 +42,8 @@ const TvPlayer = ({
   onPlay,
   externalChannel,
   onMiniPlayerStateChange,
-  initialCategory
+  initialCategory,
+  playerOnly = false
 }: TvPlayerProps) => {
   const [activeChannel, setActiveChannel] = useState<string | null>(lastWatched);
   const [searchQuery, setSearchQuery] = useState('');
@@ -55,6 +58,9 @@ const TvPlayer = ({
   const [volume, setVolume] = useState(80);
   const [isMuted, setIsMuted] = useState(false);
   const [showVolume, setShowVolume] = useState(false);
+  // Auto-hiding overlay controls (linear/live playback)
+  const [controlsVisible, setControlsVisible] = useState(true);
+  const hideTimerRef = useRef<number | null>(null);
   // Floating/draggable mini-player state
   const [floating, setFloating] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
