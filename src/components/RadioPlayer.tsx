@@ -23,11 +23,14 @@ interface RadioPlayerProps {
   onToggleFavorite: (id: string) => void;
   lastPlayed: string | null;
   onPlay: (id: string) => void;
+  externalRadio?: string | null;
+  /** Render only the player — station browsing lives on the Home page. */
+  playerOnly?: boolean;
 }
 
 const EQ_BARS = 28;
 
-const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }: RadioPlayerProps) => {
+const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay, externalRadio, playerOnly = false }: RadioPlayerProps) => {
   const [activeRadio, setActiveRadio] = useState<string | null>(lastPlayed);
   const [isPlaying, setIsPlaying] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -85,7 +88,7 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
       navigator.mediaSession.metadata = new MediaMetadata({
         title: activeRadioData.name,
         artist: activeRadioData.category,
-        album: 'MR LIVE Radio',
+        album: 'Beemo Radio',
         artwork: [{ src: activeRadioData.logo, sizes: '512x512', type: 'image/png' }],
       });
       navigator.mediaSession.setActionHandler('play', () => audioRef.current?.play().catch(() => {}));
@@ -106,8 +109,16 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
 
   useSwipeGesture(playerRef, { onSwipeLeft: handleNext, onSwipeRight: handlePrev });
 
+  // React to a station picked elsewhere (Home page / deep link)
+  useEffect(() => {
+    if (externalRadio && externalRadio !== activeRadio) {
+      handlePlayRadio(externalRadio);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [externalRadio]);
+
   return (
-    <div className="space-y-6 select-none -mx-4">
+    <div className={cn('select-none -mx-4', playerOnly ? 'space-y-0' : 'space-y-6')}>
       <audio ref={audioRef} />
 
       {/* ===== Premium Futuristic Player ===== */}
@@ -240,13 +251,15 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
       </div>
 
       {/* Search & categories */}
-      <div className="px-4 space-y-4">
-        <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="Search radio stations..." />
-        <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
-      </div>
+      {!playerOnly && (
+        <div className="px-4 space-y-4">
+          <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="Search radio stations..." />
+          <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+        </div>
+      )}
 
       {/* Station list */}
-      <div className="px-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className={cn('px-4 grid grid-cols-1 sm:grid-cols-2 gap-3', playerOnly && 'hidden')}>
         {filteredRadios.map((radio) => (
           <div key={radio.id} className={cn(
             'rounded-xl border transition-all duration-150',
@@ -267,7 +280,7 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
         ))}
       </div>
 
-      {filteredRadios.length === 0 && (
+      {!playerOnly && filteredRadios.length === 0 && (
         <div className="mx-4 border border-dashed border-border rounded-xl py-12 text-center">
           <p className="text-sm text-muted-foreground">No radio stations found</p>
         </div>

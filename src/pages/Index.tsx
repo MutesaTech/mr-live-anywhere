@@ -5,12 +5,12 @@ import BottomNav from '@/components/BottomNav';
 import HomePage from '@/components/HomePage';
 import TvPlayer from '@/components/TvPlayer';
 import RadioPlayer from '@/components/RadioPlayer';
-import Favorites from '@/components/Favorites';
-import SettingsPage from '@/components/SettingsPage';
+import BooksPage from '@/components/BooksPage';
+import ExplorePage from '@/components/ExplorePage';
+import SupportPage from '@/components/SupportPage';
 import SmartInstallPrompt from '@/components/SmartInstallPrompt';
 import OfflineIndicator from '@/components/OfflineIndicator';
 import LowBandwidthToast from '@/components/LowBandwidthToast';
-import OfflineFallback from '@/components/OfflineFallback';
 import SocialProofPopup from '@/components/SocialProofPopup';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
@@ -19,14 +19,13 @@ import { useAutoResume } from '@/hooks/useAutoResume';
 import channelsData from '@/data/channels.json';
 import radiosData from '@/data/radios.json';
 
-type Section = 'home' | 'tv' | 'radio' | 'favorites' | 'settings';
+type Section = 'home' | 'books' | 'explore' | 'support';
 
 const sectionTitles: Record<Section, string> = {
-  home: 'MR LIVE',
-  tv: 'Live TV',
-  radio: 'Radio',
-  favorites: 'Favorites',
-  settings: 'Settings',
+  home: 'Beemo',
+  books: 'Books',
+  explore: 'Explore',
+  support: 'Help & Support',
 };
 
 const Index = () => {
@@ -38,7 +37,10 @@ const Index = () => {
   const [lastWatchedTv, setLastWatchedTv] = useLocalStorage<string | null>('lastWatchedTv', null);
   const [lastPlayedRadio, setLastPlayedRadio] = useLocalStorage<string | null>('lastPlayedRadio', null);
   const [externalChannelId, setExternalChannelId] = useState<string | null>(null);
-  const [tvCategoryFilter, setTvCategoryFilter] = useState<string | null>(null);
+  const [externalRadioId, setExternalRadioId] = useState<string | null>(null);
+  const [homeSearch, setHomeSearch] = useState('');
+  const [homeFilter, setHomeFilter] = useState<'all' | 'tv' | 'radio'>('all');
+  const [homeKey, setHomeKey] = useState(0);
   const { isOnline } = useNetworkStatus();
   const { shouldReduceAnimations } = useLowBandwidthMode();
   const { saveResumeState, getResumeState } = useAutoResume();
@@ -47,11 +49,11 @@ const Index = () => {
   useEffect(() => {
     const resume = getResumeState();
     if (resume && resume.channelId) {
+      setActiveSection('home');
       if (resume.type === 'tv') {
         setExternalChannelId(resume.channelId);
-        setActiveSection('tv');
       } else {
-        setActiveSection('radio');
+        setExternalRadioId(resume.channelId);
       }
     }
   }, []);
@@ -65,7 +67,7 @@ const Index = () => {
         const exists = channelsData.find((c) => c.id === id);
         if (exists) {
           setExternalChannelId(id);
-          setActiveSection('tv');
+          setActiveSection('home');
           setLastWatchedTv(id);
           saveResumeState(id, 'tv');
         }
@@ -75,15 +77,19 @@ const Index = () => {
       if (id) {
         const exists = radiosData.find((r) => r.id === id);
         if (exists) {
-          setActiveSection('radio');
+          setExternalRadioId(id);
+          setActiveSection('home');
           setLastPlayedRadio(id);
           saveResumeState(id, 'radio');
         }
       }
     } else if (path.startsWith('/category/')) {
       const slug = (params.slug || '').toLowerCase();
-      if (slug) setTvCategoryFilter(slug);
-      setActiveSection('tv');
+      if (slug) {
+        setHomeSearch(slug);
+        setHomeKey((k) => k + 1);
+      }
+      setActiveSection('home');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname, params.id, params.slug]);
@@ -106,39 +112,28 @@ const Index = () => {
     );
   };
 
-  const favoriteChannels = channelsData.filter(channel => favoriteTvIds.includes(channel.id));
-  const favoriteRadios = radiosData.filter(radio => favoriteRadioIds.includes(radio.id));
-
   const handleSelectChannel = (id: string) => {
     setExternalChannelId(id);
-    setActiveSection('tv');
+    setActiveSection('home');
     setLastWatchedTv(id);
     saveResumeState(id, 'tv');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectRadio = (id: string) => {
-    setActiveSection('radio');
+    setExternalRadioId(id);
+    setActiveSection('home');
     setLastPlayedRadio(id);
     saveResumeState(id, 'radio');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleQuickSelect = (target: { type: 'section' | 'category'; value: string }) => {
-    if (target.type === 'section') {
-      setActiveSection(target.value as Section);
-      setTvCategoryFilter(null);
-    } else {
-      setTvCategoryFilter(target.value);
-      setActiveSection('tv');
-    }
+  const handleExploreCategory = (category: string, kind: 'tv' | 'radio') => {
+    setHomeSearch(category);
+    setHomeFilter(kind);
+    setHomeKey((k) => k + 1);
+    setActiveSection('home');
   };
-
-
-  // Clear external channel after navigation
-  useEffect(() => {
-    if (activeSection !== 'tv') {
-      setExternalChannelId(null);
-    }
-  }, [activeSection]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -151,60 +146,67 @@ const Index = () => {
       
       {/* Main Content */}
       <main className="container px-4 pt-18 pb-24">
-        {activeSection === 'home' && (
+        {/* Players stay mounted so playback survives tab switches */}
+        <div className={activeSection === 'home' ? 'space-y-6' : 'hidden'}>
+          {externalChannelId && (
+            <TvPlayer
+              playerOnly
+              channels={channelsData}
+              favorites={favoriteTvIds}
+              onToggleFavorite={toggleFavoriteTv}
+              lastWatched={lastWatchedTv}
+              onPlay={setLastWatchedTv}
+              externalChannel={externalChannelId}
+            />
+          )}
+
+          {externalRadioId && (
+            <RadioPlayer
+              playerOnly
+              radios={radiosData}
+              favorites={favoriteRadioIds}
+              onToggleFavorite={toggleFavoriteRadio}
+              lastPlayed={lastPlayedRadio}
+              externalRadio={externalRadioId}
+              onPlay={setLastPlayedRadio}
+            />
+          )}
+
           <HomePage
+            key={homeKey}
             channels={channelsData}
             radios={radiosData}
             favoriteTvIds={favoriteTvIds}
             favoriteRadioIds={favoriteRadioIds}
             lastWatchedTv={lastWatchedTv}
+            lastPlayedRadio={lastPlayedRadio}
+            activeChannelId={externalChannelId}
+            activeRadioId={externalRadioId}
             onSelectChannel={handleSelectChannel}
             onSelectRadio={handleSelectRadio}
             onToggleFavoriteTv={toggleFavoriteTv}
             onToggleFavoriteRadio={toggleFavoriteRadio}
-            onQuickSelect={handleQuickSelect}
+            reducedAnimations={shouldReduceAnimations}
+            initialSearch={homeSearch}
+            initialFilter={homeFilter}
           />
-        )}
+        </div>
 
-        {activeSection === 'tv' && (
-          <TvPlayer
+        {activeSection === 'books' && <BooksPage />}
+
+        {activeSection === 'explore' && (
+          <ExplorePage
             channels={channelsData}
-            favorites={favoriteTvIds}
-            onToggleFavorite={toggleFavoriteTv}
-            lastWatched={lastWatchedTv}
-            onPlay={setLastWatchedTv}
-            externalChannel={externalChannelId}
-            initialCategory={tvCategoryFilter}
-          />
-        )}
-        
-        {activeSection === 'radio' && (
-          <RadioPlayer
             radios={radiosData}
-            favorites={favoriteRadioIds}
-            onToggleFavorite={toggleFavoriteRadio}
-            lastPlayed={lastPlayedRadio}
-            onPlay={setLastPlayedRadio}
-          />
-        )}
-        
-        {activeSection === 'favorites' && (
-          <Favorites
-            favoriteChannels={favoriteChannels}
-            favoriteRadios={favoriteRadios}
-            onSelectChannel={handleSelectChannel}
-            onSelectRadio={handleSelectRadio}
+            onSelectCategory={handleExploreCategory}
+            onOpenBooks={() => setActiveSection('books')}
           />
         )}
 
-        {activeSection === 'settings' && (
-          <SettingsPage />
-        )}
+        {activeSection === 'support' && <SupportPage />}
       </main>
 
       <BottomNav activeSection={activeSection} onSectionChange={setActiveSection} />
-      <OfflineIndicator />
-      <LowBandwidthToast />
       <SocialProofPopup />
     </div>
   );
