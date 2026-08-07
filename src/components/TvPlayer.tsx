@@ -450,13 +450,18 @@ const TvPlayer = ({
             : "relative bg-card border-border/50",
         )}>
           {/* Video Container */}
-          <div className="relative aspect-video bg-black">
+          <div
+            className="relative aspect-video bg-black group/player"
+            onPointerMove={revealControls}
+            onPointerDown={revealControls}
+            onFocusCapture={revealControls}
+          >
             <video
               ref={videoRef}
               className="h-full w-full"
               playsInline
               autoPlay
-              onClick={togglePlayPause}
+              onClick={() => { revealControls(); togglePlayPause(); }}
             />
             
             {/* Stream Loader */}
@@ -470,64 +475,87 @@ const TvPlayer = ({
             {/* Error Handler */}
             <StreamErrorHandler error={streamError} isOffline={!isOnline} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
             
-            {/* Overlay controls */}
-            <div className="absolute top-4 left-4 right-4 flex items-start justify-between pointer-events-none">
-              <div className="badge-live pointer-events-auto">
-                <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse-dot" />
-                LIVE
-              </div>
-              
+            {/* Top overlay — dark gradient backdrop keeps broadcast graphics readable */}
+            <div
+              className={cn(
+                "absolute top-0 left-0 right-0 px-3 pt-3 pb-8 flex items-start justify-end",
+                "bg-gradient-to-b from-black/70 via-black/25 to-transparent pointer-events-none",
+                "transition-opacity duration-300",
+                controlsVisible ? "opacity-100" : "opacity-0"
+              )}
+            >
               <div className="flex gap-2 pointer-events-auto">
-                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handlePip} title="Picture in picture">
+                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black" onClick={handlePip} title="Picture in picture">
                   <PictureInPicture2 className="h-4 w-4" />
                 </Button>
-                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handleClosePlayer} title="Close">
+                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black" onClick={handleClosePlayer} title="Close">
                   <X className="h-4 w-4" />
                 </Button>
               </div>
             </div>
 
-            {/* Bottom custom controls — Play/Pause, Volume (collapsible), Fullscreen, Expand/Collapse */}
-            <div className="absolute bottom-0 left-0 right-0 px-3 py-2 flex items-center gap-2 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none">
-              <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto" onClick={togglePlayPause} title={isPaused ? 'Play' : 'Pause'}>
-                {isPaused ? <Play className="h-5 w-5 ml-0.5" /> : <Pause className="h-5 w-5" />}
-              </Button>
-
-              {/* Collapsible volume */}
-              <div className="flex items-center pointer-events-auto">
-                <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={() => setShowVolume(v => !v)} title="Volume">
-                  {isMuted || volume === 0 ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+            {/* Bottom control bar — linear broadcast: no scrubber, no duration counter */}
+            <div
+              className={cn(
+                "absolute bottom-0 left-0 right-0 px-3 pt-10 pb-2 grid grid-cols-3 items-center",
+                "bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none",
+                "transition-opacity duration-300",
+                controlsVisible ? "opacity-100" : "opacity-0"
+              )}
+            >
+              {/* Left — Play / Pause */}
+              <div className="flex justify-start">
+                <Button
+                  data-no-drag
+                  variant="ghost"
+                  size="icon"
+                  className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  onClick={togglePlayPause}
+                  title={isPaused ? 'Play' : 'Pause'}
+                >
+                  {isPaused ? <Play className="h-5 w-5 ml-0.5" /> : <Pause className="h-5 w-5" />}
                 </Button>
+              </div>
+
+              {/* Center — LIVE status indicator */}
+              <div className="flex justify-center">
+                <div className="badge-live pointer-events-auto bg-black/50 backdrop-blur-sm">
+                  <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse-dot" />
+                  LIVE
+                </div>
+              </div>
+
+              {/* Right — Volume / Mute + Fullscreen */}
+              <div className="flex items-center justify-end pointer-events-auto">
                 <div
                   data-no-drag
                   className={cn(
                     "overflow-hidden transition-[width,opacity,margin] duration-300 ease-out",
-                    showVolume ? "w-24 sm:w-32 opacity-100 ml-2" : "w-0 opacity-0 ml-0"
+                    showVolume ? "w-20 sm:w-28 opacity-100 mr-2" : "w-0 opacity-0 mr-0"
                   )}
                 >
                   <Slider
                     value={[isMuted ? 0 : volume]}
-                    onValueChange={(v) => { setVolume(v[0]); setIsMuted(v[0] === 0); }}
+                    onValueChange={(v) => { setVolume(v[0]); setIsMuted(v[0] === 0); revealControls(); }}
                     max={100}
                     step={1}
                     className="cursor-pointer"
                   />
                 </div>
+                <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black" onClick={() => setShowVolume(v => !v)} title="Volume">
+                  {isMuted || volume === 0 ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                </Button>
+                <Button
+                  data-no-drag
+                  variant="ghost"
+                  size="icon"
+                  className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white ml-1 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                  onClick={handleFullscreen}
+                  title="Fullscreen"
+                >
+                  <Maximize2 className="h-5 w-5" />
+                </Button>
               </div>
-
-              <div className="flex-1" />
-
-              {/* Fullscreen button — always available */}
-              <Button
-                data-no-drag
-                variant="ghost"
-                size="icon"
-                className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto"
-                onClick={handleFullscreen}
-                title="Fullscreen"
-              >
-                <Maximize2 className="h-5 w-5" />
-              </Button>
             </div>
 
             {/* Drag handle when floating */}
