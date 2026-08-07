@@ -612,7 +612,7 @@ const TvPlayer = ({
       )}
 
       {/* Quick-switch horizontal rail — instant channel switching without scroll-jump */}
-      {activeChannel && filteredChannels.length > 1 && (
+      {!playerOnly && activeChannel && filteredChannels.length > 1 && (
         <HorizontalRail
           title="Up Next"
           itemWidthClass="w-[160px] sm:w-[180px] md:w-[200px]"
@@ -639,13 +639,15 @@ const TvPlayer = ({
       )}
 
       {/* Search & Categories */}
-      <div className="space-y-4">
-        <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="Search channels..." />
-        <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
-      </div>
+      {!playerOnly && (
+        <div className="space-y-4">
+          <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="Search channels..." />
+          <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+        </div>
+      )}
 
       {/* Channels — one clearly separated horizontal row per category */}
-      <div className="space-y-10">
+      <div className={cn("space-y-10", playerOnly && "hidden")}>
         {channelsByCategory.map(group => (
           <section key={group.category} className="border-t border-border/40 pt-6 first:border-t-0 first:pt-0">
             <HorizontalRail
@@ -676,7 +678,7 @@ const TvPlayer = ({
       </div>
 
       {/* Empty state */}
-      {filteredChannels.length === 0 && <div className="flex flex-col items-center justify-center py-16 text-center">
+      {!playerOnly && filteredChannels.length === 0 && <div className="flex flex-col items-center justify-center py-16 text-center">
           <p className="text-muted-foreground">No channels found</p>
         </div>}
     </div>;
