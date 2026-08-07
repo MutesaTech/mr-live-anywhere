@@ -32,6 +32,8 @@ interface HomePageProps {
   onToggleFavoriteTv: (id: string) => void;
   onToggleFavoriteRadio: (id: string) => void;
   reducedAnimations?: boolean;
+  initialSearch?: string;
+  initialFilter?: Filter;
 }
 
 const CHANNEL_WIDTH = 'w-[180px] sm:w-[220px] md:w-[240px]';
@@ -59,10 +61,12 @@ const HomePage = ({
   onToggleFavoriteTv,
   onToggleFavoriteRadio,
   reducedAnimations = false,
+  initialSearch = '',
+  initialFilter = 'all',
 }: HomePageProps) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filter, setFilter] = useState<Filter>('all');
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const [filter, setFilter] = useState<Filter>(initialFilter);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 300);
