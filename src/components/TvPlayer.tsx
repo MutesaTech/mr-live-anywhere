@@ -14,13 +14,18 @@ import HorizontalRail from './HorizontalRail';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { useSwipeGesture } from '@/hooks/useSwipeGesture';
 import { formatViewers, clampViewers, randomViewers } from '@/lib/media';
+import { streamCandidates, type Channel as CatalogChannel } from '@/lib/channelCatalog';
+import { markStreamBroken, clearBrokenStream } from '@/lib/brokenStreams';
 interface Channel {
   id: string;
   name: string;
   logo: string;
   stream: string;
+  streams?: { url: string; quality?: string; label?: string | null; requiresHeaders?: boolean }[];
   category: string;
   language: string;
+  country?: string;
+  source?: string;
 }
 interface TvPlayerProps {
   channels: Channel[];
@@ -48,6 +53,7 @@ const TvPlayer = ({
   const [viewerCounts, setViewerCounts] = useState<Record<string, number>>({});
   const [isLoading, setIsLoading] = useState(false);
   const [streamError, setStreamError] = useState<string | null>(null);
+  const [unavailable, setUnavailable] = useState(false);
   const [isPlayerExpanded, setIsPlayerExpanded] = useState(true);
   const [stickyPlayer, setStickyPlayer] = useState(false);
   // Custom playback controls state
@@ -68,6 +74,9 @@ const TvPlayer = ({
   const playerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const volumeTimerRef = useRef<number | null>(null);
+  // Multi-stream fallback bookkeeping
+  const candidatesRef = useRef<string[]>([]);
+  const candidateIndexRef = useRef(0);
   const {
     isSlowConnection,
     isOnline
