@@ -883,7 +883,7 @@
     "id": "011",
     "name": "AZTV",
     "logo": "https://i.imgur.com/AHaXlCh.png",
-    "stream": "http://animezonetv.net/hls/stream.m3u8",
+    "stream": "https://livesg1.rtva.hiway.media/11a6d6f4-ee13-47c7-9c27-7313cf5424e2/manifest.m3u8",
     "category": "kids",
     "language": "English"
   }
