@@ -1,0 +1,5 @@
+{
+  "_comment": "Known-broken or intentionally excluded stream URLs / channel ids. Maintained manually + by the stream health check in scripts/build-iptv-channels.mjs. Streams are only indexed here; MR LIVE does not host, rehost or transcode any content.",
+  "urls": [],
+  "channels": []
+}
