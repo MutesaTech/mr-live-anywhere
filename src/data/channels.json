@@ -878,7 +878,16 @@
     "stream": "https://hls-live-media-gc.cdn01.net/mpegts/232076_2222904/BBuYldqUDAi4aMAXJfiRCQ/1786579200/media_mpegts_2.m3u8?via=direct&source=smarttv",
     "category": "Evangelical",
     "language": "English"
+  },
+  {
+    "id": "011",
+    "name": "AZTV",
+    "logo": "https://i.imgur.com/AHaXlCh.png",
+    "stream": "http://animezonetv.net/hls/stream.m3u8",
+    "category": "kids",
+    "language": "English"
   }
+  
   
   
 
