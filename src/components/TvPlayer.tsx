@@ -152,11 +152,27 @@ const TvPlayer = ({
     return () => clearInterval(interval);
   }, [channels]);
 
-  // Load stream with error handling
-  const loadStream = useCallback((channel: Channel) => {
-    if (!videoRef.current) return;
+  // Load one stream URL. On fatal failure we mark it broken and try the next feed.
+  const loadStreamUrl = useCallback((url: string) => {
+    if (!videoRef.current || !url) return;
     setIsLoading(true);
     setStreamError(null);
+    setUnavailable(false);
+
+    const failOver = (detail: string) => {
+      markStreamBroken(url);
+      const next = candidatesRef.current[candidateIndexRef.current + 1];
+      if (next) {
+        candidateIndexRef.current += 1;
+        // Never retry the same dead URL — move straight to the next feed.
+        loadStreamUrl(next);
+      } else {
+        setIsLoading(false);
+        setUnavailable(true);
+        setStreamError(detail);
+      }
+    };
+
     if (Hls.isSupported()) {
       if (hlsRef.current) {
         hlsRef.current.destroy();
@@ -167,30 +183,32 @@ const TvPlayer = ({
         maxBufferLength: isSlowConnection ? 15 : 30,
         maxMaxBufferLength: isSlowConnection ? 30 : 600
       });
-      hls.loadSource(channel.stream);
+      hls.loadSource(url);
       hls.attachMedia(videoRef.current);
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         setIsLoading(false);
+        clearBrokenStream(url);
         videoRef.current?.play().catch(() => {
           console.log('Autoplay prevented');
         });
       });
       hls.on(Hls.Events.ERROR, (_, data) => {
         if (data.fatal) {
-          setIsLoading(false);
-          setStreamError(data.details);
+          hls.destroy();
+          if (hlsRef.current === hls) hlsRef.current = null;
+          failOver(data.details);
         }
       });
       hlsRef.current = hls;
     } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-      videoRef.current.src = channel.stream;
-      videoRef.current.addEventListener('loadeddata', () => setIsLoading(false), {
+      videoRef.current.src = url;
+      videoRef.current.addEventListener('loadeddata', () => {
+        setIsLoading(false);
+        clearBrokenStream(url);
+      }, {
         once: true
       });
-      videoRef.current.addEventListener('error', () => {
-        setIsLoading(false);
-        setStreamError('Stream playback error');
-      }, {
+      videoRef.current.addEventListener('error', () => failOver('Stream playback error'), {
         once: true
       });
       videoRef.current.play().catch(() => {
@@ -198,6 +216,13 @@ const TvPlayer = ({
       });
     }
   }, [isSlowConnection]);
+
+  // Start a channel from its best candidate feed.
+  const loadStream = useCallback((channel: Channel) => {
+    candidatesRef.current = streamCandidates(channel as CatalogChannel);
+    candidateIndexRef.current = 0;
+    loadStreamUrl(candidatesRef.current[0]);
+  }, [loadStreamUrl]);
   useEffect(() => {
     if (activeChannel) {
       const channel = channels.find(c => c.id === activeChannel);
