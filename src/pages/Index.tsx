@@ -16,7 +16,7 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { useLowBandwidthMode } from '@/hooks/useLowBandwidthMode';
 import { useAutoResume } from '@/hooks/useAutoResume';
-import channelsData from '@/data/channels.json';
+import { allChannels as channelsData } from '@/lib/channelCatalog';
 import radiosData from '@/data/radios.json';
 
 type Section = 'home' | 'tv' | 'radio' | 'favorites' | 'settings';

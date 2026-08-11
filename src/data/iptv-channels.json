@@ -1,0 +1,969 @@
+{
+  "generatedAt": "2026-08-11T12:37:50.544Z",
+  "source": "https://github.com/iptv-org/api",
+  "notice": "Stream URLs are indexed from the public iptv-org project. Availability is not guaranteed and may be geo-restricted.",
+  "testRegion": "sandbox-us",
+  "countries": [
+    "RW",
+    "UG",
+    "KE",
+    "TZ"
+  ],
+  "channels": [
+    {
+      "id": "iptv-BTNTV.rw",
+      "name": "BTN TV",
+      "logo": "https://i.imgur.com/WmaP8zP.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "RW",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://tv.btnrwanda.com:3973/live/btnv2live.m3u8",
+      "streams": [
+        {
+          "url": "https://tv.btnrwanda.com:3973/live/btnv2live.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-IsangoTV.rw",
+      "name": "Isango TV",
+      "logo": "https://i.imgur.com/EfsHaMQ.png",
+      "category": "music",
+      "language": "unknown",
+      "country": "RW",
+      "categories": [
+        "music"
+      ],
+      "source": "iptv-org",
+      "stream": "http://80.241.215.175:1935/isangostar/isangostar/playlist.m3u8",
+      "streams": [
+        {
+          "url": "http://80.241.215.175:1935/isangostar/isangostar/playlist.m3u8",
+          "quality": "SD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-IsiboTV.rw",
+      "name": "Isibo TV",
+      "logo": "https://i.imgur.com/bXhEeTC.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "RW",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://5c46fa289c89f.streamlock.net/pub2live/myStream/playlist.m3u8",
+      "streams": [
+        {
+          "url": "https://5c46fa289c89f.streamlock.net/pub2live/myStream/playlist.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-KC2.rw",
+      "name": "KC2",
+      "logo": "https://i.imgur.com/PsYPzNc.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "RW",
+      "categories": [
+        "entertainment"
+      ],
+      "source": "iptv-org",
+      "stream": "http://197.243.19.131:1935/kc2/kc2/chunklist.m3u8",
+      "streams": [
+        {
+          "url": "http://197.243.19.131:1935/kc2/kc2/chunklist.m3u8",
+          "quality": "HD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        },
+        {
+          "url": "https://5c46fa289c89f.streamlock.net/kc2/kc2/chunklist.m3u8",
+          "quality": "HD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-RwandaTV.rw",
+      "name": "Rwanda TV",
+      "logo": "https://i.imgur.com/4nbGvxW.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "RW",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "http://197.243.19.131:1935/rtv25/rtv/chunklist.m3u8",
+      "streams": [
+        {
+          "url": "http://197.243.19.131:1935/rtv25/rtv/chunklist.m3u8",
+          "quality": "SD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        },
+        {
+          "url": "https://5c46fa289c89f.streamlock.net/rtv25/rtv/playlist.m3u8",
+          "quality": "SD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-TV1.rw",
+      "name": "TV1",
+      "logo": "https://i.imgur.com/wk59tHA.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "RW",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://live.tv1.rw/index.m3u8",
+      "streams": [
+        {
+          "url": "https://live.tv1.rw/index.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-TV10.rw",
+      "name": "TV10",
+      "logo": "https://i.imgur.com/DeaWC1N.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "RW",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://5c46fa289c89f.streamlock.net/pub1live/mystream/playlist.m3u8",
+      "streams": [
+        {
+          "url": "https://5c46fa289c89f.streamlock.net/pub1live/mystream/playlist.m3u8",
+          "quality": "HD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-3ABNTVUganda.ug",
+      "name": "3ABN TV Uganda",
+      "logo": "https://i.imgur.com/mml9lI2.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://3abn.bozztv.com/3abn/3abn_uganda_live/index.m3u8",
+      "streams": [
+        {
+          "url": "https://3abn.bozztv.com/3abn/3abn_uganda_live/index.m3u8",
+          "quality": "HD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-AlphaDigital.ug",
+      "name": "Alpha Digital",
+      "logo": "https://i.imgur.com/sLt242H.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://streamfi-alphatvdgtl1.zettawiseroutes.com:8181/hls/stream.m3u8",
+      "streams": [
+        {
+          "url": "https://streamfi-alphatvdgtl1.zettawiseroutes.com:8181/hls/stream.m3u8",
+          "quality": "SD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-BBSTV.ug",
+      "name": "BBS TV",
+      "logo": "https://i.imgur.com/Hub1AXv.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://bbstv.ug/hls/ch01/index.m3u8",
+      "streams": [
+        {
+          "url": "https://bbstv.ug/hls/ch01/index.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-BTV.ug",
+      "name": "BTV",
+      "logo": "https://i.imgur.com/rcHZ1al.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "entertainment"
+      ],
+      "source": "iptv-org",
+      "stream": "https://streamfi-alphadgtl1.zettawiseroutes.com:8181/hls/stream.m3u8",
+      "streams": [
+        {
+          "url": "https://streamfi-alphadgtl1.zettawiseroutes.com:8181/hls/stream.m3u8",
+          "quality": "SD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-BukeddeTV1.ug",
+      "name": "Bukedde TV 1",
+      "logo": "https://i.imgur.com/HFq5QlJ.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://stream.hydeinnovations.com/bukedde1flussonic/index.m3u8",
+      "streams": [
+        {
+          "url": "https://stream.hydeinnovations.com/bukedde1flussonic/index.m3u8",
+          "quality": "SD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-BukeddeTV2.ug",
+      "name": "Bukedde TV 2",
+      "logo": "https://i.imgur.com/ukwPZeY.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://stream.hydeinnovations.com/bukedde2flussonic/index.m3u8",
+      "streams": [
+        {
+          "url": "https://stream.hydeinnovations.com/bukedde2flussonic/index.m3u8",
+          "quality": "SD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-DreamTV.ug",
+      "name": "Dream TV",
+      "logo": "https://i.imgur.com/XRUDhqQ.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://streamfi-dreamtv1.zettawiseroutes.com:8181/hls/stream.m3u8",
+      "streams": [
+        {
+          "url": "https://streamfi-dreamtv1.zettawiseroutes.com:8181/hls/stream.m3u8",
+          "quality": "SD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-FORTTV.ug",
+      "name": "FORT TV",
+      "logo": "https://i.ibb.co/4KN5zW9/fort-tv-logo-GENE.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "entertainment"
+      ],
+      "source": "iptv-org",
+      "stream": "https://fort.co-works.org/memfs/87017643-274a-4bc0-a786-7767a0d159c2.m3u8",
+      "streams": [
+        {
+          "url": "https://fort.co-works.org/memfs/87017643-274a-4bc0-a786-7767a0d159c2.m3u8",
+          "quality": "SD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-GalaxyTV.ug",
+      "name": "Galaxy TV",
+      "logo": "https://i.imgur.com/P5OABe5.png",
+      "category": "music",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "music"
+      ],
+      "source": "iptv-org",
+      "stream": "https://livestream.galaxytv.ug/jikonkone/playlist.m3u8",
+      "streams": [
+        {
+          "url": "https://livestream.galaxytv.ug/jikonkone/playlist.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        },
+        {
+          "url": "https://stream.castr.com/6463248048d6cd3e143655b2/live_43351ad0f3b411ed81c78fcc31887c54/index.fmp4.m3u8",
+          "quality": "HD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": true,
+          "referrer": "https://player.castr.com/live_43351ad0f3b411ed81c78fcc31887c54",
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-KRCTV.ug",
+      "name": "KRC TV",
+      "logo": "https://i.imgur.com/8c9Uqks.jpeg",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://channels.ad-ug.com/live/ch03/index.m3u8",
+      "streams": [
+        {
+          "url": "https://channels.ad-ug.com/live/ch03/index.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-KSTVUganda.ug",
+      "name": "KSTV Uganda",
+      "logo": "https://i.imgur.com/MMPzPSl.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://live.esteem.africa/kstv/hls/0/stream.m3u8",
+      "streams": [
+        {
+          "url": "https://live.esteem.africa/kstv/hls/0/stream.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        },
+        {
+          "url": "https://unseenlive.s3.eu-west-1.amazonaws.com/kstv/hls/0/stream.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-PraiseJesusTowerTV.ug",
+      "name": "Praise Jesus Tower TV",
+      "logo": "https://i.imgur.com/KT4qIve.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://vsrv1.az-streamingserver.com:3555/live/dyjoqlgklive.m3u8",
+      "streams": [
+        {
+          "url": "https://vsrv1.az-streamingserver.com:3555/live/dyjoqlgklive.m3u8",
+          "quality": "SD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-RwenzoriTV.ug",
+      "name": "Rwenzori TV",
+      "logo": "https://i.imgur.com/qo4QHfz.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://stream.rwenzoritv.com:3232/live/rwenzoritvlive.m3u8",
+      "streams": [
+        {
+          "url": "https://stream.rwenzoritv.com:3232/live/rwenzoritvlive.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-SaltTV.ug",
+      "name": "Salt TV",
+      "logo": "https://i.imgur.com/AK9nE6Y.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://stream.salttelevision.com/hls/stream.m3u8",
+      "streams": [
+        {
+          "url": "https://stream.salttelevision.com/hls/stream.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-TayariWestTV.ug",
+      "name": "Tayari West TV",
+      "logo": "https://i.imgur.com/tbnOtUZ.jpeg",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://stream.hydeinnovations.com/tarari-west/index.m3u8",
+      "streams": [
+        {
+          "url": "https://stream.hydeinnovations.com/tarari-west/index.m3u8",
+          "quality": "FHD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-TVWest.ug",
+      "name": "TV West",
+      "logo": "https://i.imgur.com/EiJzkIz.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://stream.hydeinnovations.com/tvwest-flussonic/index.m3u8",
+      "streams": [
+        {
+          "url": "https://stream.hydeinnovations.com/tvwest-flussonic/index.m3u8",
+          "quality": "HD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-WanLuoTV.ug",
+      "name": "Wan Luo TV",
+      "logo": "https://i.imgur.com/4PUUp3E.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://stream.hydeinnovations.com/luotv-flussonic/index.m3u8",
+      "streams": [
+        {
+          "url": "https://stream.hydeinnovations.com/luotv-flussonic/index.m3u8",
+          "quality": "SD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-AkiliKids.ke",
+      "name": "Akili Kids!",
+      "logo": "https://i.imgur.com/xFm2co6.png",
+      "category": "kids",
+      "language": "unknown",
+      "country": "KE",
+      "categories": [
+        "kids"
+      ],
+      "source": "iptv-org",
+      "stream": "https://m6.livecdn.io/akilikids.co.ke/akilikids.smil/playlist.m3u8",
+      "streams": [
+        {
+          "url": "https://m6.livecdn.io/akilikids.co.ke/akilikids.smil/playlist.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-CapuchinTV.ke",
+      "name": "Capuchin TV",
+      "logo": "https://i.imgur.com/VCDSjX7.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "KE",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://goliveafrica.media:9998/live/64227f58b8413/index.m3u8",
+      "streams": [
+        {
+          "url": "https://goliveafrica.media:9998/live/64227f58b8413/index.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-GreatCommissionTV.ke",
+      "name": "Great Commission TV",
+      "logo": "https://raw.githubusercontent.com/songwenhui239/Songwenhui239/refs/heads/main/Great%20Commission%20TV.jpeg",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "KE",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://stream-server9-jupiter.muxlive.com/hls/gctvghana/index.m3u8",
+      "streams": [
+        {
+          "url": "https://stream-server9-jupiter.muxlive.com/hls/gctvghana/index.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-InooroTV.ke",
+      "name": "Inooro TV",
+      "logo": "https://i.imgur.com/5qFJtmo.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "KE",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://live-onesignal.royalmedia.co.ke/live/T-MxRsFebq6zx7k2QFMbLw.m3u8",
+      "streams": [
+        {
+          "url": "https://live-onesignal.royalmedia.co.ke/live/T-MxRsFebq6zx7k2QFMbLw.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-K24.ke",
+      "name": "K24",
+      "logo": "https://i.imgur.com/SUjo6Bm.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "KE",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://livecdn.premiumfree.tv/afxpstr/K24Backup/index.m3u8",
+      "streams": [
+        {
+          "url": "https://livecdn.premiumfree.tv/afxpstr/K24Backup/index.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-MERUTV.ke",
+      "name": "MERU TV",
+      "logo": "https://i.imgur.com/EPmWNfz.jpg",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "KE",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://goliveafrica.media:9998/live/628e5c1991061/index.m3u8",
+      "streams": [
+        {
+          "url": "https://goliveafrica.media:9998/live/628e5c1991061/index.m3u8",
+          "quality": "HD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-MorningCloudTV.ke",
+      "name": "Morning Cloud TV",
+      "logo": "https://i.imgur.com/Lxfd2ip.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "KE",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://livecdn.live247stream.com/mc/tv/playlist.m3u8",
+      "streams": [
+        {
+          "url": "https://livecdn.live247stream.com/mc/tv/playlist.m3u8",
+          "quality": "HD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        },
+        {
+          "url": "https://viewmedia7219.bozztv.com/wmedia/viewmedia100/web_026/Stream/playlist.m3u8",
+          "quality": "SD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-YOUNIBMediaTV.ke",
+      "name": "YOUNIB Media TV",
+      "logo": "https://i.imgur.com/LtiPOYG.jpg",
+      "category": "religious",
+      "language": "unknown",
+      "country": "KE",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://goliveafrica.media:9998/live/6257fbe7383d6/index.m3u8",
+      "streams": [
+        {
+          "url": "https://goliveafrica.media:9998/live/6257fbe7383d6/index.m3u8",
+          "quality": "HD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-IBNTV.tz",
+      "name": "IBN TV",
+      "logo": "https://i.imgur.com/hkV51ij.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "TZ",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "http://138.68.138.119:8080/live/5a8993709ea19/index.m3u8",
+      "streams": [
+        {
+          "url": "http://138.68.138.119:8080/live/5a8993709ea19/index.m3u8",
+          "quality": "SD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-IBNTVAfrica.tz",
+      "name": "IBN TV Africa",
+      "logo": "https://i.imgur.com/eKy2ocd.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "TZ",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "http://68.183.41.209:8080/live/5d9a537c64b9c/index.m3u8",
+      "streams": [
+        {
+          "url": "http://68.183.41.209:8080/live/5d9a537c64b9c/index.m3u8",
+          "quality": "HD",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    },
+    {
+      "id": "iptv-MahaasinTV.tz",
+      "name": "Mahaasin TV",
+      "logo": "https://i.imgur.com/wdfdKvC.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "TZ",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://mahaasintv.livebox.co.in/mahaasintvhls/mahaasintv.m3u8",
+      "streams": [
+        {
+          "url": "https://mahaasintv.livebox.co.in/mahaasintvhls/mahaasintv.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "sandbox-us"
+    }
+  ]
+}
