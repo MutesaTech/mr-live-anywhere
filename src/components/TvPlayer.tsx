@@ -479,7 +479,7 @@ const TvPlayer = ({
             />
             
             {/* Error Handler */}
-            <StreamErrorHandler error={streamError} isOffline={!isOnline} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
+            <StreamErrorHandler error={unavailable ? streamError : null} isOffline={!isOnline} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
             
             {/* Overlay controls */}
             <div className="absolute top-4 left-4 right-4 flex items-start justify-between pointer-events-none">
