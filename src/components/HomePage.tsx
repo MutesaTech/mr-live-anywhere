@@ -1,9 +1,7 @@
-import { useMemo, useState, useEffect } from 'react';
-import FeaturedCard from './FeaturedCard';
+import { useMemo } from 'react';
+import { Tv, Radio as RadioIcon, History } from 'lucide-react';
 import ChannelCard from './ChannelCard';
 import RadioCard from './RadioCard';
-import SkeletonCard, { SkeletonGrid } from './SkeletonCard';
-import SearchBar from './SearchBar';
 import HorizontalRail from './HorizontalRail';
 import QuickCategories from './QuickCategories';
 import { cn } from '@/lib/utils';
@@ -31,7 +29,8 @@ interface HomePageProps {
   radios: Radio[];
   favoriteTvIds: string[];
   favoriteRadioIds: string[];
-  lastWatchedTv: string | null;
+  recentTvIds: string[];
+  recentRadioIds: string[];
   onSelectChannel: (id: string) => void;
   onSelectRadio: (id: string) => void;
   onToggleFavoriteTv: (id: string) => void;
@@ -40,12 +39,45 @@ interface HomePageProps {
   onQuickSelect?: (target: { type: 'section' | 'category'; value: string }) => void;
 }
 
+const EmptyState = ({
+  icon: Icon,
+  title,
+  description,
+  actionLabel,
+  onAction,
+}: {
+  icon: typeof Tv;
+  title: string;
+  description: string;
+  actionLabel: string;
+  onAction?: () => void;
+}) => (
+  <div className="rounded-2xl border border-dashed border-border/60 bg-card/40 backdrop-blur p-8 flex flex-col items-center text-center gap-3">
+    <div className="h-14 w-14 rounded-full bg-muted/50 grid place-items-center">
+      <Icon className="h-6 w-6 text-muted-foreground" />
+    </div>
+    <div>
+      <p className="text-body font-semibold">{title}</p>
+      <p className="text-caption text-muted-foreground mt-1 max-w-xs">{description}</p>
+    </div>
+    {onAction && (
+      <button
+        onClick={onAction}
+        className="mt-1 rounded-full px-4 py-2 text-sm font-semibold gradient-primary text-primary-foreground shadow-glow"
+      >
+        {actionLabel}
+      </button>
+    )}
+  </div>
+);
+
 const HomePage = ({
   channels,
   radios,
   favoriteTvIds,
   favoriteRadioIds,
-  lastWatchedTv,
+  recentTvIds,
+  recentRadioIds,
   onSelectChannel,
   onSelectRadio,
   onToggleFavoriteTv,
@@ -53,189 +85,99 @@ const HomePage = ({
   reducedAnimations = false,
   onQuickSelect,
 }: HomePageProps) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
+  const recentChannels = useMemo(
+    () => recentTvIds.map((id) => channels.find((c) => c.id === id)).filter(Boolean) as Channel[],
+    [recentTvIds, channels]
+  );
 
-  // Simulate initial load for skeleton
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 300);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Featured channel (random or last watched)
-  const featuredChannel = useMemo(() => {
-    if (lastWatchedTv) {
-      return channels.find(c => c.id === lastWatchedTv) || channels[0];
-    }
-    return channels[Math.floor(Math.random() * Math.min(channels.length, 5))];
-  }, [channels, lastWatchedTv]);
-
-  // Continue watching (favorites or recent)
-  const continueWatching = useMemo(() => {
-    const favorites = channels.filter(c => favoriteTvIds.includes(c.id));
-    return favorites.length > 0 ? favorites.slice(0, 4) : channels.slice(0, 4);
-  }, [channels, favoriteTvIds]);
-
-  // Popular radios
-  const popularRadios = useMemo(() => {
-    return radios.slice(0, 4);
-  }, [radios]);
-
-  // Instant search filter
-  const filteredChannels = useMemo(() => {
-    if (!searchQuery.trim()) return continueWatching;
-    const query = searchQuery.toLowerCase();
-    return channels.filter(c => 
-      c.name.toLowerCase().includes(query) || 
-      c.category.toLowerCase().includes(query)
-    ).slice(0, 8);
-  }, [channels, continueWatching, searchQuery]);
-
-  const filteredRadios = useMemo(() => {
-    if (!searchQuery.trim()) return popularRadios;
-    const query = searchQuery.toLowerCase();
-    return radios.filter(r => 
-      r.name.toLowerCase().includes(query) || 
-      r.category.toLowerCase().includes(query)
-    ).slice(0, 4);
-  }, [radios, popularRadios, searchQuery]);
-
-  // Explicit per-category rows
-  const categoryRows = useMemo(() => {
-    const groups: { category: string; items: Channel[] }[] = [];
-    channels.forEach((c) => {
-      const g = groups.find((x) => x.category === c.category);
-      if (g) g.items.push(c);
-      else groups.push({ category: c.category, items: [c] });
-    });
-    return groups;
-  }, [channels]);
+  const recentRadios = useMemo(
+    () => recentRadioIds.map((id) => radios.find((r) => r.id === id)).filter(Boolean) as Radio[],
+    [recentRadioIds, radios]
+  );
 
   const animationClass = reducedAnimations ? '' : 'animate-page-enter';
 
   return (
-    <div className={cn("space-y-6", animationClass)}>
-      {/* Super Search */}
-      <SearchBar
-        value={searchQuery}
-        onChange={setSearchQuery}
-        placeholder="Search channels & radios..."
-        className="mb-4"
-      />
+    <div className={cn('space-y-8', animationClass)}>
+      {/* Category shortcuts */}
+      {onQuickSelect && <QuickCategories onSelect={onQuickSelect} />}
 
-      {!searchQuery && onQuickSelect && (
-        <QuickCategories onSelect={onQuickSelect} />
-      )}
-
-      {/* Loading skeletons */}
-      {isLoading ? (
-        <>
-          <SkeletonCard variant="featured" />
-          <SkeletonGrid count={4} variant="channel" />
-          <SkeletonGrid count={2} variant="radio" />
-        </>
-      ) : (
-        <>
-          {/* Featured */}
-          {featuredChannel && !searchQuery && (
-            <section>
-              <FeaturedCard
-                id={featuredChannel.id}
-                name={featuredChannel.name}
-                logo={featuredChannel.logo}
-                category={featuredChannel.category}
-                isFavorite={favoriteTvIds.includes(featuredChannel.id)}
-                onClick={() => onSelectChannel(featuredChannel.id)}
+      {/* Recently Watched */}
+      <section className="space-y-3">
+        {recentChannels.length > 0 ? (
+          <HorizontalRail
+            title="Recently Watched"
+            itemWidthClass="w-[180px] sm:w-[220px] md:w-[260px]"
+          >
+            {recentChannels.map((channel) => (
+              <ChannelCard
+                key={channel.id}
+                id={channel.id}
+                name={channel.name}
+                logo={channel.logo}
+                category={channel.category}
+                isFavorite={favoriteTvIds.includes(channel.id)}
+                onClick={() => onSelectChannel(channel.id)}
                 onToggleFavorite={(e) => {
                   e.stopPropagation();
-                  onToggleFavoriteTv(featuredChannel.id);
+                  onToggleFavoriteTv(channel.id);
                 }}
               />
-            </section>
-          )}
-
-          {/* Channels */}
-          {filteredChannels.length > 0 && (
-            <HorizontalRail
-              title={searchQuery ? 'Search Results' : 'Continue Watching'}
-              itemWidthClass="w-[180px] sm:w-[220px] md:w-[260px]"
-            >
-              {filteredChannels.map((channel) => (
-                <ChannelCard
-                  key={channel.id}
-                  id={channel.id}
-                  name={channel.name}
-                  logo={channel.logo}
-                  category={channel.category}
-                  isFavorite={favoriteTvIds.includes(channel.id)}
-                  onClick={() => onSelectChannel(channel.id)}
-                  onToggleFavorite={(e) => {
-                    e.stopPropagation();
-                    onToggleFavoriteTv(channel.id);
-                  }}
-                />
-              ))}
-            </HorizontalRail>
-          )}
-
-          {/* Radio Stations */}
-          {filteredRadios.length > 0 && (
-            <HorizontalRail
-              title="Radio Stations"
-              itemWidthClass="w-[280px] sm:w-[320px]"
-            >
-              {filteredRadios.map((radio) => (
-                <RadioCard
-                  key={radio.id}
-                  id={radio.id}
-                  name={radio.name}
-                  logo={radio.logo}
-                  category={radio.category}
-                  isFavorite={favoriteRadioIds.includes(radio.id)}
-                  onClick={() => onSelectRadio(radio.id)}
-                  onToggleFavorite={(e) => {
-                    e.stopPropagation();
-                    onToggleFavoriteRadio(radio.id);
-                  }}
-                />
-              ))}
-            </HorizontalRail>
-          )}
-
-          {/* Category rows — each category gets its own clearly separated horizontal row */}
-          {!searchQuery && (
-            <div className="space-y-10 pt-2">
-              {categoryRows.map((group) => (
-                <section
-                  key={group.category}
-                  className="border-t border-border/40 pt-6"
-                >
-                  <HorizontalRail
-                    title={group.category.charAt(0).toUpperCase() + group.category.slice(1)}
-                    itemWidthClass="w-[180px] sm:w-[220px] md:w-[240px]"
-                  >
-                    {group.items.map((channel) => (
-                      <ChannelCard
-                        key={`${group.category}-${channel.id}`}
-                        id={channel.id}
-                        name={channel.name}
-                        logo={channel.logo}
-                        category={channel.category}
-                        isFavorite={favoriteTvIds.includes(channel.id)}
-                        onClick={() => onSelectChannel(channel.id)}
-                        onToggleFavorite={(e) => {
-                          e.stopPropagation();
-                          onToggleFavoriteTv(channel.id);
-                        }}
-                      />
-                    ))}
-                  </HorizontalRail>
-                </section>
-              ))}
+            ))}
+          </HorizontalRail>
+        ) : (
+          <>
+            <div className="flex items-center gap-2 px-1">
+              <History className="h-4 w-4 text-primary" />
+              <h2 className="text-h3 font-semibold">Recently Watched</h2>
             </div>
-          )}
-        </>
-      )}
+            <EmptyState
+              icon={Tv}
+              title="Nothing watched yet"
+              description="Channels you watch will appear here for quick access."
+              actionLabel="Browse Live TV"
+              onAction={() => onQuickSelect?.({ type: 'section', value: 'tv' })}
+            />
+          </>
+        )}
+      </section>
+
+      {/* Recently Played Radio */}
+      <section className="space-y-3">
+        {recentRadios.length > 0 ? (
+          <HorizontalRail title="Recently Played Radio" itemWidthClass="w-[280px] sm:w-[320px]">
+            {recentRadios.map((radio) => (
+              <RadioCard
+                key={radio.id}
+                id={radio.id}
+                name={radio.name}
+                logo={radio.logo}
+                category={radio.category}
+                isFavorite={favoriteRadioIds.includes(radio.id)}
+                onClick={() => onSelectRadio(radio.id)}
+                onToggleFavorite={(e) => {
+                  e.stopPropagation();
+                  onToggleFavoriteRadio(radio.id);
+                }}
+              />
+            ))}
+          </HorizontalRail>
+        ) : (
+          <>
+            <div className="flex items-center gap-2 px-1">
+              <History className="h-4 w-4 text-accent" />
+              <h2 className="text-h3 font-semibold">Recently Played Radio</h2>
+            </div>
+            <EmptyState
+              icon={RadioIcon}
+              title="No stations played yet"
+              description="Stations you listen to will show up here."
+              actionLabel="Browse Radio"
+              onAction={() => onQuickSelect?.({ type: 'section', value: 'radio' })}
+            />
+          </>
+        )}
+      </section>
     </div>
   );
 };
