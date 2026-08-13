@@ -22,7 +22,7 @@ import radiosData from '@/data/radios.json';
 type Section = 'home' | 'tv' | 'radio' | 'favorites' | 'settings';
 
 const sectionTitles: Record<Section, string> = {
-  home: 'MR LIVE',
+  home: 'Beemo',
   tv: 'Live TV',
   radio: 'Radio',
   favorites: 'Favorites',
