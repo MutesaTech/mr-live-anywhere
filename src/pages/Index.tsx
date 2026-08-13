@@ -13,6 +13,8 @@ import LowBandwidthToast from '@/components/LowBandwidthToast';
 import OfflineFallback from '@/components/OfflineFallback';
 import SocialProofPopup from '@/components/SocialProofPopup';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useRecents } from '@/hooks/useRecents';
+import { useSleepTimer } from '@/hooks/useSleepTimer';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { useLowBandwidthMode } from '@/hooks/useLowBandwidthMode';
 import { useAutoResume } from '@/hooks/useAutoResume';
@@ -42,6 +44,9 @@ const Index = () => {
   const { isOnline } = useNetworkStatus();
   const { shouldReduceAnimations } = useLowBandwidthMode();
   const { saveResumeState, getResumeState } = useAutoResume();
+  const { recentTvIds, recentRadioIds, addRecentTv, addRecentRadio } = useRecents();
+  // Keep the sleep timer ticking app-wide, not only on the Settings screen
+  useSleepTimer();
 
   // Auto-resume on app load
   useEffect(() => {
@@ -67,6 +72,7 @@ const Index = () => {
           setExternalChannelId(id);
           setActiveSection('tv');
           setLastWatchedTv(id);
+          addRecentTv(id);
           saveResumeState(id, 'tv');
         }
       }
@@ -77,6 +83,7 @@ const Index = () => {
         if (exists) {
           setActiveSection('radio');
           setLastPlayedRadio(id);
+          addRecentRadio(id);
           saveResumeState(id, 'radio');
         }
       }
@@ -113,12 +120,14 @@ const Index = () => {
     setExternalChannelId(id);
     setActiveSection('tv');
     setLastWatchedTv(id);
+    addRecentTv(id);
     saveResumeState(id, 'tv');
   };
 
   const handleSelectRadio = (id: string) => {
     setActiveSection('radio');
     setLastPlayedRadio(id);
+    addRecentRadio(id);
     saveResumeState(id, 'radio');
   };
 
@@ -147,7 +156,11 @@ const Index = () => {
       <LowBandwidthToast />
       
       {/* Header */}
-      <Header title={sectionTitles[activeSection]} />
+      <Header
+        title={sectionTitles[activeSection]}
+        onFavoritesClick={() => setActiveSection('favorites')}
+        favoritesActive={activeSection === 'favorites'}
+      />
       
       {/* Main Content */}
       <main className="container px-4 pt-18 pb-24">
@@ -157,7 +170,8 @@ const Index = () => {
             radios={radiosData}
             favoriteTvIds={favoriteTvIds}
             favoriteRadioIds={favoriteRadioIds}
-            lastWatchedTv={lastWatchedTv}
+            recentTvIds={recentTvIds}
+            recentRadioIds={recentRadioIds}
             onSelectChannel={handleSelectChannel}
             onSelectRadio={handleSelectRadio}
             onToggleFavoriteTv={toggleFavoriteTv}
@@ -172,7 +186,7 @@ const Index = () => {
             favorites={favoriteTvIds}
             onToggleFavorite={toggleFavoriteTv}
             lastWatched={lastWatchedTv}
-            onPlay={setLastWatchedTv}
+            onPlay={(id: string) => { setLastWatchedTv(id); addRecentTv(id); }}
             externalChannel={externalChannelId}
             initialCategory={tvCategoryFilter}
           />
@@ -184,7 +198,7 @@ const Index = () => {
             favorites={favoriteRadioIds}
             onToggleFavorite={toggleFavoriteRadio}
             lastPlayed={lastPlayedRadio}
-            onPlay={setLastPlayedRadio}
+            onPlay={(id: string) => { setLastPlayedRadio(id); addRecentRadio(id); }}
           />
         )}
         
