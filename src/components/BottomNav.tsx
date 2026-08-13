@@ -1,4 +1,4 @@
-import { Home, Tv, Radio, Star, Settings } from 'lucide-react';
+import { Home, Tv, Radio, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type Section = 'home' | 'tv' | 'radio' | 'favorites' | 'settings';
@@ -12,7 +12,6 @@ const navItems = [
   { id: 'home' as Section, icon: Home, label: 'Home' },
   { id: 'tv' as Section, icon: Tv, label: 'TV' },
   { id: 'radio' as Section, icon: Radio, label: 'Radio' },
-  { id: 'favorites' as Section, icon: Star, label: 'Favorites' },
   { id: 'settings' as Section, icon: Settings, label: 'Settings' },
 ];
 

@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Search, Settings, Download } from 'lucide-react';
+import { Search, Heart, Download } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 interface HeaderProps {
   title: string;
   onSearchClick?: () => void;
+  onFavoritesClick?: () => void;
+  favoritesActive?: boolean;
 }
 
-const Header = ({ title, onSearchClick }: HeaderProps) => {
+const Header = ({ title, onSearchClick, onFavoritesClick, favoritesActive }: HeaderProps) => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstallable, setIsInstallable] = useState(false);
   const { toast } = useToast();
@@ -83,6 +86,22 @@ const Header = ({ title, onSearchClick }: HeaderProps) => {
               className="h-10 w-10 rounded-full"
             >
               <Search className="h-5 w-5" />
+            </Button>
+          )}
+          {onFavoritesClick && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onFavoritesClick}
+              aria-label="Favorites"
+              className="h-10 w-10 rounded-full"
+            >
+              <Heart
+                className={cn(
+                  'h-5 w-5 transition-colors',
+                  favoritesActive ? 'text-accent fill-accent' : 'text-foreground/80'
+                )}
+              />
             </Button>
           )}
         </div>
