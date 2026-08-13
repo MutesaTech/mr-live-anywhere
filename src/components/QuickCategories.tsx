@@ -1,4 +1,4 @@
-import { Tv, Radio, Trophy, Newspaper, Music2, Film, Globe, Sparkles, type LucideIcon } from 'lucide-react';
+import { Trophy, Newspaper, Music2, Film, Clapperboard, Baby, Globe, type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface QuickCategoriesProps {
@@ -12,20 +12,19 @@ const ITEMS: Array<{
   gradient: string;
   target: { type: 'section' | 'category'; value: string };
 }> = [
-  { key: 'tv',        label: 'TV Channels',    icon: Tv,        gradient: 'from-blue-500 to-indigo-600',   target: { type: 'section',  value: 'tv' } },
-  { key: 'radio',     label: 'Radio',          icon: Radio,     gradient: 'from-rose-500 to-fuchsia-600',  target: { type: 'section',  value: 'radio' } },
   { key: 'sports',    label: 'Sports',         icon: Trophy,    gradient: 'from-orange-500 to-red-500',    target: { type: 'category', value: 'sports' } },
   { key: 'news',      label: 'News',           icon: Newspaper, gradient: 'from-slate-500 to-zinc-800',    target: { type: 'category', value: 'news' } },
   { key: 'music',     label: 'Music',          icon: Music2,    gradient: 'from-fuchsia-500 to-purple-600',target: { type: 'category', value: 'music' } },
-  { key: 'enter',     label: 'Entertainment',  icon: Film,      gradient: 'from-pink-500 to-amber-400',    target: { type: 'category', value: 'entertainment' } },
+  { key: 'movies',    label: 'Movies',         icon: Film,      gradient: 'from-indigo-500 to-blue-600',   target: { type: 'category', value: 'movies' } },
+  { key: 'enter',     label: 'Entertainment',  icon: Clapperboard, gradient: 'from-pink-500 to-amber-400', target: { type: 'category', value: 'entertainment' } },
+  { key: 'kids',      label: 'Kids',           icon: Baby,      gradient: 'from-emerald-400 to-teal-600',  target: { type: 'category', value: 'kids' } },
   { key: 'intl',      label: 'International',  icon: Globe,     gradient: 'from-cyan-400 to-blue-600',     target: { type: 'category', value: 'international' } },
-  { key: 'featured',  label: 'Featured',       icon: Sparkles,  gradient: 'from-amber-400 to-rose-500',    target: { type: 'section',  value: 'home' } },
 ];
 
 const QuickCategories = ({ onSelect }: QuickCategoriesProps) => {
   return (
     <section className="space-y-3">
-      <h2 className="text-h3 font-semibold px-1">Browse</h2>
+      <h2 className="text-h3 font-semibold px-1">Categories</h2>
       <div className="flex gap-3 overflow-x-auto scrollbar-hide -mx-4 px-4 pb-2 snap-x">
         {ITEMS.map(({ key, label, icon: Icon, gradient, target }) => (
           <button
