@@ -1,49 +1,19 @@
-import { Trash2, ChevronRight, Camera, Mail, User as UserIcon, Star, Phone, Gauge } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+import { Trash2, ChevronRight, Mail, User as UserIcon, Star, Phone, Gauge } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import SleepTimerDialog from './SleepTimerDialog';
 import { AboutDialog, PrivacyDialog, TermsDialog } from './LegalDialogs';
 import { cn } from '@/lib/utils';
 
-interface UserProfile {
-  username: string;
-  email: string;
-  avatar: string | null;
-}
+/** Fixed default profile — not editable, no accounts or authentication. */
+const PROFILE = {
+  username: 'Beemo User',
+  email: 'you@beemo.app',
+};
 
 const SettingsPage = () => {
   const { toast } = useToast();
-  const fileRef = useRef<HTMLInputElement>(null);
-  const [profile, setProfile] = useLocalStorage<UserProfile>('userProfile', {
-    username: 'Beemo User',
-    email: 'you@beemo.app',
-    avatar: null,
-  });
   const [dataSaver, setDataSaver] = useLocalStorage<'auto' | 'low' | 'standard' | 'high'>('dataSaver', 'auto');
-  const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState<UserProfile>(profile);
-
-  useEffect(() => { setDraft(profile); }, [profile]);
-
-  const handleAvatarPick = () => fileRef.current?.click();
-  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      setProfile({ ...profile, avatar: reader.result as string });
-      toast({ title: 'Profile picture updated' });
-    };
-    reader.readAsDataURL(file);
-  };
-  const saveProfile = () => {
-    setProfile(draft);
-    setEditing(false);
-    toast({ title: 'Profile saved' });
-  };
 
   const handleClearCache = async () => {
     try {
