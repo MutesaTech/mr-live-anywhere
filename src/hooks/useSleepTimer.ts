@@ -1,19 +1,66 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useSyncExternalStore } from 'react';
 
 const STORAGE_KEY = 'sleepTimerEndsAt';
 
-/** Sleep timer — pauses all <video>/<audio> when expired. Persists across reloads. */
-export function useSleepTimer() {
-  const [endsAt, setEndsAt] = useState<number | null>(() => {
+/* ---- shared store so every mounted consumer sees the same timer ---- */
+const listeners = new Set<() => void>();
+
+function readStored(): number | null {
+  try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const v = Number(raw);
     return Number.isFinite(v) && v > Date.now() ? v : null;
-  });
-  const [remaining, setRemaining] = useState<number>(0);
-  const timerRef = useRef<number | null>(null);
+  } catch {
+    return null;
+  }
+}
 
-  // tick
+let endsAtStore: number | null = readStored();
+
+function emit() {
+  listeners.forEach((l) => l());
+}
+
+function setEndsAt(value: number | null) {
+  endsAtStore = value;
+  try {
+    if (value) localStorage.setItem(STORAGE_KEY, String(value));
+    else localStorage.removeItem(STORAGE_KEY);
+  } catch {}
+  emit();
+}
+
+function subscribe(cb: () => void) {
+  listeners.add(cb);
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === STORAGE_KEY) {
+      endsAtStore = readStored();
+      emit();
+    }
+  };
+  window.addEventListener('storage', onStorage);
+  return () => {
+    listeners.delete(cb);
+    window.removeEventListener('storage', onStorage);
+  };
+}
+
+const getSnapshot = () => endsAtStore;
+
+function pauseAllMedia() {
+  document.querySelectorAll('video, audio').forEach((m) => {
+    try {
+      (m as HTMLMediaElement).pause();
+    } catch {}
+  });
+}
+
+/** Sleep timer — pauses all <video>/<audio> when it expires. Persists across reloads and screens. */
+export function useSleepTimer() {
+  const endsAt = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
+  const [remaining, setRemaining] = useState<number>(endsAt ? Math.max(0, endsAt - Date.now()) : 0);
+
   useEffect(() => {
     if (!endsAt) {
       setRemaining(0);
@@ -23,29 +70,29 @@ export function useSleepTimer() {
       const rem = Math.max(0, endsAt - Date.now());
       setRemaining(rem);
       if (rem <= 0) {
-        document.querySelectorAll('video, audio').forEach((m) => {
-          try { (m as HTMLMediaElement).pause(); } catch {}
-        });
-        localStorage.removeItem(STORAGE_KEY);
+        pauseAllMedia();
+        // keep pausing briefly in case a stream auto-resumes on buffer
+        window.setTimeout(pauseAllMedia, 500);
+        window.setTimeout(pauseAllMedia, 1500);
         setEndsAt(null);
       }
     };
     tick();
     const id = window.setInterval(tick, 1000);
-    timerRef.current = id;
-    return () => window.clearInterval(id);
+    const onVisible = () => tick();
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      window.clearInterval(id);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, [endsAt]);
 
   const start = useCallback((minutes: number) => {
-    const end = Date.now() + minutes * 60 * 1000;
-    localStorage.setItem(STORAGE_KEY, String(end));
-    setEndsAt(end);
+    if (!minutes || minutes <= 0) return;
+    setEndsAt(Date.now() + minutes * 60 * 1000);
   }, []);
 
-  const cancel = useCallback(() => {
-    localStorage.removeItem(STORAGE_KEY);
-    setEndsAt(null);
-  }, []);
+  const cancel = useCallback(() => setEndsAt(null), []);
 
   return { endsAt, remaining, start, cancel, isActive: !!endsAt };
 }
