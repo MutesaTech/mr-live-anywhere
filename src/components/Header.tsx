@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Search, Settings, Download } from 'lucide-react';
+import { Search, Heart, Download } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 interface HeaderProps {
   title: string;
   onSearchClick?: () => void;
+  onFavoritesClick?: () => void;
+  favoritesActive?: boolean;
 }
 
-const Header = ({ title, onSearchClick }: HeaderProps) => {
+const Header = ({ title, onSearchClick, onFavoritesClick, favoritesActive }: HeaderProps) => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstallable, setIsInstallable] = useState(false);
   const { toast } = useToast();
@@ -33,7 +36,7 @@ const Header = ({ title, onSearchClick }: HeaderProps) => {
     if (outcome === 'accepted') {
       toast({
         title: "App installed!",
-        description: "MR LIVE has been installed on your device."
+        description: "Beemo has been installed on your device."
       });
     }
     setDeferredPrompt(null);
@@ -49,12 +52,12 @@ const Header = ({ title, onSearchClick }: HeaderProps) => {
             <div className="absolute inset-0 rounded-xl gradient-primary blur-md opacity-60" />
             <img
               src="/logo.png"
-              alt="MR LIVE"
+              alt="Beemo"
               className="relative h-9 w-9 rounded-xl object-contain bg-card p-1"
             />
           </div>
           <span className="font-bold text-lg tracking-tight text-gradient-primary hidden sm:inline">
-            MR LIVE
+            Beemo
           </span>
         </Link>
 
@@ -83,6 +86,22 @@ const Header = ({ title, onSearchClick }: HeaderProps) => {
               className="h-10 w-10 rounded-full"
             >
               <Search className="h-5 w-5" />
+            </Button>
+          )}
+          {onFavoritesClick && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={onFavoritesClick}
+              aria-label="Favorites"
+              className="h-10 w-10 rounded-full"
+            >
+              <Heart
+                className={cn(
+                  'h-5 w-5 transition-colors',
+                  favoritesActive ? 'text-accent fill-accent' : 'text-foreground/80'
+                )}
+              />
             </Button>
           )}
         </div>

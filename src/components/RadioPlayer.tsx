@@ -85,7 +85,7 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
       navigator.mediaSession.metadata = new MediaMetadata({
         title: activeRadioData.name,
         artist: activeRadioData.category,
-        album: 'MR LIVE Radio',
+        album: 'Beemo Radio',
         artwork: [{ src: activeRadioData.logo, sizes: '512x512', type: 'image/png' }],
       });
       navigator.mediaSession.setActionHandler('play', () => audioRef.current?.play().catch(() => {}));

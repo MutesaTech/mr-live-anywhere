@@ -1,49 +1,19 @@
-import { Trash2, ChevronRight, Camera, Mail, User as UserIcon, Star, Phone, Gauge } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+import { Trash2, ChevronRight, Mail, User as UserIcon, Star, Phone, Gauge } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import SleepTimerDialog from './SleepTimerDialog';
 import { AboutDialog, PrivacyDialog, TermsDialog } from './LegalDialogs';
 import { cn } from '@/lib/utils';
 
-interface UserProfile {
-  username: string;
-  email: string;
-  avatar: string | null;
-}
+/** Fixed default profile — not editable, no accounts or authentication. */
+const PROFILE = {
+  username: 'Beemo User',
+  email: 'you@beemo.app',
+};
 
 const SettingsPage = () => {
   const { toast } = useToast();
-  const fileRef = useRef<HTMLInputElement>(null);
-  const [profile, setProfile] = useLocalStorage<UserProfile>('userProfile', {
-    username: 'MR LIVE User',
-    email: 'you@mrlive.app',
-    avatar: null,
-  });
   const [dataSaver, setDataSaver] = useLocalStorage<'auto' | 'low' | 'standard' | 'high'>('dataSaver', 'auto');
-  const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState<UserProfile>(profile);
-
-  useEffect(() => { setDraft(profile); }, [profile]);
-
-  const handleAvatarPick = () => fileRef.current?.click();
-  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      setProfile({ ...profile, avatar: reader.result as string });
-      toast({ title: 'Profile picture updated' });
-    };
-    reader.readAsDataURL(file);
-  };
-  const saveProfile = () => {
-    setProfile(draft);
-    setEditing(false);
-    toast({ title: 'Profile saved' });
-  };
 
   const handleClearCache = async () => {
     try {
@@ -62,9 +32,9 @@ const SettingsPage = () => {
 
   const handleRate = () => {
     const ua = navigator.userAgent.toLowerCase();
-    let url = 'https://mrlive.app';
-    if (/android/.test(ua)) url = 'https://play.google.com/store/apps/details?id=app.lovable.mrlive';
-    else if (/iphone|ipad|ipod|mac/.test(ua)) url = 'https://apps.apple.com/app/mr-live/id000000000';
+    let url = 'https://beemo.app';
+    if (/android/.test(ua)) url = 'https://play.google.com/store/apps/details?id=app.lovable.beemo';
+    else if (/iphone|ipad|ipod|mac/.test(ua)) url = 'https://apps.apple.com/app/beemo/id000000000';
     window.open(url, '_blank', 'noopener');
   };
 
@@ -79,44 +49,16 @@ const SettingsPage = () => {
           <div className="relative">
             <div className="h-24 w-24 rounded-full p-[2px] bg-gradient-to-br from-primary via-accent to-primary-light shadow-glow">
               <div className="h-full w-full rounded-full overflow-hidden bg-card flex items-center justify-center">
-                {profile.avatar ? (
-                  <img src={profile.avatar} alt="Avatar" className="h-full w-full object-cover" />
-                ) : (
-                  <UserIcon className="h-10 w-10 text-muted-foreground" />
-                )}
+                <UserIcon className="h-10 w-10 text-muted-foreground" />
               </div>
             </div>
-            <button
-              onClick={handleAvatarPick}
-              className="absolute bottom-0 right-0 h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
-              aria-label="Change profile picture"
-            >
-              <Camera className="h-4 w-4" />
-            </button>
-            <input ref={fileRef} type="file" accept="image/*" hidden onChange={handleAvatarChange} />
           </div>
 
           <div className="flex-1 w-full text-center sm:text-left">
-            {editing ? (
-              <div className="space-y-3">
-                <Input value={draft.username} onChange={(e) => setDraft({ ...draft, username: e.target.value })} placeholder="Username" className="bg-background/40" />
-                <Input value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} placeholder="Email" type="email" className="bg-background/40" />
-                <div className="flex gap-2 justify-center sm:justify-start">
-                  <Button onClick={saveProfile}>Save</Button>
-                  <Button variant="ghost" onClick={() => { setDraft(profile); setEditing(false); }}>Cancel</Button>
-                </div>
-              </div>
-            ) : (
-              <>
-                <h2 className="text-2xl font-bold tracking-tight">{profile.username}</h2>
-                <p className="text-caption text-muted-foreground flex items-center gap-1.5 justify-center sm:justify-start mt-1">
-                  <Mail className="h-3.5 w-3.5" /> {profile.email}
-                </p>
-                <Button variant="outline" size="sm" className="mt-4 rounded-full" onClick={() => setEditing(true)}>
-                  Edit profile
-                </Button>
-              </>
-            )}
+            <h2 className="text-2xl font-bold tracking-tight">{PROFILE.username}</h2>
+            <p className="text-caption text-muted-foreground flex items-center gap-1.5 justify-center sm:justify-start mt-1">
+              <Mail className="h-3.5 w-3.5" /> {PROFILE.email}
+            </p>
           </div>
         </div>
       </section>
@@ -241,7 +183,7 @@ const SettingsPage = () => {
 
       {/* Version footer */}
       <div className="text-center text-caption text-muted-foreground py-4">
-        <p className="font-semibold text-foreground/70">MR LIVE v{APP_VERSION}</p>
+        <p className="font-semibold text-foreground/70">Beemo v{APP_VERSION}</p>
         <p>Build {BUILD} • Updated {new Date().toISOString().slice(0, 10)}</p>
       </div>
     </div>
