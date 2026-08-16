@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-08-11T12:37:50.544Z",
+  "generatedAt": "2026-08-16T04:39:15.204Z",
   "source": "https://github.com/iptv-org/api",
   "notice": "Stream URLs are indexed from the public iptv-org project. Availability is not guaranteed and may be geo-restricted.",
-  "testRegion": "sandbox-us",
+  "testRegion": "github-actions-us",
   "countries": [
     "RW",
     "UG",
@@ -34,7 +34,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-IsangoTV.rw",
@@ -60,7 +60,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-IsiboTV.rw",
@@ -86,7 +86,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-KC2.rw",
@@ -121,7 +121,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-RwandaTV.rw",
@@ -156,7 +156,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-TV1.rw",
@@ -182,7 +182,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-TV10.rw",
@@ -208,7 +208,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-3ABNTVUganda.ug",
@@ -234,7 +234,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-AlphaDigital.ug",
@@ -260,7 +260,33 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
+    },
+    {
+      "id": "iptv-ArkTV.ug",
+      "name": "Ark TV",
+      "logo": "https://i.imgur.com/yCHNZXD.png",
+      "category": "religious",
+      "language": "unknown",
+      "country": "UG",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://stream.hydeinnovations.com/arktv-international/index.fmp4.m3u8",
+      "streams": [
+        {
+          "url": "https://stream.hydeinnovations.com/arktv-international/index.fmp4.m3u8",
+          "quality": "FHD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-BBSTV.ug",
@@ -286,7 +312,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-BTV.ug",
@@ -312,7 +338,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-BukeddeTV1.ug",
@@ -338,7 +364,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-BukeddeTV2.ug",
@@ -364,7 +390,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-DreamTV.ug",
@@ -390,7 +416,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-FORTTV.ug",
@@ -416,42 +442,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
-    },
-    {
-      "id": "iptv-GalaxyTV.ug",
-      "name": "Galaxy TV",
-      "logo": "https://i.imgur.com/P5OABe5.png",
-      "category": "music",
-      "language": "unknown",
-      "country": "UG",
-      "categories": [
-        "music"
-      ],
-      "source": "iptv-org",
-      "stream": "https://livestream.galaxytv.ug/jikonkone/playlist.m3u8",
-      "streams": [
-        {
-          "url": "https://livestream.galaxytv.ug/jikonkone/playlist.m3u8",
-          "quality": "AUTO",
-          "label": null,
-          "feed": "SD",
-          "requiresHeaders": false,
-          "referrer": null,
-          "userAgent": null
-        },
-        {
-          "url": "https://stream.castr.com/6463248048d6cd3e143655b2/live_43351ad0f3b411ed81c78fcc31887c54/index.fmp4.m3u8",
-          "quality": "HD",
-          "label": "Not 24/7",
-          "feed": "SD",
-          "requiresHeaders": true,
-          "referrer": "https://player.castr.com/live_43351ad0f3b411ed81c78fcc31887c54",
-          "userAgent": null
-        }
-      ],
-      "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-KRCTV.ug",
@@ -477,7 +468,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-KSTVUganda.ug",
@@ -512,33 +503,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
-    },
-    {
-      "id": "iptv-PraiseJesusTowerTV.ug",
-      "name": "Praise Jesus Tower TV",
-      "logo": "https://i.imgur.com/KT4qIve.png",
-      "category": "religious",
-      "language": "unknown",
-      "country": "UG",
-      "categories": [
-        "religious"
-      ],
-      "source": "iptv-org",
-      "stream": "https://vsrv1.az-streamingserver.com:3555/live/dyjoqlgklive.m3u8",
-      "streams": [
-        {
-          "url": "https://vsrv1.az-streamingserver.com:3555/live/dyjoqlgklive.m3u8",
-          "quality": "SD",
-          "label": null,
-          "feed": "SD",
-          "requiresHeaders": false,
-          "referrer": null,
-          "userAgent": null
-        }
-      ],
-      "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-RwenzoriTV.ug",
@@ -564,7 +529,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-SaltTV.ug",
@@ -590,7 +555,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-TayariWestTV.ug",
@@ -616,7 +581,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-TVWest.ug",
@@ -642,7 +607,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-WanLuoTV.ug",
@@ -668,7 +633,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-AkiliKids.ke",
@@ -694,7 +659,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-CapuchinTV.ke",
@@ -720,7 +685,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-GreatCommissionTV.ke",
@@ -746,7 +711,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-InooroTV.ke",
@@ -772,7 +737,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-K24.ke",
@@ -789,7 +754,7 @@
       "streams": [
         {
           "url": "https://livecdn.premiumfree.tv/afxpstr/K24Backup/index.m3u8",
-          "quality": "AUTO",
+          "quality": "FHD",
           "label": null,
           "feed": "SD",
           "requiresHeaders": false,
@@ -798,7 +763,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-MERUTV.ke",
@@ -824,7 +789,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-MorningCloudTV.ke",
@@ -859,24 +824,24 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
-      "id": "iptv-YOUNIBMediaTV.ke",
-      "name": "YOUNIB Media TV",
-      "logo": "https://i.imgur.com/LtiPOYG.jpg",
-      "category": "religious",
+      "id": "iptv-DodomaTV.tz",
+      "name": "Dodoma TV",
+      "logo": "https://i.imgur.com/bLq9eFa.png",
+      "category": "entertainment",
       "language": "unknown",
-      "country": "KE",
+      "country": "TZ",
       "categories": [
-        "religious"
+        "general"
       ],
       "source": "iptv-org",
-      "stream": "https://goliveafrica.media:9998/live/6257fbe7383d6/index.m3u8",
+      "stream": "https://goliveafrica.media:9998/live/625965017ed69/index.m3u8",
       "streams": [
         {
-          "url": "https://goliveafrica.media:9998/live/6257fbe7383d6/index.m3u8",
-          "quality": "HD",
+          "url": "https://goliveafrica.media:9998/live/625965017ed69/index.m3u8",
+          "quality": "SD",
           "label": "Not 24/7",
           "feed": "SD",
           "requiresHeaders": false,
@@ -885,7 +850,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-IBNTV.tz",
@@ -911,7 +876,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-IBNTVAfrica.tz",
@@ -937,7 +902,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     },
     {
       "id": "iptv-MahaasinTV.tz",
@@ -963,7 +928,7 @@
         }
       ],
       "verified": true,
-      "verifiedRegion": "sandbox-us"
+      "verifiedRegion": "github-actions-us"
     }
   ]
 }
