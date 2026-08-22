@@ -47,15 +47,15 @@
     "category": "sport",
     "language": "english"
   },
-   {
+  {
     "id": "r7",
-    "name": "103.5 Capital Fm ",
+    "name": "103.5 Capital Fm",
     "logo": "https://i.postimg.cc/DwVrQDzd/121244-v8.png",
     "stream": "https://stream.zeno.fm/wmf5p1176juvv",
     "category": "music",
     "language": "kinyarwanda"
   },
-   {
+  {
     "id": "r8",
     "name": "Radio10",
     "logo": "https://i.postimg.cc/xCBfYzTD/imgi-2-s177322d.png",
@@ -63,7 +63,7 @@
     "category": "music",
     "language": "kinyarwanda"
   },
-   {
+  {
     "id": "r9",
     "name": "Kiss FM Romania",
     "logo": "https://i.postimg.cc/YCNh3b28/imgi-4-logod.png",
@@ -71,15 +71,15 @@
     "category": "music",
     "language": "Roman"
   },
-   {
+  {
     "id": "r10",
-    "name": "Apple Music Hits",
-    "logo": "https://i.postimg.cc/CKF4x5LM/imgi-4-logod.jpg",
-    "stream": "https://itsliveradio.apple.com/3p-tune-in/tune_in/1498155548/usw/256.m3u8?accessKey=1781123091_3bd851148d27cc7b4e558be627da93fa_YXgoFRpVZsRGy9%2FqgXM3%2FfrojsEJGfoRefrzyZk%2FmiNF%2BSXwLNol%2B5RwnN2rYiStm3MfeLcXi%2FNRs4y6BZuxbCQIcV3koGD9cFGXX4tv%2FkS%2FwV2%2BYYboZgeF3e6S1RhQ",
+    "name": "Workout Hits",
+    "logo": "https://i.postimg.cc/9QSVjrRQ/imgi-51-workouthits.jpg",
+    "stream": "https://s4-webradio.antenne.de/workout-hits/stream/mp3",
     "category": "music",
     "language": "english"
   },
-   {
+  {
     "id": "r11",
     "name": "Al Jazeera English",
     "logo": "https://i.postimg.cc/FRxKbRhn/imgi-2-s108977d.png",
@@ -88,36 +88,220 @@
     "language": "english"
   },
   {
-    "id": "r1",
+    "id": "r12",
     "name": "BBC World Service",
     "logo": "https://i.postimg.cc/L87ZrsYG/imgi-2-logod.png",
     "stream": "https://as-hls-ww-live.akamaized.net/pool_87948813/live/ww/bbc_world_service/bbc_world_service.isml/bbc_world_service-audio%3d48000.norewind.m3u8",
     "category": "news",
     "language": "english"
   },
-   {
-    "id": "r1",
-    "name": "",
-    "logo": "",
-    "stream": "",
+{
+    "id": "r13",
+    "name": "Heart London",
+    "logo": "https://i.postimg.cc/hGS8cPkc/imgi-49-heartlondon.jpg",
+    "stream": "https://ice-sov.musicradio.com/HeartLondonMP3",
+    "category": "music",
+    "language": "english"
+  },
+  {
+    "id": "r14",
+    "name": "NRJ EDM",
+    "logo": "https://i.postimg.cc/Sx0FZHwq/imgi-44-nrjedm.jpg",
+    "stream": "https://streaming.nrjaudio.fm/ouj3jtnxeb5p",
+    "category": "music",
+    "language": "france"
+  },
+  {
+    "id": "r15",
+    "name": "C-SPAN Radio",
+    "logo": "https://i.postimg.cc/7L6FbDz2/imgi-42-cspanradio.jpg",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/CSPANRADIO.mp3",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "r16",
+    "name": "Charlie Kirk Radio",
+    "logo": "https://i.postimg.cc/hvyxDLqW/imgi-40-charliekirk.jpg",
+    "stream": "https://radio.kirkism.com/kirk",
     "category": "news",
     "language": "english"
   },
    {
-    "id": "r1",
-    "name": "",
-    "logo": "",
-    "stream": "",
+    "id": "r17",
+    "name": "Newsmax Radio",
+    "logo": "https://i.postimg.cc/k5YBtnpN/imgi-36-newsmax.jpg",
+    "stream": "https://playerservices.streamtheworld.com/api/livestream-redirect/NEWSMAX_FM.aac",
     "category": "news",
     "language": "english"
   },
    {
-    "id": "r1",
-    "name": "",
+    "id": "r18",
+    "name": "Fox Talk",
+    "logo": "https://i.postimg.cc/K8dWcLZG/imgi-35-foxtalk.jpg",
+    "stream": "https://live.amperwave.net/direct/foxnewsradio-foxnewsradioaac-imc?source=fnr.web",
+    "category": "news",
+    "language": "english"
+  },
+   {
+    "id": "r19",
+    "name": "KPBS Radio",
+    "logo": "https://i.postimg.cc/vTNzqFTH/imgi-34-kpbs.jpg",
+    "stream": "https://kpbs.streamguys1.com/kpbs-mp3",
+    "category": "news",
+    "language": "english"
+  },
+   {
+    "id": "r20",
+    "name": "Persian VIP",
+    "logo": "https://i.postimg.cc/ZYxWht83/imgi-15-persianvip.jpg",
+    "stream": "https://radio.persianvip.com:8888/;",
+    "category": "music",
+    "language": "english"
+  },
+  {
+    "id": "r22",
+    "name": "Radio Arina",
+    "logo": "https://i.postimg.cc/1tJ1JHFt/imgi-14-radioarina.jpg",
+    "stream": "https://s5.voscast.com:10205/stream",
+    "category": "music",
+    "language": "english"
+  },
+    {
+    "id": "r23",
+    "name": "102.7 KIIS FM",
+    "logo": "https://i.postimg.cc/nLK18ST5/imgi-1-654287501105190f82d6cdda.webp",
+    "stream": "https://cloud.revma.ihrhls.com/zc185?rj-org=n42b-e2&rj-ttl=5&rj-tok=AAABoA7UPbYAyajzcKTSUM1SAA",
+    "category": "music",
+    "language": "english"
+  },
+    {
+    "id": "r24",
+    "name": "CNN",
+    "logo": "https://i.postimg.cc/x8VJ09CF/imgi-71-CNN-logo.png",
+    "stream": "https://tunein.cdnstream1.com/2868_96.mp3",
+    "category": "news",
+    "language": "english"
+  },
+    {
+    "id": "r25",
+    "name": "977 Hitz",
+    "logo": "https://i.postimg.cc/RFHdsCyX/imgi-4-51Z3r7SJmu-L.png",
+    "stream": "http://18863.live.streamtheworld.com/977_HITS_SC",
+    "category": "news",
+    "language": "english"
+  },
+    {
+    "id": "r26",
+    "name": "RMC Info Talk Sport",
+    "logo": "https://i.postimg.cc/rwsTSbhG/imgi-10-images.png",
+    "stream": "https://audio.bfmtv.com/rmcradio_128.mp3?aw_0_1st.playerId=RMC_audio_web&aggregator=RMC_audio_web",
+    "category": "sport",
+    "language": "english"
+  },
+    {
+    "id": "r27",
+    "name": "Citi FM",
+    "logo": "https://i.postimg.cc/DZgppfZj/channels4-profile.jpg",
+    "stream": "https://citi973fm.radioca.st/index.html:80/;stream.mp3",
+    "category": "sport",
+    "language": "english"
+  },
+    {
+    "id": "r28",
+    "name": "Peace FM",
+    "logo": "https://i.postimg.cc/DyXvDRQ7/imgi-123-peacefm-1400x1400-1.jpg",
+    "stream": "https://peacefm-atunwadigital.streamguys1.com/peacefm?",
+    "category": "sport",
+    "language": "english"
+  },
+    {
+    "id": "r29",
+    "name": "Super Sport FM",
+    "logo": "https://i.postimg.cc/C1zJ7G3z/images.png",
+    "stream": "https://r1.cloudskep.com/radio3/supersportfm/icecast.audio",
+    "category": "sport",
+    "language": "english"
+  },
+    {
+    "id": "r30",
+    "name": "181.FM - Old Schoo",
+    "logo": "",
+    "stream": "http://listen.181fm.com/181-oldschool_128k.mp3",
+    "category": "entertainment",
+    "language": "english"
+  },
+    {
+    "id": "r31",
+    "name": " DJ & CLUB CHARTS",
+    "logo": "",
+    "stream": "https://breakz-2012-high.rautemusik.fm/?ref=rb-djclubcharts",
+    "category": "entertainment",
+    "language": "english"
+  },
+   {
+    "id": "r32",
+    "name": "TECHNO",
+    "logo": "",
+    "stream": "https://streams.rautemusik.fm/techno/mp3-192/?ref=radiobrowser",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "r33",
+    "name": "SmoothJazz. ",
+    "logo": "",
+    "stream": "https://smoothjazz.cdnstream1.com/2585_64.aac",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "r34",
+    "name": " ",
     "logo": "",
     "stream": "",
-    "category": "news",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "r35",
+    "name": " ",
+    "logo": "",
+    "stream": "",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "r36",
+    "name": " ",
+    "logo": "",
+    "stream": "",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "r37",
+    "name": " ",
+    "logo": "",
+    "stream": "",
+    "category": "entertainment",
+    "language": "english"
+  },
+  {
+    "id": "r38",
+    "name": " ",
+    "logo": "",
+    "stream": "",
+    "category": "entertainment",
     "language": "english"
   }
+
+
+
+
+
+
+
+
 
 ]

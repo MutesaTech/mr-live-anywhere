@@ -51,7 +51,7 @@
     "id": "7",
     "name": "BTN",
     "logo": "https://i.postimg.cc/wj7Jcm5X/images-1.png",
-    "stream": "https://tv.btnrwanda.com:3086/live/btnlive.m3u8",
+    "stream": "https://tv.btnrwanda.com:3973/live/btnv2live.m3u8",
     "category": "news",
     "language": "kinyarwanda"
   },
@@ -436,7 +436,7 @@
     "name": "Charge!",
     "logo": "https://i.postimg.cc/hjw4rrKK/images.png",
     "stream": "https://fast-channels.sinclairstoryline.com/CHARGE/index_1.m3u8",
-    "category": "TV Shows",
+    "category": "Movies",
     "language": "english"
   },
     {
@@ -508,7 +508,7 @@
     "name": "TV Cultura",
     "logo": "https://i.postimg.cc/xj4TtWwL/images.png",
     "stream": "https://player-tvcultura.stream.uol.com.br/live/tvcultura_lsd.m3u8?vhost=player-tvcultura.stream.uol.com.br",
-    "category": "kids",
+    "category": "education",
     "language": "Portuguese"
   },
    {
@@ -566,11 +566,2278 @@
     "stream": "https://stream.ads.ottera.tv/cl/260514d82qs6b8akdc739g4as0/854x480_550000_3_f.m3u8?i=475_50",
     "category": "kids",
     "language": "english"
+  },
+   {
+    "id": "72",
+    "name": "5-Minute Crafts ",
+    "logo": "https://i.postimg.cc/DfDkMT7k/imgi-61-aade542208ceee1dd2c608fe42c0375c.webp",
+    "stream": "https://amg02051-soulpublishing-amg02051c7-plex-us-306.playouts.now.amagi.tv/ts-us-e2-n1/playlist/amg02051-amg02051c7-306/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac7353db80148b61299bce8c37683f03409a5e5afba358b1ebb75e10d16cf5b11f559c2641ef9f43c8821da688d20dca5e8074f215ccc4f1dddb42d786f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad68e406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8ea4981ea1f885e28d715b822799bb5c61988853a03bd4f172b1/35/320x180_550000/index.m3u8",
+    "category": "education",
+    "language": "english"
+  },
+  {
+    "id": "73",
+    "name": "RT documentary",
+    "logo": "https://i.postimg.cc/HkFF64mn/imgi-63-7ab9a956d38f2361c92545120dee2a95.webp",
+    "stream": "https://rt-rtd.rttv.com/dvr/rtdoc/playlist_800Kb.m3u8",
+    "category": "education",
+    "language": "english"
+  },
+  {
+    "id": "74",
+    "name": "TCM",
+    "logo": "https://i.postimg.cc/VsM9tqGT/imgi-65-af00a626f71e3a3dfadb5a5c8ffa086c.webp",
+    "stream": "https://live.tcm10.com.br/tcm10hd/stream.m3u8",
+    "category": "education",
+    "language": "english"
+  },
+  {
+    "id": "75",
+    "name": "Negocios TV Live",
+    "logo": "https://i.postimg.cc/dVcxdQ9c/imgi-63-c85fd0cf3f525e62451b720289c9851f.webp",
+    "stream": "https://negociostv-negociostv-samsunges.amagi.tv/playlist480p.m3u8",
+    "category": "education",
+    "language": "english"
+  },
+  {
+    "id": "76",
+    "name": "CTR",
+    "logo": "https://i.postimg.cc/CKB76W7C/imgi-63-dd1a297f1f16bf6cb34cf077ae7cd041.webp",
+    "stream": "https://stmv2.voxtvhd.com.br/crtvchile/crtvchile/playlist.m3u8?hls_ctx=5160bcy3",
+    "category": "education",
+    "language": "english"
+  },
+  {
+    "id": "77",
+    "name": "Une TV HN Live",
+    "logo": "https://i.postimg.cc/7YRTQbW3/imgi-59-f7a011032d35bbe2a51f265fe83f8578.webp",
+    "stream": "https://amixtv.com:8081/unetvhn/tracks-v1a1/mono.ts.m3u8",
+    "category": "education",
+    "language": "spanish"
+  },
+  {
+    "id": "78",
+    "name": "Sat 7",
+    "logo": "https://i.postimg.cc/ZKtLgKv8/images.png",
+    "stream": "https://svs.itworkscdn.net/sat7kidslive/sat7kids.smil/sat7kidspublish/sat7kids_240p/chunks_dvr.m3u8",
+    "category": "education",
+    "language": "english"
+  },
+   {
+    "id": "79",
+    "name": "Sat 7 kids",
+    "logo": "https://i.postimg.cc/ZKtLgKv8/images.png",
+    "stream": "https://svs.itworkscdn.net/sat7kidslive/sat7kids.smil/sat7kidspublish/sat7kids_240p/chunks_dvr.m3u8",
+    "category": "Religious",
+    "language": "english"
+  },
+   {
+    "id": "80",
+    "name": "Negocios",
+    "logo": "https://i.postimg.cc/dVcxdQ9c/imgi-63-c85fd0cf3f525e62451b720289c9851f.webp",
+    "stream": "https://negociostv-negociostv-samsunges.amagi.tv/playlist480p.m3u8",
+    "category": "news",
+    "language": "spanish"
+  },
+   {
+    "id": "81",
+    "name": "Canal De Deportes",
+    "logo": "https://i.postimg.cc/CKB76W7C/imgi-63-dd1a297f1f16bf6cb34cf077ae7cd041.webp",
+    "stream": "https://stmv2.voxtvhd.com.br/crtvchile/crtvchile/playlist.m3u8?hls_ctx=5160bcy3",
+    "category": "sports",
+    "language": "english"
+  },
+   {
+    "id": "82",
+    "name": "Chile Live",
+    "logo": "https://i.postimg.cc/CKB76W7C/imgi-63-dd1a297f1f16bf6cb34cf077ae7cd041.webp",
+    "stream": "https://stmv2.voxtvhd.com.br/crtvchile/crtvchile/playlist.m3u8?hls_ctx=5160bcy3",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "83",
+    "name": "Une TV HN ",
+    "logo": "https://i.postimg.cc/7YRTQbW3/imgi-59-f7a011032d35bbe2a51f265fe83f8578.webp",
+    "stream": "https://amixtv.com:8081/unetvhn/tracks-v1a1/mono.ts.m3u8",
+    "category": "Documentary",
+    "language": "spanish"
+  },
+  {
+    "id": "84",
+    "name": "Une TV ",
+    "logo": "https://i.postimg.cc/7YRTQbW3/imgi-59-f7a011032d35bbe2a51f265fe83f8578.webp",
+    "stream": "https://amixtv.com:8081/unetvhn/tracks-v1a1/mono.ts.m3u8",
+    "category": "news",
+    "language": "spanish"
   }
-  
-
-
-
-
+  ,{
+    "id": "85",
+    "name": "TV UNAM ",
+    "logo": "https://i.postimg.cc/fRjDSrmj/imgi-64-90740042f10b769eb9368e0007125578.webp",
+    "stream": "https://5fc584f3f19c9.streamlock.net/tvunam/videotvunam/chunklist_w17948383_DVR.m3u8",
+    "category": "education",
+    "language": "spanish"
+  },
+  {
+    "id": "86",
+    "name": "ARD Alpha ",
+    "logo": "https://i.postimg.cc/tC4MNvKN/imgi-63-d659168679666e20ad9d36dd3ab55f55.webp",
+    "stream": "https://mcdn.br.de/br/fs/ard_alpha/hls/int/master270p700.m3u8",
+    "category": "education",
+    "language": "German"
+  },
+  {
+    "id": "87",
+    "name": "TV UFMA",
+    "logo": "https://i.postimg.cc/sXXtgVpW/imgi-61-7e14eadd6dccc864f2c280ee74954319.webp",
+    "stream": "https://media-gmcdn.eduplay.rnp.br/live/NhvbchzlulkhY8kQ0hHNuQ'''''''1'/CFypFL3SnHR0/720_index.m3u8",
+    "category": "education",
+    "language": "Portuguese"
+  },
+  {
+    "id": "88",
+    "name": "Wild Earth",
+    "logo": "https://i.postimg.cc/CKFKJqgG/imgi-56-fa9ce50e5372b0370d861138ca7e935f.webp",
+    "stream": "https://wildearth-plex.amagi.tv/masterR432p.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "89",
+    "name": "RT",
+    "logo": "https://i.postimg.cc/HkFF64mn/imgi-63-7ab9a956d38f2361c92545120dee2a95.webp",
+    "stream": "https://rt-rtd.rttv.com/dvr/rtdoc/playlist_800Kb.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "90",
+    "name": "DW ",
+    "logo": "https://i.postimg.cc/zBhXGSwk/imgi-62-dd20dc7ce12901f45a5f100a4cc97032.webp",
+    "stream": "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/stream01/streamPlaylist.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "91",
+    "name": "Adventure Earth",
+    "logo": "https://i.postimg.cc/9ML1zZWc/imgi-59-8964689ffab6b835bfc53e18f535f45d.webp",
+    "stream": "https://a57e9c69976649b582a8d7604c00e69a.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RlaxxTV-eu_AdventureEarth/87e1d859-0906-4f28-a5f6-f46c7ae31204/2.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "92",
+    "name": "flash TV",
+    "logo": "https://i.postimg.cc/Y9YQgFfm/imgi-4-47494.png",
+    "stream": "https://fn.rtsp.me/YUkhmlUVyulQo8VMIw3Kag/1786878605/hls/BU1Lr9xabYEDqX7k.m3u8?ip=41.186.200.193",
+    "category": "news",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "93",
+    "name": "Demais TV",
+    "logo": "https://i.postimg.cc/wMj7wsY7/imgi-62-5a0ca2ab1c68adcde7bf577af87071b8.webp",
+    "stream": "https://stmv1.samcast.com.br/demaistv6503/demaistv6503/playlist.m3u8",
+    "category": "education",
+    "language": "Portuguese"
+  },
+   {
+    "id": "94",
+    "name": "B+ Live",
+    "logo": "https://i.postimg.cc/j2pv0446/channels4-profile.jpg",
+    "stream": "https://tv.btnrwanda.com:3432/live/bpluslive.m3u8",
+    "category": "Movies",
+    "language": "kinyarwanda"
+  },
+   {
+    "id": "95",
+    "name": "Flash",
+    "logo": "https://i.postimg.cc/Y9YQgFfm/imgi-4-47494.png",
+    "stream": "https://fn.rtsp.me/YUkhmlUVyulQo8VMIw3Kag/1786878605/hls/BU1Lr9xabYEDqX7k.m3u8?ip=41.186.200.193",
+    "category": "entertainment",
+    "language": "kinyarwanda"
+  },
+  {
+    "id": "96",
+    "name": "Love The Planet ",
+    "logo": "https://i.postimg.cc/xT6k756X/imgi-61-0051dffef6555ae2d69b59e63b301b3b.webp",
+    "stream": "https://amg01821-lovetvchannels-lovetheplanetsp-tivify-tivify-vycsr.amagi.tv/480p/index.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+ {
+    "id": "97",
+    "name": "Nature Time",
+    "logo": "https://i.postimg.cc/85wD5KJw/imgi-59-76c1f7bf76617738201aa7ad7ca01972.webp",
+    "stream": "https://amg00090-blueantmedia-naturetime-samsungfr-yakbf.amagi.tv/ts-eu-w1-n2/playlist/amg00090-blueantmedia-naturetime-samsungfr/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac7353db80148b61299bce8c37683f03409a5e5afba358b1ebb0594cdc65a9e51e559c2640b19f43c8821da6d1d20a9c5ed370f3479897f2d98042d385f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad68e406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8fa695ad203284cedfa33419cb95e505f1722b14911a25853419db/183/640x360_1020800/index.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "98",
+    "name": "Law & Crime",
+    "logo": "https://i.postimg.cc/j2V9Ryvf/imgi-56-63229ccfd54091b1956faf9e645b74c7.webp",
+    "stream": "https://a-cdn.klowdtv.com/live3/law_720p/chunks.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "99",
+    "name": "Weather Spy",
+    "logo": "https://i.postimg.cc/ZnZcfHwS/imgi-36-6a9309fe1901184164369c6b83f61e4b.webp",
+    "stream": "https://d12gab6t5iutxf.cloudfront.net/playlist_384x216.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "100",
+    "name": "Taiwan Plus",
+    "logo": "https://i.postimg.cc/yxbDJYgy/imgi-37-0f21a8334286d31135e8569ed96f417c.webp",
+    "stream": "https://fastly.live.brightcove.com/6385235869112/ap-northeast-1/6282251407001/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJob3N0IjoiaWU4OWZvLmVncmVzcy5pdjNqZDgiLCJhY2NvdW50X2lkIjoiNjI4MjI1MTQwNzAwMSIsImVobiI6ImZhc3RseS5saXZlLmJyaWdodGNvdmUuY29tIiwiaXNzIjoiYmxpdmUtcGxheWJhY2stc291cmNlLWFwaSIsInN1YiI6InBhdGhtYXB0b2tlbiIsImF1ZCI6WyI2MjgyMjUxNDA3MDAxIl0sImp0aSI6IjYzODUyMzU4NjkxMTIifQ.4c-V1Ks3nBx9nRljtn5-jCNP_nLuWBbk-pw9BFWZfMQ/chunklist__0.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "101",
+    "name": "History Lab",
+    "logo": "https://i.postimg.cc/jjxRbYC7/imgi-64-1dd08ff2959bb19209a7a49b72765d53.webp",
+    "stream": "https://5f204aff97bee.streamlock.net/RTTRlive/livestream/chunklist_w245236039.m3u8",
+    "category": "Documentary",
+    "language": "etalian"
+  },
+  {
+    "id": "102",
+    "name": "SR Fernsehen",
+    "logo": "https://i.postimg.cc/yYpGdqfF/imgi-59-2e753ee9fed1eca3d7998807c155cf61.webp",
+    "stream": "https://srfs.akamaized.net/hls/live/689649/srfsgeo/master-540p-1728.m3u8",
+    "category": "Documentary",
+    "language": "German"
+  },
+   {
+    "id": "103",
+    "name": "Taiwan Plus Live",
+    "logo": "https://i.postimg.cc/yxbDJYgy/imgi-37-0f21a8334286d31135e8569ed96f417c.webp",
+    "stream": "https://fastly.live.brightcove.com/6385235869112/ap-northeast-1/6282251407001/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJob3N0IjoiaWU4OWZvLmVncmVzcy5pdjNqZDgiLCJhY2NvdW50X2lkIjoiNjI4MjI1MTQwNzAwMSIsImVobiI6ImZhc3RseS5saXZlLmJyaWdodGNvdmUuY29tIiwiaXNzIjoiYmxpdmUtcGxheWJhY2stc291cmNlLWFwaSIsInN1YiI6InBhdGhtYXB0b2tlbiIsImF1ZCI6WyI2MjgyMjUxNDA3MDAxIl0sImp0aSI6IjYzODUyMzU4NjkxMTIifQ.4c-V1Ks3nBx9nRljtn5-jCNP_nLuWBbk-pw9BFWZfMQ/chunklist__0.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+    {
+    "id": "104",
+    "name": "Qatar TV 1",
+    "logo": "https://i.postimg.cc/nLrcmtxR/imgi-52-ee69b2eb0023723121240108bb15daab.webp",
+    "stream": "https://qatartv.akamaized.net/hls/live/20000609/qtv1/stream_02/index.m3u8",
+    "category": "Documentary",
+    "language": "Arabic"
+  },
+   {
+    "id": "104",
+    "name": "Qatar Tv 1",
+    "logo": "https://i.postimg.cc/nLrcmtxR/imgi-52-ee69b2eb0023723121240108bb15daab.webp",
+    "stream": "https://qatartv.akamaized.net/hls/live/20000609/qtv1/stream_02/index.m3u8",
+    "category": "news",
+    "language": "Arabic"
+  },
+  {
+    "id": "105",
+    "name": "Xphere Wild",
+    "logo": "https://i.postimg.cc/hGcVRv9T/imgi-63-2af4dd316afda72cb7c982a399289623.webp",
+    "stream": "https://stmv2.voxtvhd.com.br/xpherewild/xpherewild/playlist.m3u8?hls_ctx=5y6yn57a",
+    "category": "Documentary",
+    "language": "spanish"
+  },
+  {
+    "id": "106",
+    "name": "Surf Cinema",
+    "logo": "https://i.postimg.cc/pXMYRPMm/imgi-58-1102a03699a66e2eea64c375aa738c9a.webp",
+    "stream": "https://amg13231-actve-amg13231c4-plex-us-1821.playouts.now.amagi.tv/acTVe-surfer-ono/playlist1080P.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "107",
+    "name": "Motorvision",
+    "logo": "https://i.postimg.cc/XqqMv9Cr/imgi-59-85358cbfb4c84a0eb47a98f5c9ceca01.webp",
+    "stream": "https://stream.ads.ottera.tv/cl/260816da0populb8oc73ddq4dg/854x480_1355200_2_f.m3u8?i=475_757",
+    "category": "Documentary",
+    "language": "spanish"
+  },
+  {
+    "id": "108",
+    "name": "People Are Awesome",
+    "logo": "https://i.postimg.cc/kG08T3WX/imgi-56-e55d3f6f2a75879017f1850561af0d1c.webp",
+    "stream": "https://jukin-peopleareawesome-2-ca.samsung.wurl.tv/1200.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "109",
+    "name": "ABC News",
+    "logo": "https://i.postimg.cc/nh8NN3xF/imgi-59-ec432b3a9f86ac0b68d68ce11c20dd99.webp",
+    "stream": "https://aegis-cloudfront-1.tubi.video/d6cbb0de-68e4-4f3b-82f9-bf5d526e0bde/index_3.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "110",
+    "name": "CNA Live",
+    "logo": "https://i.postimg.cc/TwZZG0bB/imgi-51-22820071256fad3110f9b05a1fa086a9.webp",
+    "stream": "https://d2e1asnsl7br7b.cloudfront.net/7782e205e72f43aeb4a48ec97f66ebbe/index_3.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "111",
+    "name": "TVídeoNews",
+    "logo": "https://i.postimg.cc/CLJfQQkP/imgi-64-58399bd0987147a2d4380e3a8cdbee1c.webp",
+    "stream": "https://video01.logicahost.com.br/tvideonews/tvideonews/chunklist_w1992804748.m3u8",
+    "category": "Documentary",
+    "language": "Portuguese"
+  },
+  {
+    "id": "112",
+    "name": "Nosey",
+    "logo": "https://i.postimg.cc/GhmZR00S/imgi-58-2dde61405eae0d8c4cc66c7fd0532911.webp",
+    "stream": "https://nosey-3-us.plex.wurl.tv/2000.m3u8",
+    "category": "Documentary",
+    "language": "spanish"
+  },
+  {
+    "id": "113",
+    "name": "Al Jazeera Documentary",
+    "logo": "https://i.postimg.cc/BZK0yf0X/imgi-52-baddfc8370c837760f60cd223c2ad7be.webp",
+    "stream": "https://live-hls-web-aja-gcp.thehlive.com/AJA/04.m3u8",
+    "category": "Documentary",
+    "language": "Arabic"
+  },
+  {
+    "id": "114",
+    "name": "Love Wine ",
+    "logo": "https://i.postimg.cc/zXQTfhQj/imgi-59-999031671dfbf04262fc9c57d42b8253.webp",
+    "stream": "https://amg01821-lovetvchannels-lovewinespain-tivify-tivify-9ajng.amagi.tv/480p/index.m3u8",
+    "category": "Documentary",
+    "language": "spanish"
+  },
+  {
+    "id": "115",
+    "name": "Channel 13 Israel",
+    "logo": "https://i.postimg.cc/76vVZWBS/imgi-52-04f11e34700f1f415d2e631764d7bbae.webp",
+    "stream": "https://d2xg1g9o5vns8m.cloudfront.net/out/v1/66d4ac8748ce4a9298b4e40e48d1ae2f/index_3.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+{
+    "id": "116",
+    "name": "BBC News",
+    "logo": "https://i.postimg.cc/kXFX1R3J/imgi-59-ba538316bebf174f0064368c0cacda41.webp",
+    "stream": "https://dash2.antik.sk/live/test_bbc_world/playlist.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "117",
+    "name": "Bongo Play",
+    "logo": "https://i.postimg.cc/nz2fKB9W/Chat-GPT-Image-Aug-15-2026-07-25-37-PM.png",
+    "stream": "https://goliveafrica.media:9998/live/6258185b02c25/index.m3u8",
+    "category": "Music",
+    "language": "swahili"
+  },
+  {
+    "id": "118",
+    "name": "Safari Channel",
+    "logo": "https://i.postimg.cc/nz2fKB9W/Chat-GPT-Image-Aug-15-2026-07-25-37-PM.png",
+    "stream": "https://stream-134630.castr.net/5fe35eae8c53540cab83659a/live_12bb7dc0590211f1951119e8afeb4224/tracks-v1/index.fmp4.m3u8",
+    "category": "Documentary",
+    "language": "swahili"
+  },
+   {
+    "id": "119",
+    "name": "Bxx tv Live",
+    "logo": "https://i.postimg.cc/QCLF4HVr/images.jpg",
+    "stream": "https://fl1004.bozztv.com/ushba-mafia/tracks-v1a1/mono.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+   {
+    "id": "120",
+    "name": "Activa",
+    "logo": "https://i.postimg.cc/nLbFS563/7ec1b88db8493f5426d662878c90025f-removebg-preview.png",
+    "stream": "https://streamtv.mediasector.es/hls/activatv/1_2/index.m3u8?tkn=86011797",
+    "category": "Music",
+    "language": "spanish"
+  },
+  {
+    "id": "121",
+    "name": "Afrobeat TV",
+    "logo": "https://i.postimg.cc/W3qFypj6/imgi-34-afrobeat.jpg",
+    "stream": "https://stream.ecable.tv/afbtv/tracks-v3a1/mono.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "122",
+    "name": "CBS News",
+    "logo": "https://i.postimg.cc/yY8B6Q3S/imgi-28-thumb.jpg",
+    "stream": "https://cbsn-us.cbsnstream.cbsnews.com/out/v1/55a8648e8f134e82a470f83d562deeca/master_24.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "123",
+    "name": "Bloomberg",
+    "logo": "https://i.postimg.cc/m2tq60Fm/imgi-28-thumb.png",
+    "stream": "https://liveproduseast.global.ssl.fastly.net/us/Channel-USTV-AWS-virginia-2/Source-USTV-10000-1-slxdlg-BP-HD-6-l58G2tjrUlU7_live.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "124",
+    "name": "CPAC Canada",
+    "logo": "https://i.postimg.cc/wBHwHP30/imgi-28-thumb.jpg",
+    "stream": "https://cpac-ca-live.cdn.vustreams.com/groupa/live/f9809cea-1e07-47cd-a94d-2ddd3e1351db/live.isml/live-video_track=2400000.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "125",
+    "name": "France 24 ",
+    "logo": "https://i.postimg.cc/PJ8W1zPz/imgi-34-france24.png",
+    "stream": "https://amg00106-amg00106c1-rakuten-uk-4654.playouts.now.amagi.tv/ts-eu-w1-n2/playlist/amg00106-france24fast-france24-rakutenuk/a11489c8-9989-11f1-a2f6-32d236f6448a/122/1280x720_3329040/index.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "126",
+    "name": "Newsmax ",
+    "logo": "https://i.postimg.cc/Hx8ztCNW/imgi-28-thumb.png",
+    "stream": "https://nmxlive.akamaized.net/hls/live/529965/Live_1/2.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "127",
+    "name": "RSBN",
+    "logo": "https://i.postimg.cc/x8YmbDDR/imgi-27-thumb.jpg",
+    "stream": "https://1a-1791.com/live/qt9k24wa/slot-74/dajb-6soi_360p/chunklist_DVR.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "128",
+    "name": "WION",
+    "logo": "https://i.postimg.cc/QC0F9Fqb/imgi-35-thumb.png",
+    "stream": "https://d7x8z4yuq42qn.cloudfront.net/index_7.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "129",
+    "name": "TRT World",
+    "logo": "https://i.postimg.cc/SKFxKLp1/imgi-28-thumb.jpg",
+    "stream": "https://tv-trtworld.medya.trt.com.tr/master_720.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "130",
+    "name": "Newsy",
+    "logo": "https://i.postimg.cc/2yPPxwGw/imgi-34-newsy.jpg",
+    "stream": "https://content-ausw2-up-1.uplynk.com/channel/4bb4901b934c4e029fd4c1abfc766c37/d.m3u8?pbs=b03b423b8ef14bb7a29eb08d16ce8560",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "131",
+    "name": "RAV TV",
+    "logo": "https://i.postimg.cc/N0nqMBTf/imgi-28-thumb.png",
+    "stream": "https://d2jiqiw4g5lj5k.cloudfront.net/v1/manifest/3722c60a815c199d9c0ef36c5b73da68a62b09d1/AmericasVoiceChannel-prod/480430bc-9e51-46e5-8e66-3c643c0a30a7/1.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "132",
+    "name": "Worldview Tube",
+    "logo": "https://i.postimg.cc/3wsSVRm0/imgi-28-thumb.png",
+    "stream": "https://live.worldviewtube.com/wvw/live/ngrp:live_all/chunklist_b2728000.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "133",
+    "name": "Cheddar News",
+    "logo": "https://i.postimg.cc/QdbKvn75/imgi-34-cheddarnews.png",
+    "stream": "https://hls.livecdn.io/cheddar.com/cheddar/cheddar.com/cheddarTS_240p/chunks.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "134",
+    "name": "NTD New",
+    "logo": "https://i.postimg.cc/DfLZtMkd/imgi-34-ntdnews.jpg",
+    "stream": "https://amg17596-amg17596c1-ntdtv-worldwide-3276.playouts.now.amagi.tv/ts-us-e2-n2/playlist/amg17596-newtangdynastytelevision-ntdtv-ntdtvworldwide/cb54381f65736d8884c83f66cef049a3f9431fde1d6988693eb5518975d10725dce2b48be65b9e3608dd4087351a6c545677ab4096295dd7d763b820743c4b21fdcde00080dd0d0cb1df11292ca36265299a7369cc350f7bd2ec5a2f803ebe764c53cb017c593f88f258a8774cc59e0a957f39f6f28f3865284a3cce0b0ca7f941a6fce64346de7eb5b31f1e967945efd75fc0dd14ef9dd55ac8429b7ef2139e8fa2ded345808ec331aa5fb1353b76480df10e9bf0b33f84edd80f0b8b7026421f2797c9f1df684c4cc3de3e8299eab977f610cff345cb0065f868ca3edd862f66fe69c74137c0cddbbf222167848e364021b2eca38bb41e3aba67f7abd33512168cdb1b624ec561d96d7e76c0bd83388dcd008eed63a4ba6d0f37c99505cac8e9c3dfb9954f9065938eb4b92d52426633078476ab8e228e7a8a36fb98536977657080b619848ad055352268838355db5a5b9ad3998cd20b749b354a14b82e8915552ce13b6e75e928b9a93d6a883403ca606eac1666d63091d24bd4a9dff70932b1aca513aa158fbf6983a25b490cedfbe50794380f8991640ead3f8e262a197df0635c/149/640x360_1057680/index.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "135",
+    "name": "NBC LX",
+    "logo": "https://i.postimg.cc/HndgG3Xj/imgi-34-nbclx.jpg",
+    "stream": "https://nbculocallive.akamaized.net/hls/live/2037096/lx/use1_2.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "136",
+    "name": "Now News",
+    "logo": "https://i.postimg.cc/1tKdFSVt/imgi-34-newsoftheworld.jpg",
+    "stream": "https://nowhls.wns.live/hls/stream.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "137",
+    "name": "Global News",
+    "logo": "https://i.postimg.cc/52wSy3C9/imgi-34-globalnews.png",
+    "stream": "https://live.corusdigitaldev.com/groupd/live/49a91e7f-1023-430f-8d66-561055f3d0f7/live.isml/live-audio_1=96000-video=2499968.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "138",
+    "name": "CityNews  Toronto",
+    "logo": "https://i.postimg.cc/tg8WpvqZ/imgi-35-thumb.jpg",
+    "stream": "https://citynewsregional.akamaized.net/hls/live/1024052/Regional_Live_7/Video-3MBPS.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "139",
+    "name": "CityNews Vancouver",
+    "logo": "https://i.postimg.cc/tg8WpvqZ/imgi-35-thumb.jpg",
+    "stream": "https://citynewsregional.akamaized.net/hls/live/1024054/Regional_Live_9/Video-3MBPS.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+   {
+    "id": "140",
+    "name": "CityNews Calgaryr",
+    "logo": "https://i.postimg.cc/tg8WpvqZ/imgi-35-thumb.jpg",
+    "stream": "https://citynewsregional.akamaized.net/hls/live/1024053/Regional_Live_8/Video-3MBPS.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "141",
+    "name": "ICI Television",
+    "logo": "https://i.postimg.cc/vZHNVTWf/imgi-34-icitv.png",
+    "stream": "https://amdici.akamaized.net/hls/live/873426/ICI-Live-Stream/Video-3MBPS.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "142",
+    "name": "ICI RDI",
+    "logo": "https://i.postimg.cc/rsDpsMQB/imgi-34-icirdi.jpg",
+    "stream": "https://rcavlive.akamaized.net/hls/live/704025/xcanrdi/master_1200.m3u8",
+    "category": "news",
+    "language": "french"
+  },
+  {
+    "id": "143",
+    "name": "The First TV",
+    "logo": "https://i.postimg.cc/VN4sFdTr/imgi-34-thefirst.png",
+    "stream": "https://thefirst-oando.amagi.tv/480p-cc/index.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "144",
+    "name": "NHK World",
+    "logo": "https://i.postimg.cc/Fzbh7z06/imgi-34-nhkworld.png",
+    "stream": "https://nhk.lls.pbs.org/index_720p.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "145",
+    "name": "rirang TV",
+    "logo": "https://i.postimg.cc/QCmv2TQF/imgi-34-arirang.jpg",
+    "stream": "https://amdlive-ch01-ctnd-com.akamaized.net/arirang_1ch/smil:arirang_1ch.smil/chunklist_b656000_sleng.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "146",
+    "name": "Free Speech ",
+    "logo": "https://i.postimg.cc/nzkdrtCw/imgi-34-fstv.png",
+    "stream": "https://edge.fstv-live-linear-channel.top.comcast.net/Content/HLS_HLSv3/Live/channel(b168a609-19c1-2203-ae1d-6b9726f05e67)/01.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "147",
+    "name": "Euronews",
+    "logo": "https://i.postimg.cc/t4ktFzXZ/imgi-34-euronews.png",
+    "stream": "https://a-cdn.klowdtv.com/live3/euronews_720p/chunks.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "148",
+    "name": "Yahoo Finance",
+    "logo": "https://i.postimg.cc/fbFdv21t/imgi-28-thumb.png",
+    "stream": "https://yahoo-plex.amagi.tv/720p-cc/index.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "149",
+    "name": "Mordovia 24",
+    "logo": "https://i.postimg.cc/90cQPyXm/imgi-34-mordovia24.png",
+    "stream": "https://live-mordovia24.cdnvideo.ru/mordovia24/streamtr/tracks-v1a1/mono.ts.m3u8?hls_proxy_host=2db07a74c5b7654a3f7784ccb4131e64",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "150",
+    "name": "KXXV Texas",
+    "logo": "https://i.postimg.cc/NjmZtS76/imgi-34-kxxv.png",
+    "stream": "https://content-ausw2-up-1.uplynk.com/channel/d98542382d0b49b2b573f1653590e346/d.m3u8?pbs=9d9709247c424ffd8bcbe0ffc9b281af",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "151",
+    "name": "ABC 10 San Diego",
+    "logo": "https://i.postimg.cc/P55K37V1/imgi-28-thumb.jpg",
+    "stream": "https://content-ausw2-up-1.uplynk.com/channel/6b5dd91d4efc46aa93549daf0c208501/a.m3u8?pbs=d79dec05765b41e982fa245d9523979d",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "152",
+    "name": "Fox Weather",
+    "logo": "https://i.postimg.cc/Rh8CkyQ1/imgi-34-foxweather.jpg",
+    "stream": "https://247wlive.foxweather.com/stream/index_960x540.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "153",
+    "name": "WeatherSpy",
+    "logo": "https://i.postimg.cc/WpDdnwwB/imgi-35-weatherspy.jpg",
+    "stream": "https://jukin-weatherspy-2-in.samsung.wurl.tv/3000.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "154",
+    "name": "Mir 24",
+    "logo": "https://i.postimg.cc/rpKTkQsj/imgi-28-thumb.png",
+    "stream": "https://hls-mirtv.cdnvideo.ru/mirtv-parampublish/mir24_2500/tracks-v1a1/mono.ts.m3u8?hls_proxy_host=ceb47544f8d5cb4dd083338710e69ccd",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "155",
+    "name": "Russia Today",
+    "logo": "https://i.postimg.cc/fLN8KRGT/imgi-34-russiatoday.png",
+    "stream": "https://rt-glb.rttv.com/dvr/rtnews/playlist_800Kb.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "156",
+    "name": "RBC TV Russia",
+    "logo": "https://i.postimg.cc/CKkg5dCM/imgi-34-rbctv.png",
+    "stream": "https://online-video.rbc.ru/online/rbctvhd_480p/index.m3u8?e=e2&t=kRhmMA",
+    "category": "news",
+    "language": "Russian"
+  },
+  {
+    "id": "157",
+    "name": "Moscow 24",
+    "logo": "https://i.postimg.cc/52KzQZQZ/imgi-28-thumb.png",
+    "stream": "https://www.m24.ru/trans/air/170p.m3u8?e=1786910400&s=_DLwOShuw0z2jJAgmBMhaA",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "158",
+    "name": "M2O TV",
+    "logo": "https://i.postimg.cc/BQwWS2F4/imgi-28-thumb.jpg",
+    "stream": "https://streamcdnb1-4c4b867c89244861ac216426883d1ad0.msvdn.net/live/S62628868/uhdWBlkC1AoO/chunklist_b2428000.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "159",
+    "name": "Circle Country",
+    "logo": "https://i.postimg.cc/br7Qg6Mv/imgi-34-circlecountry.jpg",
+    "stream": "https://circle-samsung.amagi.tv/720p-vtt/index.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "160",
+    "name": "Magic TV",
+    "logo": "https://i.postimg.cc/L8TfMm5n/imgi-34-magictv2.png",
+    "stream": "https://bss1.neterra.tv/magictv/stream_1.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "161",
+    "name": "Sky Folk TV",
+    "logo": "https://i.postimg.cc/nLXLwxDJ/imgi-28-skyfolktv.jpg",
+    "stream": "https://us.live.skyfolk.mk/live.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "162",
+    "name": "Spirit",
+    "logo": "https://i.postimg.cc/J0MMmCGn/imgi-34-spirittv.jpg",
+    "stream": "https://cdnlive.myspirit.tv/LS-ATL-43240-2/tracks-v2a1/mono.ts.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "163",
+    "name": "Kuriakos Music",
+    "logo": "https://i.postimg.cc/MHN5VqV6/imgi-34-kuriakos.jpg",
+    "stream": "https://w2.manasat.com/kmusic/smil:kmusic.smil/chunklist_w47555530_b413000_sleng.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "164",
+    "name": "4 Fun TV",
+    "logo": "https://i.postimg.cc/9QV8pXsj/imgi-34-4fun.png",
+    "stream": "https://stream.4fun.tv:8888/hls/4f_low/index.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "165",
+    "name": "Retro Music",
+    "logo": "https://i.postimg.cc/k5RbRKwN/imgi-29-thumb.png",
+    "stream": "https://stream.mediawork.cz/retrotv/retrotvHQ1/chunklist_w1786224306.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "166",
+    "name": "Feva Music",
+    "logo": "https://i.postimg.cc/jqMSKC4r/imgi-35-thumb.png",
+    "stream": "https://d2y0xw9ugf4if7.cloudfront.net/scheduler/scheduleMaster/417/variant/22100012.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "167",
+    "name": "Tezaur Folc ",
+    "logo": "https://i.postimg.cc/0jzR9591/imgi-34-tezaurtv.png",
+    "stream": "https://oldkors-k0y7s.cfgdwrkr.workers.dev/?url=http://tezaur.mlbfan.org/tezaur/index.m3u8",
+    "category": "Music",
+    "language": ""
+  },
+  {
+    "id": "168",
+    "name": "XITE",
+    "logo": "https://i.postimg.cc/fRDs9NKf/imgi-28-thumb.png",
+    "stream": "https://oldkors-k0y7s.cfgdwrkr.workers.dev/?url=https%3A%2F%2Fxite-rakuten.amagi.tv%2F720p-vtt%2Findex.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "169",
+    "name": "Deejay TV",
+    "logo": "https://i.postimg.cc/XY7hW7Lx/imgi-28-thumb.png",
+    "stream": "https://streamcdnb3-4c4b867c89244861ac216426883d1ad0.msvdn.net/live/S85984808/sMO0tz9Sr2Rk/chunklist_b2428000.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "170",
+    "name": "Kronehit TV",
+    "logo": "https://i.postimg.cc/Fs13XMcY/imgi-28-thumb.jpg",
+    "stream": "https://bitcdn-kronehit.bitmovin.com/v2/hls/chunklist_b828000.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "171",
+    "name": "Radio Italia",
+    "logo": "https://i.postimg.cc/wBz1MZtS/imgi-34-radioitalia.png",
+    "stream": "https://radioitaliatv.akamaized.net/hls/live/2093117/RadioitaliaTV/stream03/streamPlaylist.m3u8",
+    "category": "Music",
+    "language": "italian"
+  },
+  {
+    "id": "172",
+    "name": "Company TV",
+    "logo": "https://i.postimg.cc/cHn1cc8m/imgi-34-companytv.png",
+    "stream": "https://5929b138b139d.streamlock.net/CompanyTV/smil:CompanyTV.smil/chunklist_w668506166_b878000_slita.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "173",
+    "name": "Euro Indie",
+    "logo": "https://i.postimg.cc/26RNCNVG/imgi-28-thumb.png",
+    "stream": "https://oldkors-k0y7s.cfgdwrkr.workers.dev/?url=http%3A%2F%2Feuroindiemusic.icdndhcp.com%3A1935%2Feuroindiemusic%2Feuroindiemusic%2Fchunklist_w89708072.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "174",
+    "name": "Kiss TV",
+    "logo": "https://i.postimg.cc/CxB256yx/imgi-34-kisstv-(1).png",
+    "stream": "https://tv.broadcasting.ro/kisstv/a629c031-2170-4ee9-a36d-87a891aa3131_output_0.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "175",
+    "name": "Baraza TV",
+    "logo": "https://i.postimg.cc/xTKRZD2V/imgi-35-barazatv.jpg",
+    "stream": "https://eco.streams.ovh:8081/barazatv/tracks-v1a1/mono.m3u8",
+    "category": "Music",
+    "language": ""
+  },
+  {
+    "id": "176",
+    "name": "NRG 91 ",
+    "logo": "https://i.postimg.cc/ZqgpRVS6/imgi-28-thumb.png",
+    "stream": "https://oldkors-k0y7s.cfgdwrkr.workers.dev/?url=http%3A%2F%2Ftv.nrg91.gr%3A1935%2Fonweb%2Flive%2Fchunklist_w1436871658.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "177",
+    "name": "Ocko",
+    "logo": "https://i.postimg.cc/RhTWcTj6/imgi-34-ockotv.jpg",
+    "stream": "https://ocko-live-dash.ssl.cdn.cra.cz/cra_live2/ocko.stream.1.smil/chunklist_b2628000.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "178",
+    "name": "Ocko Gold",
+    "logo": "https://i.postimg.cc/RhTWcTj6/imgi-34-ockotv.jpg",
+    "stream": "https://ocko-live-dash.ssl.cdn.cra.cz/cra_live2/ocko_gold.stream.1.smil/chunklist_b2628000.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "179",
+    "name": "Ocko Expres",
+    "logo": "https://i.postimg.cc/s2psQ2Fw/imgi-34-ockoexpres.jpg",
+    "stream": "https://ocko-live-dash.ssl.cdn.cra.cz/cra_live2/ocko_expres.stream.1.smil/chunklist_b2628000.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "180",
+    "name": "Piterpan",
+    "logo": "https://i.postimg.cc/x88wRf7Q/imgi-34-piterpantv.jpg",
+    "stream": "https://58d921499d3d3.streamlock.net/RadioPiterpanTV/livestream/chunklist_w655433376.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "181",
+    "name": "Country FM",
+    "logo": "https://i.postimg.cc/Dzjkb4j2/imgi-35-thumb.jpg",
+    "stream": "https://live-stranafm.cdnvideo.ru/stranafm/smil:stranafm.smil/99ee104b38f852cdee1e10c0807eda2c--stranafm--stranafm_hd.sdp--tracks-v1a1--mono.m3u8?hls_proxy_host=4cf1db3cb92056e052625ba031e2e718",
+    "category": "Music",
+    "language": "Russian"
+  },
+  {
+    "id": "182",
+    "name": "3ABN Praise Him",
+    "logo": "https://i.postimg.cc/3NLDsBn7/imgi-34-3abnpraisehimmusic.jpg",
+    "stream": "https://3abn.bozztv.com/3abn1/PraiseHim/smil:PraiseHim.smil/chunklist_w533677557_b728000_slen.m3u8?nimblesessionid=792139751",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "183",
+    "name": "On Air TV",
+    "logo": "https://i.postimg.cc/RV6FC40c/imgi-34-onairtv.png",
+    "stream": "https://oldkors-k0y7s.cfgdwrkr.workers.dev/?url=http%3A%2F%2Fweb.onair-radio.eu%3A1935%2FAlpha-Host%2FAlpha-Host%2Fchunklist_w1611843892.m3u8",
+    "category": "Music",
+    "language": ""
+  },
+  {
+    "id": "184",
+    "name": "Kiss Kiss Italia",
+    "logo": "https://i.postimg.cc/DftWX8Hp/imgi-34-kisskissitalia.jpg",
+    "stream": "https://59253971be783.streamlock.net/KKTV01/livestream/chunklist_w59971571.m3u8",
+    "category": "Music",
+    "language": "italian"
+  },
+  {
+    "id": "185",
+    "name": "Vevo TV",
+    "logo": "https://i.postimg.cc/0yZ2cQX1/imgi-34-vevo.png",
+    "stream": "https://d3150hggbcolbo.cloudfront.net/360p/index.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "186",
+    "name": "Vevo Pop",
+    "logo": "https://i.postimg.cc/SxZkcPjW/imgi-36-thumb.jpg",
+    "stream": "https://amg00056-amg00056c7-rakuten-de-3245.playouts.now.amagi.tv/480p/index.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "187",
+    "name": "Vevo Schlager",
+    "logo": "https://i.postimg.cc/0yZ2cQX1/imgi-34-vevo.png",
+    "stream": "https://amg00056-amg00056c15-rakuten-it-3241.playouts.now.amagi.tv/480p/index.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "188",
+    "name": "1Muz",
+    "logo": "https://i.postimg.cc/R0rGpS35/imgi-27-1muz.jpg",
+    "stream": "https://oldkors-k0y7s.cfgdwrkr.workers.dev/?url=http://hz1.teleport.cc/HLS/HD.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "189",
+    "name": "Fashion TV",
+    "logo": "https://i.postimg.cc/C56q7PWL/imgi-28-thumb.png",
+    "stream": "https://ftv1.b-cdn.net/bfdbb576-83f7-11f0-9f89-0200170e3e04_1000028043_HLS/video_7201280_p_0.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "190",
+    "name": "World Fashion ",
+    "logo": "https://i.postimg.cc/65J2WZBx/imgi-34-worldfashion.jpg",
+    "stream": "https://cdn.wfc.tv/cdn/stream-eng-720p.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+   {
+    "id": "191",
+    "name": "World Fashion Russia ",
+    "logo": "https://i.postimg.cc/65J2WZBx/imgi-34-worldfashion.jpg",
+    "stream": "https://cdn.wfc.tv/cdn/stream-rus-720p.m3u8",
+    "category": "fashion",
+    "language": ""
+  },
+  {
+    "id": "192",
+    "name": "Code Fashion",
+    "logo": "https://i.postimg.cc/2jwRyRDS/imgi-34-codefashion.jpg",
+    "stream": "https://cdn2.invivo.bg/Codefashion_5500/tracks-v3a1/mono.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "193",
+    "name": "Fashion One",
+    "logo": "https://i.postimg.cc/nz2RFxQ4/imgi-27-fashionone.jpg",
+    "stream": "https://b01c02nl.mediatriple.net/videoonlylive/mtkgeuihrlfwlive/broadcast_5c9e2ee690051.smil/chunklist_b400000.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "194",
+    "name": "Global Fashion ",
+    "logo": "https://i.postimg.cc/DyJgDLBV/imgi-35-thumb.png",
+    "stream": "https://pubgfc.teleosmedia.com/linear/globalfashionchannel/globalfashionchannel/cdbe280e-0aea-4bbe-861f-fd115abcfec7_360p.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "195",
+    "name": "Miami TV",
+    "logo": "https://i.postimg.cc/FFqbj1mk/imgi-35-miamitv.png",
+    "stream": "https://9cb0b5022c1c499ebe9e915fb85e9193.mediatailor.us-east-2.amazonaws.com/v1/manifest/c3d3fd1c31fa281b88eab2cd253e2ca576b6628b/fast-MiamiTV/b29243a5-73f7-44e1-9dcb-3db963c13da1/0.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "196",
+    "name": "Kaloopy TV",
+    "logo": "https://i.postimg.cc/66RVftQf/imgi-35-thumb.jpg",
+    "stream": "https://viewtvnetwork.viewtv.cloud/media/7f3413aa-e6e7-4527-9917-2de863a66988/playlist_0.m3u8?_uid=06512484-4768-41a2-955a-bf3cb70b2f52&rK=c3&_did=2ae096f0-bb86-f8d9-a613-eaa9e155d57f",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "197",
+    "name": "Super Yacht ",
+    "logo": "https://i.postimg.cc/kXsbT4dd/imgi-35-thumb.png",
+    "stream": "https://sy.wns.live/hls/stream.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "198",
+    "name": "Fashion Finds",
+    "logo": "https://i.postimg.cc/4xnmwQ5s/imgi-27-thumb.jpg",
+    "stream": "https://qvc-amd-live.akamaized.net/hls/live/2034113/lsqvc5us/medlow.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "199",
+    "name": "QVC Beauty",
+    "logo": "https://i.postimg.cc/5Ny4MNFT/imgi-27-qvcbeauty.png",
+    "stream": "https://qvc-amd-live.akamaized.net/hls/live/2034113/lsqvc1uscln/med.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "200",
+    "name": "QVC Beauty 2",
+    "logo": "https://i.postimg.cc/GtNZRRZq/imgi-34-qvc2.png",
+    "stream": "https://qvc-amd-live.akamaized.net/hls/live/2034113/lsqvc2uscln/med.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "201",
+    "name": "QVC Beauty 3",
+    "logo": "https://i.postimg.cc/4d20vZNT/imgi-28-thumb.jpg",
+    "stream": "https://qvc-amd-live.akamaized.net/hls/live/2034113/lsqvc3uscln/medhigh.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "202",
+    "name": "QVC Kitchen",
+    "logo": "https://i.postimg.cc/NG9tNPqw/imgi-35-thumb.png",
+    "stream": "https://qvc-amd-live.akamaized.net/hls/live/2034113/lsqvc4uscln/medlow.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "203",
+    "name": "GEMS TV",
+    "logo": "https://i.postimg.cc/dVBc7bdr/imgi-34-gemstv.jpg",
+    "stream": "https://lo3.gemporia.com/abrgemporiaukgfx/smil:livestream.smil/chunklist_w269220699_b798000.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "204",
+    "name": "Gem Shopping",
+    "logo": "https://i.postimg.cc/05m3KgRT/imgi-34-gemshoppingnetwork.png",
+    "stream": "https://amg01460-gemshoppingnetw-gem-ono-x662c.amagi.tv/playlist360p.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "205",
+    "name": "Jewellery Maker",
+    "logo": "https://i.postimg.cc/Vv6dT98K/imgi-34-jewellerymaker.png",
+    "stream": "https://livecdn.use1-0004.jwplive.com/live/sites/2hbjTQ4s/media/oe7UD7Ag/live.isml/live-video=3000000.m3u8",
+    "category": "fashion",
+    "language": "english"
+  },
+  {
+    "id": "206",
+    "name": "Rakuten documentary",
+    "logo": "https://i.postimg.cc/qM2L4n6S/imgi-27-thumb.png",
+    "stream": "https://ead2625dd95b42dabfd015fadcf144e3.mediatailor.eu-west-1.amazonaws.com/v1/manifest/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6222/6add7b3e-f99c-415b-8ce0-01cd58d0b37b/5.m3u8",
+    "category": "Documentary",
+    "language": "english"
+  },
+  {
+    "id": "207",
+    "name": "Rakuten Family",
+    "logo": "https://i.postimg.cc/qM2L4n6S/imgi-27-thumb.png",
+    "stream": "https://48faa1daf24549fab34594bc5bdd99f2.mediatailor.eu-west-1.amazonaws.com/v1/manifest/0547f18649bd788bec7b67b746e47670f558b6b2/production-LiveChannel-6213/8e3cb0a6-0972-411d-b430-1e7d28a953d7/5.m3u8",
+    "category": "kids",
+    "language": "english"
+  },
+  {
+    "id": "208",
+    "name": "Biz TV",
+    "logo": "https://i.postimg.cc/pXyHSW9b/imgi-34-biztv.jpg",
+    "stream": "https://fl.biztv.media/biz_tv_720_uni8jhub4h8fub4idejswh8dh3j94finbu4nidj39inwsj92in3d/tracks-v1a1/mono.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "209",
+    "name": "BBC Drama",
+    "logo": "https://i.postimg.cc/kGqx5YbT/imgi-34-bbcdrama.jpg",
+    "stream": "https://amg00793-amg00793c41-rakuten-it-5445.playouts.now.amagi.tv/720p/index.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "210",
+    "name": "Carac 1",
+    "logo": "https://i.postimg.cc/9Ff7N7tj/imgi-28-thumb.jpg",
+    "stream": "https://edge17.vedge.infomaniak.com/livecast/ik:event/chunklist_w128414603.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+   {
+    "id": "211",
+    "name": "Carac 2",
+    "logo": "https://i.postimg.cc/9Ff7N7tj/imgi-28-thumb.jpg",
+    "stream": "https://edge18.vedge.infomaniak.com/livecast/ik:onefmmd/chunklist_w382398123_b300360.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "212",
+    "name": "Carac 4",
+    "logo": "https://i.postimg.cc/9Ff7N7tj/imgi-28-thumb.jpg",
+    "stream": "https://edge17.vedge.infomaniak.com/livecast/ik:compack_media_1/chunklist_w885693571_b300000.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+   {
+    "id": "301",
+    "name": "Carac 4 Live",
+    "logo": "https://i.postimg.cc/9Ff7N7tj/imgi-28-thumb.jpg",
+    "stream": "https://edge17.vedge.infomaniak.com/livecast/ik:compack_media_1/chunklist_w885693571_b300000.m3u8",
+    "category": "Music",
+    "language": "english"
+  },
+  {
+    "id": "213",
+    "name": "TV100 Greece",
+    "logo": "https://i.postimg.cc/zD4ypcvY/imgi-28-thumb.jpg",
+    "stream": "https://gwebstream.net/hls/stream_1.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "214",
+    "name": "Groovy TV",
+    "logo": "https://i.postimg.cc/TP21p87w/imgi-34-groovytv.jpg",
+    "stream": "https://web.onair-radio.eu/groovytv/groovytv/chunklist_w1969434738.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "215",
+    "name": "Dove Channel",
+    "logo": "https://i.postimg.cc/kMR4Vvcp/imgi-27-dovechannel.png",
+    "stream": "https://linear-896.frequency.stream/dist/xumo/896/hls/master/playlist_1280x720.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "216",
+    "name": "AfroLand ",
+    "logo": "https://i.postimg.cc/8zZDX74M/imgi-28-thumb.jpg",
+    "stream": "https://alt-al.otteravision.com/alt/al/al_720p.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "217",
+    "name": "Revry TV",
+    "logo": "https://i.postimg.cc/RZp5QjCV/imgi-27-revrytv.jpg",
+    "stream": "https://03e7e5beea1d42fea576037d67f531eb.mediatailor.us-east-1.amazonaws.com/v1/manifest/44f73ba4d03e9607dcd9bebdcb8494d86964f1d8/RakutenTV-eu_Revry/0b96e3e9-149c-4a13-98a5-a8b7b13aa1e4/0.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "218",
+    "name": "Comet TV",
+    "logo": "https://i.postimg.cc/fTMG4wJs/imgi-28-thumb.png",
+    "stream": "https://fast-channels.sinclairstoryline.com/COMET/index_5_0.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "219",
+    "name": "BBC Doctor Who Classic",
+    "logo": "https://i.postimg.cc/5ybRM3Nf/imgi-36-thumb.jpg",
+    "stream": "https://bbc-classicdrwho-1-us.xumo.wurl.tv/3000.m3u8",
+    "category": "Movies",
+    "language": "english"
+  }, 
+  {
+    "id": "220",
+    "name": "MyTime Movie",
+    "logo": "https://i.postimg.cc/GmHSr9r2/imgi-34-mytimemovie.jpg",
+    "stream": "https://appletree-mytime-samsungbrazil.amagi.tv/playlist720p.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "221",
+    "name": "30A Classic ",
+    "logo": "https://i.postimg.cc/C5cmppQf/imgi-35-thumb.jpg",
+    "stream": "https://30a-tv.com/feeds/720p/52.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "222",
+    "name": "MovieSphere",
+    "logo": "https://i.postimg.cc/MpCtSDdN/imgi-28-thumb.jpg",
+    "stream": "https://moviesphereuk-samsunguk.amagi.tv/360p-vtt/index.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "223",
+    "name": "Cowboy Movie",
+    "logo": "https://i.postimg.cc/sfTcXyT9/imgi-28-thumb.jpg",
+    "stream": "https://streams2.sofast.tv/sofast2/v1/0197c4fd45d01ea506ec94c3cd653/0197c4fdae7a1ea506492547d864d/cowboy_movie_eng_2500k.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "224",
+    "name": "CrimeFlix",
+    "logo": "https://i.postimg.cc/cJG7jJJy/imgi-28-thumb.png",
+    "stream": "https://dgx2snzx175pa.cloudfront.net/scheduler/scheduleMaster/391/variant/22099984/d3972c1a-c572-4b58-b637-9edcb0993804.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "225",
+    "name": "24 Hour Free ",
+    "logo": "https://i.postimg.cc/8Cbv0B3c/imgi-27-24hourfreemovies.jpg",
+    "stream": "https://d1j2u714xk898n.cloudfront.net/scheduler/scheduleMaster/145/variant/22099475.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "226",
+    "name": "YTA TV",
+    "logo": "https://i.postimg.cc/MKjQS84h/imgi-28-thumb.png",
+    "stream": "https://yta.unitedteleports.tv/hls/YTA/720-HD/YTA-720SCTE35.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "227",
+    "name": "Electric Now",
+    "logo": "https://i.postimg.cc/BvZ5sV2g/imgi-28-thumb.png",
+    "stream": "https://amg01705-amg01705c1-amgplt0274.playout.now3.amagi.tv/720p-cc/index.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "228",
+    "name": "Brat TV",
+    "logo": "https://i.postimg.cc/g2m8qTtc/imgi-35-brattv.jpg",
+    "stream": "https://brat-samsung-us.amagi.tv/720p-vtt/index.m3u8",
+    "category": "Movies",
+    "language": "english"
+  },
+  {
+    "id": "229",
+    "name": "Horse TV",
+    "logo": "https://i.postimg.cc/XvZJwKb2/imgi-35-thumb.jpg",
+    "stream": "https://a-cdn.klowdtv.com/live2/horsetv_720p/chunks.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "230",
+    "name": "ACC Digital Network",
+    "logo": "https://i.postimg.cc/c48X52c1/imgi-27-accdn.jpg",
+    "stream": "https://raycom-accdn-firetv.amagi.tv/720p-cc/index.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "231",
+    "name": "MAVTV",
+    "logo": "https://i.postimg.cc/BtWc0ZCg/imgi-34-mavtv3.jpg",
+    "stream": "https://amg00378-mavtv-amg00378c2-rakuten-us-1048.playouts.now.amagi.tv/ts-us-e2-n2/playlist/amg00378-mavtvfast-motorsportsnetwork-rakutenus/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac7353db80148b61299bce8c37683f03409a5e5afba358b1ebb05b408d6ba3e34d559c2613e19f43c8821da6d2dd09975ed470a4479fc0a1ddd2158185f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad68e406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8ea3951ea186fced8d7146daaf0aabc5315e3eab80833d456e7b/48/640x360_1020588/index.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "232",
+    "name": "FIFA Plus",
+    "logo": "https://i.postimg.cc/YCHZNtwW/imgi-34-fifaplus.jpg",
+    "stream": "https://a62dad94.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0ZJRkFQbHVzRW5nbGlzaF9ITFM/28482722-d75d-425f-adae-5f1ff26f6b60/2.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "233",
+    "name": "FIFA TV",
+    "logo": "https://i.postimg.cc/YCHZNtwW/imgi-34-fifaplus.jpg",
+    "stream": "https://d2w9q46ikgrcwx.cloudfront.net/v1/sysdata_s_p_a_fifa_7/samsungheadend_us/V00000002/0/HLS/playlist_3000k_20260604T024843.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "234",
+    "name": "NHL TV",
+    "logo": "https://i.postimg.cc/mk3NTfpz/imgi-28-thumb.png",
+    "stream": "https://aegis-cloudfront-1.tubi.video/1f4cbb33-cb23-40ab-b54b-2965cc551b32/playlist720p.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "235",
+    "name": "MLB TV",
+    "logo": "https://i.postimg.cc/SNr754Mz/imgi-28-thumb.png",
+    "stream": "https://aegis-cloudfront-1.tubi.video/36ef2f9d-7100-4c4d-b41a-dbf41ab7e461/playlist_1280x720.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "236",
+    "name": "Motorsports 1",
+    "logo": "https://i.postimg.cc/Y0xgJNj5/imgi-28-thumb.jpg",
+    "stream": "https://digicom.hls.iptvdc.com/motorstv/tracks-v2a1/mono.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "237",
+    "name": "Motorsports1",
+    "logo": "https://i.postimg.cc/Y0xgJNj5/imgi-28-thumb.jpg",
+    "stream": "https://digicom.hls.iptvdc.com/motorstv/tracks-v2a1/mono.m3u8",
+    "category": "cars",
+    "language": "english"
+  },
  
+  {
+    "id": "238",
+    "name": "Canal Motor",
+    "logo": "https://i.postimg.cc/8Crv1gjJ/imgi-28-thumb.png",
+    "stream": "https://digicom.hls.iptvdc.com/canalmotor/tracks-v2a1/mono.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+   {
+    "id": "239",
+    "name": "CanalMotor",
+    "logo": "https://i.postimg.cc/8Crv1gjJ/imgi-28-thumb.png",
+    "stream": "https://digicom.hls.iptvdc.com/canalmotor/tracks-v2a1/mono.m3u8",
+    "category": "cars",
+    "language": "english"
+  },
+  {
+    "id": "240",
+    "name": "ATG TV",
+    "logo": "https://i.postimg.cc/gJWxmwCQ/imgi-34-atgtv.jpg",
+    "stream": "https://kanal75xto-llhls.akamaized.net/live/Data/atg-kanal-15-02a-rr/HLS-Legacy-HL/atg-kanal-15-02a-rr-avc1_700000=4211053591-mp4a_128000=497751258.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "241",
+    "name": "Racing Australia",
+    "logo": "https://i.postimg.cc/jdFCCkVX/imgi-35-thumb.png",
+    "stream": "https://racingvic-i.akamaized.net/hls/live/598695/racingvic/index_1.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "242",
+    "name": "Super Tennis",
+    "logo": "https://i.postimg.cc/dQWVSSVW/imgi-28-thumb-(1).png",
+    "stream": "https://corsply-v0s4.cfgdwrkr.workers.dev/?url=https%3A%2F%2Famg01935-amg01935c1-amgplt0165.playout.now3.amagi.tv%2F720p-cc%2Findex.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "243",
+    "name": "30A Golf Kingdom",
+    "logo": "https://i.postimg.cc/C5cmppQf/imgi-35-thumb.jpg",
+    "stream": "https://30a-tv.com/feeds/720p/53.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "244",
+    "name": "BBC Top Gear",
+    "logo": "https://i.postimg.cc/J7dRQDTW/imgi-28-thumb.png",
+    "stream": "https://amg00793-amg00793c5-xumo-us-2664.playouts.now.amagi.tv/bbcstudios-bbctopgear8min-all/playlist720-tp.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+   {
+    "id": "245",
+    "name": "BBCTopGear",
+    "logo": "https://i.postimg.cc/J7dRQDTW/imgi-28-thumb.png",
+    "stream": "https://amg00793-amg00793c5-xumo-us-2664.playouts.now.amagi.tv/bbcstudios-bbctopgear8min-all/playlist720-tp.m3u8",
+    "category": "cars",
+    "language": "english"
+  },
+  {
+    "id": "246",
+    "name": "Game Plus",
+    "logo": "https://i.postimg.cc/Bn5WRXCq/imgi-34-gametv.jpg",
+    "stream": "https://a-cdn.klowdtv.com/live2/fntsy_720p/chunks.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "247",
+    "name": "beIN Sports Xtra",
+    "logo": "https://i.postimg.cc/RVKVVCT2/imgi-29-thumb.jpg",
+    "stream": "https://corsply-v0s4.cfgdwrkr.workers.dev/?url=https%3A%2F%2Fbein-beinxtrasports-firetv.amagi.tv%2FplaylistR576p.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "248",
+    "name": "Kozoom TV",
+    "logo": "https://i.postimg.cc/GmM0b6Zd/imgi-34-kozoomtv2.jpg",
+    "stream": "https://streams2.sofast.tv/v1/manifest/611d79b11b77e2f571934fd80ca1413453772ac7/fdd6f243-f971-4a1a-9510-97ac01d6b37f/fd8d73aa-ef21-49f5-bf9b-e5b95e07cdf3/1.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "249",
+    "name": "Sportitalia",
+    "logo": "https://i.postimg.cc/c4ZPwsSV/imgi-28-thumb.jpg",
+    "stream": "https://amg01370-italiansportcom-sportitalia-rakuten-3hmdb.amagi.tv/ts-us-e2-n1/playlist/rakutenAA-sportitalia-rakuten/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac7353db80148b61299bce8c37683f03409a5e5afba358b1ebb05943da3ff4b549559c2613b69f43c8821da6d1d60acf5e8723f911c893f6d8d412d0d2f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad68e406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8ea09f1ea1dbe9ed8d714e79567274d47440db818425f260c9fc/72/640x360_1020800/index.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "250",
+    "name": "PAC 12 Insider",
+    "logo": "https://i.postimg.cc/YC0nz0sj/imgi-34-pac12.png",
+    "stream": "https://pac12-samsungus.amagi.tv/720p-en-webvtt/index.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "251",
+    "name": "Turkmenistan",
+    "logo": "https://i.postimg.cc/T1TQL3bR/imgi-34-turkmenistansport.jpg",
+    "stream": "https://corsply-v0s4.cfgdwrkr.workers.dev/?url=https%3A%2F%2Falpha.tv.online.tm%2Fhls%2Fch004_720%2Findex.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "252",
+    "name": "DAZN Combat",
+    "logo": "https://i.postimg.cc/DwRgQgGD/imgi-35-thumb.png",
+    "stream": "https://aegis-cloudfront-1.tubi.video/bfad29e2-5bee-44f3-8256-127324e8b106/360p-cc/index.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "253",
+    "name": "Glory Kickboxing",
+    "logo": "https://i.postimg.cc/KcQDpFLb/imgi-34-glorykickboxing.jpg",
+    "stream": "https://6f972d29.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0dsb3J5S2lja2JveGluZ19ITFM/eb132b5d-acdb-4899-8f99-fa01812d3870/2.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "254",
+    "name": "Fuel TV",
+    "logo": "https://i.postimg.cc/Kc9trfSy/imgi-34-fueltv.png",
+    "stream": "https://amg01074-fueltv-fueltvemeaen-rakuten-b6j62.amagi.tv/ts-us-e2-n1/playlist/rakutenAA-fueltvemeaen/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac7353db80148b61299bce8c37683f03409a5e5afba358b1ebb70843da3ea4e31d559c2613b59f43c8821da6d18752cc5e8127a046c990f9ded513d383f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad68e406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8fa69fa92032f4d1d3a3347a0b60d7ed20de531e6da389e6897966/127/1280x720_2657600/index.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "255",
+    "name": "Unbeaten",
+    "logo": "https://i.postimg.cc/3R8D24tq/imgi-30-thumb.jpg",
+    "stream": "https://oldkors-k0y7s.cfgdwrkr.workers.dev/?url=https%3A%2F%2Funbeaten-tcl.amagi.tv%2F720p-cc%2Findex.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "256",
+    "name": "Shooting Sports Life",
+    "logo": "https://i.postimg.cc/CKYZVnTN/imgi-28-thumb.jpg",
+    "stream": "https://linear-1312.frequency.stream/dist/shootingsportslife/1312/hls/master/playlist_1280x720.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "257",
+    "name": "90 TV",
+    "logo": "https://i.postimg.cc/DmkvdR79/imgi-27-thumb.jpg",
+    "stream": "https://streaming.astrakhan.ru/astrakhanrusporthd/tracks-v4a1/mono.ts.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+   {
+    "id": "258",
+    "name": "90TV",
+    "logo": "https://i.postimg.cc/DmkvdR79/imgi-27-thumb.jpg",
+    "stream": "https://streamtv.as3sport.online:3394/hybrid/play.m3u8",
+    "category": "sports",
+    "language": "english"
+  },
+  {
+    "id": "259",
+    "name": "1 TV",
+    "logo": "https://i.postimg.cc/kGccKvf8/download.jpg",
+    "stream": "https://tv.nucast.tv/lb/gpb-1tv/index.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+  {
+    "id": "260",
+    "name": "DLTV",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "https://cdn-live.dltv.ac.th/smil:origin01-dltv-01-adaptive.smil/chunklist_b3128000_slth.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+   {
+    "id": "261",
+    "name": "DLTV 10",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "https://cdn-live.dltv.ac.th/smil:origin02-dltv-10-adaptive.smil/chunklist_b3128000_slth.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+  {
+    "id": "262",
+    "name": "DLTV 11",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "https://cdn-live.dltv.ac.th/smil:origin03-dltv-11-adaptive.smil/chunklist_b3128000_slth.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+ 
+ {
+    "id": "263",
+    "name": "DLTV 12",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "https://cdn-live.dltv.ac.th/smil:origin03-dltv-12-adaptive.smil/chunklist_b3128000_slth.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+  {
+    "id": "264",
+    "name": "DLTV 13",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "https://cdn-live.dltv.ac.th/smil:origin03-dltv-12-adaptive.smil/chunklist_b3128000_slth.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+  {
+    "id": "265",
+    "name": "DLTV 14",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "https://cdn-live.dltv.ac.th/smil:origin03-dltv-13-adaptive.smil/chunklist_b3128000_slth.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+   {
+    "id": "266",
+    "name": "DLTV 15",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "https://cdn-live.dltv.ac.th/dltv15.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+   {
+    "id": "267",
+    "name": "DLTV 2",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "",
+    "category": "education",
+    "language": "Thailand"
+  },
+  {
+    "id": "268",
+    "name": "DLTV 2",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "https://cdn-live.dltv.ac.th/dltv02.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+
+  {
+    "id": "269",
+    "name": "DLTV 3",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "https://cdn-live.dltv.ac.th/smil:origin01-dltv-03-adaptive.smil/chunklist_b3128000_slth.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+   {
+    "id": "270",
+    "name": "DLTV 4",
+    "logo": "https://i.postimg.cc/02W8C6X9/imgi-2-fzngqhp.png",
+    "stream": "https://cdn-live.dltv.ac.th/smil:origin01-dltv-04-adaptive.smil/chunklist_b3128000_slth.m3u8",
+    "category": "education",
+    "language": "Thailand"
+  },
+  {
+    "id": "271",
+    "name": "EBS 1",
+    "logo": "https://i.postimg.cc/cH0RB568/imgi-27-j41nwj3.png",
+    "stream": "https://ebsonair.ebs.co.kr/groundwavefamilypc/familypc1m/chunklist.m3u8",
+    "category": "education",
+    "language": "Korea"
+  },
+   {
+    "id": "272",
+    "name": "EBS 2",
+    "logo": "https://i.postimg.cc/cH0RB568/imgi-27-j41nwj3.png",
+    "stream": "https://ebsonair.ebs.co.kr/ebs2familypc/familypc1m/chunklist.m3u8",
+    "category": "education",
+    "language": "Korea"
+  },
+  {
+    "id": "273",
+    "name": "EBS English",
+    "logo": "https://i.postimg.cc/cH0RB568/imgi-27-j41nwj3.png",
+    "stream": "https://ebsonair.ebs.co.kr/plus3familypc/familypc1m/chunklist.m3u8",
+    "category": "education",
+    "language": "Korea"
+  },
+   {
+    "id": "274",
+    "name": "EBS 1plus",
+    "logo": "https://i.postimg.cc/cH0RB568/imgi-27-j41nwj3.png",
+    "stream": "https://ebsonair.ebs.co.kr/plus1familypc/familypc1m/chunklist.m3u8",
+    "category": "education",
+    "language": "Korea"
+  },
+  {
+    "id": "275",
+    "name": "Elektrika Tv",
+    "logo": "https://i.postimg.cc/4xpwvcwD/imgi-2-dc6vdd7.png",
+    "stream": "https://rtmp.elektrika.cz/live/myStream.sdp/chunklist_w1035129251.m3u8",
+    "category": "education",
+    "language": ""
+  },
+  {
+    "id": "276",
+    "name": "Leominster",
+    "logo": "https://i.postimg.cc/CLSjy247/imgi-2-douto3e.png",
+    "stream": "https://livestream.telvue.com/leominster2/f7b44cfafd5c52223d5498196c8a2e7b.sdp/leominster2/stream1/chunks.m3u8",
+    "category": "education",
+    "language": ""
+  },
+  {
+    "id": "277",
+    "name": "Litus",
+    "logo": "https://i.postimg.cc/qvCB1JCm/imgi-2-ivs9fny.png",
+    "stream": "https://edge.enhdtv.com/litustv/tracks-v1a1/mono.m3u8",
+    "category": "education",
+    "language": ""
+  },
+  {
+    "id": "278",
+    "name": "The South EST",
+    "logo": "https://i.postimg.cc/7hyQrNBG/imgi-2-dgdfksh.png",
+    "stream": "https://selu-tv.cablecast.tv/live/stream-1/WIFI-1096k-360p.m3u8?duration=0",
+    "category": "education",
+    "language": ""
+  },
+  {
+    "id": "279",
+    "name": "24 horas",
+    "logo": "https://i.postimg.cc/qM79TbRg/imgi-4-8rzvt6l.png",
+    "stream": "https://rtvelivestream.rtve.es/rtvesec/24h/24h_main_dvr_360.m3u8",
+    "category": "news",
+    "language": "spanish"
+  },
+  {
+    "id": "280",
+    "name": "24 Tv",
+    "logo": "https://i.postimg.cc/4NnFMYLb/imgi-6-uoebrex.png",
+    "stream": "https://turkmedya-live.ercdn.net/tv24/tv24_1080p.m3u8",
+    "category": "news",
+    "language": ""
+  },
+  {
+    "id": "281",
+    "name": "Lionel Nation",
+    "logo": "https://i.postimg.cc/CxGC6Ygm/imgi-2-6lvyt12.png",
+    "stream": "https://30a-tv.com/feeds/720p/50.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "282",
+    "name": "ahaber",
+    "logo": "https://i.postimg.cc/FKFPy1LY/imgi-8-ypydtba.png",
+    "stream": "https://trkvz-live.ercdn.net/ahaberhd/ahaberhd_720p.m3u8?st=kdG0xMNVLVn_77359Jp5uA&e=1787195670",
+    "category": "news",
+    "language": ""
+  },
+  {
+    "id": "283",
+    "name": "Para",
+    "logo": "https://i.postimg.cc/50Rc6Tn7/imgi-9-bhqmpgd.png",
+    "stream": "https://trkvz-live.ercdn.net/aparahd/aparahd_360p.m3u8?st=F2JH6MOyDBUezel3oQoH6g&e=1787195878",
+    "category": "news",
+    "language": ""
+  },
+  {
+    "id": "284",
+    "name": "A24 Live",
+    "logo": "https://i.postimg.cc/v8CBKNbt/imgi-12-kwvwvao.png",
+    "stream": "https://g5.vxral-slo.transport.edge-access.net/a12/ngrp:a24-100056_all/a24-100056_240p.m3u8",
+    "category": "news",
+    "language": ""
+  },
+  {
+    "id": "285",
+    "name": "ABP ANAND",
+    "logo": "https://i.postimg.cc/7ZHyt3Gd/imgi-19-jrbshbe.png",
+    "stream": "https://d2l4ar6y3mrs4k.cloudfront.net/live-streaming/ananda-livetv/master_180.m3u8",
+    "category": "news",
+    "language": ""
+  },
+  {
+    "id": "286",
+    "name": "waff",
+    "logo": "https://i.postimg.cc/gj1nqM20/imgi-59-3-1x1.jpg",
+    "stream": "https://dai.google.com/linear/hls/pa/event/ptWa6ttLTJGbdw9boKTakA/stream/4e480910-dce1-4d66-80ce-719202decd58:GRQ/variant/0c7f0f69829d39822766ceb1d4289839/bandwidth/4776000.m3u8",
+    "category": "news",
+    "language": "english"
+  },
+  {
+    "id": "287",
+    "name": "Abc 30",
+    "logo": "https://i.postimg.cc/RFHFC7Td/imgi-3-WBMA-160.png",
+    "stream": "https://csm-e-cesinclairlusordlive-102180472.bln1.yospace.com/csm/extlive/sbgtvprd01,wbma-hls-1080p/1.m3u8;jsessionid=233686F6E13C6EBCB2EAB6978052DBF4.csm-e-cesinclairlusordlive-102180472.bln1.yospace.com?yo.av=4&yo.rpt=30&yo.ap=https%3A%2F%2Fyospace-ads-nonprod.nonprod-sinclairstoryline.com%2F&yo.cps=a.mw.d.n.15.3x.r&yo.t.jt=1000&yo.t.pf=8000&cst.override=true&screen=1600x900&viewport=1600x731",
+    "category": "news",
+    "language": ""
+  },
+  {
+    "id": "288",
+    "name": "ACI Sport",
+    "logo": "https://i.postimg.cc/rw72VvYF/imgi-2-evfazef.png",
+    "stream": "https://webstream.multistream.it/memfs/e2cb3629-c1a2-495b-b43a-9eb386f04ed8_output_0.m3u8?session=FX3E9HxeciqKVE8AkEMka8",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "289",
+    "name": "A ction",
+    "logo": "https://i.postimg.cc/fT0K4pXR/imgi-10-ycpk3cw.png",
+    "stream": "https://actionlive.siliconweb.com/actionabr/actiontv/actionlive/actiontv_480p/chunks.m3u8",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "290",
+    "name": "Aragon Tv",
+    "logo": "https://i.postimg.cc/7P5c6B0C/imgi-12-9iiffmn.png",
+    "stream": "https://streamer92.server.aranova.cloud/clsdvr/live/aragontv_canal1_1000/index.m3u8?vv=RW&h=JZ1JPlbl1m-pANVSjdPk1A&e=31373837323433363337&r=2666",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "291",
+    "name": "snrtlive",
+    "logo": "https://i.postimg.cc/856R8rJt/imgi-4-logo-snrtnews2-2.png",
+    "stream": "https://cdn.live.easybroadcast.io/abr_corp/73_arryadia_k2tgcj0/corp/73_arryadia_k2tgcj0_480p/chunks_dvr.m3u8?token=RzQOj-o6DyJ2e_BzTTIje1wXUrBVGt87oyY9h7h-6Oo&expires=1787161019&token_path=%2Fabr_corp%2F73_arryadia_k2tgcj0",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "292",
+    "name": "Bahrain sport 1",
+    "logo": "https://i.postimg.cc/XJkvyVTC/imgi-18-ja40wy2.png",
+    "stream": "https://5c7b683162943.streamlock.net/live/ngrp:sportsone_all/chunklist_w462455683_b978000.m3u8",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "293",
+    "name": "Bek sports",
+    "logo": "https://i.postimg.cc/BQLGrSM1/imgi-21-0yq577e.png",
+    "stream": "https://cdn3.wowza.com/5/ZWQ1K2NYTmpFbGsr/BEK-WOWZA-1/smil:BEKPRIMEeast.smil/chunklist_b546000_slENG.m3u8",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "294",
+    "name": "Best cable sports",
+    "logo": "https://i.postimg.cc/3NpQD9yb/imgi-2-logosinsloganblanco.jpg",
+    "stream": "https://ca2.oxira.net.pe/bestcablesports/tracks-v1a1/mono.m3u8?remote=41.186.200.193&token=d4c5d4951aded5c78d7612bdb10951c6dc43cd36-f4fc96c00a22137acf08ea62c37016d9-1787168624-1787157824",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "295",
+    "name": "Canal .Motor",
+    "logo": "https://i.postimg.cc/MK8hF7fn/imgi-25-vf50b95.png",
+    "stream": "https://digicom.hls.iptvdc.com/canalmotor/tracks-v2a1/mono.m3u8",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "296",
+    "name": "TV Tudo",
+    "logo": "https://i.postimg.cc/W3qGRYfZ/imgi-2-jkbse4i.png",
+    "stream": "https://tv02.zas.media:1936/tvtudo/tvtudo/chunklist_w2024642342.m3u8",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "297",
+    "name": "TV Docarro",
+    "logo": "https://i.postimg.cc/TYtp9qCJ/imgi-88-4ooesft.png",
+    "stream": "https://tv03.zas.media:1936/tvdocarro/tvdocarro/chunklist_w1117818410.m3u8",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "298",
+    "name": "El Garage",
+    "logo": "https://i.postimg.cc/6Q0S2q98/imgi-2-aq90ybs.png",
+    "stream": "https://stream1.sersat.com/hls/garagetv.m3u8",
+    "category": "sports",
+    "language": ""
+  },
+  {
+    "id": "299",
+    "name": "Tv Camara",
+    "logo": "https://i.postimg.cc/BQ0Vg2XX/imgi-72-p9w5x3r.png",
+    "stream": "https://tls-cl.cdnz.cl/streamdiptudadosa/live/chunklist_w1730331766.m3u8",
+    "category": "Religious",
+    "language": ""
+  },
+  {
+    "id": "300",
+    "name": "4Fun",
+    "logo": "https://i.postimg.cc/bJGw3KV7/imgi-6-rwa7rr2.png",
+    "stream": "https://stream.4fun.tv:8888/hls/4f_med/index.m3u8",
+    "category": "entertainment",
+    "language": ""
+  },
+   {
+    "id": "302",
+    "name": "AG ",
+    "logo": "https://i.postimg.cc/6pjKgMvk/imgi-10-cbffhs9.png",
+    "stream": "https://video01.brascast.com/grezzana1839/grezzana1839/playlist.m3u8?hls_ctx=0811643h",
+    "category": "entertainment",
+    "language": ""
+  },
+   {
+    "id": "303",
+    "name": "Ayushi",
+    "logo": "https://i.postimg.cc/9fhP3BHg/imgi-26-mqyvxlc.png",
+    "stream": "https://95eryw39dwn4-hls-live.wmncdn.net/Ayushu/271ddf829afeece44d8732757fba1a66.sdp/chunks.m3u8",
+    "category": "entertainment",
+    "language": ""
+  },
+   {
+    "id": "304",
+    "name": "BDC",
+    "logo": "https://i.postimg.cc/vTVt9YJS/imgi-31-f08k9f0.png",
+    "stream": "https://video01.brascast.com/bdctv/bdctv/playlist.m3u8?hls_ctx=3485g8t0",
+    "category": "entertainment",
+    "language": ""
+  }, {
+    "id": "305",
+    "name": "Buzzr",
+    "logo": "https://i.postimg.cc/1zDSWwp4/imgi-39-ck6nrsu.png",
+    "stream": "https://buzzrota-ono.amagi.tv/playlist360p.m3u8",
+    "category": "entertainment",
+    "language": ""
+  },
+   {
+    "id": "306",
+    "name": "Canal Ame",
+    "logo": "https://i.postimg.cc/vHwNzk0x/imgi-40-kgbntsw.png",
+    "stream": "https://ss2.tvrdomi.com:1936/ame47/ame47/chunklist_w31674545.m3u8",
+    "category": "Movies",
+    "language": ""
+  },
+   {
+    "id": "310",
+    "name": "CanalAme",
+    "logo": "https://i.postimg.cc/vHwNzk0x/imgi-40-kgbntsw.png",
+    "stream": "https://ss2.tvrdomi.com:1936/ame47/ame47/chunklist_w31674545.m3u8",
+    "category": "entertainment",
+    "language": ""
+  },
+  {
+    "id": "307",
+    "name": "Canal Series Classic",
+    "logo": "https://i.postimg.cc/15L5J9kZ/imgi-42-jsazi3r.png",
+    "stream": "https://video10.logicahost.com.br/serieclassic/serieclassic/chunklist_w1818780608.m3u8",
+    "category": "Movies",
+    "language": ""
+  },
+   {
+    "id": "311",
+    "name": "Canal Series",
+    "logo": "https://i.postimg.cc/15L5J9kZ/imgi-42-jsazi3r.png",
+    "stream": "https://video10.logicahost.com.br/serieclassic/serieclassic/chunklist_w1818780608.m3u8",
+    "category": "entertainment",
+    "language": ""
+  },
+  {
+    "id": "308",
+    "name": "Canal 7",
+    "logo": "https://i.postimg.cc/0yYxn7Gb/imgi-43-olc7q1u.png",
+    "stream": "https://59d7d6f47d7fc.streamlock.net/canale7/canale7/chunklist_w1123741789.m3u8",
+    "category": "entertainment",
+    "language": ""
+  },
+  {
+    "id": "309",
+    "name": "Canal Tv Anime",
+    "logo": "https://i.postimg.cc/bN8shY6v/imgi-60-kqjxe85.png",
+    "stream": "https://midnightpulp-midnightpulp.cdn-gc.matchpoint.tv/cinedigm/1000000041622/65df1790f1039d200d18f57b/hls/235.m3u8",
+    "category": "entertainment",
+    "language": ""
+  },
+   {
+    "id": "316",
+    "name": "Canal Tv Anime",
+    "logo": "https://i.postimg.cc/bN8shY6v/imgi-60-kqjxe85.png",
+    "stream": "https://midnightpulp-midnightpulp.cdn-gc.matchpoint.tv/cinedigm/1000000041622/65df1790f1039d200d18f57b/hls/235.m3u8",
+    "category": "Movies",
+    "language": ""
+  },
+   {
+    "id": "312",
+    "name": "Dstc",
+    "logo": "https://i.postimg.cc/7P5pZSRw/imgi-62-nnvhpst.png",
+    "stream": "https://video.oct.dc.gov/out/u/124_4.m3u8",
+    "category": "entertainment",
+    "language": ""
+  },
+  {
+    "id": "313",
+    "name": "Aleph Business",
+    "logo": "https://i.postimg.cc/dtyR30vh/imgi-5-Iqv-ZBeo.png",
+    "stream": "https://streamw.m.ro/Aleph/ngrp:Alephbiz.stream_all/chunklist_b1398304.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+{
+    "id": "314",
+    "name": "Ameritrade",
+    "logo": "https://i.postimg.cc/13L3t9mm/imgi-6-71CZKwin9m-L.png",
+    "stream": "https://tdameritrade-vizio.amagi.tv/playlistR720P.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+{
+    "id": "315",
+    "name": "apart TV",
+    "logo": "https://i.postimg.cc/q7vH4Sng/imgi-7-IBc-MIc-Z.png",
+    "stream": "https://2-fss-2.streamhoster.com/pl_124/206820-4338160-1/chunklist.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+{
+    "id": "316",
+    "name": "Asharq News",
+    "logo": "https://i.postimg.cc/YS9ZJgKL/imgi-8-bq-RC3sl.png",
+    "stream": "https://live-news.asharq.com/asharq_480p30.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "317",
+    "name": "Ausbiz TV ",
+    "logo": "https://i.postimg.cc/Kvx96LtS/imgi-10-8v-GGd-B0.png",
+    "stream": "https://d9quh89lh7dtw.cloudfront.net/public-output/index.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "318",
+    "name": "bloomberg",
+    "logo": "https://i.postimg.cc/vmFxK760/imgi-13-bmk-Xf-IE.png",
+    "stream": "https://tv.ensonhaber.com/bloomberght/bloomberght_720p.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "319",
+    "name": "Bloomberg Originals",
+    "logo": "https://i.postimg.cc/FKpFx0bc/imgi-14-Bloomberg-Originals.png",
+    "stream": "https://e96a7526.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0Jsb29tYmVyZ09yaWdpbmFsc19ITFM/9b46c185-d380-49e0-8df0-a0e1f0457208/1.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "320",
+    "name": "BloombergTV",
+    "logo": "https://i.postimg.cc/7Y4xjBBT/imgi-15-Ouog-LHx.png",
+    "stream": "https://liveprodapnortheast.global.ssl.fastly.net/ap1/Channel-APTVqvs-AWS-Tokyo-2/Source-APTVqvs-10000-1-swyg20-BP-HD-5-Y6282hwqf3C7_live.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "321",
+    "name": "BMG TV",
+    "logo": "https://i.postimg.cc/cCX5949k/imgi-17-v-GLk-TPA.png",
+    "stream": "https://tv.nucast.tv/lb/ge/bmg/tracks-v1a1/mono.ts.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "322",
+    "name": "BT TV live",
+    "logo": "https://i.postimg.cc/RZnXfRBL/imgi-19-best-bank-new.png",
+    "stream": "https://bttvlive-amd.akamaized.net/hls/live/2096488-b/live/bttv/bttv5/chunklist.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "323",
+    "name": "Cafe Trade TV",
+    "logo": "https://i.postimg.cc/W34ZmNkS/imgi-21-cafe-trade-tv.png",
+    "stream": "https://cafetradehls.wns.live/hls/stream.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+{
+    "id": "324",
+    "name": "Zee Business",
+    "logo": "https://i.postimg.cc/mrL8PFTq/imgi-66-GNLZZGG00230YYJ.png",
+    "stream": "https://dwby15d04agvq.cloudfront.net/index_5.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "325",
+    "name": "Yahoo! Finance live",
+    "logo": "https://i.postimg.cc/J7kc4QbN/imgi-65-43o-Hs-HL.png",
+    "stream": "https://d1ewctnvcwvvvu.cloudfront.net/1080p-cc/index.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+   {
+    "id": "326",
+    "name": "Tevex live",
+    "logo": "https://i.postimg.cc/28YvjNj5/imgi-62-Fn-In-QRd.png",
+    "stream": "https://v2.tustreaming.cl/tevex/index.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+   {
+    "id": "327",
+    "name": "Schwab Network",
+    "logo": "https://i.postimg.cc/8c4CP34x/imgi-60-logo-20231219-221750-68.png",
+    "stream": "https://tdameritrade-distro.amagi.tv/playlistR404p.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+   {
+    "id": "328",
+    "name": "QBC live",
+    "logo": "https://i.postimg.cc/85t8FS8W/imgi-58-logo-0-2x9wpd284-a.jpg",
+    "stream": "https://googlecdn1.alkassdigital.net/livestream/qbc4/20260803T135559Z/mux_video_1080p_ts/index-1.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+   {
+    "id": "329",
+    "name": "Pro Business",
+    "logo": "https://i.postimg.cc/dVXS4Bm7/imgi-57-1u8Kv-TD.png",
+    "stream": "https://tv-streaming.bsh.ru:21938/probusiness/probusiness.stream/playlist.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+   {
+    "id": "340",
+    "name": "NW Economie",
+    "logo": "https://i.postimg.cc/3NcgYLwN/imgi-56-Oml-FQa8.png",
+    "stream": "https://hls.newworldtv.com/nw-economie/video/live_2.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "341",
+    "name": "NDTV Profit",
+    "logo": "https://i.postimg.cc/W4wfmJ8M/imgi-54-WK4t-Z6p.png",
+    "stream": "https://ndtvprofit.akamaized.net/hls/live/2107404/ndtvprofit/chunklist_2.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "342",
+    "name": "Laboral TV",
+    "logo": "https://i.postimg.cc/Pxzp5dtN/imgi-52-logo.png",
+    "stream": "https://tv.laboralsst.com.br/hls/0/stream.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "343",
+    "name": "Kanaal Z ",
+    "logo": "https://i.postimg.cc/k4fJHGJj/imgi-24-qti-GLz-Z.png",
+    "stream": "https://d1hz1p2gea2zy4.cloudfront.net/live/rmgtv/RMG-TRENDSZNL-LIVE/chunklist_b5628000.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "344",
+    "name": "JOB TV live",
+    "logo": "https://i.postimg.cc/02mQk8cb/imgi-50-Uzc-ZNe3.png",
+    "stream": "https://jobtvserver.eu/hls/stream_mid/index.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "345",
+    "name": "CGTN Global Biz",
+    "logo": "https://i.postimg.cc/RFQksDR5/channels4-profile.jpg",
+    "stream": "https://amg01314-amg01314c6-distrotv-us-10220.playouts.now.amagi.tv/ts-us-w2-n2/playlist/amg01314-cgtn-cgtnglobalbiz-distrotvus/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac7353db80148b61299bce8c37683f03409a5e5afba358b1ebb554438d3ef3b41c559c7c4db49f43c8821da688d159995e8f23f345c892a28ed6108285f31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad68e406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8fa695a62032eab5c2a334a75a025ee0c802b71d84ea3b18ba49e9/188/1920x1080_4681597/index.m3u8",
+    "category": "Business",
+    "language": ""
+  },
+  {
+    "id": "346",
+    "name": "TVS Comedy ",
+    "logo": "https://i.postimg.cc/RFBFJ2Fd/imgi-160-r-XORbti.png",
+    "stream": "https://rpn.bozztv.com/gusa/gusa-tvscomedy/tracks-v1a1/mono.m3u8?nimblesessionid=1773559958",
+    "category": "comedy",
+    "language": ""
+  },
+   {
+    "id": "347",
+    "name": "ETV Comedy",
+    "logo": "https://i.postimg.cc/QdckLGRz/imgi-47-IN4900003U3-20251106T195117SQUARE.png",
+    "stream": "https://cc-wie8j8y69d2uy.akamaized.net/WWBI/Amagi/ETV_Comedy_IN/360p-cc/index.m3u8",
+    "category": "comedy",
+    "language": ""
+  },
+    {
+    "id": "348",
+    "name": "alpha Cinema ",
+    "logo": "https://i.postimg.cc/QdDSddgn/imgi-9-146Ogf-U.png",
+    "stream": "https://live.15plusmg.ru/memfs/3546fc09-2eba-459d-9a1f-9a2fc39e50bd_output_0.m3u8?session=gmAYyZjduaVsnpEKLWNRsC",
+    "category": "comedy",
+    "language": ""
+  },
+    {
+    "id": "349",
+    "name": "Anger Management",
+    "logo": "https://i.postimg.cc/KvMsYW6q/imgi-12-VXZgr-Ny.png",
+    "stream": "https://amg00353-lionsgatestudio-angermgmt-samsungau-o9jg9.amagi.tv/ts-eu-w1-n2/playlist/amg00353-lionsgatestudio-angermgmt-samsungau/cb54381f65736d8884c83f66cef049a3f9591fde1d6988693eb5518975d1073edce2a59caa08ff16388f1ede7f0a66413a3e951fda77118fd87eb141453c5728cfffe729a2c05616b7db083429b56a062a866a68ac39437ed0e21f48a238b6720a5aa82a66443d80b846ac7353db80148b61299bce8c37683f03409a5e5afba358b1ebb05c448e6ba8b315559c7c4ce59f43c8821da688dc5ccb5e8e23f214cb94f68c8513d78ff31d93778abaeb3b581fabb73bf5fb4ab7d49e684bed1b4a6738252c270e9c345aa7415155fbfeb1df2f9f418de177f039811e0dcc2fe490f30bca69c7812efe8df1b263472badc75a2e0ca9e2a186f20ffedc0cf48fe6c77a7095f75b2d09992d9015223694f2dc07c4ed21d6e773cbe4325d0fc99f13cfc6f29bb9e4c40abd35dacbf1af3840656a104dd30ef5d43e8d69955380fa3e0d100d48a4915084a1dc5d3b6d06c6a356c61c16bc94dad68e406b8430550aa853d85d047ec57b392fb263aacc4e19e34c3d8c3b39f44f26c013acca4bdb939bb45675e5a484289948e0ba0ddef378d94e344b0dbef76c12057b74deea691a233ba461e1c0c1f578190a8fa694a62032bc82c2a334f64ecb84f8e6a1f74f54bcd803776062/198/848x480_1686360/index.m3u8",
+    "category": "comedy",
+    "language": ""
+  },
+    {
+    "id": "350",
+    "name": "Camera Smile",
+    "logo": "https://i.postimg.cc/bwLMXncX/imgi-22-V5h4R83.png",
+    "stream": "https://rpn.bozztv.com/gusa/gusa-camerasmile/index.m3u8",
+    "category": "comedy",
+    "language": ""
+  },
+   {
+    "id": "351",
+    "name": "bon appetit",
+    "logo": "https://i.postimg.cc/9QzShMWX/imgi-6-Yh-FFxl-E.png",
+    "stream": "https://bonappetit-samsung.amagi.tv/480p-vtt/index.m3u8",
+    "category": "cooking",
+    "language": ""
+  },
+   {
+    "id": "352",
+    "name": "Chef Champion",
+    "logo": "https://i.postimg.cc/vTB7V42H/imgi-8-15a9p-G9.png",
+    "stream": "https://rpn.bozztv.com/gusa/gusa-chefchampion/tracks-v1a1/mono.m3u8?nimblesessionid=1773626581",
+    "category": "cooking",
+    "language": ""
+  },
+   {
+    "id": "353",
+    "name": "Chef Roc Show",
+    "logo": "https://i.postimg.cc/pLthN9Qm/imgi-9-vh-Vn-Az-E.png",
+    "stream": "https://rpn.bozztv.com/gusa/gusa-chefrock/tracks-v1a1/mono.m3u8?nimblesessionid=1773629658",
+    "category": "cooking",
+    "language": ""
+  },
+   {
+    "id": "354",
+    "name": "City Eden Recepty",
+    "logo": "https://i.postimg.cc/Dwd6J476/imgi-11-w-R0pv-Rc.png",
+    "stream": "https://streaming013.gestec-video.com/hls/negociostv.m3u8",
+    "category": "cooking",
+    "language": ""
+  },
+   {
+    "id": "355",
+    "name": "Food Food ",
+    "logo": "https://i.postimg.cc/vmrJmZNS/imgi-15-J930p-A1.png",
+    "stream": "https://mumt03.tangotv.in/Dsly5z3HFOODFOOD/tracks-v1a1/mono.m3u8",
+    "category": "cooking",
+    "language": ""
+  },
+   {
+    "id": "356",
+    "name": "Gusto TV",
+    "logo": "https://i.postimg.cc/GmQN05T9/imgi-20-sw-UX3h-Q.png",
+    "stream": "https://563f72af.wurl.com/manifest/f36d25e7e52f1ba8d7e56eb859c636563214f541/UmFrdXRlblRWLWV1X0d1c3RvVFZfSExT/724787a9-f54c-4e3e-90cb-f2afcb6dcd0d/3.m3u8",
+    "category": "cooking",
+    "language": ""
+  },
+   {
+    "id": "357",
+    "name": "In the Kitchen ",
+    "logo": "https://i.postimg.cc/vZfYWMKr/images.jpg",
+    "stream": "https://qvc-amd-live.akamaized.net/hls/live/2034113/lsqvc4us/med.m3u8",
+    "category": "cooking",
+    "language": ""
+  },
+ {
+    "id": "358",
+    "name": "AS3 Sport",
+    "logo": "https://i.postimg.cc/vmKvS1LB/Chat-GPT-Image-Aug-15-2026-07-25-37-PM.png",
+    "stream": "https://streamtv.as3sport.online:3394/hybrid/play.m3u8",
+    "category": "sports",
+    "language": ""
+  },
+   {
+    "id": "359",
+    "name": "Baraza TV",
+    "logo": "https://i.postimg.cc/vmKvS1LB/Chat-GPT-Image-Aug-15-2026-07-25-37-PM.png",
+    "stream": "https://eco.streams.ovh:8081/barazatv/tracks-v1a1/mono.m3u8",
+    "category": "Music",
+    "language": ""
+  },
+   {
+    "id": "360",
+    "name": "",
+    "logo": "",
+    "stream": "",
+    "category": "comedy",
+    "language": ""
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]

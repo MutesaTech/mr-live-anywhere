@@ -17,13 +17,17 @@ const Row = ({ icon, title, subtitle, children }: { icon: ReactNode; title: stri
     </DialogTrigger>
     <DialogContent className="sm:max-w-lg max-h-[80vh] overflow-y-auto">
       <DialogHeader><DialogTitle>{title}</DialogTitle></DialogHeader>
-      <div className="prose prose-invert prose-sm max-w-none text-foreground/90">{children}</div>
+      <div className="prose dark:prose-invert prose-sm max-w-none text-foreground/90">{children}</div>
     </DialogContent>
   </Dialog>
 );
 
 export const AboutDialog = () => (
-  <Row icon={<Info className="h-5 w-5 text-primary" />} title="About" subtitle="App info & release notes">
+  <Row
+    icon={<img src="/logo.png" alt="Beemo" className="h-6 w-6 rounded-md object-contain" draggable={false} />}
+    title="About"
+    subtitle="App info & release notes"
+  >
     <h3>Beemo</h3>
     <p>Premium Live TV & Radio streaming, built for mobile, tablet, desktop, and Smart TVs.</p>
     <p><strong>Developer:</strong> Mutesa Moments</p>

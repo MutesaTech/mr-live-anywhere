@@ -23,8 +23,8 @@ const SleepTimerDialog = () => {
       <DialogTrigger asChild>
         <button className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-indigo-500/15 flex items-center justify-center">
-              <Moon className="h-5 w-5 text-indigo-400" />
+            <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+              <Moon className="h-5 w-5 text-primary" />
             </div>
             <div className="text-left">
               <p className="text-body font-medium">Sleep Timer</p>

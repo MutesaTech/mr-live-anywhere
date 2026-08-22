@@ -45,6 +45,9 @@ export const clearBrokenStream = (url: string) => {
   write(map);
 };
 
+/** Clear the entire broken-stream cache — every stream gets a fresh attempt. */
+export const clearBrokenStreams = () => write({});
+
 /** Playable candidates first: unknown-good before recently-failed, never empty. */
 export const orderCandidates = (urls: string[]) => {
   const unique = [...new Set(urls.filter((u) => /^https?:\/\//i.test(u)))];

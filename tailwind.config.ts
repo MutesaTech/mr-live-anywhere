@@ -41,6 +41,11 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        search: {
+          bg: "hsl(var(--search-bg))",
+          icon: "hsl(var(--search-icon))",
+          placeholder: "hsl(var(--search-placeholder))",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         surface: {

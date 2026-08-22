@@ -91,7 +91,7 @@ const HorizontalRail = ({
           type="button"
           aria-label="Scroll left"
           onClick={() => scrollBy(-1)}
-          className="hidden md:flex absolute left-1 top-1/2 z-20 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full glass-strong border border-white/10 text-white opacity-0 group-hover/rail:opacity-100 transition-opacity hover:bg-primary/20"
+          className="hidden md:flex absolute left-1 top-1/2 z-20 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full glass-strong border border-border text-foreground opacity-0 group-hover/rail:opacity-100 transition-opacity hover:bg-primary/20"
         >
           <ChevronLeft className="h-5 w-5" />
         </button>
@@ -99,7 +99,7 @@ const HorizontalRail = ({
           type="button"
           aria-label="Scroll right"
           onClick={() => scrollBy(1)}
-          className="hidden md:flex absolute right-1 top-1/2 z-20 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full glass-strong border border-white/10 text-white opacity-0 group-hover/rail:opacity-100 transition-opacity hover:bg-primary/20"
+          className="hidden md:flex absolute right-1 top-1/2 z-20 -translate-y-1/2 h-10 w-10 items-center justify-center rounded-full glass-strong border border-border text-foreground opacity-0 group-hover/rail:opacity-100 transition-opacity hover:bg-primary/20"
         >
           <ChevronRight className="h-5 w-5" />
         </button>

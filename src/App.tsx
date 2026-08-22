@@ -20,6 +20,8 @@ const App = () => (
           <Route path="/radio/:id" element={<Index />} />
           <Route path="/live/:id" element={<Index />} />
           <Route path="/category/:slug" element={<Index />} />
+          <Route path="/categories" element={<Index />} />
+          <Route path="/playlists/:slug" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

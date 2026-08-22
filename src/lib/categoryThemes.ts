@@ -58,3 +58,71 @@ export const getCategoryTheme = (key: string): CategoryTheme => {
     label: key.charAt(0).toUpperCase() + key.slice(1),
   };
 };
+
+/* ------------------------------------------------------------------ */
+/* Category ordering — professional, predictable order. Unknown        */
+/* categories are always appended so new data still appears.           */
+/* ------------------------------------------------------------------ */
+
+export const CATEGORY_ORDER: string[] = [
+  'news',
+  'sports',
+  'entertainment',
+  'movies',
+  'kids',
+  'music',
+  'documentary',
+  'general',
+  'international',
+  'religious',
+  'talk',
+  'live',
+];
+
+/** Sort normalized category keys by the preferred order (unknown keys appended alphabetically). */
+export const sortCategoryKeys = (keys: string[]): string[] => {
+  const rank = (k: string) => {
+    const i = CATEGORY_ORDER.indexOf(k);
+    return i === -1 ? CATEGORY_ORDER.length : i;
+  };
+  return [...keys].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
+};
+
+/* ------------------------------------------------------------------ */
+/* Pastel tile backgrounds for the Home category cards + grid.         */
+/* Assign per category where known, otherwise cycle the base palette.  */
+/* ------------------------------------------------------------------ */
+
+const PASTEL_BY_CATEGORY: Record<string, string> = {
+  news: 'bg-sky-500/10 border-sky-400/25',
+  sports: 'bg-amber-500/10 border-amber-400/25',
+  entertainment: 'bg-rose-500/10 border-rose-400/25',
+  movies: 'bg-purple-500/10 border-purple-400/25',
+  kids: 'bg-pink-500/10 border-pink-400/25',
+  music: 'bg-emerald-500/10 border-emerald-400/25',
+  documentary: 'bg-teal-500/10 border-teal-400/25',
+  general: 'bg-blue-500/10 border-blue-400/25',
+  international: 'bg-indigo-500/10 border-indigo-400/25',
+  religious: 'bg-orange-500/10 border-orange-400/25',
+  talk: 'bg-cyan-500/10 border-cyan-400/25',
+  cars: 'bg-slate-500/10 border-slate-400/25',
+  live: 'bg-red-500/10 border-red-400/25',
+  radio: 'bg-fuchsia-500/10 border-fuchsia-400/25',
+};
+
+const PASTEL_CYCLE = [
+  'bg-sky-500/10 border-sky-400/25',
+  'bg-emerald-500/10 border-emerald-400/25',
+  'bg-amber-500/10 border-amber-400/25',
+  'bg-purple-500/10 border-purple-400/25',
+  'bg-rose-500/10 border-rose-400/25',
+  'bg-teal-500/10 border-teal-400/25',
+  'bg-pink-500/10 border-pink-400/25',
+  'bg-indigo-500/10 border-indigo-400/25',
+];
+
+/** Pastel background/border classes for a category tile (stable per category). */
+export const getCategoryPastel = (key: string, index = 0): string => {
+  const k = (key || '').toLowerCase().trim();
+  return PASTEL_BY_CATEGORY[k] ?? PASTEL_CYCLE[index % PASTEL_CYCLE.length];
+};

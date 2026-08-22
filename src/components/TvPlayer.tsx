@@ -1,21 +1,20 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
-import Hls from 'hls.js';
-import { Star, Eye, X, GripHorizontal, PictureInPicture2, Play, Pause, Volume2, VolumeX, Maximize2 } from 'lucide-react';
+import { X, Loader2, Minimize2, PictureInPicture2, Play, Pause, Volume2, VolumeX, Maximize2, ArrowLeft, ArrowRight, RotateCw } from 'lucide-react';
 import { Button } from './ui/button';
+import CompactChannelCard from './CompactChannelCard';
 import { Slider } from './ui/slider';
 import { cn } from '@/lib/utils';
-import ChannelCard from './ChannelCard';
-import CategoryTabs from './CategoryTabs';
 import SearchBar from './SearchBar';
-import StreamLoader from './StreamLoader';
 import StreamErrorHandler from './StreamErrorHandler';
 import SponsoredBanner from './SponsoredBanner';
-import HorizontalRail from './HorizontalRail';
 import { useNetworkStatus } from '@/hooks/useNetworkStatus';
 import { useSwipeGesture } from '@/hooks/useSwipeGesture';
-import { formatViewers, clampViewers, randomViewers } from '@/lib/media';
-import { streamCandidates, type Channel as CatalogChannel } from '@/lib/channelCatalog';
-import { markStreamBroken, clearBrokenStream } from '@/lib/brokenStreams';
+import { clampViewers, randomViewers } from '@/lib/media';
+import { useStreamPlayer } from '@/hooks/useStreamPlayer';
+import { usePlayer } from '@/hooks/usePlayer';
+import { getCategoryTheme, sortCategoryKeys } from '@/lib/categoryThemes';
+import { useToast } from '@/hooks/use-toast';
+import { clearBrokenStreams } from '@/lib/brokenStreams';
 interface Channel {
   id: string;
   name: string;
@@ -27,60 +26,66 @@ interface Channel {
   country?: string;
   source?: string;
 }
+/** A channel from an external IPTV playlist, played through the existing player. */
+interface ExternalStream {
+  id: string;
+  name: string;
+  logo: string;
+  stream: string;
+  category: string;
+  language: string;
+}
+
 interface TvPlayerProps {
   channels: Channel[];
-  favorites: string[];
-  onToggleFavorite: (id: string) => void;
   lastWatched: string | null;
   onPlay: (id: string) => void;
   externalChannel?: string | null;
-  onMiniPlayerStateChange?: (isVisible: boolean, isExpanded: boolean) => void;
-  initialCategory?: string | null;
+  /** A channel from an imported IPTV playlist to play in the existing player. */
+  externalStream?: ExternalStream | null;
+  /** Called when the player is closed while an external stream is active. */
+  onCloseExternal?: () => void;
+  /** Open the directory directly in a specific category's isolated (See All) view. */
+  initialExpandedCategory?: string | null;
 }
 const TvPlayer = ({
   channels,
-  favorites,
-  onToggleFavorite,
   lastWatched,
   onPlay,
   externalChannel,
-  onMiniPlayerStateChange,
-  initialCategory
+  externalStream,
+  onCloseExternal,
+  initialExpandedCategory
 }: TvPlayerProps) => {
   const [activeChannel, setActiveChannel] = useState<string | null>(lastWatched);
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState(initialCategory || 'all');
   const [viewerCounts, setViewerCounts] = useState<Record<string, number>>({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [streamError, setStreamError] = useState<string | null>(null);
-  const [unavailable, setUnavailable] = useState(false);
-  const [isPlayerExpanded, setIsPlayerExpanded] = useState(true);
-  const [stickyPlayer, setStickyPlayer] = useState(false);
+  // When set, the directory isolates to only this category's channels.
+  // Arriving from a category link (e.g. Home → category) opens straight into it.
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(initialExpandedCategory ?? null);
   // Custom playback controls state
   const [isPaused, setIsPaused] = useState(false);
   const [volume, setVolume] = useState(80);
   const [isMuted, setIsMuted] = useState(false);
   const [showVolume, setShowVolume] = useState(false);
-  // Floating/draggable mini-player state
-  const [floating, setFloating] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const [inlineHeight, setInlineHeight] = useState(0);
-  const dragRef = useRef<{ sx: number; sy: number; bx: number; by: number } | null>(null);
-  const inlineSlotRef = useRef<HTMLDivElement>(null);
-  const sentinelRef = useRef<HTMLDivElement>(null);
-  const playerWrapRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const hlsRef = useRef<Hls | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [controlsVisible, setControlsVisible] = useState(true);
+  const controlsTimerRef = useRef<number | null>(null);
+  const videoBoxRef = useRef<HTMLDivElement>(null);
+  const pipSupported = typeof document !== 'undefined' && document.pictureInPictureEnabled === true;
   const playerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const volumeTimerRef = useRef<number | null>(null);
-  // Multi-stream fallback bookkeeping
-  const candidatesRef = useRef<string[]>([]);
-  const candidateIndexRef = useRef(0);
-  const {
-    isSlowConnection,
-    isOnline
-  } = useNetworkStatus();
+  const { isOnline } = useNetworkStatus();
+  const { toast } = useToast();
+
+  const isExternalActive = Boolean(externalStream && activeChannel === externalStream.id);
+  const activeChannelData = useMemo(() => {
+    if (externalStream && activeChannel === externalStream.id) return externalStream;
+    return channels.find(c => c.id === activeChannel) ?? null;
+  }, [channels, activeChannel, externalStream]);
+  const { videoRef, isLoading, streamError, unavailable, retry } = useStreamPlayer(activeChannelData ?? null);
+  const { setNowPlaying, setPlaybackActive, clearNowPlaying } = usePlayer();
 
   // Swipe gestures for channel switching
   useSwipeGesture(playerRef, {
@@ -88,47 +93,65 @@ const TvPlayer = ({
     onSwipeRight: () => handlePreviousChannel()
   });
 
-  // Get unique categories
+  // Get unique categories — data-driven, normalized (trim/lowercase), professionally ordered.
   const categories = useMemo(() => {
-    const cats = ['all', ...new Set(channels.map(c => c.category))];
-    return cats;
+    const keys = Array.from(new Set(channels.map((c) => (c.category || '').trim().toLowerCase()).filter(Boolean)));
+    return ['all', ...sortCategoryKeys(keys)];
   }, [channels]);
 
-  // Filter channels
+  // Filter channels — search only, so the directory ALWAYS lists every channel
+  // (grouped per category row below). Category selection happens via the
+  // toolbar dropdown, which isolates a single category instead of silently
+  // hiding the rest of the directory.
   const filteredChannels = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
     return channels.filter(channel => {
-      const matchesSearch = channel.name.toLowerCase().includes(searchQuery.toLowerCase()) || channel.category.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = activeCategory === 'all' || channel.category === activeCategory;
-      return matchesSearch && matchesCategory;
+      const name = (channel.name || '').toLowerCase();
+      const chCat = (channel.category || '').trim().toLowerCase();
+      return name.includes(q) || chCat.includes(q);
     });
-  }, [channels, searchQuery, activeCategory]);
+  }, [channels, searchQuery]);
 
   // Get current channel index
   const currentChannelIndex = useMemo(() => {
     return channels.findIndex(c => c.id === activeChannel);
   }, [channels, activeChannel]);
 
-  // Group filtered channels into explicit category rows
+  // Group filtered channels into explicit category rows — normalized keys so
+  // "News"/"news"/"NEWS" can never split into duplicate sections, ordered
+  // professionally with unknown categories appended.
   const channelsByCategory = useMemo(() => {
     const groups: { category: string; items: Channel[] }[] = [];
     filteredChannels.forEach(channel => {
-      const group = groups.find(g => g.category === channel.category);
+      const key = (channel.category || 'entertainment').trim().toLowerCase();
+      const group = groups.find(g => g.category === key);
       if (group) group.items.push(channel);
-      else groups.push({ category: channel.category, items: [channel] });
+      else groups.push({ category: key, items: [channel] });
     });
-    return groups;
+    const rank = new Map(sortCategoryKeys(groups.map((g) => g.category)).map((k, i) => [k, i]));
+    return groups.sort((a, b) => (rank.get(a.category) ?? 0) - (rank.get(b.category) ?? 0));
   }, [filteredChannels]);
 
   // Handle external channel selection
   useEffect(() => {
     if (externalChannel && externalChannel !== activeChannel) {
-      handlePlayChannel(externalChannel, true);
+      handlePlayChannel(externalChannel);
     }
   }, [externalChannel]);
-  // Sync initialCategory prop changes
+
+  // Play a channel coming from an imported IPTV playlist (through this same player).
+  // `activeChannel` is intentionally excluded — the effect must only react to a
+  // NEW external stream, not to the user switching channels afterwards.
   useEffect(() => {
-    if (initialCategory) setActiveCategory(initialCategory);
-  }, [initialCategory]);
+    if (externalStream && externalStream.id !== activeChannel) {
+      setActiveChannel(externalStream.id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [externalStream]);
+  // Sync initialExpandedCategory prop changes (e.g. navigating between category links)
+  useEffect(() => {
+    if (initialExpandedCategory) setExpandedCategory(initialExpandedCategory);
+  }, [initialExpandedCategory]);
 
   useEffect(() => {
     const counts: Record<string, number> = {};
@@ -152,117 +175,65 @@ const TvPlayer = ({
     return () => clearInterval(interval);
   }, [channels]);
 
-  // Load one stream URL. On fatal failure we mark it broken and try the next feed.
-  const loadStreamUrl = useCallback((url: string) => {
-    if (!videoRef.current || !url) return;
-    setIsLoading(true);
-    setStreamError(null);
-    setUnavailable(false);
-
-    const failOver = (detail: string) => {
-      markStreamBroken(url);
-      const next = candidatesRef.current[candidateIndexRef.current + 1];
-      if (next) {
-        candidateIndexRef.current += 1;
-        // Never retry the same dead URL — move straight to the next feed.
-        loadStreamUrl(next);
-      } else {
-        setIsLoading(false);
-        setUnavailable(true);
-        setStreamError(detail);
-      }
-    };
-
-    if (Hls.isSupported()) {
-      if (hlsRef.current) {
-        hlsRef.current.destroy();
-      }
-      const hls = new Hls({
-        enableWorker: true,
-        lowLatencyMode: !isSlowConnection,
-        maxBufferLength: isSlowConnection ? 15 : 30,
-        maxMaxBufferLength: isSlowConnection ? 30 : 600
-      });
-      hls.loadSource(url);
-      hls.attachMedia(videoRef.current);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        setIsLoading(false);
-        clearBrokenStream(url);
-        videoRef.current?.play().catch(() => {
-          console.log('Autoplay prevented');
-        });
-      });
-      hls.on(Hls.Events.ERROR, (_, data) => {
-        if (data.fatal) {
-          hls.destroy();
-          if (hlsRef.current === hls) hlsRef.current = null;
-          failOver(data.details);
-        }
-      });
-      hlsRef.current = hls;
-    } else if (videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
-      videoRef.current.src = url;
-      videoRef.current.addEventListener('loadeddata', () => {
-        setIsLoading(false);
-        clearBrokenStream(url);
-      }, {
-        once: true
-      });
-      videoRef.current.addEventListener('error', () => failOver('Stream playback error'), {
-        once: true
-      });
-      videoRef.current.play().catch(() => {
-        console.log('Autoplay prevented');
-      });
-    }
-  }, [isSlowConnection]);
-
-  // Start a channel from its best candidate feed.
-  const loadStream = useCallback((channel: Channel) => {
-    candidatesRef.current = streamCandidates(channel as CatalogChannel);
-    candidateIndexRef.current = 0;
-    loadStreamUrl(candidatesRef.current[0]);
-  }, [loadStreamUrl]);
-  useEffect(() => {
-    if (activeChannel) {
-      const channel = channels.find(c => c.id === activeChannel);
-      if (channel) {
-        loadStream(channel);
-      }
-    }
-    return () => {
-      if (hlsRef.current) {
-        hlsRef.current.destroy();
-        hlsRef.current = null;
-      }
-    };
-  }, [activeChannel, channels, loadStream]);
-  const handlePlayChannel = (channelId: string, autoExpand = true) => {
+  const handlePlayChannel = (channelId: string) => {
     // Optimistic, instant switch — no scroll jumping.
-    setIsLoading(true);
     setActiveChannel(channelId);
+    setNowPlaying('tv', channelId);
     onPlay(channelId);
-    if (autoExpand) {
-      setIsPlayerExpanded(true);
-    }
   };
   const handleClosePlayer = () => {
     setActiveChannel(null);
-    setIsPlayerExpanded(false);
-    setFloating(false);
-    setDragOffset({ x: 0, y: 0 });
-    if (hlsRef.current) {
-      hlsRef.current.destroy();
-      hlsRef.current = null;
-    }
+    clearNowPlaying();
+    if (isExternalActive) onCloseExternal?.();
   };
   const handleFullscreen = () => {
-    if (videoRef.current) {
-      if (videoRef.current.requestFullscreen) {
-        videoRef.current.requestFullscreen();
-      }
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+      return;
+    }
+    const el = videoBoxRef.current ?? videoRef.current;
+    if (el?.requestFullscreen) {
+      el.requestFullscreen().catch(() => {});
     }
   };
+
+  // Keep the fullscreen state in sync so the icon reflects it.
+  useEffect(() => {
+    const onChange = () => setIsFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener('fullscreenchange', onChange);
+    return () => document.removeEventListener('fullscreenchange', onChange);
+  }, []);
+
+  // Auto-hide controls after a short period of inactivity while playing.
+  const showControls = useCallback(() => {
+    setControlsVisible(true);
+    if (controlsTimerRef.current) window.clearTimeout(controlsTimerRef.current);
+    controlsTimerRef.current = null;
+  }, []);
+
+  const scheduleHide = useCallback(() => {
+    if (controlsTimerRef.current) window.clearTimeout(controlsTimerRef.current);
+    controlsTimerRef.current = window.setTimeout(() => setControlsVisible(false), 3000);
+  }, []);
+
+  useEffect(() => {
+    if (isPaused) {
+      showControls();
+      return;
+    }
+    scheduleHide();
+    return () => {
+      if (controlsTimerRef.current) window.clearTimeout(controlsTimerRef.current);
+      controlsTimerRef.current = null;
+    };
+  }, [isPaused, showControls, scheduleHide]);
+
+  const onPlayerInteract = useCallback(() => {
+    showControls();
+    if (!isPaused) scheduleHide();
+  }, [showControls, scheduleHide, isPaused]);
+
+  const controlsShown = isPaused || controlsVisible;
   const togglePlayPause = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
@@ -271,32 +242,32 @@ const TvPlayer = ({
       videoRef.current.pause();
     }
   };
-  const toggleMute = () => {
-    if (!videoRef.current) return;
-    const next = !isMuted;
-    videoRef.current.muted = next;
-    setIsMuted(next);
-  };
   // Sync video element with volume/mute state
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.volume = volume / 100;
       videoRef.current.muted = isMuted || volume === 0;
     }
-  }, [volume, isMuted]);
+  }, [volume, isMuted, videoRef]);
   // Track play/pause from video element
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    const onPlay = () => setIsPaused(false);
-    const onPause = () => setIsPaused(true);
+    const onPlay = () => {
+      setIsPaused(false);
+      setPlaybackActive(true);
+    };
+    const onPause = () => {
+      setIsPaused(true);
+      setPlaybackActive(false);
+    };
     v.addEventListener('play', onPlay);
     v.addEventListener('pause', onPause);
     return () => {
       v.removeEventListener('play', onPlay);
       v.removeEventListener('pause', onPause);
     };
-  }, [activeChannel]);
+  }, [activeChannel, videoRef, setPlaybackActive]);
   const handlePip = async () => {
     try {
       if (!videoRef.current) return;
@@ -309,33 +280,36 @@ const TvPlayer = ({
       console.warn('PiP failed', err);
     }
   };
-  const scrollToInline = () => {
-    inlineSlotRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setDragOffset({ x: 0, y: 0 });
-  };
   const handleNextChannel = useCallback(() => {
+    if (isExternalActive) return;
     if (currentChannelIndex < channels.length - 1) {
       handlePlayChannel(channels[currentChannelIndex + 1].id);
     } else {
       handlePlayChannel(channels[0].id);
     }
-  }, [currentChannelIndex, channels]);
+  }, [currentChannelIndex, channels, isExternalActive]);
   const handlePreviousChannel = useCallback(() => {
+    if (isExternalActive) return;
     if (currentChannelIndex > 0) {
       handlePlayChannel(channels[currentChannelIndex - 1].id);
     } else {
       handlePlayChannel(channels[channels.length - 1].id);
     }
-  }, [currentChannelIndex, channels]);
-  const handleRetryStream = () => {
-    if (activeChannel) {
-      const channel = channels.find(c => c.id === activeChannel);
-      if (channel) {
-        loadStream(channel);
-      }
-    }
+  }, [currentChannelIndex, channels, isExternalActive]);
+  const handleRetryStream = retry;
+  // Refresh — clears the broken-stream cache and re-attaches the active stream
+  // so previously-failed feeds get a fresh attempt.
+  const [refreshing, setRefreshing] = useState(false);
+  const handleRefresh = () => {
+    clearBrokenStreams();
+    if (activeChannelData) retry();
+    setRefreshing(true);
+    window.setTimeout(() => setRefreshing(false), 700);
+    toast({
+      title: 'Refreshed',
+      description: activeChannelData ? `Restarting ${activeChannelData.name}` : 'Channel list refreshed',
+    });
   };
-  const activeChannelData = channels.find(c => c.id === activeChannel);
 
   // Auto-collapse volume after 3s inactivity
   useEffect(() => {
@@ -344,45 +318,6 @@ const TvPlayer = ({
     volumeTimerRef.current = window.setTimeout(() => setShowVolume(false), 3000);
     return () => { if (volumeTimerRef.current) window.clearTimeout(volumeTimerRef.current); };
   }, [showVolume, volume, isMuted]);
-
-  // Floating mini-player driven by scroll position (works reliably on mobile + desktop).
-  // We measure the natural anchor — sentinel when inline, placeholder when floating —
-  // which stays at the player's original position and never flickers.
-  useEffect(() => {
-    if (!activeChannel) return;
-    const headerH = 80;
-    let raf = 0;
-    const tick = () => {
-      raf = 0;
-      const anchor = floating ? inlineSlotRef.current : playerWrapRef.current;
-      if (!anchor) return;
-      const r = anchor.getBoundingClientRect();
-      if (!floating && r.bottom < headerH) {
-        setFloating(true);
-        onMiniPlayerStateChange?.(true, false);
-      } else if (floating && r.bottom > headerH + 20) {
-        setFloating(false);
-        setDragOffset({ x: 0, y: 0 });
-        onMiniPlayerStateChange?.(false, true);
-      }
-    };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(tick); };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    // initial check
-    onScroll();
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, [activeChannel, floating, onMiniPlayerStateChange]);
-
-  // Reset floating when channel changes — main player should always open full size.
-  useEffect(() => {
-    setFloating(false);
-    setDragOffset({ x: 0, y: 0 });
-  }, [activeChannel]);
 
   // MediaSession metadata for lockscreen / notification controls
   useEffect(() => {
@@ -399,269 +334,284 @@ const TvPlayer = ({
       navigator.mediaSession.setActionHandler('nexttrack', () => handleNextChannel());
       navigator.mediaSession.setActionHandler('previoustrack', () => handlePreviousChannel());
     } catch {}
-  }, [activeChannelData, handleNextChannel, handlePreviousChannel]);
+  }, [activeChannelData, handleNextChannel, handlePreviousChannel, videoRef]);
 
-  // Capture inline player height so the slot reserves space when player goes floating
-  useEffect(() => {
-    if (!playerWrapRef.current || floating) return;
-    const h = playerWrapRef.current.offsetHeight;
-    if (h > 0) setInlineHeight(h);
-  }, [activeChannel, floating, isPlayerExpanded]);
 
-  // Drag handlers for floating mini-player
-  const onDragStart = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!floating) return;
-    const target = e.target as HTMLElement;
-    if (target.closest('video, button, input, [data-no-drag]')) return;
-    dragRef.current = { sx: e.clientX, sy: e.clientY, bx: dragOffset.x, by: dragOffset.y };
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-  };
-  const onDragMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!dragRef.current) return;
-    const { sx, sy, bx, by } = dragRef.current;
-    setDragOffset({ x: bx + (e.clientX - sx), y: by + (e.clientY - sy) });
-  };
-  const onDragEnd = (e: React.PointerEvent<HTMLDivElement>) => {
-    dragRef.current = null;
-    try { (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId); } catch {}
-  };
-
-  return <div ref={containerRef} className="space-y-6 animate-page-enter">
-      {/* Stable 1px sentinel — observer target. Never resizes, so no scroll jitter. */}
+  return <div ref={containerRef} className="flex h-[calc(100dvh-4rem)] flex-col animate-page-enter">
+      {/* FIXED PLAYER — pinned at the top, never scrolls away with the channel list */}
       {activeChannel && activeChannelData && (
-        <div ref={sentinelRef} aria-hidden className="h-px w-full -mb-px" />
-      )}
-      {/* Placeholder — only rendered when player is floating, reserves the player's natural height. */}
-      {activeChannel && activeChannelData && floating && (
-        <div
-          ref={inlineSlotRef}
-          aria-hidden
-          style={{ height: inlineHeight, minHeight: inlineHeight }}
-          className="rounded-2xl border border-dashed border-border/40 bg-card/30"
-        />
-      )}
+        <div ref={playerRef} className="shrink-0">
+          {/* Full-bleed player — spans the full screen width, flush to the edges, no card treatment */}
+          <div className="group relative w-screen left-1/2 -translate-x-1/2 overflow-hidden bg-black">
+            {/* Video Container — video is the dominant element */}
+            <div
+              ref={videoBoxRef}
+              onMouseMove={onPlayerInteract}
+              onTouchStart={onPlayerInteract}
+              onMouseLeave={() => { if (!isPaused) scheduleHide(); }}
+              className={cn('relative bg-black', isFullscreen ? 'h-full w-full' : 'aspect-video')}
+            >
+              <video
+                ref={videoRef}
+                className="h-full w-full object-contain"
+                playsInline
+                autoPlay
+                onClick={togglePlayPause}
+              />
 
-      {/* Full / Floating Player — same DOM node so the video stream never reloads */}
-      {activeChannel && activeChannelData && <div
-        ref={(el) => { playerRef.current = el; (playerWrapRef as any).current = el; }}
-        onPointerDown={onDragStart}
-        onPointerMove={onDragMove}
-        onPointerUp={onDragEnd}
-        onPointerCancel={onDragEnd}
-        style={{
-          transform: floating ? `translate3d(${dragOffset.x}px, ${dragOffset.y}px, 0)` : 'translate3d(0,0,0)',
-          willChange: 'transform',
-          contain: 'layout style paint',
-        }}
-        className={cn(
-          "rounded-2xl overflow-hidden border shadow-strong",
-          isPlayerExpanded ? "" : "h-0 opacity-0",
-          floating
-            ? "fixed z-40 bottom-20 right-4 w-[280px] sm:w-[340px] md:w-[400px] glass-strong border-white/10 shadow-2xl cursor-grab active:cursor-grabbing"
-            : "relative bg-card border-border/50",
-        )}>
-          {/* Video Container */}
-          <div className="relative aspect-video bg-black">
-            <video
-              ref={videoRef}
-              className="h-full w-full"
-              playsInline
-              autoPlay
-              onClick={togglePlayPause}
-            />
-            
-            {/* Stream Loader */}
-            <StreamLoader
-              isLoading={isLoading}
-              channelLogo={activeChannelData.logo}
-              channelName={activeChannelData.name}
-              channelCategory={activeChannelData.category}
-            />
-            
-            {/* Error Handler */}
-            <StreamErrorHandler error={unavailable ? streamError : null} isOffline={!isOnline} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
-            
-            {/* Overlay controls */}
-            <div className="absolute top-4 left-4 right-4 flex items-start justify-between pointer-events-none">
-              <div className="badge-live pointer-events-auto">
-                <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse-dot" />
-                LIVE
-              </div>
-              
-              <div className="flex gap-2 pointer-events-auto">
-                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handlePip} title="Picture in picture">
-                  <PictureInPicture2 className="h-4 w-4" />
-                </Button>
-                <Button data-no-drag variant="ghost" size="icon" className="h-9 w-9 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={handleClosePlayer} title="Close">
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
+              {/* Minimal loading state */}
+              {isLoading && (
+                <div className="absolute inset-0 z-10 grid place-items-center bg-black/40">
+                  <Loader2 className="h-9 w-9 animate-spin text-white/70" />
+                </div>
+              )}
 
-            {/* Bottom custom controls — Play/Pause, Volume (collapsible), Fullscreen, Expand/Collapse */}
-            <div className="absolute bottom-0 left-0 right-0 px-3 py-2 flex items-center gap-2 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none">
-              <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto" onClick={togglePlayPause} title={isPaused ? 'Play' : 'Pause'}>
-                {isPaused ? <Play className="h-5 w-5 ml-0.5" /> : <Pause className="h-5 w-5" />}
-              </Button>
+              {/* Error state */}
+              <StreamErrorHandler error={unavailable ? streamError : null} isOffline={!isOnline} channelName={activeChannelData.name} onRetry={handleRetryStream} onSwitchToNext={handleNextChannel} />
 
-              {/* Collapsible volume */}
-              <div className="flex items-center pointer-events-auto">
-                <Button data-no-drag variant="ghost" size="icon" className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white" onClick={() => setShowVolume(v => !v)} title="Volume">
-                  {isMuted || volume === 0 ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
-                </Button>
-                <div
-                  data-no-drag
-                  className={cn(
-                    "overflow-hidden transition-[width,opacity,margin] duration-300 ease-out",
-                    showVolume ? "w-24 sm:w-32 opacity-100 ml-2" : "w-0 opacity-0 ml-0"
+              {/* Minimal bottom controls — auto-hide after inactivity */}
+              <div className={cn(
+                "absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-3 pointer-events-none",
+                "px-4 pb-3 pt-10 bg-gradient-to-t from-black/70 via-black/25 to-transparent",
+                "transition-opacity duration-300",
+                controlsShown ? 'opacity-100' : 'opacity-0'
+              )}>
+                {/* Channel name + LIVE indicator — fades out together with the controls */}
+                <div className="pointer-events-auto flex flex-col gap-1.5">
+                  <span className="text-sm sm:text-base font-semibold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] line-clamp-1 max-w-[55vw] sm:max-w-[40vw]">
+                    {activeChannelData.name}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/90" aria-hidden>
+                    <span className="h-1.5 w-1.5 rounded-full bg-destructive animate-pulse-dot" />
+                    LIVE
+                  </span>
+                </div>
+
+                {/* Controls */}
+                <div className="pointer-events-auto flex items-center gap-2 sm:gap-3">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-10 w-10 sm:h-9 sm:w-9 rounded-full text-white/90 hover:bg-white/15 hover:text-white"
+                    onClick={togglePlayPause}
+                    title={isPaused ? 'Play' : 'Pause'}
+                    aria-label={isPaused ? 'Play' : 'Pause'}
+                  >
+                    {isPaused ? <Play className="h-5 w-5 ml-0.5" /> : <Pause className="h-5 w-5" />}
+                  </Button>
+
+                  {/* Volume (collapsible, compact on small screens) */}
+                  <div className="flex items-center">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-10 w-10 sm:h-9 sm:w-9 rounded-full text-white/90 hover:bg-white/15 hover:text-white"
+                      onClick={() => setShowVolume(v => !v)}
+                      title={isMuted || volume === 0 ? 'Unmute' : 'Mute'}
+                      aria-label={isMuted || volume === 0 ? 'Unmute' : 'Mute'}
+                    >
+                      {isMuted || volume === 0 ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                    </Button>
+                    <div
+                      className={cn(
+                        "overflow-hidden transition-[width,opacity,margin] duration-300 ease-out",
+                        showVolume ? "w-20 sm:w-28 opacity-100 ml-1.5" : "w-0 opacity-0 ml-0"
+                      )}
+                    >
+                      <Slider
+                        value={[isMuted ? 0 : volume]}
+                        onValueChange={(v) => { setVolume(v[0]); setIsMuted(v[0] === 0); }}
+                        max={100}
+                        step={1}
+                        className="w-full cursor-pointer"
+                        aria-label="Volume"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Picture-in-picture — only when supported */}
+                  {pipSupported && (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="h-10 w-10 sm:h-9 sm:w-9 rounded-full text-white/90 hover:bg-white/15 hover:text-white"
+                      onClick={handlePip}
+                      title="Picture in picture"
+                      aria-label="Picture in picture"
+                    >
+                      <PictureInPicture2 className="h-5 w-5" />
+                    </Button>
                   )}
-                >
-                  <Slider
-                    value={[isMuted ? 0 : volume]}
-                    onValueChange={(v) => { setVolume(v[0]); setIsMuted(v[0] === 0); }}
-                    max={100}
-                    step={1}
-                    className="cursor-pointer"
-                  />
+
+                  {/* Fullscreen */}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-10 w-10 sm:h-9 sm:w-9 rounded-full text-white/90 hover:bg-white/15 hover:text-white"
+                    onClick={handleFullscreen}
+                    title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+                    aria-label={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+                  >
+                    {isFullscreen ? <Minimize2 className="h-5 w-5" /> : <Maximize2 className="h-5 w-5" />}
+                  </Button>
+
+                  {/* Close */}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-10 w-10 sm:h-9 sm:w-9 rounded-full text-white/90 hover:bg-white/15 hover:text-white"
+                    onClick={handleClosePlayer}
+                    title="Close"
+                    aria-label="Close player"
+                  >
+                    <X className="h-5 w-5" />
+                  </Button>
                 </div>
               </div>
-
-              <div className="flex-1" />
-
-              {/* Fullscreen button — always available */}
-              <Button
-                data-no-drag
-                variant="ghost"
-                size="icon"
-                className="h-10 w-10 rounded-full bg-black/50 hover:bg-black/70 text-white pointer-events-auto"
-                onClick={handleFullscreen}
-                title="Fullscreen"
-              >
-                <Maximize2 className="h-5 w-5" />
-              </Button>
             </div>
-
-            {/* Drag handle when floating */}
-            {floating && (
-              <div className="absolute top-1 left-1/2 -translate-x-1/2 text-white/60">
-                <GripHorizontal className="h-4 w-4" />
-              </div>
-            )}
           </div>
-          
-          {/* Channel Info — hidden in floating compact mode */}
-          {!floating && <div className="p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <img src={activeChannelData.logo} alt={activeChannelData.name} className="h-12 w-12 rounded-xl object-cover" />
-                <div>
-                  <h3 className="text-h3 font-semibold">{activeChannelData.name}</h3>
-                  <p className="text-caption text-muted-foreground capitalize">
-                    {activeChannelData.category} • {activeChannelData.language}
-                  </p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1 text-muted-foreground">
-                  <Eye className="h-4 w-4" />
-                  <span className="text-caption">{formatViewers(viewerCounts[activeChannel] ?? 0)} watching</span>
-                </div>
-                <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full" onClick={() => onToggleFavorite(activeChannel)}>
-                  <Star className={cn("h-5 w-5", favorites.includes(activeChannel) && "fill-primary text-primary")} />
-                </Button>
-              </div>
-            </div>
-          </div>}
+        </div>
+      )}
 
-          {/* Compact info bar — only when floating */}
-          {floating && (
-            <div className="flex items-center gap-2 p-2.5 border-t border-white/10">
-              <img src={activeChannelData.logo} alt={activeChannelData.name} className="h-8 w-8 rounded-lg object-cover" />
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-semibold text-white line-clamp-1">{activeChannelData.name}</p>
-                <p className="text-[10px] text-white/60 capitalize line-clamp-1">{activeChannelData.category}</p>
-              </div>
-              <Button data-no-drag variant="ghost" size="icon" className="h-8 w-8 rounded-full text-white/80 hover:text-white" onClick={() => onToggleFavorite(activeChannel)}>
-                <Star className={cn('h-4 w-4', favorites.includes(activeChannel) && 'fill-primary text-primary')} />
-              </Button>
+      {/* PINNED TOOLBAR — back, integrated search + category selector, and refresh stay fixed while the list scrolls */}
+      <div className="relative w-screen left-1/2 -translate-x-1/2 shrink-0 z-30 flex items-center gap-2.5 py-3 px-4 bg-card/90 backdrop-blur-xl border-b border-border/60">
+        {/* Compact back button when browsing a specific category */}
+        {expandedCategory && (
+          <button
+            type="button"
+            onClick={() => setExpandedCategory(null)}
+            aria-label="Back to all categories"
+            title="Back to all categories"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-muted/60 hover:bg-muted border border-border/70 text-muted-foreground hover:text-foreground transition-all flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </button>
+        )}
+
+        {/* Integrated search + category selector */}
+        <SearchBar
+          className="flex-1"
+          value={searchQuery}
+          onChange={setSearchQuery}
+          placeholder="Search channels..."
+          selectOptions={categories.map((c) => ({ value: c, label: c === 'all' ? 'All Categories' : getCategoryTheme(c).label }))}
+          selectValue={expandedCategory ?? 'all'}
+          onSelectChange={(category) => {
+            if (category === 'all') setExpandedCategory(null);
+            else setExpandedCategory(category);
+          }}
+        />
+
+        {/* Refresh — retries the active stream after clearing the broken-stream cache */}
+        <button
+          type="button"
+          onClick={handleRefresh}
+          aria-label="Refresh"
+          title="Refresh"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-muted/60 hover:bg-muted border border-border/70 text-muted-foreground hover:text-foreground transition-all flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+        >
+          <RotateCw className={cn('h-4 w-4', refreshing && 'animate-spin')} />
+        </button>
+      </div>
+
+      {/* SCROLLABLE CHANNEL LIST — the only region that scrolls; the player and controls never move */}
+      <div className="flex-1 min-h-0 overflow-y-auto pt-5 pb-8">
+        <div className="flex flex-col gap-8">
+          {/* Sponsored banner — top of the scrolling content, directly below the player */}
+          {activeChannel && activeChannelData && (
+            <SponsoredBanner />
+          )}
+
+          {/* Channels — categorized rows; "See More" isolates a single category */}
+          {expandedCategory ? (
+            /* Expanded category: header + vertical list of all its channels (back icon lives in the pinned bar) */
+            (() => {
+              const group = channelsByCategory.find((g) => g.category === expandedCategory);
+              const theme = getCategoryTheme(expandedCategory);
+              return (
+                <div key={expandedCategory} className="space-y-4 animate-fade-in">
+                  {/* Category header — count shown only after the user opens this category */}
+                  <div className="mb-3 flex items-center gap-2 px-1">
+                    <h2 className="text-lg sm:text-xl font-bold tracking-tight">{theme.label}</h2>
+                    <span className="shrink-0 rounded-full bg-muted border border-border px-2 py-0.5 text-[10px] font-medium text-muted-foreground tabular-nums">
+                      {group?.items.length ?? 0}
+                    </span>
+                  </div>
+
+                  {/* Vertical channel list */}
+                  <div className="flex flex-col gap-2.5 w-full">
+                    {(group?.items ?? []).map(channel => (
+                      <CompactChannelCard
+                        key={channel.id}
+                        id={channel.id}
+                        name={channel.name}
+                        logo={channel.logo}
+                        language={channel.language}
+                        isActive={activeChannel === channel.id}
+                        isPlaying={activeChannel === channel.id}
+                        isAvailable={Boolean(channel.stream)}
+                        viewerCount={viewerCounts[channel.id]}
+                        onClick={() => handlePlayChannel(channel.id)}
+                        variant="row"
+                      />
+                    ))}
+                  </div>
+                </div>
+              );
+            })()
+          ) : (
+            <div className="space-y-8 animate-fade-in">
+              {channelsByCategory.map(group => {
+                const theme = getCategoryTheme(group.category);
+                // Show every channel in the category — no cap.
+                const collapsedItems = group.items;
+                return (
+                  <section key={group.category} className="border-t border-border/40 pt-6 first:border-t-0 first:pt-0">
+                    {/* Section header: category name + See All link */}
+                    <div className="mb-3 flex items-center justify-between gap-3 px-1">
+                      <h2 className="text-lg sm:text-xl font-bold tracking-tight">{theme.label}</h2>
+                      <button
+                        type="button"
+                        onClick={() => setExpandedCategory(group.category)}
+                        className="group/see inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded"
+                      >
+                        See All
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/see:translate-x-0.5" />
+                      </button>
+                    </div>
+
+                    {/* Horizontal snap scroll row */}
+                    <div className="flex gap-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-2 -mx-1 px-1">
+                      {collapsedItems.map(channel => (
+                        <div key={channel.id} className="w-32 sm:w-40 flex-shrink-0 snap-start">
+                          <CompactChannelCard
+                            id={channel.id}
+                            name={channel.name}
+                            logo={channel.logo}
+                            language={channel.language}
+                            isActive={activeChannel === channel.id}
+                            isPlaying={activeChannel === channel.id}
+                            isAvailable={Boolean(channel.stream)}
+                            viewerCount={viewerCounts[channel.id]}
+                            onClick={() => handlePlayChannel(channel.id)}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
             </div>
           )}
-        </div>}
 
-      {/* Sponsored banner — directly below the live player */}
-      {activeChannel && activeChannelData && (
-        <SponsoredBanner />
-      )}
-
-      {/* Quick-switch horizontal rail — instant channel switching without scroll-jump */}
-      {activeChannel && filteredChannels.length > 1 && (
-        <HorizontalRail
-          title="Up Next"
-          itemWidthClass="w-[160px] sm:w-[180px] md:w-[200px]"
-        >
-          {filteredChannels.map((channel) => (
-            <ChannelCard
-              key={`rail-${channel.id}`}
-              id={channel.id}
-              name={channel.name}
-              logo={channel.logo}
-              category={channel.category}
-              isActive={activeChannel === channel.id}
-              isPlaying={activeChannel === channel.id}
-              isFavorite={favorites.includes(channel.id)}
-              viewerCount={viewerCounts[channel.id]}
-              onClick={() => handlePlayChannel(channel.id)}
-              onToggleFavorite={(e) => {
-                e.stopPropagation();
-                onToggleFavorite(channel.id);
-              }}
-            />
-          ))}
-        </HorizontalRail>
-      )}
-
-      {/* Search & Categories */}
-      <div className="space-y-4">
-        <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="Search channels..." />
-        <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
+          {/* Empty state — offline searches report clearly, not as a broken search */}
+          {filteredChannels.length === 0 && <div className="flex flex-col items-center justify-center py-16 text-center">
+              <p className="text-muted-foreground">
+                {isOnline ? 'No channels found' : 'No cached results available offline.'}
+              </p>
+            </div>}
+        </div>
       </div>
-
-      {/* Channels — one clearly separated horizontal row per category */}
-      <div className="space-y-10">
-        {channelsByCategory.map(group => (
-          <section key={group.category} className="border-t border-border/40 pt-6 first:border-t-0 first:pt-0">
-            <HorizontalRail
-              title={group.category.charAt(0).toUpperCase() + group.category.slice(1)}
-              itemWidthClass="w-[180px] sm:w-[220px] md:w-[240px]"
-            >
-              {group.items.map(channel => (
-                <ChannelCard
-                  key={channel.id}
-                  id={channel.id}
-                  name={channel.name}
-                  logo={channel.logo}
-                  category={channel.category}
-                  isActive={activeChannel === channel.id}
-                  isPlaying={activeChannel === channel.id}
-                  isFavorite={favorites.includes(channel.id)}
-                  viewerCount={viewerCounts[channel.id]}
-                  onClick={() => handlePlayChannel(channel.id)}
-                  onToggleFavorite={e => {
-                    e.stopPropagation();
-                    onToggleFavorite(channel.id);
-                  }}
-                />
-              ))}
-            </HorizontalRail>
-          </section>
-        ))}
-      </div>
-
-      {/* Empty state */}
-      {filteredChannels.length === 0 && <div className="flex flex-col items-center justify-center py-16 text-center">
-          <p className="text-muted-foreground">No channels found</p>
-        </div>}
     </div>;
 };
 export default TvPlayer;

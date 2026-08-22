@@ -1,19 +1,19 @@
-import { Trash2, ChevronRight, Mail, User as UserIcon, Star, Phone, Gauge } from 'lucide-react';
+import { useState } from 'react';
+import { Trash2, ChevronDown, Mail, Phone, Gauge, Sun, Moon, Timer, Info, MessageCircle, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useTheme } from '@/hooks/useTheme';
 import SleepTimerDialog from './SleepTimerDialog';
 import { AboutDialog, PrivacyDialog, TermsDialog } from './LegalDialogs';
 import { cn } from '@/lib/utils';
 
-/** Fixed default profile — not editable, no accounts or authentication. */
-const PROFILE = {
-  username: 'Beemo User',
-  email: 'you@beemo.app',
-};
-
 const SettingsPage = () => {
   const { toast } = useToast();
   const [dataSaver, setDataSaver] = useLocalStorage<'auto' | 'low' | 'standard' | 'high'>('dataSaver', 'auto');
+  const { theme, setTheme } = useTheme();
+  // Collapsible sections — collapsed by default keeps the page compact.
+  const [playbackOpen, setPlaybackOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
 
   const handleClearCache = async () => {
     try {
@@ -40,73 +40,106 @@ const SettingsPage = () => {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      {/* Profile Card — glassy premium */}
-      <section className="relative overflow-hidden rounded-3xl glass-strong border border-white/10 p-6 shadow-strong">
-        <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-primary/30 blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 -left-10 h-48 w-48 rounded-full bg-accent/20 blur-3xl pointer-events-none" />
-
-        <div className="relative flex flex-col sm:flex-row items-center sm:items-start gap-5">
-          <div className="relative">
-            <div className="h-24 w-24 rounded-full p-[2px] bg-gradient-to-br from-primary via-accent to-primary-light shadow-glow">
-              <div className="h-full w-full rounded-full overflow-hidden bg-card flex items-center justify-center">
-                <UserIcon className="h-10 w-10 text-muted-foreground" />
-              </div>
-            </div>
-          </div>
-
-          <div className="flex-1 w-full text-center sm:text-left">
-            <h2 className="text-2xl font-bold tracking-tight">{PROFILE.username}</h2>
-            <p className="text-caption text-muted-foreground flex items-center gap-1.5 justify-center sm:justify-start mt-1">
-              <Mail className="h-3.5 w-3.5" /> {PROFILE.email}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Playback */}
-      <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden divide-y divide-border/50">
-        <div className="p-4">
-          <h2 className="text-h3 font-semibold">Playback</h2>
-          <p className="text-caption text-muted-foreground mt-1">Sleep timer</p>
-        </div>
-        <SleepTimerDialog />
-      </section>
-
-      {/* Data Saver */}
-      <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden">
+      {/* Appearance — light / dark theme toggle with icons */}
+      <section className="rounded-2xl bg-card border border-border overflow-hidden">
         <div className="p-4 border-b border-border/50 flex items-center gap-3">
           <div className="h-10 w-10 rounded-full bg-primary/10 grid place-items-center">
-            <Gauge className="h-5 w-5 text-primary" />
+            <Sun className="h-5 w-5 text-primary" />
           </div>
           <div className="flex-1">
-            <h2 className="text-h3 font-semibold">Data Saver</h2>
-            <p className="text-caption text-muted-foreground mt-0.5">Optimize streaming for your network</p>
+            <h2 className="text-h3 font-semibold">Appearance</h2>
+            <p className="text-caption text-muted-foreground mt-0.5">Choose between light and dark mode</p>
           </div>
         </div>
         <div className="p-4 grid grid-cols-2 gap-2">
-          {([
-            { v: 'auto', label: 'Auto', desc: 'Match your connection' },
-            { v: 'low', label: 'Low Data', desc: 'Best on 2G / 3G' },
-            { v: 'standard', label: 'Standard', desc: 'Balanced quality' },
-            { v: 'high', label: 'High', desc: 'Best on Wi-Fi' },
-          ] as const).map((o) => (
-            <button
-              key={o.v}
-              onClick={() => { setDataSaver(o.v); toast({ title: `Data Saver: ${o.label}` }); }}
-              className={cn(
-                'text-left rounded-xl border p-3 transition-colors',
-                dataSaver === o.v ? 'border-primary bg-primary/5' : 'border-border/50 hover:border-border'
-              )}
-            >
-              <p className="text-sm font-semibold">{o.label}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{o.desc}</p>
-            </button>
-          ))}
+          <button
+            type="button"
+            onClick={() => setTheme('light')}
+            aria-pressed={theme === 'light'}
+            className={cn(
+              'flex flex-col items-center gap-2 rounded-xl border p-4 transition-colors',
+              theme === 'light'
+                ? 'border-primary bg-primary/5'
+                : 'border-border/50 hover:border-border'
+            )}
+          >
+            <Sun className={cn('h-6 w-6', theme === 'light' ? 'text-primary' : 'text-muted-foreground')} />
+            <span className="text-sm font-semibold">Light</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setTheme('dark')}
+            aria-pressed={theme === 'dark'}
+            className={cn(
+              'flex flex-col items-center gap-2 rounded-xl border p-4 transition-colors',
+              theme === 'dark'
+                ? 'border-primary bg-primary/5'
+                : 'border-border/50 hover:border-border'
+            )}
+          >
+            <Moon className={cn('h-6 w-6', theme === 'dark' ? 'text-primary' : 'text-muted-foreground')} />
+            <span className="text-sm font-semibold">Dark</span>
+          </button>
         </div>
       </section>
 
+      {/* Playback & Data — collapsible dropdown */}
+      <section className="rounded-2xl bg-card border border-border overflow-hidden">
+        <button
+          type="button"
+          onClick={() => setPlaybackOpen(v => !v)}
+          aria-expanded={playbackOpen}
+          className="w-full flex items-center gap-3 p-4 text-left hover:bg-muted/40 transition-colors"
+        >
+          <div className="h-10 w-10 rounded-full bg-primary/10 grid place-items-center">
+            <Timer className="h-5 w-5 text-primary" />
+          </div>
+          <div className="flex-1">
+            <h2 className="text-h3 font-semibold">Playback & Data</h2>
+            <p className="text-caption text-muted-foreground mt-0.5">Sleep timer and data saver</p>
+          </div>
+          <ChevronDown className={cn('h-5 w-5 text-muted-foreground transition-transform duration-300', playbackOpen && 'rotate-180')} />
+        </button>
+        {playbackOpen && (
+          <div className="divide-y divide-border/50 animate-fade-in">
+            <SleepTimerDialog />
+            <div className="p-4">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="h-10 w-10 rounded-full bg-primary/10 grid place-items-center">
+                  <Gauge className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-body font-medium">Data Saver</p>
+                  <p className="text-caption text-muted-foreground">Optimize streaming for your network</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {([
+                  { v: 'auto', label: 'Auto', desc: 'Match your connection' },
+                  { v: 'low', label: 'Low Data', desc: 'Best on 2G / 3G' },
+                  { v: 'standard', label: 'Standard', desc: 'Balanced quality' },
+                  { v: 'high', label: 'High', desc: 'Best on Wi-Fi' },
+                ] as const).map((o) => (
+                  <button
+                    key={o.v}
+                    onClick={() => { setDataSaver(o.v); toast({ title: `Data Saver: ${o.label}` }); }}
+                    className={cn(
+                      'text-left rounded-xl border p-3 transition-colors',
+                      dataSaver === o.v ? 'border-primary bg-primary/5' : 'border-border/50 hover:border-border'
+                    )}
+                  >
+                    <p className="text-sm font-semibold">{o.label}</p>
+                    <p className="text-xs text-muted-foreground mt-0.5">{o.desc}</p>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+
       {/* Storage */}
-      <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden">
+      <section className="rounded-2xl bg-card border border-border overflow-hidden">
         <div className="p-4 border-b border-border/50">
           <h2 className="text-h3 font-semibold">Storage</h2>
           <p className="text-caption text-muted-foreground mt-1">Manage app data and cache</p>
@@ -121,48 +154,79 @@ const SettingsPage = () => {
               <p className="text-caption text-muted-foreground">Free up storage space</p>
             </div>
           </div>
-          <ChevronRight className="h-5 w-5 text-muted-foreground" />
+          <ChevronDown className="h-5 w-5 text-muted-foreground -rotate-90" />
         </button>
       </section>
 
-      {/* Support */}
-      <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden">
-        <div className="p-4 border-b border-border/50">
-          <h2 className="text-h3 font-semibold">Contact Support</h2>
-          <p className="text-caption text-muted-foreground mt-1">We respond fast</p>
-        </div>
-        <div className="divide-y divide-border/50">
-          <a href="https://wa.me/250791319992" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-emerald-500/15 grid place-items-center">
-                <Phone className="h-5 w-5 text-emerald-400" />
+      {/* Contact Support — one link that reveals all contact channels */}
+      <section className="rounded-2xl bg-card border border-border overflow-hidden">
+        <button
+          type="button"
+          onClick={() => setContactOpen(v => !v)}
+          aria-expanded={contactOpen}
+          className="w-full flex items-center gap-3 p-4 text-left hover:bg-muted/40 transition-colors"
+        >
+          <div className="h-10 w-10 rounded-full bg-primary/10 grid place-items-center">
+            <MessageCircle className="h-5 w-5 text-primary" />
+          </div>
+          <div className="flex-1">
+            <h2 className="text-h3 font-semibold">Contact Support</h2>
+            <p className="text-caption text-muted-foreground mt-0.5">We respond fast</p>
+          </div>
+          <ChevronDown className={cn('h-5 w-5 text-muted-foreground transition-transform duration-300', contactOpen && 'rotate-180')} />
+        </button>
+        {contactOpen && (
+          <div className="divide-y divide-border/50 animate-fade-in">
+            <a href="https://wa.me/250791319992" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-emerald-500/15 grid place-items-center">
+                  <MessageCircle className="h-5 w-5 text-emerald-400" />
+                </div>
+                <div>
+                  <p className="text-body font-medium">WhatsApp</p>
+                  <p className="text-caption text-muted-foreground">+250 791 319 992</p>
+                </div>
               </div>
-              <div>
-                <p className="text-body font-medium">WhatsApp</p>
-                <p className="text-caption text-muted-foreground">Chat with support</p>
+              <ChevronDown className="h-5 w-5 text-muted-foreground -rotate-90" />
+            </a>
+            <a href="mailto:mutesamoments@gmail.com" className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-accent/10 grid place-items-center">
+                  <Mail className="h-5 w-5 text-accent" />
+                </div>
+                <div>
+                  <p className="text-body font-medium">Email</p>
+                  <p className="text-caption text-muted-foreground">mutesamoments@gmail.com</p>
+                </div>
               </div>
-            </div>
-            <ChevronRight className="h-5 w-5 text-muted-foreground" />
-          </a>
-          <a href="mailto:mutesamoments@gmail.com" className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-accent/10 grid place-items-center">
-                <Mail className="h-5 w-5 text-accent" />
+              <ChevronDown className="h-5 w-5 text-muted-foreground -rotate-90" />
+            </a>
+            <a href="tel:+250791319992" className="flex items-center justify-between p-4 hover:bg-muted/50 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-primary/10 grid place-items-center">
+                  <Phone className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-body font-medium">Call</p>
+                  <p className="text-caption text-muted-foreground">+250 791 319 992</p>
+                </div>
               </div>
-              <div>
-                <p className="text-body font-medium">Email</p>
-                <p className="text-caption text-muted-foreground">Send us a message</p>
-              </div>
-            </div>
-            <ChevronRight className="h-5 w-5 text-muted-foreground" />
-          </a>
-        </div>
+              <ChevronDown className="h-5 w-5 text-muted-foreground -rotate-90" />
+            </a>
+          </div>
+        )}
       </section>
 
       {/* Legal */}
-      <section className="rounded-2xl bg-card/60 backdrop-blur border border-border/50 overflow-hidden divide-y divide-border/50">
-        <div className="p-4">
-          <h2 className="text-h3 font-semibold">About & Legal</h2>
+      <section className="rounded-2xl bg-card border border-border overflow-hidden divide-y divide-border/50">
+        <div className="p-4 flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-primary/10 grid place-items-center">
+            <Info className="h-5 w-5 text-primary" />
+          </div>
+          <div className="flex-1">
+            <h2 className="text-h3 font-semibold">About & Legal</h2>
+            <p className="text-caption text-muted-foreground mt-0.5">App info, privacy and terms</p>
+          </div>
         </div>
         <AboutDialog />
         <PrivacyDialog />
@@ -177,7 +241,7 @@ const SettingsPage = () => {
               <p className="text-caption text-muted-foreground">Open store rating page</p>
             </div>
           </div>
-          <ChevronRight className="h-5 w-5 text-muted-foreground" />
+          <ChevronDown className="h-5 w-5 text-muted-foreground -rotate-90" />
         </button>
       </section>
 

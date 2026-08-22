@@ -1,8 +1,9 @@
-import { Star, Play, Eye } from 'lucide-react';
+import { Star, Eye } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import LazyImage from './LazyImage';
 import { formatViewers } from '@/lib/media';
+import { getTvChannelNumber } from '@/lib/channelNumbers';
 
 interface ChannelCardProps {
   id: string;
@@ -13,8 +14,12 @@ interface ChannelCardProps {
   isPlaying?: boolean;
   isFavorite?: boolean;
   viewerCount?: number;
+  /** Hide the favorite (star) button — used on "Recently Watched" rails. */
+  showFavorite?: boolean;
+  /** Optional relative-time label, e.g. "Watched 5 min ago". */
+  timestampLabel?: string;
   onClick: () => void;
-  onToggleFavorite: (e: React.MouseEvent) => void;
+  onToggleFavorite?: (e: React.MouseEvent) => void;
 }
 
 const ChannelCard = ({
@@ -26,15 +31,31 @@ const ChannelCard = ({
   isPlaying,
   isFavorite,
   viewerCount,
+  showFavorite = true,
+  timestampLabel,
   onClick,
   onToggleFavorite,
 }: ChannelCardProps) => {
+  const channelNumber = getTvChannelNumber(id);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if ((e.key === 'Enter' || e.key === ' ') && !(e.target as HTMLElement).closest('button')) {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
   return (
     <div
       onClick={onClick}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      aria-label={`${name}, channel ${channelNumber}`}
       className={cn(
         "group relative rounded-xl overflow-hidden cursor-pointer card-interactive",
         "bg-card border border-border/50",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
         isActive && "ring-2 ring-primary"
       )}
     >
@@ -43,28 +64,21 @@ const ChannelCard = ({
         <LazyImage
           src={logo}
           alt={name}
-          className="h-full w-full"
+          className="h-full w-full transition-transform duration-500 motion-safe:group-hover:scale-[1.06]"
         />
         
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         
-        {/* Play button - centered */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="h-12 w-12 rounded-full bg-primary/90 flex items-center justify-center shadow-glow">
-            <Play className="h-5 w-5 text-primary-foreground ml-0.5" />
-          </div>
-        </div>
-        
         {/* Live/Playing badge */}
         {isPlaying ? (
-          <div className="absolute top-2 left-2 badge-live">
-            <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse-dot" />
+          <div className="absolute top-1.5 left-1.5 badge-live">
+            <span className="h-1 w-1 rounded-full bg-current animate-pulse-dot" />
             NOW PLAYING
           </div>
         ) : (
-          <div className="absolute top-2 left-2 badge-live">
-            <span className="h-1.5 w-1.5 rounded-full bg-current animate-pulse-dot" />
+          <div className="absolute top-1.5 left-1.5 badge-live">
+            <span className="h-1 w-1 rounded-full bg-current animate-pulse-dot" />
             LIVE
           </div>
         )}
@@ -86,21 +100,27 @@ const ChannelCard = ({
                 <span className="text-caption">{formatViewers(viewerCount)} watching</span>
               </div>
             )}
+            {timestampLabel && (
+              <p className="text-[10px] text-muted-foreground/80 mt-1">{timestampLabel}</p>
+            )}
           </div>
           
-          <Button
-            variant="ghost"
-            size="icon"
-            className="h-8 w-8 shrink-0 -mr-1"
-            onClick={onToggleFavorite}
-          >
-            <Star
-              className={cn(
-                "h-4 w-4 transition-colors",
-                isFavorite && "fill-primary text-primary"
-              )}
-            />
-          </Button>
+          {showFavorite && onToggleFavorite && (
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 shrink-0 -mr-1"
+              onClick={onToggleFavorite}
+              aria-label={`Toggle favorite: ${name}`}
+            >
+              <Star
+                className={cn(
+                  "h-4 w-4 transition-colors",
+                  isFavorite && "fill-primary text-primary"
+                )}
+              />
+            </Button>
+          )}
         </div>
       </div>
     </div>

@@ -1,10 +1,14 @@
-import { useMemo } from 'react';
-import { Tv, Radio as RadioIcon, History } from 'lucide-react';
-import ChannelCard from './ChannelCard';
-import RadioCard from './RadioCard';
-import HorizontalRail from './HorizontalRail';
+import { useEffect, useMemo, useState } from 'react';
+import FeaturedImages from './FeaturedImages';
+import TikCleanAdCard from './TikCleanAdCard';
 import QuickCategories from './QuickCategories';
+import HorizontalRail from './HorizontalRail';
+import HomeSkeleton from './HomeSkeleton';
+import { ContinueTvCard, ContinueRadioCard } from './ContinueCards';
 import { cn } from '@/lib/utils';
+import type { HistoryRecord } from '@/hooks/useRecents';
+import { DEFAULT_TV_CHANNEL_IDS, DEFAULT_RADIO_CHANNEL_IDS } from '@/lib/recentDefaults';
+import { getCategoryTheme, sortCategoryKeys } from '@/lib/categoryThemes';
 
 interface Channel {
   id: string;
@@ -27,156 +31,136 @@ interface Radio {
 interface HomePageProps {
   channels: Channel[];
   radios: Radio[];
-  favoriteTvIds: string[];
-  favoriteRadioIds: string[];
-  recentTvIds: string[];
-  recentRadioIds: string[];
+  recentTv: HistoryRecord[];
+  recentRadio: HistoryRecord[];
   onSelectChannel: (id: string) => void;
   onSelectRadio: (id: string) => void;
-  onToggleFavoriteTv: (id: string) => void;
-  onToggleFavoriteRadio: (id: string) => void;
   reducedAnimations?: boolean;
   onQuickSelect?: (target: { type: 'section' | 'category'; value: string }) => void;
+  /** Opens the full Categories grid page (all categories). */
+  onOpenCategories?: () => void;
+  /** Opens a playlist page from the Featured promo slides. */
+  onOpenCategoryPlaylist?: (category: 'sports' | 'family' | 'movies') => void;
 }
 
-const EmptyState = ({
-  icon: Icon,
-  title,
-  description,
-  actionLabel,
-  onAction,
-}: {
-  icon: typeof Tv;
-  title: string;
-  description: string;
-  actionLabel: string;
-  onAction?: () => void;
-}) => (
-  <div className="rounded-2xl border border-dashed border-border/60 bg-card/40 backdrop-blur p-8 flex flex-col items-center text-center gap-3">
-    <div className="h-14 w-14 rounded-full bg-muted/50 grid place-items-center">
-      <Icon className="h-6 w-6 text-muted-foreground" />
-    </div>
-    <div>
-      <p className="text-body font-semibold">{title}</p>
-      <p className="text-caption text-muted-foreground mt-1 max-w-xs">{description}</p>
-    </div>
-    {onAction && (
-      <button
-        onClick={onAction}
-        className="mt-1 rounded-full px-4 py-2 text-sm font-semibold gradient-primary text-primary-foreground shadow-glow"
-      >
-        {actionLabel}
-      </button>
-    )}
-  </div>
-);
+/**
+ * Resolve which history records to show in a "Continue" rail: real history
+ * takes priority, and a curated set fills the rail until the user has history,
+ * so the section never appears empty. Stale/broken ids are filtered out.
+ */
+const resolveHistory = (
+  history: HistoryRecord[],
+  catalog: { id: string }[],
+  defaults: string[]
+): HistoryRecord[] => {
+  const real = history.filter((r) => catalog.some((item) => item.id === r.id));
+  const source = real.length > 0 ? real : defaults.map((id) => ({ id, watchedAt: 0, count: 0 }));
+  return source.filter((r) => catalog.some((item) => item.id === r.id)).slice(0, 5);
+};
 
 const HomePage = ({
   channels,
   radios,
-  favoriteTvIds,
-  favoriteRadioIds,
-  recentTvIds,
-  recentRadioIds,
+  recentTv,
+  recentRadio,
   onSelectChannel,
   onSelectRadio,
-  onToggleFavoriteTv,
-  onToggleFavoriteRadio,
   reducedAnimations = false,
   onQuickSelect,
+  onOpenCategories,
+  onOpenCategoryPlaylist,
 }: HomePageProps) => {
-  const recentChannels = useMemo(
-    () => recentTvIds.map((id) => channels.find((c) => c.id === id)).filter(Boolean) as Channel[],
-    [recentTvIds, channels]
+  // Short hydration phase so the skeleton → content transition feels smooth.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    const t = window.setTimeout(() => setHydrated(true), 400);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  const continueTv = useMemo(
+    () => resolveHistory(recentTv, channels, DEFAULT_TV_CHANNEL_IDS),
+    [recentTv, channels]
+  );
+  const continueRadio = useMemo(
+    () => resolveHistory(recentRadio, radios, DEFAULT_RADIO_CHANNEL_IDS),
+    [recentRadio, radios]
   );
 
-  const recentRadios = useMemo(
-    () => recentRadioIds.map((id) => radios.find((r) => r.id === id)).filter(Boolean) as Radio[],
-    [recentRadioIds, radios]
+  const continueTvChannels = useMemo(
+    () =>
+      continueTv
+        .map((rec) => channels.find((c) => c.id === rec.id))
+        .filter((c): c is Channel => Boolean(c)),
+    [continueTv, channels]
   );
+
+  const continueRadioStations = useMemo(
+    () =>
+      continueRadio
+        .map((rec) => radios.find((r) => r.id === rec.id))
+        .filter((r): r is Radio => Boolean(r)),
+    [continueRadio, radios]
+  );
+
+  // Data-driven category preview: every category that actually contains TV
+  // channels, normalized + ordered. New categories appear automatically.
+  const homeCategories = useMemo(() => {
+    const seen = new Map<string, string>();
+    channels.forEach((c) => {
+      const key = (c.category || '').trim().toLowerCase();
+      if (!key || seen.has(key)) return;
+      seen.set(key, getCategoryTheme(key).label);
+    });
+    return sortCategoryKeys([...seen.keys()]).map((key) => ({ key, label: seen.get(key) ?? key }));
+  }, [channels]);
 
   const animationClass = reducedAnimations ? '' : 'animate-page-enter';
 
+  if (!hydrated) return <HomeSkeleton />;
+
   return (
     <div className={cn('space-y-8', animationClass)}>
-      {/* Category shortcuts */}
-      {onQuickSelect && <QuickCategories onSelect={onQuickSelect} />}
+      {/* 1. Featured Images — one large playlist promo slide at a time, auto-rotating showcase at the top */}
+      <FeaturedImages onOpenCategoryPlaylist={onOpenCategoryPlaylist} />
 
-      {/* Recently Watched */}
+      {/* 2. Explore Categories — directly below the featured showcase */}
+      {onQuickSelect && (
+        <QuickCategories
+          categories={homeCategories}
+          onSelect={onQuickSelect}
+          onSeeMore={onOpenCategories ?? (() => {})}
+        />
+      )}
+
+      {/* 3. Continue Watching (TV) */}
       <section className="space-y-3">
-        {recentChannels.length > 0 ? (
-          <HorizontalRail
-            title="Recently Watched"
-            itemWidthClass="w-[180px] sm:w-[220px] md:w-[260px]"
-          >
-            {recentChannels.map((channel) => (
-              <ChannelCard
-                key={channel.id}
-                id={channel.id}
-                name={channel.name}
-                logo={channel.logo}
-                category={channel.category}
-                isFavorite={favoriteTvIds.includes(channel.id)}
-                onClick={() => onSelectChannel(channel.id)}
-                onToggleFavorite={(e) => {
-                  e.stopPropagation();
-                  onToggleFavoriteTv(channel.id);
-                }}
-              />
-            ))}
-          </HorizontalRail>
-        ) : (
-          <>
-            <div className="flex items-center gap-2 px-1">
-              <History className="h-4 w-4 text-primary" />
-              <h2 className="text-h3 font-semibold">Recently Watched</h2>
-            </div>
-            <EmptyState
-              icon={Tv}
-              title="Nothing watched yet"
-              description="Channels you watch will appear here for quick access."
-              actionLabel="Browse Live TV"
-              onAction={() => onQuickSelect?.({ type: 'section', value: 'tv' })}
+        <HorizontalRail title="Continue Watching" itemWidthClass="w-[180px] sm:w-[200px] md:w-[230px]">
+          {continueTvChannels.map((channel) => (
+            <ContinueTvCard
+              key={channel.id}
+              channel={channel}
+              onClick={() => onSelectChannel(channel.id)}
             />
-          </>
-        )}
+          ))}
+        </HorizontalRail>
       </section>
 
-      {/* Recently Played Radio */}
+      {/* 4. Continue Listening (Radio) */}
       <section className="space-y-3">
-        {recentRadios.length > 0 ? (
-          <HorizontalRail title="Recently Played Radio" itemWidthClass="w-[280px] sm:w-[320px]">
-            {recentRadios.map((radio) => (
-              <RadioCard
-                key={radio.id}
-                id={radio.id}
-                name={radio.name}
-                logo={radio.logo}
-                category={radio.category}
-                isFavorite={favoriteRadioIds.includes(radio.id)}
-                onClick={() => onSelectRadio(radio.id)}
-                onToggleFavorite={(e) => {
-                  e.stopPropagation();
-                  onToggleFavoriteRadio(radio.id);
-                }}
-              />
-            ))}
-          </HorizontalRail>
-        ) : (
-          <>
-            <div className="flex items-center gap-2 px-1">
-              <History className="h-4 w-4 text-accent" />
-              <h2 className="text-h3 font-semibold">Recently Played Radio</h2>
-            </div>
-            <EmptyState
-              icon={RadioIcon}
-              title="No stations played yet"
-              description="Stations you listen to will show up here."
-              actionLabel="Browse Radio"
-              onAction={() => onQuickSelect?.({ type: 'section', value: 'radio' })}
+        <HorizontalRail title="Continue Listening" itemWidthClass="w-[240px] sm:w-[260px] md:w-[290px]">
+          {continueRadioStations.map((radio) => (
+            <ContinueRadioCard
+              key={radio.id}
+              radio={radio}
+              onClick={() => onSelectRadio(radio.id)}
             />
-          </>
-        )}
+          ))}
+        </HorizontalRail>
+      </section>
+
+      {/* 5. TikClean promo — compact sponsored banner, replaces the old second Featured section */}
+      <section aria-label="TikClean promotion" className="mx-[7px] sm:mx-0">
+        <TikCleanAdCard />
       </section>
     </div>
   );

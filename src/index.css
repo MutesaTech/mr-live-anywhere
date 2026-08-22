@@ -5,8 +5,93 @@
 @tailwind utilities;
 
 @layer base {
+  /* ============================================================
+     LIGHT THEME (default) — warm white/pink surfaces, charcoal
+     text, red primary accent, soft pastel category cards, deep
+     navy-purple cinematic featured content.
+     ============================================================ */
   :root {
-    /* Premium Dark Streaming Palette (default) */
+    /* #FFF6F7 warm white background */
+    --background: 353 100% 98%;
+    --foreground: 253 11% 16%;   /* #26242D */
+    --surface: 0 0% 100%;
+    --surface-elevated: 0 0% 100%; /* #FEFEFE */
+
+    /* #FFFFFF cards */
+    --card: 0 0% 100%;
+    --card-foreground: 253 11% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 253 11% 16%;
+
+    /* Primary red (#B4301B) */
+    --primary: 8 74% 41%;
+    --primary-dark: 8 74% 33%;
+    --primary-light: 342 41% 55%; /* #BC5F7B soft red */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 280 10% 94%; /* #F0EEF1 */
+    --secondary-foreground: 253 11% 16%;
+
+    --muted: 285 8% 91%; /* #E8E5E9 */
+    --muted-foreground: 240 7% 35%; /* #545461 */
+
+    /* Active accent = primary red */
+    --accent: 8 74% 41%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Live red */
+    --destructive: 351 76% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --live: 351 100% 62%;
+
+    --border: 280 10% 94%; /* #F0EEF1 */
+    --input: 210 56% 93%; /* #E3EDF7 search background */
+    --ring: 8 74% 41%;
+
+    /* Search field — soft blue treatment */
+    --search-bg: 210 56% 93%;
+    --search-icon: 215 21% 44%; /* #586B86 */
+    --search-placeholder: 215 20% 44%; /* #596B85 */
+
+    --radius: 0.875rem;
+
+    /* Glassmorphism */
+    --glass-bg: 0 0% 100% / 0.6;
+    --glass-border: 253 11% 16% / 0.08;
+
+    /* Gradients */
+    --gradient-bg: radial-gradient(60% 50% at 80% 0%, hsl(342 41% 55% / 0.07), transparent 70%),
+                   radial-gradient(50% 40% at 0% 20%, hsl(8 74% 41% / 0.05), transparent 70%),
+                   linear-gradient(180deg, hsl(353 100% 98%) 0%, hsl(353 100% 96%) 100%);
+    --gradient-card: linear-gradient(160deg, hsl(0 0% 100%) 0%, hsl(280 10% 96%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(8 74% 41%), hsl(342 41% 55%));
+    --gradient-live: linear-gradient(135deg, hsl(351 100% 62%), hsl(340 95% 55%));
+
+    /* Soft shadows — very subtle, no heavy black */
+    --shadow-sm: 0 1px 2px 0 hsl(253 11% 16% / 0.05);
+    --shadow-md: 0 4px 12px -2px hsl(253 11% 16% / 0.08);
+    --shadow-lg: 0 12px 32px -8px hsl(253 11% 16% / 0.12);
+    --shadow-xl: 0 24px 60px -16px hsl(253 11% 16% / 0.16);
+    --shadow-card: 0 8px 32px hsl(253 11% 16% / 0.08);
+    --shadow-glow: 0 0 32px hsl(8 74% 41% / 0.3);
+    --shadow-glow-cyan: 0 0 28px hsl(342 41% 55% / 0.25);
+    --shadow-glow-live: 0 0 24px hsl(351 100% 62% / 0.4);
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 253 11% 16%;
+    --sidebar-primary: 8 74% 41%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 280 10% 94%;
+    --sidebar-accent-foreground: 253 11% 16%;
+    --sidebar-border: 280 10% 94%;
+    --sidebar-ring: 8 74% 41%;
+  }
+
+  /* ============================================================
+     DARK THEME — premium dark streaming palette (unchanged).
+     ============================================================ */
+  .dark {
     /* #0A0F1F navy black */
     --background: 225 52% 8%;
     --foreground: 0 0% 100%;
@@ -45,6 +130,11 @@
     --input: 224 30% 20%;
     --ring: 217 91% 60%;
 
+    /* Search field — dark surface with neutral icon text */
+    --search-bg: 224 44% 13%;
+    --search-icon: 220 14% 71%;
+    --search-placeholder: 220 14% 61%;
+
     --radius: 0.875rem;
 
     /* Glassmorphism */
@@ -78,33 +168,6 @@
     --sidebar-border: 224 30% 20%;
     --sidebar-ring: 217 91% 60%;
   }
-
-  .dark {
-    /* Same premium dark palette */
-    --background: 225 52% 8%;
-    --foreground: 0 0% 100%;
-    --surface: 224 44% 11%;
-    --surface-elevated: 224 40% 15%;
-    --card: 224 44% 13%;
-    --card-foreground: 0 0% 100%;
-    --popover: 224 44% 13%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 224 35% 18%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 224 35% 18%;
-    --muted-foreground: 220 14% 71%;
-    --accent: 187 85% 53%;
-    --accent-foreground: 225 52% 8%;
-    --destructive: 351 100% 62%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 224 30% 20%;
-    --input: 224 30% 20%;
-    --ring: 217 91% 60%;
-    --glass-bg: 224 44% 13% / 0.55;
-    --glass-border: 0 0% 100% / 0.08;
-  }
 }
 
 @layer base {
@@ -115,6 +178,9 @@
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
+    /* Full-bleed player spans exactly 100vw; clip (not hidden) prevents a
+       horizontal scrollbar without creating a scroll container. */
+    overflow-x: clip;
   }
 
   body {
@@ -123,6 +189,38 @@
     background-image: var(--gradient-bg);
     background-attachment: fixed;
     min-height: 100vh;
+    overflow-x: clip;
+  }
+
+  /* Consistent, subtle keyboard focus state — replaces the browser default
+     focus ring (which can render as a golden/yellow outline on dark themes)
+     with the application's own accent color. Only applies to keyboard/AT
+     focus, never to mouse/touch clicks, and does not add a heavy box. */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring) / 0.7);
+    outline-offset: 2px;
+  }
+
+  /* Global: hide EVERY scrollbar app-wide while keeping scrolling fully
+     enabled. Applies to all elements (lists, carousels, modals, nested
+     scrollers, future screens) so no per-component config is ever needed.
+     Scrollbars are visually removed only — overflow/scroll behavior is
+     untouched, so swipe, drag, and wheel scrolling all keep working. */
+  * {
+    -ms-overflow-style: none; /* IE / legacy Edge */
+    scrollbar-width: none; /* Firefox */
+    scrollbar-color: transparent transparent; /* Firefox fallback */
+  }
+
+  *::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Android, iOS */
+    width: 0;
+    height: 0;
+  }
+
+  *::-webkit-scrollbar-track,
+  *::-webkit-scrollbar-thumb {
+    background: transparent;
   }
 
   h1, h2, h3 {
@@ -149,7 +247,7 @@
 
   /* Card Styles */
   .card-elevated {
-    @apply rounded-2xl border border-white/5;
+    @apply rounded-2xl border border-border/50;
     background: var(--gradient-card);
     box-shadow: var(--shadow-card);
   }
@@ -159,8 +257,8 @@
   }
 
   .card-interactive:hover {
-    @apply -translate-y-1 border-white/10;
-    box-shadow: var(--shadow-xl), 0 0 0 1px hsl(217 91% 60% / 0.25), 0 0 28px hsl(217 91% 60% / 0.25);
+    @apply -translate-y-1 border-border;
+    box-shadow: var(--shadow-xl), 0 0 0 1px hsl(var(--primary) / 0.25), 0 0 28px hsl(var(--primary) / 0.22);
   }
 
   .card-interactive:active {
@@ -226,16 +324,16 @@
 
   /* Badge Styles */
   .badge-live {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-white;
+    @apply inline-flex items-center gap-0.5 px-1.5 py-px rounded-full text-[8px] font-bold uppercase tracking-wider text-white;
     background: var(--gradient-live);
     box-shadow: var(--shadow-glow-live);
   }
 
   .badge-category {
-    @apply inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wide text-white/90;
-    background: hsl(225 52% 8% / 0.6);
-    backdrop-filter: blur(8px);
-    border: 1px solid hsl(0 0% 100% / 0.08);
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium uppercase tracking-wide;
+    background: hsl(var(--muted));
+    color: hsl(var(--muted-foreground));
+    border: 1px solid hsl(var(--border));
   }
 
   /* Hide scrollbar but keep functionality */
@@ -306,6 +404,78 @@
   }
 }
 
+/* New Featured Images showcase — subtle directional fade/slide between slides */
+@keyframes featured-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--slide-from, 24px));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* TikClean promo card — premium glass reflection sweeping across the surface.
+   Starts off-screen left, enters at a slight diagonal, fades as it exits right,
+   then waits briefly before repeating. Softly blurred + feathered so it reads
+   like light passing over polished glass, never a hard white bar. */
+@keyframes glass-sweep {
+  0% {
+    transform: translateX(-170%) skewX(-12deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(470%) skewX(-12deg);
+    opacity: 0;
+  }
+}
+
+.glass-sweep {
+  position: absolute;
+  top: -50%;
+  bottom: -50%;
+  width: 34%;
+  left: 0;
+  pointer-events: none;
+  filter: blur(3px);
+  /* Slightly stronger in Light Mode so the sheen reads on the light surface */
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    hsl(0 0% 100% / 0.06) 22%,
+    hsl(0 0% 100% / 0.18) 42%,
+    hsl(0 0% 100% / 0.26) 50%,
+    hsl(0 0% 100% / 0.18) 58%,
+    hsl(0 0% 100% / 0.06) 78%,
+    transparent 100%
+  );
+  animation: glass-sweep 7s ease-in-out infinite;
+}
+
+/* Dark mode: even gentler reflection — subtle light, reduced intensity */
+.dark .glass-sweep {
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    hsl(0 0% 100% / 0.04) 22%,
+    hsl(0 0% 100% / 0.1) 42%,
+    hsl(0 0% 100% / 0.14) 50%,
+    hsl(0 0% 100% / 0.1) 58%,
+    hsl(0 0% 100% / 0.04) 78%,
+    transparent 100%
+  );
+}
+
 @keyframes pulse-dot {
   0%, 100% {
     opacity: 1;
@@ -329,6 +499,10 @@
 
 .animate-scale-in {
   animation: scaleIn 0.3s ease-out;
+}
+
+.animate-featured-in {
+  animation: featured-in 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .animate-pulse-dot {
@@ -372,6 +546,42 @@
   box-shadow: 0 0 12px hsl(351 100% 60% / 0.8);
 }
 
+/* Radio waveform SVG bars — scaleY pulse, paused via animation-play-state */
+.wave-bar {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: eq-bar 0.9s ease-in-out infinite;
+}
+
+/* Skeleton shimmer sweep — foreground-based so it works on light and dark */
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.08), transparent);
+  animation: shimmer 1.8s linear infinite;
+}
+
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* Mini player entrance — short, professional pop-in */
+@keyframes mini-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-mini-enter {
+  animation: mini-enter 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 /* Stagger children animations */
 .stagger-children > * {
   animation: pageEnter 0.4s ease-out backwards;
@@ -386,3 +596,13 @@
 .stagger-children > *:nth-child(7) { animation-delay: 300ms; }
 .stagger-children > *:nth-child(8) { animation-delay: 350ms; }
 .stagger-children > *:nth-child(9) { animation-delay: 400ms; }
+
+/* Respect reduced-motion preferences globally */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

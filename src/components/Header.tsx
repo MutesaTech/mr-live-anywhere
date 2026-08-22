@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Search, Heart, Download } from 'lucide-react';
 import { Button } from './ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 interface HeaderProps {
@@ -44,27 +43,29 @@ const Header = ({ title, onSearchClick, onFavoritesClick, favoritesActive }: Hea
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-16 glass shadow-soft border-b border-white/5">
+    <header className="fixed top-0 left-0 right-0 z-50 h-16 bg-card/95 backdrop-blur-sm border-b border-border/60 shadow-soft">
       <div className="container h-full flex items-center justify-between px-4">
-        {/* Left: Logo + Brand */}
-        <Link to="/" className="flex items-center gap-2.5">
-          <div className="relative">
-            <div className="absolute inset-0 rounded-xl gradient-primary blur-md opacity-60" />
-            <img
-              src="/logo.png"
-              alt="Beemo"
-              className="relative h-9 w-9 rounded-xl object-contain bg-card p-1"
-            />
-          </div>
-          <span className="font-bold text-lg tracking-tight text-gradient-primary hidden sm:inline">
+        {/* Left: App logo (hippo) */}
+        <div className="flex shrink-0 items-center gap-2">
+          <img
+            src="/logo.png"
+            alt="Beemo"
+            className="h-9 w-9 rounded-xl object-contain"
+            draggable={false}
+          />
+        </div>
+
+        {/* Center: Brand name + section context */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center max-w-[50%] pointer-events-none">
+          <span className="text-lg font-bold tracking-tight text-foreground leading-tight truncate max-w-full">
             Beemo
           </span>
-        </Link>
-
-        {/* Center: Title */}
-        <h1 className="absolute left-1/2 -translate-x-1/2 text-base font-semibold truncate max-w-[50%] text-foreground/90">
-          {title}
-        </h1>
+          {title && title !== 'Beemo' && (
+            <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground truncate max-w-full">
+              {title}
+            </span>
+          )}
+        </div>
 
         {/* Right: Actions */}
         <div className="flex items-center gap-1">
@@ -88,22 +89,22 @@ const Header = ({ title, onSearchClick, onFavoritesClick, favoritesActive }: Hea
               <Search className="h-5 w-5" />
             </Button>
           )}
-          {onFavoritesClick && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onFavoritesClick}
-              aria-label="Favorites"
-              className="h-10 w-10 rounded-full"
-            >
-              <Heart
-                className={cn(
-                  'h-5 w-5 transition-colors',
-                  favoritesActive ? 'text-accent fill-accent' : 'text-foreground/80'
-                )}
-              />
-            </Button>
-          )}
+          {/* Favorites heart — always on the right side of the header */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onFavoritesClick}
+            aria-label="Favorites"
+            title="Favorites"
+            className="h-10 w-10 rounded-full"
+          >
+            <Heart
+              className={cn(
+                'h-5 w-5 transition-colors',
+                favoritesActive ? 'text-accent fill-accent' : 'text-foreground/80'
+              )}
+            />
+          </Button>
         </div>
       </div>
     </header>

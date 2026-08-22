@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { AlertTriangle, RefreshCw, SkipForward, WifiOff } from 'lucide-react';
-import { Button } from './ui/button';
+import { RefreshCw, SkipForward, WifiOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface StreamErrorHandlerProps {
@@ -15,7 +14,6 @@ interface StreamErrorHandlerProps {
 
 const StreamErrorHandler = ({
   error,
-  channelName,
   isOffline = false,
   onRetry,
   onSwitchToNext,
@@ -46,50 +44,78 @@ const StreamErrorHandler = ({
 
   if (!error && !isOffline) return null;
 
+  // Progress toward auto-switch — fills as time elapses before switching.
+  const progress = Math.min(
+    100,
+    Math.max(0, ((autoSwitchDelay - countdown * 1000) / autoSwitchDelay) * 100)
+  );
+
   return (
-    <div className={cn(
-      "absolute inset-0 flex items-center justify-center bg-black/90 z-10",
-      "transition-opacity duration-200",
-      className
-    )}>
-      <div className="text-center p-6 max-w-sm">
-        <div className="flex items-center justify-center mb-4">
-          <div className={cn(
-            "h-16 w-16 rounded-full flex items-center justify-center",
-            isOffline ? "bg-accent/20" : "bg-destructive/20"
-          )}>
-            {isOffline
-              ? <WifiOff className="h-8 w-8 text-accent" />
-              : <AlertTriangle className="h-8 w-8 text-destructive" />}
+    <div
+      className={cn(
+        'absolute inset-0 z-10 flex flex-col items-center justify-center overflow-hidden p-6 text-center',
+        'rounded-2xl bg-slate-950 border border-slate-800/80',
+        'bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950',
+        className
+      )}
+    >
+      {/* Icon — muted signal loss in a soft glow pill */}
+      <div className="h-12 w-12 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-3 shadow-lg shadow-amber-500/5">
+        <WifiOff className="h-6 w-6" />
+      </div>
+
+      {/* Title */}
+      <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
+        {isOffline ? "You're offline" : 'Channel Unavailable'}
+      </h3>
+
+      {/* Subtitle */}
+      <p className="text-xs sm:text-sm text-slate-400 max-w-sm mb-4">
+        {isOffline
+          ? 'Connect to the internet to watch live TV. Playback resumes automatically once your connection is restored.'
+          : 'Stream is temporarily offline.'}
+      </p>
+
+      {/* Auto-switch countdown — pill + animated progress bar */}
+      {!isOffline && (
+        <div className="w-full max-w-[220px] mb-5" role="status" aria-live="polite">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+              Auto-switch
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-slate-800/80 border border-slate-700 px-2.5 py-0.5 text-[10px] font-medium text-indigo-300 tabular-nums">
+              Switching in {countdown}s...
+            </span>
+          </div>
+          <div className="h-1 w-full rounded-full bg-slate-800/80 overflow-hidden">
+            <div
+              className="h-full rounded-full bg-indigo-500 transition-[width] duration-1000 ease-linear"
+              style={{ width: `${progress}%` }}
+            />
           </div>
         </div>
+      )}
 
-        <h3 className="text-h3 font-semibold text-white mb-2">
-          {isOffline ? 'Connection Lost' : 'Channel Unavailable'}
-        </h3>
-        <p className="text-caption text-white/70 mb-4">
-          {isOffline
-            ? 'You are offline. Playback will resume once your connection is restored.'
-            : `This channel is currently unavailable. Switching to the next recommended channel in ${countdown}s...`}
-        </p>
-
-        <div className="flex gap-3 justify-center">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onRetry}
-            className="gap-2 border-white/20 text-white hover:bg-white/10"
+      {/* Action buttons */}
+      <div className="flex items-center gap-3 mt-2">
+        <button
+          type="button"
+          onClick={onRetry}
+          className="px-4 py-2 text-xs font-medium text-slate-300 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 rounded-xl transition-all flex items-center gap-1.5"
+        >
+          <RefreshCw className="h-3.5 w-3.5" />
+          Retry
+        </button>
+        {!isOffline && (
+          <button
+            type="button"
+            onClick={onSwitchToNext}
+            className="px-4 py-2 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl transition-all shadow-lg shadow-indigo-600/25 flex items-center gap-1.5"
           >
-            <RefreshCw className="h-4 w-4" />
-            Retry
-          </Button>
-          {!isOffline && (
-            <Button size="sm" onClick={onSwitchToNext} className="gap-2">
-              <SkipForward className="h-4 w-4" />
-              Switch Now
-            </Button>
-          )}
-        </div>
+            <SkipForward className="h-3.5 w-3.5" />
+            Switch Now
+          </button>
+        )}
       </div>
     </div>
   );

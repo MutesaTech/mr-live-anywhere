@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
-import { Play, Pause, Heart, Menu, Grid3x3, SkipBack, SkipForward } from 'lucide-react';
-import { Button } from './ui/button';
+import { Play, Pause, SkipBack, SkipForward, ArrowLeft, ChevronRight, WifiOff } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import RadioCard from './RadioCard';
-import CategoryTabs from './CategoryTabs';
-import SearchBar from './SearchBar';
-import { useSwipeGesture } from '@/hooks/useSwipeGesture';
+import LazyImage from './LazyImage';
+import { usePlayer } from '@/hooks/usePlayer';
+import { useNetworkStatus } from '@/hooks/useNetworkStatus';
+import { getCategoryTheme, sortCategoryKeys } from '@/lib/categoryThemes';
 
 interface Radio {
   id: string;
@@ -19,64 +18,288 @@ interface Radio {
 
 interface RadioPlayerProps {
   radios: Radio[];
-  favorites: string[];
-  onToggleFavorite: (id: string) => void;
   lastPlayed: string | null;
   onPlay: (id: string) => void;
 }
 
-const EQ_BARS = 28;
+/** Friendly pill labels — derived from the categories actually present in the catalog. */
+const CATEGORY_LABELS: Record<string, string> = {
+  news: 'News & Talk',
+  music: 'Music',
+  sport: 'Sports',
+  entertainment: 'Entertainment',
+};
 
-const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }: RadioPlayerProps) => {
+const capitalize = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
+
+/** Deterministic FM frequency derived from the station id (visual only). */
+const getFrequency = (radio: Radio | null): string => {
+  if (!radio) return '94.3';
+  if (radio.frequency) return radio.frequency;
+  const seed = Array.from(radio.id).reduce((a, c) => a + c.charCodeAt(0), 0);
+  const freq = 87.5 + (seed % 220) / 10; // 87.5 - 109.5
+  return freq.toFixed(1);
+};
+
+/**
+ * Animated equalizer — bars pulse while playing, stay still otherwise.
+ * Pausable via animation-play-state so it never runs when idle.
+ */
+const Equalizer = ({
+  playing,
+  bars = 21,
+  className,
+}: {
+  playing: boolean;
+  bars?: number;
+  className?: string;
+}) => (
+  <div className={cn('flex items-end justify-center gap-[3px]', className)} aria-hidden>
+    {Array.from({ length: bars }).map((_, i) => (
+      <span
+        key={i}
+        className="wave-bar w-[3px] rounded-full bg-primary"
+        style={{
+          height: `${6 + ((i * 13) % 22)}px`,
+          animationDelay: `${(i * 90) % 900}ms`,
+          animationPlayState: playing ? 'running' : 'paused',
+          opacity: playing ? 1 : 0.3,
+        }}
+      />
+    ))}
+  </div>
+);
+
+interface StationCardProps {
+  radio: Radio;
+  isActive: boolean;
+  isPlaying: boolean;
+  onPlay: () => void;
+}
+
+/** Vertical list tile — logo, station info, play/pause action. */
+const StationCard = ({ radio, isActive, isPlaying, onPlay }: StationCardProps) => {
+  const freq = getFrequency(radio);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if ((e.key === 'Enter' || e.key === ' ') && !(e.target as HTMLElement).closest('button')) {
+      e.preventDefault();
+      onPlay();
+    }
+  };
+
+  return (
+    <div
+      onClick={onPlay}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      aria-label={`${radio.name}, play radio`}
+      aria-pressed={isActive && isPlaying}
+      className={cn(
+        'group flex w-full min-h-[54px] items-center justify-between gap-3 p-2 rounded-xl cursor-pointer border transition-all duration-200',
+        isActive
+          ? 'bg-primary/[0.06] border-primary shadow-[0_0_10px_hsl(var(--primary)/0.12)]'
+          : 'bg-card border-border hover:bg-muted/60 hover:border-muted-foreground/40',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary'
+      )}
+    >
+      {/* Station logo */}
+      <div className="relative shrink-0">
+        <LazyImage
+          src={radio.logo}
+          alt={radio.name}
+          className={cn(
+            'h-9 w-9 rounded-lg bg-muted border border-border object-cover transition-transform duration-300',
+            'motion-safe:group-hover:scale-105'
+          )}
+        />
+        {isActive && isPlaying && (
+          <span className="absolute -bottom-1 -right-1 h-2.5 w-2.5 rounded-full bg-primary flex items-center justify-center">
+            <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse-dot" />
+          </span>
+        )}
+      </div>
+
+      {/* Station info */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 flex-wrap">
+          <h3 className="font-semibold text-xs text-foreground truncate">{radio.name}</h3>
+          {isActive && isPlaying && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary/90 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-primary-foreground">
+              <span className="h-1 w-1 rounded-full bg-white animate-pulse-dot" />
+              Live
+            </span>
+          )}
+        </div>
+        <p className="text-[10px] text-muted-foreground mt-0.5 truncate">
+          <span className="tabular-nums">{freq} FM</span>
+          <span className="mx-1.5 text-muted-foreground/60">•</span>
+          {capitalize(radio.language)}
+        </p>
+      </div>
+
+      {/* Play / Pause action */}
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          onPlay();
+        }}
+        aria-label={isPlaying ? `Pause ${radio.name}` : `Play ${radio.name}`}
+        className={cn(
+          'h-8 w-8 shrink-0 rounded-full flex items-center justify-center transition-all duration-200',
+          'bg-primary hover:bg-primary-dark text-primary-foreground',
+          'shadow-[0_0_12px_hsl(var(--primary)/0.25)]',
+          'active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary'
+        )}
+      >
+        {isPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 ml-0.5" />}
+      </button>
+    </div>
+  );
+};
+
+interface RowStationCardProps {
+  radio: Radio;
+  isActive: boolean;
+  isPlaying: boolean;
+  onPlay: () => void;
+}
+
+/** Compact horizontal-row card — logo, name, frequency. */
+const RowStationCard = ({ radio, isActive, isPlaying, onPlay }: RowStationCardProps) => (
+  <button
+    type="button"
+    onClick={onPlay}
+    aria-label={`Play ${radio.name}`}
+    aria-pressed={isActive && isPlaying}
+    className={cn(
+      'group w-24 sm:w-28 flex-shrink-0 snap-start rounded-xl border bg-card p-2 text-center transition-all duration-200',
+      isActive
+        ? 'border-primary shadow-[0_0_14px_hsl(var(--primary)/0.15)]'
+        : 'border-border hover:bg-muted/60 hover:border-muted-foreground/40',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary'
+    )}
+  >
+    <div className="relative mx-auto w-fit">
+      <LazyImage
+        src={radio.logo}
+        alt={radio.name}
+        className="h-10 w-10 rounded-lg bg-muted border border-border object-cover transition-transform duration-300 motion-safe:group-hover:scale-105"
+      />
+      {isActive && isPlaying && (
+        <span className="absolute -bottom-1 -right-1 h-2.5 w-2.5 rounded-full bg-primary flex items-center justify-center">
+          <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse-dot" />
+        </span>
+      )}
+    </div>
+    <h3 className="mt-1.5 truncate text-[11px] font-semibold text-foreground">{radio.name}</h3>
+    <p className="mt-0.5 text-[9px] tabular-nums text-muted-foreground">{getFrequency(radio)} FM</p>
+  </button>
+);
+
+const RadioPlayer = ({ radios, lastPlayed, onPlay }: RadioPlayerProps) => {
   const [activeRadio, setActiveRadio] = useState<string | null>(lastPlayed);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  const [offlineNotice, setOfflineNotice] = useState(false);
+
+  const { isOnline } = useNetworkStatus();
+
+  // Clear the offline notice automatically once connectivity returns.
+  useEffect(() => {
+    if (isOnline) setOfflineNotice(false);
+  }, [isOnline]);
 
   const audioRef = useRef<HTMLAudioElement>(null);
-  const playerRef = useRef<HTMLDivElement>(null);
 
-  const filteredRadios = useMemo(() => radios.filter(r => {
-    const matchSearch = r.name.toLowerCase().includes(searchQuery.toLowerCase()) || r.category.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchCat = activeCategory === 'all' || r.category === activeCategory;
-    return matchSearch && matchCat;
-  }), [radios, searchQuery, activeCategory]);
+  const activeRadioData = useMemo(
+    () => radios.find((r) => r.id === activeRadio) || null,
+    [radios, activeRadio]
+  );
 
-  const categories = useMemo(() => ['all', ...new Set(radios.map(r => r.category))], [radios]);
-  const activeRadioData = useMemo(() => radios.find(r => r.id === activeRadio) || null, [radios, activeRadio]);
-  const currentIndex = useMemo(() => radios.findIndex(r => r.id === activeRadio), [radios, activeRadio]);
+  // Stations grouped by category — data-driven, normalized, professionally ordered.
+  const categoryGroups = useMemo(() => {
+    const map = new Map<string, Radio[]>();
+    radios.forEach((r) => {
+      const key = (r.category || '').trim().toLowerCase();
+      if (!key) return;
+      if (!map.has(key)) map.set(key, []);
+      map.get(key)!.push(r);
+    });
+    return sortCategoryKeys([...map.keys()]).map((key) => ({
+      category: key,
+      label: CATEGORY_LABELS[key] ?? getCategoryTheme(key).label,
+      items: map.get(key)!,
+    }));
+  }, [radios]);
 
-  // Deterministic frequency derived from id (visual only)
-  const frequencyDisplay = useMemo(() => {
-    if (!activeRadioData) return '94.3';
-    if (activeRadioData.frequency) return activeRadioData.frequency;
-    const seed = Array.from(activeRadioData.id).reduce((a, c) => a + c.charCodeAt(0), 0);
-    const freq = 87.5 + (seed % 220) / 10; // 87.5 - 109.5
-    return freq.toFixed(1);
-  }, [activeRadioData]);
+  const expandedGroup = useMemo(
+    () => categoryGroups.find((g) => g.category === expandedCategory) ?? null,
+    [categoryGroups, expandedCategory]
+  );
 
-  const handlePlayRadio = useCallback(async (id: string) => {
-    const radio = radios.find(r => r.id === id);
-    if (!radio || !audioRef.current) return;
-    if (activeRadio === id && isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-      return;
+  const { setNowPlaying, setPlaybackActive } = usePlayer();
+
+  // Report real playback to the global player so the mini player can continue
+  // it when the user leaves the radio section.
+  useEffect(() => {
+    if (activeRadioData && isPlaying) {
+      setNowPlaying('radio', activeRadioData.id);
+      setPlaybackActive(true);
+    } else if (!isPlaying) {
+      setPlaybackActive(false);
     }
-    try {
-      if (activeRadio !== id) {
+  }, [activeRadioData, isPlaying, setNowPlaying, setPlaybackActive]);
+
+  const handlePlayRadio = useCallback(
+    async (id: string) => {
+      const radio = radios.find((r) => r.id === id);
+      if (!radio || !audioRef.current) return;
+      // Live radio needs the internet — never fake playback while offline.
+      if (!isOnline) {
+        setOfflineNotice(true);
+        setIsPlaying(false);
+        return;
+      }
+      if (activeRadio === id && isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        return;
+      }
+      const isNewStation = activeRadio !== id;
+      if (isNewStation) {
         audioRef.current.src = radio.stream;
         audioRef.current.load();
         setActiveRadio(id);
-        onPlay(id);
       }
-      await audioRef.current.play();
-      setIsPlaying(true);
-    } catch (e) {
-      console.error('Radio playback failed', e);
-      setIsPlaying(false);
-    }
-  }, [radios, activeRadio, isPlaying, onPlay]);
+      try {
+        await audioRef.current.play();
+        setIsPlaying(true);
+        // Only track a station once playback has actually started.
+        if (isNewStation) onPlay(id);
+      } catch (e) {
+        console.error('Radio playback failed', e);
+        setIsPlaying(false);
+        // Stream failures while offline are a connectivity problem, not a
+        // station problem — show the offline notice instead of a dead player.
+        if (!isOnline) setOfflineNotice(true);
+      }
+    },
+    [radios, activeRadio, isPlaying, isOnline, onPlay]
+  );
+
+  // Previous / Next — move through the catalog (wraps around) and start playing.
+  const handleStep = useCallback(
+    (dir: 1 | -1) => {
+      if (radios.length === 0) return;
+      const idx = radios.findIndex((r) => r.id === activeRadio);
+      const next = idx === -1 ? 0 : (idx + dir + radios.length) % radios.length;
+      handlePlayRadio(radios[next].id);
+    },
+    [radios, activeRadio, handlePlayRadio]
+  );
 
   // MediaSession metadata for lockscreen / notification controls
   useEffect(() => {
@@ -90,188 +313,170 @@ const RadioPlayer = ({ radios, favorites, onToggleFavorite, lastPlayed, onPlay }
       });
       navigator.mediaSession.setActionHandler('play', () => audioRef.current?.play().catch(() => {}));
       navigator.mediaSession.setActionHandler('pause', () => audioRef.current?.pause());
-    } catch {}
+    } catch {
+      // MediaSession is optional — ignore platforms that don't support it.
+    }
   }, [activeRadioData]);
 
-  const handleNext = useCallback(() => {
-    if (!radios.length) return;
-    const next = currentIndex < radios.length - 1 ? currentIndex + 1 : 0;
-    handlePlayRadio(radios[next].id);
-  }, [radios, currentIndex, handlePlayRadio]);
-  const handlePrev = useCallback(() => {
-    if (!radios.length) return;
-    const prev = currentIndex > 0 ? currentIndex - 1 : radios.length - 1;
-    handlePlayRadio(radios[prev].id);
-  }, [radios, currentIndex, handlePlayRadio]);
-
-  useSwipeGesture(playerRef, { onSwipeLeft: handleNext, onSwipeRight: handlePrev });
-
   return (
-    <div className="space-y-6 select-none -mx-4">
+    <div className="flex h-[calc(100dvh-4rem)] flex-col select-none animate-page-enter">
       <audio ref={audioRef} />
 
-      {/* ===== Premium Futuristic Player ===== */}
-      <div className="relative overflow-hidden radio-bg rounded-3xl mx-4 px-5 pt-5 pb-8 sm:pt-8 sm:pb-10 shadow-strong border border-white/5">
-        {/* Ambient glows */}
-        <div className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-blue-600/20 blur-3xl" />
-
-        {/* Top nav */}
-        <div className="relative flex items-center justify-between text-white">
-          <button className="h-10 w-10 grid place-items-center rounded-full hover:bg-white/10 transition-colors" aria-label="Menu">
-            <Menu className="h-5 w-5 drop-shadow-[0_0_8px_rgba(0,245,255,0.5)]" />
-          </button>
-          <div className="text-xs font-bold tracking-[0.35em] text-white/90 drop-shadow-[0_0_10px_rgba(0,245,255,0.55)]">RADIO</div>
-          <button className="h-10 w-10 grid place-items-center rounded-full hover:bg-white/10 transition-colors" aria-label="Menu">
-            <Grid3x3 className="h-5 w-5 drop-shadow-[0_0_8px_rgba(0,245,255,0.5)]" />
-          </button>
-        </div>
-
-        {/* Circular frequency display */}
-        <div ref={playerRef} className="relative mt-8 flex justify-center touch-pan-x">
-          <div className="relative animate-float-soft">
-            {/* Outer glow ring */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-300/30 via-blue-500/20 to-transparent blur-2xl" />
-            {/* Disc */}
-            <div className={cn(
-              "relative h-56 w-56 sm:h-64 sm:w-64 rounded-full",
-              "bg-gradient-to-br from-cyan-200/40 via-cyan-500/10 to-blue-900/40",
-              "backdrop-blur-xl border border-cyan-300/40",
-              "flex items-center justify-center",
-              isPlaying ? "animate-neon-pulse" : "shadow-[0_0_36px_rgba(0,245,255,0.45),inset_0_0_24px_rgba(0,245,255,0.25)]"
-            )}>
-              {/* Inner ring */}
-              <div className="absolute inset-4 rounded-full border border-white/15" />
-              <div className="absolute inset-8 rounded-full border border-cyan-200/20" />
-              {/* Frequency */}
-              <div className="relative text-center">
-                <div className="text-[64px] sm:text-[72px] leading-none font-extrabold tracking-tight text-[#021B79] drop-shadow-[0_2px_0_rgba(255,255,255,0.4)]" style={{ fontFamily: 'Space Grotesk, Inter, sans-serif' }}>
-                  {frequencyDisplay}
-                </div>
-                <div className="mt-1 text-[10px] font-bold tracking-[0.4em] text-[#021B79]/70">MHZ</div>
-              </div>
+      {/* ===== 1. FIXED circular radio player — pinned, never scrolls away ===== */}
+      <div className="shrink-0 pt-5 pb-4">
+        <div className="flex flex-col items-center text-center">
+          {/* Circular frequency display */}
+          <div
+            className={cn(
+              'relative flex h-32 w-32 sm:h-40 sm:w-40 items-center justify-center rounded-full border transition-all duration-300',
+              isPlaying ? 'border-primary/60' : 'border-border/70'
+            )}
+            style={{
+              boxShadow: isPlaying
+                ? '0 0 0 5px hsl(var(--primary) / 0.10), 0 0 32px hsl(var(--primary) / 0.30)'
+                : 'inset 0 0 26px hsl(var(--primary) / 0.05)',
+            }}
+          >
+            {/* inner ring */}
+            <div className="absolute inset-[5px] rounded-full border border-border/50" />
+            <div className="relative text-center">
+              <p className="text-4xl sm:text-5xl font-bold tabular-nums tracking-tight text-foreground">
+                {getFrequency(activeRadioData)}
+              </p>
+              <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-muted-foreground">
+                FM
+              </p>
             </div>
           </div>
-        </div>
 
-        {/* Station name */}
-        <div className="relative mt-6 text-center">
-          <h2 className="text-white text-xl sm:text-2xl font-extrabold tracking-[0.25em] uppercase drop-shadow-[0_0_18px_rgba(0,245,255,0.55)]">
-            {activeRadioData?.name || 'Select a Station'}
+          {/* Animated equalizer — below the frequency */}
+          <Equalizer playing={isPlaying} className="mt-4 h-6 w-24" />
+
+          {/* Station name */}
+          <h2 className="mt-3 max-w-full px-4 text-lg sm:text-xl font-bold tracking-tight text-foreground line-clamp-1">
+            {activeRadioData ? activeRadioData.name.toUpperCase() : 'SELECT A STATION'}
           </h2>
           {activeRadioData && (
-            <p className="text-white/50 text-[11px] mt-1 uppercase tracking-[0.3em]">
-              {activeRadioData.category} • {activeRadioData.language}
+            <p className="mt-0.5 max-w-full px-4 text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground line-clamp-1">
+              {CATEGORY_LABELS[activeRadioData.category] ?? capitalize(activeRadioData.category)}
             </p>
           )}
-        </div>
 
-        {/* Equalizer card */}
-        <div className="relative mt-6 mx-auto max-w-md">
-          <div className="rounded-2xl border border-white/10 bg-[#021B79]/50 backdrop-blur-xl px-4 py-4 shadow-[inset_0_0_24px_rgba(0,153,255,0.15)]">
-            <div className="flex items-end justify-center gap-1.5 h-16">
-              {Array.from({ length: EQ_BARS }).map((_, i) => {
-                const isCenter = i === Math.floor(EQ_BARS / 2);
-                const delay = `${(i * 60) % 900}ms`;
-                const height = 24 + ((i * 13) % 28); // 24-52px base
-                return (
-                  <span
-                    key={i}
-                    className={cn('eq-bar', isCenter && 'eq-bar--red')}
-                    style={{
-                      height: `${height}px`,
-                      animationDelay: delay,
-                      animationPlayState: isPlaying ? 'running' : 'paused',
-                      opacity: isPlaying ? 1 : 0.45,
-                    }}
-                  />
-                );
-              })}
+          {/* Offline notice — shown when a live listen is attempted without a connection */}
+          {offlineNotice && (
+            <p className="mt-3 inline-flex max-w-full items-center gap-1.5 rounded-full border border-border bg-muted px-3 py-1.5 text-[11px] font-medium text-muted-foreground animate-fade-in">
+              <WifiOff className="h-3.5 w-3.5 shrink-0" />
+              You're offline. Connect to the internet to listen live.
+            </p>
+          )}
+
+          {/* Previous | Play/Pause | Next */}
+          <div className="mt-5 flex items-center gap-7 sm:gap-9">
+            <button
+              type="button"
+              onClick={() => handleStep(-1)}
+              aria-label="Previous station"
+              title="Previous station"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-muted/70 text-foreground/80 border border-border/70 transition-all hover:bg-muted hover:text-foreground active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <SkipBack className="h-5 w-5" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() =>
+                activeRadioData
+                  ? handlePlayRadio(activeRadioData.id)
+                  : radios[0] && handlePlayRadio(radios[0].id)
+              }
+              aria-label={isPlaying ? 'Pause' : 'Play'}
+              title={isPlaying ? 'Pause' : 'Play'}
+              className="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_0_22px_hsl(var(--primary)/0.35)] transition-all hover:bg-primary-dark active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              {isPlaying ? <Pause className="h-7 w-7" /> : <Play className="h-7 w-7 ml-0.5" />}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleStep(1)}
+              aria-label="Next station"
+              title="Next station"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-muted/70 text-foreground/80 border border-border/70 transition-all hover:bg-muted hover:text-foreground active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <SkipForward className="h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== 2. SCROLLABLE content — category rows, or an isolated category ===== */}
+      <div className="flex-1 min-h-0 overflow-y-auto border-t border-border/60 pt-4 pb-8">
+        {expandedCategory && expandedGroup ? (
+          /* Isolated category view — ALL stations in this category, vertical list */
+          <div className="space-y-4 animate-fade-in">
+            <div className="flex items-center gap-2.5 px-1">
+              <button
+                type="button"
+                onClick={() => setExpandedCategory(null)}
+                aria-label="Back to all categories"
+                title="Back to all categories"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-muted/60 hover:bg-muted border border-border/70 text-muted-foreground hover:text-foreground transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <ArrowLeft className="h-4 w-4" />
+              </button>
+              <h2 className="text-lg sm:text-xl font-bold tracking-tight">
+                {expandedGroup.label}
+              </h2>
+              <span className="shrink-0 rounded-full bg-muted border border-border px-2 py-0.5 text-[10px] font-medium text-muted-foreground tabular-nums">
+                {expandedGroup.items.length}
+              </span>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              {expandedGroup.items.map((radio) => (
+                <StationCard
+                  key={radio.id}
+                  radio={radio}
+                  isActive={activeRadio === radio.id}
+                  isPlaying={activeRadio === radio.id && isPlaying}
+                  onPlay={() => handlePlayRadio(radio.id)}
+                />
+              ))}
             </div>
           </div>
-        </div>
+        ) : (
+          /* Category rows — each category shows ONLY its own stations */
+          <div className="space-y-8">
+            {categoryGroups.map((group) => (
+              <section key={group.category}>
+                <div className="mb-3 flex items-center justify-between gap-3 px-1">
+                  <h2 className="text-base sm:text-lg font-bold tracking-tight">{group.label}</h2>
+                  <button
+                    type="button"
+                    onClick={() => setExpandedCategory(group.category)}
+                    className="group/see inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:rounded"
+                  >
+                    See More
+                    <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover/see:translate-x-0.5" />
+                  </button>
+                </div>
 
-        {/* Playback controls */}
-        <div className="relative mt-7 flex items-center justify-center gap-6">
-          <button
-            onClick={() => activeRadioData && onToggleFavorite(activeRadioData.id)}
-            disabled={!activeRadioData}
-            className="h-12 w-12 grid place-items-center rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-white hover:bg-white/10 transition-all hover:scale-105 disabled:opacity-40"
-            aria-label="Favorite"
-          >
-            <Heart className={cn('h-5 w-5 drop-shadow-[0_0_8px_rgba(0,245,255,0.5)]', activeRadioData && favorites.includes(activeRadioData.id) && 'fill-[#FF3B5C] text-[#FF3B5C]')} />
-          </button>
-
-          <button
-            onClick={handlePrev}
-            className="h-11 w-11 grid place-items-center rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
-            aria-label="Previous"
-          >
-            <SkipBack className="h-5 w-5" />
-          </button>
-
-          {/* Primary play */}
-          <button
-            onClick={() => activeRadioData ? handlePlayRadio(activeRadioData.id) : radios[0] && handlePlayRadio(radios[0].id)}
-            className={cn(
-              "relative h-20 w-20 rounded-full grid place-items-center",
-              "bg-gradient-to-br from-[#0099FF] to-[#021B79]",
-              "border-2 border-cyan-300/60",
-              "shadow-[0_0_36px_rgba(0,245,255,0.65),inset_0_0_20px_rgba(0,0,0,0.4)]",
-              "transition-transform active:scale-95 hover:scale-105"
-            )}
-            aria-label={isPlaying ? 'Pause' : 'Play'}
-          >
-            {isPlaying ? (
-              <Pause className="h-8 w-8 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
-            ) : (
-              <Play className="h-8 w-8 text-white ml-1 drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]" fill="currentColor" />
-            )}
-          </button>
-
-          <button
-            onClick={handleNext}
-            className="h-11 w-11 grid place-items-center rounded-full text-white/80 hover:text-white hover:bg-white/10 transition-colors"
-            aria-label="Next"
-          >
-            <SkipForward className="h-5 w-5" />
-          </button>
-        </div>
-      </div>
-
-      {/* Search & categories */}
-      <div className="px-4 space-y-4">
-        <SearchBar value={searchQuery} onChange={setSearchQuery} placeholder="Search radio stations..." />
-        <CategoryTabs categories={categories} activeCategory={activeCategory} onCategoryChange={setActiveCategory} />
-      </div>
-
-      {/* Station list */}
-      <div className="px-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {filteredRadios.map((radio) => (
-          <div key={radio.id} className={cn(
-            'rounded-xl border transition-all duration-150',
-            activeRadio === radio.id ? 'border-primary bg-primary/[0.05]' : 'border-border/60 hover:bg-muted/20'
-          )}>
-            <RadioCard
-              id={radio.id}
-              name={radio.name}
-              logo={radio.logo}
-              category={radio.category}
-              isActive={activeRadio === radio.id}
-              isPlaying={activeRadio === radio.id && isPlaying}
-              isFavorite={favorites.includes(radio.id)}
-              onClick={() => handlePlayRadio(radio.id)}
-              onToggleFavorite={(e) => { e.stopPropagation(); onToggleFavorite(radio.id); }}
-            />
+                <div className="flex gap-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-2 -mx-1 px-1">
+                  {group.items.map((radio) => (
+                    <RowStationCard
+                      key={radio.id}
+                      radio={radio}
+                      isActive={activeRadio === radio.id}
+                      isPlaying={activeRadio === radio.id && isPlaying}
+                      onPlay={() => handlePlayRadio(radio.id)}
+                    />
+                  ))}
+                </div>
+              </section>
+            ))}
           </div>
-        ))}
+        )}
       </div>
-
-      {filteredRadios.length === 0 && (
-        <div className="mx-4 border border-dashed border-border rounded-xl py-12 text-center">
-          <p className="text-sm text-muted-foreground">No radio stations found</p>
-        </div>
-      )}
     </div>
   );
 };

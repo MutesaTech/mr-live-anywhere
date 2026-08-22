@@ -1,7 +1,7 @@
 import { Home, Tv, Radio, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-type Section = 'home' | 'tv' | 'radio' | 'favorites' | 'settings';
+type Section = 'home' | 'tv' | 'radio' | 'playlists' | 'favorites' | 'settings' | 'category' | 'categories';
 
 interface BottomNavProps {
   activeSection: Section;
@@ -17,7 +17,7 @@ const navItems = [
 
 const BottomNav = ({ activeSection, onSectionChange }: BottomNavProps) => {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 glass-strong shadow-strong rounded-t-3xl pb-safe border-t border-white/10">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 glass-strong shadow-soft rounded-t-3xl pb-safe border-t border-border/60">
       <div className="flex items-center justify-around h-16">
         {navItems.map((item) => {
           const isActive = activeSection === item.id;
@@ -28,7 +28,7 @@ const BottomNav = ({ activeSection, onSectionChange }: BottomNavProps) => {
               key={item.id}
               onClick={() => onSectionChange(item.id)}
               className={cn(
-                "flex flex-col items-center justify-center gap-0.5 w-16 h-full relative ripple",
+                "group flex flex-col items-center justify-center gap-0.5 w-16 h-full relative ripple",
                 "transition-colors duration-200"
               )}
             >
@@ -42,13 +42,13 @@ const BottomNav = ({ activeSection, onSectionChange }: BottomNavProps) => {
                   "h-5 w-5 transition-all duration-200",
                   isActive
                     ? "text-accent scale-110 drop-shadow-[0_0_8px_hsl(var(--accent)/0.6)]"
-                    : "text-muted-foreground"
+                    : "text-muted-foreground/60 group-hover:text-foreground/80"
                 )}
               />
               <span
                 className={cn(
                   "text-caption transition-colors duration-200",
-                  isActive ? "text-primary font-medium" : "text-muted-foreground"
+                  isActive ? "text-primary font-medium" : "text-muted-foreground/70 group-hover:text-foreground/90"
                 )}
               >
                 {item.label}
