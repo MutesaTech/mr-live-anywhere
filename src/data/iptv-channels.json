@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-16T04:39:15.204Z",
+  "generatedAt": "2026-08-23T04:40:54.504Z",
   "source": "https://github.com/iptv-org/api",
   "notice": "Stream URLs are indexed from the public iptv-org project. Availability is not guaranteed and may be geo-restricted.",
   "testRegion": "github-actions-us",
@@ -201,32 +201,6 @@
           "url": "https://5c46fa289c89f.streamlock.net/pub1live/mystream/playlist.m3u8",
           "quality": "HD",
           "label": null,
-          "feed": "SD",
-          "requiresHeaders": false,
-          "referrer": null,
-          "userAgent": null
-        }
-      ],
-      "verified": true,
-      "verifiedRegion": "github-actions-us"
-    },
-    {
-      "id": "iptv-3ABNTVUganda.ug",
-      "name": "3ABN TV Uganda",
-      "logo": "https://i.imgur.com/mml9lI2.png",
-      "category": "religious",
-      "language": "unknown",
-      "country": "UG",
-      "categories": [
-        "religious"
-      ],
-      "source": "iptv-org",
-      "stream": "https://3abn.bozztv.com/3abn/3abn_uganda_live/index.m3u8",
-      "streams": [
-        {
-          "url": "https://3abn.bozztv.com/3abn/3abn_uganda_live/index.m3u8",
-          "quality": "HD",
-          "label": "Not 24/7",
           "feed": "SD",
           "requiresHeaders": false,
           "referrer": null,
@@ -558,32 +532,6 @@
       "verifiedRegion": "github-actions-us"
     },
     {
-      "id": "iptv-TayariWestTV.ug",
-      "name": "Tayari West TV",
-      "logo": "https://i.imgur.com/tbnOtUZ.jpeg",
-      "category": "entertainment",
-      "language": "unknown",
-      "country": "UG",
-      "categories": [
-        "general"
-      ],
-      "source": "iptv-org",
-      "stream": "https://stream.hydeinnovations.com/tarari-west/index.m3u8",
-      "streams": [
-        {
-          "url": "https://stream.hydeinnovations.com/tarari-west/index.m3u8",
-          "quality": "FHD",
-          "label": null,
-          "feed": "SD",
-          "requiresHeaders": false,
-          "referrer": null,
-          "userAgent": null
-        }
-      ],
-      "verified": true,
-      "verifiedRegion": "github-actions-us"
-    },
-    {
       "id": "iptv-TVWest.ug",
       "name": "TV West",
       "logo": "https://i.imgur.com/EiJzkIz.png",
@@ -827,6 +775,32 @@
       "verifiedRegion": "github-actions-us"
     },
     {
+      "id": "iptv-YOUNIBMediaTV.ke",
+      "name": "YOUNIB Media TV",
+      "logo": "https://i.imgur.com/LtiPOYG.jpg",
+      "category": "religious",
+      "language": "unknown",
+      "country": "KE",
+      "categories": [
+        "religious"
+      ],
+      "source": "iptv-org",
+      "stream": "https://goliveafrica.media:9998/live/6257fbe7383d6/index.m3u8",
+      "streams": [
+        {
+          "url": "https://goliveafrica.media:9998/live/6257fbe7383d6/index.m3u8",
+          "quality": "HD",
+          "label": "Not 24/7",
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "github-actions-us"
+    },
+    {
       "id": "iptv-DodomaTV.tz",
       "name": "Dodoma TV",
       "logo": "https://i.imgur.com/bLq9eFa.png",
@@ -920,6 +894,58 @@
         {
           "url": "https://mahaasintv.livebox.co.in/mahaasintvhls/mahaasintv.m3u8",
           "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "github-actions-us"
+    },
+    {
+      "id": "iptv-TBC1.tz",
+      "name": "TBC1",
+      "logo": "https://i.imgur.com/OmiVZ1u.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "TZ",
+      "categories": [
+        "general"
+      ],
+      "source": "iptv-org",
+      "stream": "https://tbc.maintek.co/LiveApp/streams/YF43nTzH0duMyUA2130641323343587.m3u8",
+      "streams": [
+        {
+          "url": "https://tbc.maintek.co/LiveApp/streams/YF43nTzH0duMyUA2130641323343587.m3u8",
+          "quality": "AUTO",
+          "label": null,
+          "feed": "SD",
+          "requiresHeaders": false,
+          "referrer": null,
+          "userAgent": null
+        }
+      ],
+      "verified": true,
+      "verifiedRegion": "github-actions-us"
+    },
+    {
+      "id": "iptv-TBC2.tz",
+      "name": "TBC2",
+      "logo": "https://i.imgur.com/VkUJt2q.png",
+      "category": "entertainment",
+      "language": "unknown",
+      "country": "TZ",
+      "categories": [
+        "entertainment"
+      ],
+      "source": "iptv-org",
+      "stream": "https://stream-134630.castr.net/5fe35eae8c53540cab83659a/live_44ed95e05b6d11f18d5d85805abbdd6f/index.m3u8",
+      "streams": [
+        {
+          "url": "https://stream-134630.castr.net/5fe35eae8c53540cab83659a/live_44ed95e05b6d11f18d5d85805abbdd6f/index.m3u8",
+          "quality": "FHD",
           "label": null,
           "feed": "SD",
           "requiresHeaders": false,
